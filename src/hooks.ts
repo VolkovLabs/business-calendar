@@ -1,17 +1,23 @@
 import { useCallback, useEffect } from 'react';
 
 export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => void) => {
-  const keydownListener = useCallback(e => {
-    if (e.key === 'Shift') {
-      onKeyPressed(true);
-    }
-  }, []);
+  const keydownListener = useCallback(
+    e => {
+      if (e.key === 'Shift') {
+        onKeyPressed(true);
+      }
+    },
+    [onKeyPressed]
+  );
 
-  const keyupListener = useCallback(e => {
-    if (e.key === 'Shift') {
-      onKeyPressed(false);
-    }
-  }, []);
+  const keyupListener = useCallback(
+    e => {
+      if (e.key === 'Shift') {
+        onKeyPressed(false);
+      }
+    },
+    [onKeyPressed]
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', keydownListener, true);
@@ -21,5 +27,5 @@ export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => voi
   useEffect(() => {
     window.addEventListener('keyup', keyupListener, true);
     return () => window.removeEventListener('keyup', keyupListener, true);
-  }, [keydownListener]);
+  }, [keyupListener]);
 };

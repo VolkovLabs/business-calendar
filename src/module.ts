@@ -1,7 +1,7 @@
 import { FieldType, PanelPlugin } from '@grafana/data';
 import { CalendarOptions } from './types';
 import { CalendarPanel } from './CalendarPanel';
-import { FieldSelectEditor } from './FieldSelectEditor';
+import { FieldSelectEditor } from 'grafana-plugin-support';
 
 export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).setNoPadding().setPanelOptions(builder => {
   return builder

@@ -21,6 +21,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "dayjs": "^1.10.4"
+    "dayjs": "^1.10.4",
+    "grafana-plugin-support": "^0.1.0"
   }
 }

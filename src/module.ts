@@ -1,40 +1,30 @@
-import { PanelPlugin } from '@grafana/data';
-import { SimpleOptions } from './types';
-import { SimplePanel } from './SimplePanel';
+import { FieldType, PanelPlugin } from '@grafana/data';
+import { CalendarOptions } from './types';
+import { CalendarPanel } from './CalendarPanel';
+import { FieldSelectEditor } from './FieldSelectEditor';
 
-export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setNoPadding().setPanelOptions(builder => {
+export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).setNoPadding().setPanelOptions(builder => {
   return builder
-    .addTextInput({
-      path: 'text',
-      name: 'Simple text option',
-      description: 'Description of panel option',
-      defaultValue: 'Default value of text input option',
-    })
-    .addBooleanSwitch({
-      path: 'showSeriesCount',
-      name: 'Show series counter',
-      defaultValue: false,
-    })
-    .addRadio({
-      path: 'seriesCountSize',
-      defaultValue: 'sm',
-      name: 'Series counter size',
+    .addCustomEditor({
+      id: 'timeField',
+      path: 'timeField',
+      name: 'Time',
+      description: 'Field to use for the time. Defaults to the first time field.',
+      editor: FieldSelectEditor,
+      category: ['Dimensions'],
       settings: {
-        options: [
-          {
-            value: 'sm',
-            label: 'Small',
-          },
-          {
-            value: 'md',
-            label: 'Medium',
-          },
-          {
-            value: 'lg',
-            label: 'Large',
-          },
-        ],
+        filterByType: [FieldType.time],
       },
-      showIf: config => config.showSeriesCount,
+    })
+    .addCustomEditor({
+      id: 'textField',
+      path: 'textField',
+      name: 'Text',
+      description: 'Field to use for the text. Defaults to the first textual field.',
+      editor: FieldSelectEditor,
+      category: ['Dimensions'],
+      settings: {
+        filterByType: [FieldType.string],
+      },
     });
 });

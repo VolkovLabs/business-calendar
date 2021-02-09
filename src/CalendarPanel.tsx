@@ -91,6 +91,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
           height: ${height}px;
           display: flex;
           flex-direction: column;
+          overflow: hidden;
         `
       )}
     >
@@ -145,7 +146,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               key={i}
               weekend={isWeekend}
               today={isToday}
-              entries={entries.map(_ => ({ label: _.value, color: theme.palette.brandSuccess }))}
+              entries={entries
+                .filter(_ => _.value && _.time)
+                .map(_ => ({ label: _.value, color: theme.palette.brandSuccess }))}
               selected={isSelected ?? false}
               onSelectionChange={onIntervalSelection(day)}
             />
@@ -192,6 +195,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     weekdayLabel: css`
       text-align: right;
       padding: ${theme.spacing.xxs} ${theme.spacing.xs};
+      overflow: hidden;
     `,
     calendarContainer: css`
       width: 100%;

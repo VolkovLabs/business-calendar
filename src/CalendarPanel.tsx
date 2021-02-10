@@ -127,6 +127,10 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             .startOf('day')
             .add(i, 'days');
 
+          const outsideInterval =
+            day.isBefore(dayjs(timeRange.from.valueOf()).startOf('day')) ||
+            day.isAfter(dayjs(timeRange.to.valueOf()).startOf('day'));
+
           const isWeekend = day.isoWeekday() > 5;
 
           const isToday = dayjs()
@@ -151,6 +155,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
                 .map(_ => ({ label: _.value, color: theme.palette.brandSuccess }))}
               selected={isSelected ?? false}
               onSelectionChange={onIntervalSelection(day)}
+              outsideInterval={outsideInterval}
             />
           );
         })}
@@ -204,6 +209,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       grid-template-columns: repeat(7, minmax(0, 1fr));
       grid-auto-rows: 10rem;
       overflow: auto;
+      user-select: none;
     `,
   };
 });

@@ -21,9 +21,10 @@ interface Props {
   entries: CalendarEntry[];
   selected: boolean;
   onSelectionChange: (selected: boolean) => void;
+  outsideInterval: boolean;
 }
 
-export const Day = ({ day, weekend, today, entries, selected, onSelectionChange }: Props) => {
+export const Day = ({ day, weekend, today, entries, selected, onSelectionChange, outsideInterval }: Props) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -35,7 +36,8 @@ export const Day = ({ day, weekend, today, entries, selected, onSelectionChange 
         styles.root,
         { [styles.weekend]: weekend },
         { [styles.today]: today },
-        { [styles.selected]: selected }
+        { [styles.selected]: selected },
+        { [styles.outsideInterval]: outsideInterval }
       )}
       onClick={() => {
         onSelectionChange(!selected);
@@ -53,12 +55,13 @@ export const Day = ({ day, weekend, today, entries, selected, onSelectionChange 
             css`
               float: right;
               color: ${theme.colors.textSemiWeak};
-              border-radius: ${theme.border.radius.lg};
+              border-radius: 50%;
+              width: 3ch;
+              height: 3ch;
+              text-align: center;
               font-size: ${theme.typography.size.md};
               margin: ${theme.spacing.xs};
-              padding: 0.3em;
-              padding-bottom: 0.1em;
-              line-height: 1;
+              line-height: 3.1ch;
               user-select: none;
             `,
             {
@@ -68,13 +71,18 @@ export const Day = ({ day, weekend, today, entries, selected, onSelectionChange 
             },
             {
               [css`
+                color: ${theme.colors.textFaint};
+              `]: outsideInterval,
+            },
+            {
+              [css`
                 background: ${theme.palette.queryRed};
                 color: ${theme.palette.black};
               `]: today,
             },
             {
               [css`
-                background: ${theme.palette.blue95};
+                background: ${theme.colors.textBlue};
                 color: ${theme.palette.black};
               `]: selected,
             }
@@ -105,7 +113,15 @@ export const Day = ({ day, weekend, today, entries, selected, onSelectionChange 
               <svg width={5} height={5} viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={_.color}>
                 <circle cx={5} cy={5} r={5} />
               </svg>
-              <div className={styles.calendarEntryLabel}>{_.label}</div>
+              <div
+                className={cx(styles.calendarEntryLabel, {
+                  [css`
+                    color: ${theme.colors.textFaint};
+                  `]: outsideInterval,
+                })}
+              >
+                {_.label}
+              </div>
             </div>
           ))}
         {entries.length - maxNumEntries > 0 && (
@@ -138,6 +154,9 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     `,
     weekend: css`
       background: ${theme.colors.bg2};
+    `,
+    outsideInterval: css`
+      background: ${theme.colors.dashboardBg};
     `,
     today: css``,
     selected: css``,

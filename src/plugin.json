@@ -1,6 +1,6 @@
 {
   "type": "panel",
-  "name": "Gantt",
+  "name": "Calendar",
   "id": "marcusolsson-calendar-panel",
 
   "info": {

@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.0 (Unreleased)
+## 0.1.0 (2021-02-10)
 
-Initial release.
+Initial release. Not fit for production.

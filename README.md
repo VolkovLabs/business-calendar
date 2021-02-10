@@ -9,6 +9,8 @@ A panel plugin for [Grafana](https://grafana.com) to display calendar events fro
 
 **Important:** This plugin is still under development and is **not fit for production use**. Please use it and [submit issues](https://github.com/marcusolsson/grafana-calendar-panel/issues/new) to improve it.
 
+![Screenshot](https://github.com/marcusolsson/grafana-calendar-panel/raw/main/src/img/screenshot.png)
+
 ## Configuration
 
 This section lists the available configuration options.

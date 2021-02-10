@@ -1,33 +1,32 @@
 {
-  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "panel",
-  "name": "Calendar",
+  "name": "Gantt",
   "id": "marcusolsson-calendar-panel",
+
   "info": {
-    "description": "",
+    "description": "Calendar for Grafana",
     "author": {
-      "name": "Marcus Olsson",
-      "url": ""
+      "name": "Marcus Olsson"
     },
-    "keywords": [],
+    "keywords": ["panel", "calendar"],
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
     },
     "links": [
+      { "name": "Website", "url": "https://github.com/marcusolsson/grafana-calendar-panel" },
+      { "name": "License", "url": "https://github.com/marcusolsson/grafana-calendar-panel/blob/master/LICENSE" }
+    ],
+    "screenshots": [
       {
-        "name": "Website",
-        "url": "https://github.com/grafana/grafana-starter-panel"
-      },
-      {
-        "name": "License",
-        "url": "https://github.com/grafana/grafana-starter-panel/blob/master/LICENSE"
+        "name": "Calendar",
+        "path": "img/screenshot.png"
       }
     ],
-    "screenshots": [],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
+
   "dependencies": {
     "grafanaDependency": ">=7.0.3",
     "plugins": []

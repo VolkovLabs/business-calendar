@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "dayjs": "^1.10.4",
-    "grafana-plugin-support": "^0.1.0"
+    "grafana-plugin-support": "0.2.0-alpha.0"
   },
   "devDependencies": {
     "@grafana/data": "latest",

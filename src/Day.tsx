@@ -22,9 +22,19 @@ interface Props {
   selected: boolean;
   onSelectionChange: (selected: boolean) => void;
   outsideInterval: boolean;
+  annotations: any[];
 }
 
-export const Day = ({ day, weekend, today, entries, selected, onSelectionChange, outsideInterval }: Props) => {
+export const Day = ({
+  day,
+  weekend,
+  today,
+  entries,
+  selected,
+  onSelectionChange,
+  outsideInterval,
+  annotations,
+}: Props) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -43,71 +53,69 @@ export const Day = ({ day, weekend, today, entries, selected, onSelectionChange,
         onSelectionChange(!selected);
       }}
     >
-      <div
-        className={cx(
-          css`
-            float: right;
-          `
-        )}
-      >
+      <div>
         <div
-          className={cx(
-            css`
-              float: right;
-              color: ${theme.colors.textSemiWeak};
-              border-radius: 50%;
-              width: 3ch;
-              height: 3ch;
-              text-align: center;
-              font-size: ${theme.typography.size.md};
-              margin: ${theme.spacing.xs};
-              line-height: 3.1ch;
-              user-select: none;
-            `,
-            {
-              [css`
-                color: ${theme.colors.textWeak};
-              `]: weekend,
-            },
-            {
-              [css`
-                color: ${theme.colors.textFaint};
-              `]: outsideInterval,
-            },
-            {
-              [css`
-                background: ${theme.palette.queryRed};
-                color: ${theme.palette.black};
-              `]: today,
-            },
-            {
-              [css`
-                background: ${theme.colors.textBlue};
-                color: ${theme.palette.black};
-              `]: selected,
-            }
-          )}
+          className={css`
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: ${theme.spacing.xs};
+          `}
         >
-          {day.format('D')}
-        </div>
-      </div>
-      <div
-        className={css`
-          padding: 0.3em 0.5em;
-        `}
-      >
-        {day.format('D') === '1' && (
           <div
             className={css`
               color: ${theme.palette.brandPrimary};
               font-weight: 500;
             `}
           >
-            {day.format('MMM')}
+            {day.format('D') === '1' && day.format('MMM')}
           </div>
-        )}
+          <div
+            className={cx(
+              css`
+                color: ${theme.colors.textSemiWeak};
+                border-radius: 50%;
+                width: 3ch;
+                height: 3ch;
+                text-align: center;
+                font-size: ${theme.typography.size.md};
+                line-height: 3.1ch;
+                user-select: none;
+              `,
+              {
+                [css`
+                  color: ${theme.colors.textWeak};
+                `]: weekend,
+              },
+              {
+                [css`
+                  color: ${theme.colors.textFaint};
+                `]: outsideInterval,
+              },
+              {
+                [css`
+                  background: ${theme.palette.queryRed};
+                  color: ${theme.palette.black};
+                `]: today,
+              },
+              {
+                [css`
+                  background: ${theme.colors.textBlue};
+                  color: ${theme.palette.black};
+                `]: selected,
+              }
+            )}
+          >
+            {day.format('D')}
+          </div>
+        </div>
+      </div>
+      <div>
+        {annotations.map(annotation => (
+          <div className={styles.annotationEntry}>{annotation.text}</div>
+        ))}
         {entries
-          .filter((_, i) => i < maxNumEntries)
+          .filter((_, i) => i + annotations.length < maxNumEntries)
           .map(_ => (
             <div className={styles.calendarEntry}>
               <svg width={5} height={5} viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={_.color}>
@@ -124,8 +132,10 @@ export const Day = ({ day, weekend, today, entries, selected, onSelectionChange,
               </div>
             </div>
           ))}
-        {entries.length - maxNumEntries > 0 && (
-          <div className={styles.moreEntriesLabel}>{`${entries.length - maxNumEntries} more...`}</div>
+        {annotations.length + entries.length - maxNumEntries > 0 && (
+          <div className={styles.moreEntriesLabel}>{`${annotations.length +
+            entries.length -
+            maxNumEntries} more...`}</div>
         )}
       </div>
     </div>
@@ -163,9 +173,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     calendarEntry: css`
       display: flex;
       align-items: center;
-      & > * {
-        min-width: 5px;
-      }
+      padding: 0 ${theme.spacing.xs};
     `,
     calendarEntryLabel: css`
       font-size: ${theme.typography.size.sm};
@@ -182,6 +190,13 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       margin-left: 10px;
       user-select: none;
       color: ${theme.colors.textWeak};
+    `,
+    annotationEntry: css`
+      font-size: ${theme.typography.size.sm};
+      background: ${theme.colors.textBlue};
+      color: ${theme.palette.black};
+      padding-left: 13px;
+      margin-bottom: 1px;
     `,
   };
 });

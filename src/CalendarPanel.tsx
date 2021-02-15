@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { Field, FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
 import { Button, stylesFactory, useTheme } from '@grafana/ui';
 
 import { Day } from './Day';
-import { CalendarOptions } from 'types';
-import { useKeyPress } from 'hooks';
+import { Annotation, CalendarOptions } from './types';
+import { useKeyPress } from './hooks';
 
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
+
+import { getBackendSrv } from '@grafana/runtime';
 
 dayjs.extend(isoWeek);
 
@@ -21,6 +23,16 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   const [selectedInterval, setSelectedInterval] = useState<Range>();
   const [intervalSelection, setIntervalSelection] = useState(false);
 
+  const [annotations, setAnnotations] = useState([]);
+
+  useEffect(() => {
+    getBackendSrv()
+      .datasourceRequest({ url: '/api/annotations' })
+      .then(res => {
+        setAnnotations(res.data);
+      });
+  }, []);
+
   useKeyPress('Shift', pressed => {
     setIntervalSelection(pressed);
   });
@@ -28,7 +40,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   const theme = useTheme();
   const styles = getStyles(theme);
 
-  const onIntervalSelection = (time: dayjs.Dayjs) => (selected: boolean) => {
+  const annotationBuckets = groupAnnotationsByDays(annotations);
+
+  const onIntervalSelection = (time: dayjs.Dayjs) => {
     if (!selectedInterval && !intervalSelection) {
       setSelectedInterval([time.startOf('day'), time.endOf('day')]);
       return;
@@ -63,20 +77,20 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
     }
   };
 
-  const frame = data.series[0];
+  const frame = data.series.length > 0 ? data.series[0] : undefined;
 
   // Find the fields we're going to be using for the visualization. If the user
   // has set the field explicitly we use that one, otherwise we guess based on
   // the expected field type.
   const textField = options.textField
-    ? frame.fields.find(f => f.name === options.textField)
-    : frame.fields.find(f => f.type === FieldType.string);
+    ? frame?.fields.find(f => f.name === options.textField)
+    : frame?.fields.find(f => f.type === FieldType.string);
 
   const timeField = options.timeField
-    ? frame.fields.find(f => f.name === options.timeField)
-    : frame.fields.find(f => f.type === FieldType.time);
+    ? frame?.fields.find(f => f.name === options.timeField)
+    : frame?.fields.find(f => f.type === FieldType.time);
 
-  const buckets = groupByDays(timeField, textField);
+  const buckets = timeField && textField ? groupByDays(timeField, textField) : {};
 
   const from = dayjs(timeRange.from.valueOf()).startOf('isoWeek');
   const to = dayjs(timeRange.to.valueOf()).endOf('isoWeek');
@@ -137,7 +151,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             .startOf('day')
             .isSame(day);
 
-          const entries = buckets[day.format('YYYY-MM-DD')] ?? [];
+          const dayString = day.format('YYYY-MM-DD');
+          const entries = buckets[dayString] ?? [];
+          const annotationEntries = annotationBuckets[dayString] ?? [];
 
           const isSelected =
             selectedInterval &&
@@ -146,6 +162,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
 
           return (
             <Day
+              annotations={annotationEntries}
               day={day}
               key={i}
               weekend={isWeekend}
@@ -154,7 +171,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
                 .filter(_ => _.value && _.time)
                 .map(_ => ({ label: _.value, color: theme.palette.brandSuccess }))}
               selected={isSelected ?? false}
-              onSelectionChange={onIntervalSelection(day)}
+              onSelectionChange={() => onIntervalSelection(day)}
               outsideInterval={outsideInterval}
             />
           );
@@ -164,14 +181,14 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   );
 };
 
-const groupByDays = (timeField?: Field, textField?: Field) => {
+const groupByDays = (timeField: Field, textField: Field) => {
   const init: { [day: string]: Array<{ time: number; value: string }> } = {};
 
   return Array.from({ length: timeField?.values.length ?? 0 })
     .map((_, i) => {
       return {
-        time: timeField?.values.get(i),
-        value: textField?.values.get(i),
+        time: timeField.values.get(i),
+        value: textField.values.get(i),
       };
     })
     .reduce((acc, curr) => {
@@ -179,6 +196,16 @@ const groupByDays = (timeField?: Field, textField?: Field) => {
       (acc[day] = acc[day] || []).push(curr);
       return acc;
     }, init);
+};
+
+const groupAnnotationsByDays = (annotations: Annotation[]) => {
+  const init: { [day: string]: Annotation[] } = {};
+
+  return annotations.reduce((acc, curr) => {
+    const day = dayjs(curr.time).format('YYYY-MM-DD');
+    (acc[day] = acc[day] || []).push(curr);
+    return acc;
+  }, init);
 };
 
 const getStyles = stylesFactory((theme: GrafanaTheme) => {
@@ -207,7 +234,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       display: grid;
       flex-grow: 1;
       grid-template-columns: repeat(7, minmax(0, 1fr));
-      grid-auto-rows: 10rem;
+      grid-auto-rows: 11rem;
       overflow: auto;
       user-select: none;
     `,

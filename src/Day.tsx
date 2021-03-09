@@ -6,6 +6,7 @@ import { stylesFactory, useTheme } from '@grafana/ui';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { GrafanaTheme } from '@grafana/data';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 dayjs.extend(isoWeek);
 
@@ -22,23 +23,11 @@ interface Props {
   selected: boolean;
   onSelectionChange: (selected: boolean) => void;
   outsideInterval: boolean;
-  annotations: any[];
 }
 
-export const Day = ({
-  day,
-  weekend,
-  today,
-  entries,
-  selected,
-  onSelectionChange,
-  outsideInterval,
-  annotations,
-}: Props) => {
+export const Day = ({ day, weekend, today, entries, selected, onSelectionChange, outsideInterval }: Props) => {
   const theme = useTheme();
   const styles = getStyles(theme);
-
-  const maxNumEntries = 5;
 
   return (
     <div
@@ -110,34 +99,38 @@ export const Day = ({
           </div>
         </div>
       </div>
-      <div>
-        {annotations.map(annotation => (
-          <div className={styles.annotationEntry}>{annotation.text}</div>
-        ))}
-        {entries
-          .filter((_, i) => i + annotations.length < maxNumEntries)
-          .map(_ => (
-            <div className={styles.calendarEntry}>
-              <svg width={5} height={5} viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={_.color}>
-                <circle cx={5} cy={5} r={5} />
-              </svg>
-              <div
-                className={cx(styles.calendarEntryLabel, {
-                  [css`
-                    color: ${theme.colors.textFaint};
-                  `]: outsideInterval,
-                })}
-              >
-                {_.label}
-              </div>
-            </div>
-          ))}
-        {annotations.length + entries.length - maxNumEntries > 0 && (
-          <div className={styles.moreEntriesLabel}>{`${annotations.length +
-            entries.length -
-            maxNumEntries} more...`}</div>
-        )}
-      </div>
+      <AutoSizer disableWidth>
+        {({ height }) => {
+          const heightPerEntry = 40;
+          const maxNumEntries = Math.floor(height / heightPerEntry);
+
+          return (
+            <>
+              {entries
+                .filter((_, i) => i < maxNumEntries)
+                .map(_ => (
+                  <div className={styles.calendarEntry}>
+                    <svg width={5} height={5} viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={_.color}>
+                      <circle cx={5} cy={5} r={5} />
+                    </svg>
+                    <div
+                      className={cx(styles.calendarEntryLabel, {
+                        [css`
+                          color: ${theme.colors.textFaint};
+                        `]: outsideInterval,
+                      })}
+                    >
+                      {_.label}
+                    </div>
+                  </div>
+                ))}
+              {entries.length - maxNumEntries > 0 && (
+                <div className={styles.moreEntriesLabel}>{`${entries.length - maxNumEntries} more...`}</div>
+              )}
+            </>
+          );
+        }}
+      </AutoSizer>
     </div>
   );
 };

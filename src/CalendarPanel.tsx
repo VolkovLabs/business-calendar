@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 
 import { Field, FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
 import { Button, stylesFactory, useTheme } from '@grafana/ui';
 
 import { Day } from './Day';
-import { Annotation, CalendarOptions } from './types';
+import { CalendarOptions } from './types';
 import { useKeyPress } from './hooks';
 
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
-
-import { getBackendSrv } from '@grafana/runtime';
 
 dayjs.extend(isoWeek);
 
@@ -23,24 +21,12 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   const [selectedInterval, setSelectedInterval] = useState<Range>();
   const [intervalSelection, setIntervalSelection] = useState(false);
 
-  const [annotations, setAnnotations] = useState([]);
-
-  useEffect(() => {
-    getBackendSrv()
-      .datasourceRequest({ url: '/api/annotations' })
-      .then(res => {
-        setAnnotations(res.data);
-      });
-  }, []);
-
   useKeyPress('Shift', pressed => {
     setIntervalSelection(pressed);
   });
 
   const theme = useTheme();
   const styles = getStyles(theme);
-
-  const annotationBuckets = groupAnnotationsByDays(annotations);
 
   const onIntervalSelection = (time: dayjs.Dayjs) => {
     if (!selectedInterval && !intervalSelection) {
@@ -135,7 +121,15 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         })}
       </div>
 
-      <div className={styles.calendarContainer}>
+      <div
+        className={cx(
+          styles.calendarContainer,
+          css`
+            // Expand height when displaying fewer weeks.
+            grid-auto-rows: ${Math.max(100 / Math.ceil(days / 7), 20)}%;
+          `
+        )}
+      >
         {Array.from({ length: days + 1 }).map((_, i) => {
           const day = dayjs(from.valueOf())
             .startOf('day')
@@ -153,7 +147,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
 
           const dayString = day.format('YYYY-MM-DD');
           const entries = buckets[dayString] ?? [];
-          const annotationEntries = annotationBuckets[dayString] ?? [];
 
           const isSelected =
             selectedInterval &&
@@ -162,7 +155,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
 
           return (
             <Day
-              annotations={annotationEntries}
               day={day}
               key={i}
               weekend={isWeekend}
@@ -198,16 +190,6 @@ const groupByDays = (timeField: Field, textField: Field) => {
     }, init);
 };
 
-const groupAnnotationsByDays = (annotations: Annotation[]) => {
-  const init: { [day: string]: Annotation[] } = {};
-
-  return annotations.reduce((acc, curr) => {
-    const day = dayjs(curr.time).format('YYYY-MM-DD');
-    (acc[day] = acc[day] || []).push(curr);
-    return acc;
-  }, init);
-};
-
 const getStyles = stylesFactory((theme: GrafanaTheme) => {
   return {
     applyIntervalButton: css`
@@ -234,7 +216,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       display: grid;
       flex-grow: 1;
       grid-template-columns: repeat(7, minmax(0, 1fr));
-      grid-auto-rows: 11rem;
+      grid-auto-rows: 20%;
       overflow: auto;
       user-select: none;
     `,

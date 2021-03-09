@@ -197,6 +197,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       bottom: 0;
       right: 0;
       padding: ${theme.spacing.sm};
+      z-index: 1000;
     `,
     weekdayContainer: css`
       width: 100%;

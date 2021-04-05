@@ -8,10 +8,21 @@ export const plugin = getPanelPluginOrFallback(
   new PanelPlugin<CalendarOptions>(CalendarPanel).setNoPadding().setPanelOptions(builder => {
     return builder
       .addCustomEditor({
+        id: 'textField',
+        path: 'textField',
+        name: 'Text',
+        description: 'Field to use for the event text. Defaults to the first textual field.',
+        editor: FieldSelectEditor,
+        category: ['Dimensions'],
+        settings: {
+          filterByType: [FieldType.string],
+        },
+      })
+      .addCustomEditor({
         id: 'timeField',
         path: 'timeField',
-        name: 'Time',
-        description: 'Field to use for the time. Defaults to the first time field.',
+        name: 'Start time',
+        description: 'Field to use for the event start time. Defaults to the first time field.',
         editor: FieldSelectEditor,
         category: ['Dimensions'],
         settings: {
@@ -19,14 +30,14 @@ export const plugin = getPanelPluginOrFallback(
         },
       })
       .addCustomEditor({
-        id: 'textField',
-        path: 'textField',
-        name: 'Text',
-        description: 'Field to use for the text. Defaults to the first textual field.',
+        id: 'endTimeField',
+        path: 'endTimeField',
+        name: 'End time',
+        description: 'Field to use for the event end time. Defaults to the first time field.',
         editor: FieldSelectEditor,
         category: ['Dimensions'],
         settings: {
-          filterByType: [FieldType.string],
+          filterByType: [FieldType.time],
         },
       });
   })

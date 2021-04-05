@@ -1,67 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Field, FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
+import { FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
 import { Button, stylesFactory, useTheme } from '@grafana/ui';
 
+import { alignEvents } from 'alignEvents';
 import { Day } from './Day';
-import { CalendarOptions } from './types';
-import { useKeyPress } from './hooks';
+import { CalendarEvent, CalendarOptions } from './types';
 
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
+import utc from 'dayjs/plugin/utc';
+import { useIntervalSelection } from 'hooks';
 
 dayjs.extend(isoWeek);
-
-type Range = [dayjs.Dayjs, dayjs.Dayjs];
+dayjs.extend(utc);
 
 interface Props extends PanelProps<CalendarOptions> {}
 
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
-  const [selectedInterval, setSelectedInterval] = useState<Range>();
-  const [intervalSelection, setIntervalSelection] = useState(false);
-
-  useKeyPress('Shift', pressed => {
-    setIntervalSelection(pressed);
-  });
-
   const theme = useTheme();
   const styles = getStyles(theme);
 
-  const onIntervalSelection = (time: dayjs.Dayjs) => {
-    if (!selectedInterval && !intervalSelection) {
-      setSelectedInterval([time.startOf('day'), time.endOf('day')]);
-      return;
-    }
-
-    if (selectedInterval && intervalSelection) {
-      const [start, end] = selectedInterval;
-
-      if (time.isSame(start)) {
-        setSelectedInterval(undefined);
-      }
-      if (time.isBefore(end)) {
-        setSelectedInterval([time, end]);
-      }
-      if (start.isBefore(time)) {
-        setSelectedInterval([start, time.endOf('day')]);
-      }
-
-      return;
-    }
-
-    if (selectedInterval) {
-      const clone1 = time.startOf('day');
-      const clone2 = time.endOf('day');
-
-      if (clone1.isSame(selectedInterval[0])) {
-        setSelectedInterval(undefined);
-        return;
-      }
-
-      setSelectedInterval([clone1, clone2]);
-    }
-  };
+  const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
 
   const frame = data.series.length > 0 ? data.series[0] : undefined;
 
@@ -72,16 +33,46 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
     ? frame?.fields.find(f => f.name === options.textField)
     : frame?.fields.find(f => f.type === FieldType.string);
 
-  const timeField = options.timeField
+  const startTimeField = options.timeField
     ? frame?.fields.find(f => f.name === options.timeField)
     : frame?.fields.find(f => f.type === FieldType.time);
 
-  const buckets = timeField && textField ? groupByDays(timeField, textField) : {};
+  // No default for end time. If end time dimension isn't set, we assume that all events are instants.
+  const endTimeField = frame?.fields.find(f => f.name === options.endTimeField);
 
-  const from = dayjs(timeRange.from.valueOf()).startOf('isoWeek');
-  const to = dayjs(timeRange.to.valueOf()).endOf('isoWeek');
+  // We'll still show the calendar even if no dimensions are set. However, if the user has configured a text field
+  // without a matching time field, this is likely an error.
+  if (textField && !startTimeField) {
+    return <div>You've configured a text field without a corresponding time field.</div>;
+  }
 
-  const days = to.diff(from, 'days');
+  const from = dayjs(timeRange.from.valueOf());
+  const to = dayjs(timeRange.to.valueOf());
+  const startOfWeek = from.startOf('isoWeek');
+  const endOfWeek = to.endOf('isoWeek');
+  const numDays = endOfWeek.diff(startOfWeek, 'days');
+
+  const events = Array.from({ length: frame?.length ?? 0 })
+    .map((_, i) => ({
+      label: textField?.values.get(i),
+      start: startTimeField?.values.get(i),
+      end: endTimeField?.values.get(i),
+    }))
+    .map<CalendarEvent>(({ label, start, end }) => ({
+      label,
+      start: dayjs(start),
+
+      // Set undefined if the user hasn't explicitly configured the dimension
+      // for end time.
+      //
+      // Set end time to the end of the time interval if the user configured the
+      // end time dimension, but it's missing values. The panel interpretes
+      // this as an open interval.
+      end: endTimeField ? (end ? dayjs(end) : endOfWeek) : undefined,
+      open: !!endTimeField && !end,
+    }));
+
+  const alignedEvents = alignEvents(events);
 
   return (
     <div
@@ -95,13 +86,14 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         `
       )}
     >
+      {/* Apply time interval */}
       {selectedInterval && (
         <div className={styles.applyIntervalButton}>
           <Button
             onClick={() => {
               if (selectedInterval) {
                 const [from, to] = selectedInterval;
-                setSelectedInterval(undefined);
+                clearSelection();
                 onChangeTimeRange({ from: from.valueOf(), to: to.valueOf() });
               }
             }}
@@ -111,83 +103,66 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         </div>
       )}
 
+      {/* Header displaying the weekdays */}
       <div className={styles.weekdayContainer}>
-        {Array.from({ length: 7 }).map((_, i) => {
-          const clone = dayjs()
-            .startOf('isoWeek')
-            .add(i, 'days');
-
-          return <div className={styles.weekdayLabel}>{clone.format('ddd')}</div>;
-        })}
+        {Array.from({ length: 7 }).map((_, i) => (
+          <div className={styles.weekdayLabel}>
+            {dayjs()
+              .startOf('isoWeek')
+              .add(i, 'days')
+              .format('ddd')}
+          </div>
+        ))}
       </div>
 
+      {/* Day grid */}
       <div
         className={cx(
           styles.calendarContainer,
           css`
-            // Expand height when displaying fewer weeks.
-            grid-auto-rows: ${Math.max(100 / Math.ceil(days / 7), 20)}%;
+            grid-auto-rows: ${Math.max(100 / Math.ceil(numDays / 7), 20)}%;
           `
         )}
       >
-        {Array.from({ length: days + 1 }).map((_, i) => {
-          const day = dayjs(from.valueOf())
+        {Array.from({ length: numDays + 1 }).map((_, i) => {
+          const day = dayjs(startOfWeek.valueOf())
             .startOf('day')
             .add(i, 'days');
 
-          const outsideInterval =
-            day.isBefore(dayjs(timeRange.from.valueOf()).startOf('day')) ||
-            day.isAfter(dayjs(timeRange.to.valueOf()).startOf('day'));
-
           const isWeekend = day.isoWeekday() > 5;
-
-          const isToday = dayjs()
-            .startOf('day')
-            .isSame(day);
-
-          const dayString = day.format('YYYY-MM-DD');
-          const entries = buckets[dayString] ?? [];
-
+          const isToday = day.isSame(dayjs().startOf('day'));
           const isSelected =
             selectedInterval &&
             selectedInterval[0].valueOf() <= day.valueOf() &&
             day.valueOf() <= selectedInterval[1].valueOf();
 
+          // Since the calendar always displays full weeks, the day may be
+          // rendered even if it's outside of the selected time interval.
+          const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
+
+          const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
+          const entries = events.map<CalendarEvent | undefined>(event =>
+            event ? { ...event, color: theme.palette.brandSuccess } : undefined
+          );
+
           return (
             <Day
-              day={day}
               key={i}
+              day={day}
               weekend={isWeekend}
               today={isToday}
-              entries={entries
-                .filter(_ => _.value && _.time)
-                .map(_ => ({ label: _.value, color: theme.palette.brandSuccess }))}
-              selected={isSelected ?? false}
-              onSelectionChange={() => onIntervalSelection(day)}
-              outsideInterval={outsideInterval}
+              events={entries}
+              selected={!!isSelected}
+              onSelectionChange={() => onTimeSelection(day)}
+              outsideInterval={isOutsideInterval}
+              from={startOfWeek}
+              to={endOfWeek}
             />
           );
         })}
       </div>
     </div>
   );
-};
-
-const groupByDays = (timeField: Field, textField: Field) => {
-  const init: { [day: string]: Array<{ time: number; value: string }> } = {};
-
-  return Array.from({ length: timeField?.values.length ?? 0 })
-    .map((_, i) => {
-      return {
-        time: timeField.values.get(i),
-        value: textField.values.get(i),
-      };
-    })
-    .reduce((acc, curr) => {
-      const day = dayjs(curr.time).format('YYYY-MM-DD');
-      (acc[day] = acc[day] || []).push(curr);
-      return acc;
-    }, init);
 };
 
 const getStyles = stylesFactory((theme: GrafanaTheme) => {

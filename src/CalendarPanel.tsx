@@ -11,7 +11,7 @@ import { CalendarEvent, CalendarOptions } from './types';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
-import { useIntervalSelection } from 'hooks';
+import { useAnnotations, useIntervalSelection } from 'hooks';
 
 dayjs.extend(isoWeek);
 dayjs.extend(utc);
@@ -21,6 +21,7 @@ interface Props extends PanelProps<CalendarOptions> {}
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
+  const annotations = useAnnotations();
 
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
 
@@ -71,6 +72,15 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       end: endTimeField ? (end ? dayjs(end) : endOfWeek) : undefined,
       open: !!endTimeField && !end,
     }));
+
+  annotations
+    .map<CalendarEvent>(annotation => ({
+      label: annotation.text ?? '',
+      start: dayjs(annotation.time),
+      end: annotation.time ? dayjs(annotation.timeEnd) : undefined,
+      open: false,
+    }))
+    .forEach(event => events.push(event));
 
   const alignedEvents = alignEvents(events);
 

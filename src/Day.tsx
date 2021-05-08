@@ -68,8 +68,8 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
     </div>
   );
 
-  const entries = events.map(event => (
-    <CalendarEntry event={event} day={day} outsideInterval={outsideInterval} summary={false} />
+  const entries = events.map((event, i) => (
+    <CalendarEntry key={i} event={event} day={day} outsideInterval={outsideInterval} summary={false} />
   ));
 
   return (
@@ -102,8 +102,14 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
                   maxWidth={500}
                   content={
                     <div>
-                      {events.map(event => (
-                        <CalendarEntry event={event} day={day} outsideInterval={outsideInterval} summary={true} />
+                      {events.map((event, i) => (
+                        <CalendarEntry
+                          key={i}
+                          event={event}
+                          day={day}
+                          outsideInterval={outsideInterval}
+                          summary={true}
+                        />
                       ))}
                     </div>
                   }
@@ -113,8 +119,9 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
                   visible={visible}
                   onClickOutside={hide}
                 >
-                  <div onClick={show} className={styles.moreEntriesLabel}>{`${entries.length -
-                    maxNumEvents} more…`}</div>
+                  <div onClick={show} className={styles.moreEntriesLabel}>{`${
+                    entries.length - maxNumEvents
+                  } more…`}</div>
                 </Tippy>
               )}
             </>

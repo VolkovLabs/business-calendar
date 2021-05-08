@@ -30,20 +30,20 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   // has set the field explicitly we use that one, otherwise we guess based on
   // the expected field type.
   const textField = options.textField
-    ? frame?.fields.find(f => f.name === options.textField)
-    : frame?.fields.find(f => f.type === FieldType.string);
+    ? frame?.fields.find((f) => f.name === options.textField)
+    : frame?.fields.find((f) => f.type === FieldType.string);
 
   const startTimeField = options.timeField
-    ? frame?.fields.find(f => f.name === options.timeField)
-    : frame?.fields.find(f => f.type === FieldType.time);
+    ? frame?.fields.find((f) => f.name === options.timeField)
+    : frame?.fields.find((f) => f.type === FieldType.time);
 
   // No default for end time. If end time dimension isn't set, we assume that all events are instants.
-  const endTimeField = frame?.fields.find(f => f.name === options.endTimeField);
+  const endTimeField = frame?.fields.find((f) => f.name === options.endTimeField);
 
   // We'll still show the calendar even if no dimensions are set. However, if the user has configured a text field
   // without a matching time field, this is likely an error.
   if (textField && !startTimeField) {
-    return <div>You've configured a text field without a corresponding time field.</div>;
+    return <div>{`You've configured a text field without a corresponding time field.`}</div>;
   }
 
   const from = dayjs(timeRange.from.valueOf());
@@ -106,11 +106,8 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       {/* Header displaying the weekdays */}
       <div className={styles.weekdayContainer}>
         {Array.from({ length: 7 }).map((_, i) => (
-          <div className={styles.weekdayLabel}>
-            {dayjs()
-              .startOf('isoWeek')
-              .add(i, 'days')
-              .format('ddd')}
+          <div key={i} className={styles.weekdayLabel}>
+            {dayjs().startOf('isoWeek').add(i, 'days').format('ddd')}
           </div>
         ))}
       </div>
@@ -125,9 +122,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         )}
       >
         {Array.from({ length: numDays + 1 }).map((_, i) => {
-          const day = dayjs(startOfWeek.valueOf())
-            .startOf('day')
-            .add(i, 'days');
+          const day = dayjs(startOfWeek.valueOf()).startOf('day').add(i, 'days');
 
           const isWeekend = day.isoWeekday() > 5;
           const isToday = day.isSame(dayjs().startOf('day'));
@@ -141,7 +136,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
           const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
 
           const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
-          const entries = events.map<CalendarEvent | undefined>(event =>
+          const entries = events.map<CalendarEvent | undefined>((event) =>
             event ? { ...event, color: theme.palette.brandSuccess } : undefined
           );
 

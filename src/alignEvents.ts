@@ -13,7 +13,7 @@ export const alignEvents = (events: CalendarEvent[]): Record<string, Array<Calen
     return a.start.isBefore(b.start) ? -1 : 1;
   });
 
-  events.forEach(event => {
+  events.forEach((event) => {
     const eventsOnStart = alignedEvents[event.start.format('YYYY-MM-DD')];
 
     // offset determines the vertical position of the event. It's used to make
@@ -21,12 +21,12 @@ export const alignEvents = (events: CalendarEvent[]): Record<string, Array<Calen
     let offset = 0;
     if (eventsOnStart) {
       // Find the first available vertical slot, or add it to the end.
-      const firstAvailableIndex = eventsOnStart.findIndex(event => !event);
+      const firstAvailableIndex = eventsOnStart.findIndex((event) => !event);
       offset = firstAvailableIndex < 0 ? eventsOnStart.length : firstAvailableIndex;
     }
 
     // We expand each event to an entry for each day it spans.
-    expandInterval(event).forEach(entry => {
+    expandInterval(event).forEach((entry) => {
       if (!alignedEvents[entry.day]) {
         alignedEvents[entry.day] = [];
       }
@@ -58,5 +58,5 @@ const expandInterval = (event: CalendarEvent): Array<{ day: string; event: Calen
   // Create an entry per day within the duration of the event.
   return Array.from({ length: eventDurationInDays })
     .map((_, i) => event.start.add(i, 'days'))
-    .map(d => ({ day: d.format('YYYY-MM-DD'), event }));
+    .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
 };

@@ -23,17 +23,17 @@
     "url": "https://marcus.se.net"
   },
   "dependencies": {
+    "@tippyjs/react": "^4.1.0",
     "dayjs": "^1.10.4",
-    "grafana-plugin-support": "0.3.0-alpha.4",
-    "@tippyjs/react": "^4.1.0"
+    "grafana-plugin-support": "0.3.0-alpha.4"
   },
   "devDependencies": {
-    "@grafana/data": "latest",
-    "@grafana/toolkit": "latest",
-    "@grafana/ui": "latest",
-    "@grafana/runtime": "latest",
-    "emotion": "10.0.27",
+    "@grafana/data": "^7.5.5",
+    "@grafana/runtime": "^7.5.5",
+    "@grafana/toolkit": "^7.5.5",
+    "@grafana/ui": "^7.5.5",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
+    "emotion": "10.0.27",
     "react-virtualized-auto-sizer": "^1.0.4"
   },
   "engines": {

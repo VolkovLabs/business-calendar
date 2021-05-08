@@ -5,7 +5,7 @@ type Range = [dayjs.Dayjs, dayjs.Dayjs];
 
 export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => void) => {
   const keydownListener = useCallback(
-    e => {
+    (e) => {
       if (e.key === 'Shift') {
         onKeyPressed(true);
       }
@@ -14,7 +14,7 @@ export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => voi
   );
 
   const keyupListener = useCallback(
-    e => {
+    (e) => {
       if (e.key === 'Shift') {
         onKeyPressed(false);
       }
@@ -37,7 +37,7 @@ export const useIntervalSelection = (): [Range | undefined, () => void, (time: d
   const [selectedInterval, setSelectedInterval] = useState<Range>();
   const [intervalSelection, setIntervalSelection] = useState(false);
 
-  useKeyPress('Shift', pressed => {
+  useKeyPress('Shift', (pressed) => {
     setIntervalSelection(pressed);
   });
 

@@ -5,7 +5,7 @@ import { FieldSelectEditor, getPanelPluginOrFallback } from 'grafana-plugin-supp
 
 export const plugin = getPanelPluginOrFallback(
   'marcusolsson-calendar-panel',
-  new PanelPlugin<CalendarOptions>(CalendarPanel).setNoPadding().setPanelOptions(builder => {
+  new PanelPlugin<CalendarOptions>(CalendarPanel).setNoPadding().setPanelOptions((builder) => {
     return builder
       .addCustomEditor({
         id: 'textField',

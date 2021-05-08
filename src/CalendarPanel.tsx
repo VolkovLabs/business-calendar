@@ -40,37 +40,34 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   // No default for end time. If end time dimension isn't set, we assume that all events are instants.
   const endTimeField = frame?.fields.find((f) => f.name === options.endTimeField);
 
-  // We'll still show the calendar even if no dimensions are set. However, if the user has configured a text field
-  // without a matching time field, this is likely an error.
-  if (textField && !startTimeField) {
-    return <div>{`You've configured a text field without a corresponding time field.`}</div>;
-  }
-
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());
   const startOfWeek = from.startOf('isoWeek');
   const endOfWeek = to.endOf('isoWeek');
   const numDays = endOfWeek.diff(startOfWeek, 'days');
 
-  const events = Array.from({ length: frame?.length ?? 0 })
-    .map((_, i) => ({
-      label: textField?.values.get(i),
-      start: startTimeField?.values.get(i),
-      end: endTimeField?.values.get(i),
-    }))
-    .map<CalendarEvent>(({ label, start, end }) => ({
-      label,
-      start: dayjs(start),
+  const events =
+    textField && startTimeField
+      ? Array.from({ length: frame?.length ?? 0 })
+          .map((_, i) => ({
+            label: textField?.values.get(i),
+            start: startTimeField?.values.get(i),
+            end: endTimeField?.values.get(i),
+          }))
+          .map<CalendarEvent>(({ label, start, end }) => ({
+            label,
+            start: dayjs(start),
 
-      // Set undefined if the user hasn't explicitly configured the dimension
-      // for end time.
-      //
-      // Set end time to the end of the time interval if the user configured the
-      // end time dimension, but it's missing values. The panel interpretes
-      // this as an open interval.
-      end: endTimeField ? (end ? dayjs(end) : endOfWeek) : undefined,
-      open: !!endTimeField && !end,
-    }));
+            // Set undefined if the user hasn't explicitly configured the dimension
+            // for end time.
+            //
+            // Set end time to the end of the time interval if the user configured the
+            // end time dimension, but it's missing values. The panel interpretes
+            // this as an open interval.
+            end: endTimeField ? (end ? dayjs(end) : endOfWeek) : undefined,
+            open: !!endTimeField && !end,
+          }))
+      : [];
 
   const alignedEvents = alignEvents(events);
 

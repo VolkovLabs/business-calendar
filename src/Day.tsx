@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css, cx } from 'emotion';
 
 import { stylesFactory, useTheme } from '@grafana/ui';
@@ -7,6 +7,8 @@ import dayjs from 'dayjs';
 import { GrafanaTheme } from '@grafana/data';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { CalendarEvent } from 'types';
+import Tippy from '@tippyjs/react';
+import { CalendarEntry } from './CalendarEntry';
 
 interface Props {
   day: dayjs.Dayjs;
@@ -21,61 +23,15 @@ interface Props {
 }
 
 export const Day = ({ day, weekend, today, events, selected, onSelectionChange, outsideInterval }: Props) => {
+  const [visible, setVisible] = useState(false);
+  const show = (e: any) => {
+    e.stopPropagation();
+    setVisible(true);
+  };
+  const hide = () => setVisible(false);
+
   const theme = useTheme();
   const styles = getStyles(theme);
-
-  // A filler is added to offset entries that started on a day with previously
-  // ongoing events.
-  const filler = <div className={cx(styles.event, styles.multiDayEvent, styles.filler)}></div>;
-
-  const eventStartsToday = (e: CalendarEvent): boolean => e.start.startOf('day').isSame(day);
-  const eventEndsToday = (e: CalendarEvent): boolean =>
-    e.end ? e.end.startOf('day').isSame(day) : e.end === undefined ? eventStartsToday(e) : false;
-
-  const eventEntries = events.map(event => {
-    if (!event) {
-      return filler;
-    }
-
-    const startsToday = eventStartsToday(event);
-    const endsToday = eventEndsToday(event);
-
-    return startsToday && endsToday ? (
-      <div className={cx(styles.event, styles.centerItems)}>
-        <svg
-          width={theme.spacing.xs}
-          height={theme.spacing.xs}
-          viewBox="0 0 10 10"
-          xmlns="http://www.w3.org/2000/svg"
-          fill={theme.palette.brandSuccess}
-          className={css`
-            margin-right: ${theme.spacing.xs};
-          `}
-        >
-          <circle cx={5} cy={5} r={5} />
-        </svg>
-        <div
-          className={cx(styles.eventLabel, {
-            [css`
-              color: ${theme.colors.textFaint};
-            `]: outsideInterval,
-          })}
-        >
-          {event.label}
-        </div>
-      </div>
-    ) : (
-      <div
-        className={cx(styles.event, styles.multiDayEvent, {
-          [styles.startDayStyle]: startsToday,
-          [styles.endDayStyle]: endsToday && !event.open,
-        })}
-      >
-        {/* Only display the event text on the day it starts. */}
-        {startsToday && <div className={cx(styles.eventLabel)}>{event.label}</div>}
-      </div>
-    );
-  });
 
   const dateHeader = (
     <div className={styles.dateHeader.root}>
@@ -112,6 +68,10 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
     </div>
   );
 
+  const entries = events.map(event => (
+    <CalendarEntry event={event} day={day} outsideInterval={outsideInterval} summary={false} />
+  ));
+
   return (
     <div
       className={cx(
@@ -130,15 +90,32 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
       <AutoSizer disableWidth>
         {({ height }) => {
           // TODO: Can we compute this rather than having it hard-coded?
-          const heightPerEntry = 18;
+          const heightPerEntry = 17;
 
-          const maxNumEvents = Math.floor((height - 3 * heightPerEntry) / heightPerEntry);
+          const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
 
           return (
             <>
-              {eventEntries.filter((_, i) => i < maxNumEvents)}
-              {eventEntries.length - maxNumEvents > 0 && (
-                <div className={styles.moreEntriesLabel}>{`${eventEntries.length - maxNumEvents} more…`}</div>
+              {entries.filter((_, i) => i < maxNumEvents)}
+              {entries.length - maxNumEvents > 0 && (
+                <Tippy
+                  maxWidth={500}
+                  content={
+                    <div>
+                      {events.map(event => (
+                        <CalendarEntry event={event} day={day} outsideInterval={outsideInterval} summary={true} />
+                      ))}
+                    </div>
+                  }
+                  placement="bottom"
+                  animation={false}
+                  className={styles.tooltip}
+                  visible={visible}
+                  onClickOutside={hide}
+                >
+                  <div onClick={show} className={styles.moreEntriesLabel}>{`${entries.length -
+                    maxNumEvents} more…`}</div>
+                </Tippy>
               )}
             </>
           );
@@ -181,7 +158,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       display: flex;
       align-items: center;
       box-sizing: border-box;
-      height: 1.5em;
+      height: 1rem;
       padding: 0 ${theme.spacing.xs};
       width: 100%;
 
@@ -190,7 +167,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       }
     `,
     eventLabel: css`
-      font-size: ${theme.typography.size.sm};
+      font-size: ${theme.typography.size.xs};
       user-select: none;
       flex-grow: 1;
       white-space: nowrap;
@@ -210,10 +187,18 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       background: transparent;
     `,
     moreEntriesLabel: css`
-      font-size: ${theme.typography.size.sm};
+      margin-top: 1px;
+      display: inline-block;
+      font-size: ${theme.typography.size.xs};
       padding: ${theme.spacing.xs};
       user-select: none;
       color: ${theme.colors.textWeak};
+      cursor: pointer;
+
+      &:hover {
+        background: ${theme.colors.bg3};
+        border-radius: 0 ${theme.border.radius.lg} ${theme.border.radius.lg} 0;
+      }
     `,
     startDayStyle: css`
       width: calc(100% - ${theme.spacing.xs});
@@ -246,5 +231,12 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
         user-select: none;
       `,
     },
+    tooltip: css`
+      min-width: 200px;
+      border-radius: ${theme.border.radius.md};
+      background-color: ${theme.colors.bg2};
+      padding: ${theme.spacing.sm};
+      box-shadow: 0px 0px 20px ${theme.colors.dropdownShadow};
+    `,
   };
 });

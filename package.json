@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "dayjs": "^1.10.4",
-    "grafana-plugin-support": "0.3.0-alpha.4"
+    "grafana-plugin-support": "0.3.0-alpha.4",
+    "@tippyjs/react": "^4.1.0"
   },
   "devDependencies": {
     "@grafana/data": "latest",

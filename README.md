@@ -7,6 +7,9 @@
 
 A panel plugin for [Grafana](https://grafana.com) to display calendar events from data sources.
 
+- **Change time interval** by selecting the days in the calendar
+- **Query calendar events** from any data source
+
 ![Screenshot](https://github.com/marcusolsson/grafana-calendar-panel/raw/main/src/img/screenshot.png)
 
 ## Configuration
@@ -25,4 +28,4 @@ This section lists the available configuration options.
 
 If only **Start** is configured, events are considered instantaneous.
 
-If both **Start** and **End** are configured, events are considered to have a duration. Any events that are missing an end time are considered ongoing.
+If **End** are configured, events are considered to have a duration. Any events that are missing an end time are considered ongoing.

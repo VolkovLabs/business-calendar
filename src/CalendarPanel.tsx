@@ -12,13 +12,22 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
 import { useIntervalSelection } from 'hooks';
+import { toTimeField } from 'grafana-plugin-support';
 
 dayjs.extend(isoWeek);
 dayjs.extend(utc);
 
 interface Props extends PanelProps<CalendarOptions> {}
 
-export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
+export const CalendarPanel: React.FC<Props> = ({
+  options,
+  data,
+  timeRange,
+  timeZone,
+  width,
+  height,
+  onChangeTimeRange,
+}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -33,12 +42,14 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
     ? frame?.fields.find((f) => f.name === options.textField)
     : frame?.fields.find((f) => f.type === FieldType.string);
 
-  const startTimeField = options.timeField
-    ? frame?.fields.find((f) => f.name === options.timeField)
-    : frame?.fields.find((f) => f.type === FieldType.time);
+  const startTimeField = toTimeField(
+    options.timeField
+      ? frame?.fields.find((f) => f.name === options.timeField)
+      : frame?.fields.find((f) => f.type === FieldType.time)
+  );
 
   // No default for end time. If end time dimension isn't set, we assume that all events are instants.
-  const endTimeField = frame?.fields.find((f) => f.name === options.endTimeField);
+  const endTimeField = toTimeField(frame?.fields.find((f) => f.name === options.endTimeField));
 
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());

@@ -26,7 +26,7 @@ export const plugin = getPanelPluginOrFallback(
         editor: FieldSelectEditor,
         category: ['Dimensions'],
         settings: {
-          filterByType: [FieldType.time],
+          filterByType: [FieldType.time, FieldType.string, FieldType.number],
         },
       })
       .addCustomEditor({
@@ -37,7 +37,7 @@ export const plugin = getPanelPluginOrFallback(
         editor: FieldSelectEditor,
         category: ['Dimensions'],
         settings: {
-          filterByType: [FieldType.time],
+          filterByType: [FieldType.time, FieldType.string, FieldType.number],
         },
       });
   })

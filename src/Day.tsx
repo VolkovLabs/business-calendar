@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { css, cx } from 'emotion';
 
-import { stylesFactory, useTheme } from '@grafana/ui';
+import { Badge, stylesFactory, useTheme } from '@grafana/ui';
 
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+dayjs.extend(localizedFormat);
 import dayjs from 'dayjs';
 import { GrafanaTheme } from '@grafana/data';
 import AutoSizer from 'react-virtualized-auto-sizer';
@@ -23,15 +25,29 @@ interface Props {
 }
 
 export const Day = ({ day, weekend, today, events, selected, onSelectionChange, outsideInterval }: Props) => {
-  const [visible, setVisible] = useState(false);
-  const show = (e: any) => {
+  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent>();
+
+  const [moreVisible, setMoreVisible] = useState(false);
+  const hideMore = () => setMoreVisible(false);
+  const showMore = (e: any) => {
     e.stopPropagation();
-    setVisible(true);
+    setEntryVisible(false);
+    setMoreVisible(true);
   };
-  const hide = () => setVisible(false);
+
+  const [entryVisible, setEntryVisible] = useState(false);
+  const hideEntry = () => setEntryVisible(false);
+  const showEntry = (event?: CalendarEvent) => (e: any) => {
+    e.stopPropagation();
+    setSelectedEvent(event);
+    setMoreVisible(false);
+    setEntryVisible(true);
+  };
 
   const theme = useTheme();
   const styles = getStyles(theme);
+
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   const dateHeader = (
     <div className={styles.dateHeader.root}>
@@ -69,11 +85,68 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
   );
 
   const entries = events.map((event, i) => (
-    <CalendarEntry key={i} event={event} day={day} outsideInterval={outsideInterval} summary={false} />
+    <CalendarEntry
+      key={i}
+      event={event}
+      day={day}
+      outsideInterval={outsideInterval}
+      summary={false}
+      onClick={showEntry(event)}
+    />
   ));
+
+  const eventSummary = (event: CalendarEvent) => {
+    return (
+      <div
+        className={css`
+          & > * {
+            &:not(&:last-child) {
+              margin-bottom: ${theme.spacing.sm};
+            }
+          }
+        `}
+      >
+        <h4>{event.text}</h4>
+        <div>
+          {event.start.format('LL')}
+
+          {event.end ? (
+            // If the event has a duration, check if starts and finishes in the
+            // same day. In that case, we'll display a more detailed time format.
+            event.start.startOf('day').isSame(event.end?.startOf('day')) ? (
+              <>
+                <span
+                  className={css`
+                    margin: 0 ${theme.spacing.sm};
+                  `}
+                >
+                  &middot;
+                </span>
+                {event.start.format('LT')}&ndash;{event.end.format('LT')}
+              </>
+            ) : (
+              <>&ndash;{event.end.format('LL')}</>
+            )
+          ) : (
+            // Instant event
+            event.start.format('LT')
+          )}
+        </div>
+        {!!event.labels?.length && (
+          <div>
+            {event.labels?.map((label, i) => (
+              <Badge key={i} text={label} color={'blue'} />
+            ))}
+          </div>
+        )}
+        {event.description && <div>{event.description}</div>}
+      </div>
+    );
+  };
 
   return (
     <div
+      ref={rootRef}
       className={cx(
         styles.root,
         { [styles.weekend]: weekend },
@@ -82,6 +155,8 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
         { [styles.outsideInterval]: outsideInterval }
       )}
       onClick={() => {
+        setEntryVisible(false);
+        setMoreVisible(false);
         onSelectionChange(!selected);
       }}
     >
@@ -96,33 +171,56 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
 
           return (
             <>
-              {entries.filter((_, i) => i < maxNumEvents)}
-              {entries.length - maxNumEvents > 0 && (
+              {selectedEvent && (
                 <Tippy
                   maxWidth={500}
-                  content={
-                    <div>
-                      {events.map((event, i) => (
-                        <CalendarEntry
-                          key={i}
-                          event={event}
-                          day={day}
-                          outsideInterval={outsideInterval}
-                          summary={true}
-                        />
-                      ))}
-                    </div>
-                  }
-                  placement="bottom"
+                  content={eventSummary(selectedEvent)}
+                  placement="auto-start"
                   animation={false}
                   className={styles.tooltip}
-                  visible={visible}
-                  onClickOutside={hide}
-                >
-                  <div onClick={show} className={styles.moreEntriesLabel}>{`${
+                  visible={entryVisible}
+                  onClickOutside={hideEntry}
+                  interactive={true}
+                  appendTo={document.body}
+                  trigger="manual"
+                  reference={rootRef}
+                />
+              )}
+
+              {entries.filter((_, i) => i < maxNumEvents)}
+              {entries.length - maxNumEvents > 0 && (
+                <>
+                  <div onClick={showMore} className={styles.moreEntriesLabel}>{`${
                     entries.length - maxNumEvents
                   } more…`}</div>
-                </Tippy>
+                  <Tippy
+                    maxWidth={500}
+                    content={
+                      <div>
+                        {events
+                          .filter((event) => event)
+                          .map((event, i) => (
+                            <CalendarEntry
+                              key={i}
+                              event={event}
+                              day={day}
+                              outsideInterval={outsideInterval}
+                              summary={true}
+                              onClick={showEntry(event)}
+                            />
+                          ))}
+                      </div>
+                    }
+                    placement="bottom"
+                    animation={false}
+                    className={styles.tooltip}
+                    visible={moreVisible}
+                    onClickOutside={hideMore}
+                    interactive={true}
+                    appendTo={document.body}
+                    reference={rootRef}
+                  />
+                </>
               )}
             </>
           );
@@ -161,38 +259,6 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     today: css``,
     selected: css``,
 
-    event: css`
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      height: 1rem;
-      padding: 0 ${theme.spacing.xs};
-      width: 100%;
-
-      &:not(&:last-child) {
-        margin-bottom: 1px;
-      }
-    `,
-    eventLabel: css`
-      font-size: ${theme.typography.size.xs};
-      user-select: none;
-      flex-grow: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    `,
-    multiDayEvent: css`
-      padding-left: ${theme.spacing.sm};
-      background: ${theme.colors.textBlue};
-      color: ${theme.palette.black};
-    `,
-    centerItems: css`
-      display: flex;
-      align-items: center;
-    `,
-    filler: css`
-      background: transparent;
-    `,
     moreEntriesLabel: css`
       margin-top: 1px;
       display: inline-block;

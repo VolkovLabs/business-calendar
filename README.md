@@ -20,11 +20,13 @@ This section lists the available configuration options.
 
 #### Dimensions
 
-| Option       | Description                                                                          |
-|--------------|--------------------------------------------------------------------------------------|
-| _Text_       | Name of the field to use for the event text. Defaults to the first string field.     |
-| _Start time_ | Name of the field to use for the event start time. Defaults to the first time field. |
-| _End time_   | Name of the field to use for the event end time.                                     |
+| Option        | Description                                                         |
+|---------------|---------------------------------------------------------------------|
+| _Text_        | Field to use as event text. Defaults to the first text field.       |
+| _Description_ | Field to use as event description.                                  |
+| _Start time_  | Field to use as event start time. Defaults to the first time field. |
+| _End time_    | Field to use as event end time.                                     |
+| _Labels_      | Fields to use as event labels.                                      |
 
 If only **Start** is configured, events are considered instantaneous.
 

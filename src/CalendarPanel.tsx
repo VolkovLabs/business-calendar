@@ -42,6 +42,8 @@ export const CalendarPanel: React.FC<Props> = ({
     ? frame?.fields.find((f) => f.name === options.textField)
     : frame?.fields.find((f) => f.type === FieldType.string);
 
+  const descriptionField = frame?.fields.find((f) => f.name === options.descriptionField);
+
   const startTimeField = toTimeField(
     options.timeField
       ? frame?.fields.find((f) => f.name === options.timeField)
@@ -50,6 +52,8 @@ export const CalendarPanel: React.FC<Props> = ({
 
   // No default for end time. If end time dimension isn't set, we assume that all events are instants.
   const endTimeField = toTimeField(frame?.fields.find((f) => f.name === options.endTimeField));
+
+  const labelFields = frame?.fields.filter((f) => options.labelFields?.includes(f.name));
 
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());
@@ -61,12 +65,16 @@ export const CalendarPanel: React.FC<Props> = ({
     textField && startTimeField
       ? Array.from({ length: frame?.length ?? 0 })
           .map((_, i) => ({
-            label: textField?.values.get(i),
+            text: textField?.values.get(i),
+            description: descriptionField?.values.get(i),
             start: startTimeField?.values.get(i),
             end: endTimeField?.values.get(i),
+            labels: labelFields?.map((field) => field.values.get(i)).filter((label) => label),
           }))
-          .map<CalendarEvent>(({ label, start, end }) => ({
-            label,
+          .map<CalendarEvent>(({ text, description, labels, start, end }) => ({
+            text,
+            description,
+            labels,
             start: dayjs(start),
 
             // Set undefined if the user hasn't explicitly configured the dimension

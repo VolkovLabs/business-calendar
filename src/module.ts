@@ -19,6 +19,17 @@ export const plugin = getPanelPluginOrFallback(
         },
       })
       .addCustomEditor({
+        id: 'descriptionField',
+        path: 'descriptionField',
+        name: 'Description',
+        description: 'Field to use for the event description.',
+        editor: FieldSelectEditor,
+        category: ['Dimensions'],
+        settings: {
+          filterByType: [FieldType.string],
+        },
+      })
+      .addCustomEditor({
         id: 'timeField',
         path: 'timeField',
         name: 'Start time',
@@ -38,6 +49,18 @@ export const plugin = getPanelPluginOrFallback(
         category: ['Dimensions'],
         settings: {
           filterByType: [FieldType.time, FieldType.string, FieldType.number],
+        },
+      })
+      .addCustomEditor({
+        id: 'labelFields',
+        path: 'labelFields',
+        name: 'Labels',
+        description: 'Fields to use as event labels.',
+        editor: FieldSelectEditor,
+        category: ['Dimensions'],
+        settings: {
+          filterByType: [FieldType.string],
+          multi: true,
         },
       });
   })

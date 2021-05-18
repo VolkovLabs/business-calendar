@@ -8,7 +8,7 @@ export const alignEvents = (events: CalendarEvent[]): Record<string, Array<Calen
   // TODO: Is this the right place to sort?
   events.sort((a, b) => {
     if (a.start.isSame(b.start)) {
-      return a.label.localeCompare(b.label);
+      return a.text.localeCompare(b.text);
     }
     return a.start.isBefore(b.start) ? -1 : 1;
   });

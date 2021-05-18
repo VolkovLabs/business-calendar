@@ -11,9 +11,10 @@ interface Props {
   day: dayjs.Dayjs;
   outsideInterval: boolean;
   summary: boolean;
+  onClick?: (e: any) => void;
 }
 
-export const CalendarEntry = ({ event, day, outsideInterval, summary }: Props) => {
+export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }: Props) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -33,7 +34,7 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary }: Props) =
   const endsToday = eventEndsToday(event);
 
   return startsToday && endsToday ? (
-    <div title={event.label} className={cx(styles.event, styles.centerItems)}>
+    <div title={event.text} className={cx(styles.event, styles.centerItems)} onClick={onClick}>
       <svg
         width={theme.spacing.sm}
         height={theme.spacing.sm}
@@ -55,20 +56,21 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary }: Props) =
           `]: outsideInterval,
         })}
       >
-        {event.label}
+        {event.text}
       </div>
     </div>
   ) : (
     <div
-      title={event.label}
+      title={event.text}
       className={cx(styles.event, styles.multiDayEvent, {
         [styles.startDayStyle]: startsToday,
         [styles.endDayStyle]: endsToday && !event.open,
         [styles.summary]: summary,
       })}
+      onClick={onClick}
     >
       {/* Only display the event text on the day it starts. */}
-      {(startsToday || summary) && <div className={cx(styles.eventLabel)}>{event.label}</div>}
+      {(startsToday || summary) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
     </div>
   );
 };
@@ -79,12 +81,19 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       display: flex;
       align-items: center;
       box-sizing: border-box;
-      height: 1rem;
+      height: 1.1rem;
       padding: 0 ${theme.spacing.xs};
       width: 100%;
 
       &:not(&:last-child) {
         margin-bottom: 1px;
+      }
+
+      color: ${theme.colors.textSemiWeak};
+
+      &:hover {
+        color: ${theme.colors.text};
+        cursor: pointer;
       }
     `,
     eventLabel: css`
@@ -98,7 +107,11 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     multiDayEvent: css`
       padding-left: calc(3 * ${theme.spacing.xs});
       background: ${theme.colors.textBlue};
-      color: ${theme.palette.black};
+      color: ${theme.palette.dark5};
+      &:hover {
+        color: ${theme.palette.black};
+        cursor: pointer;
+      }
     `,
     centerItems: css`
       display: flex;
@@ -106,6 +119,9 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     `,
     filler: css`
       background: transparent;
+      &:hover {
+        cursor: initial;
+      }
     `,
     startDayStyle: css`
       width: calc(100% - ${theme.spacing.xs});
@@ -120,6 +136,13 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       width: calc(100% - 2 * ${theme.spacing.xs});
       margin-left: ${theme.spacing.xs};
       border-radius: ${theme.border.radius.lg};
+    `,
+    tooltip: css`
+      min-width: 200px;
+      border-radius: ${theme.border.radius.md};
+      background-color: ${theme.colors.bg2};
+      padding: ${theme.spacing.sm};
+      box-shadow: 0px 0px 20px ${theme.colors.dropdownShadow};
     `,
   };
 });

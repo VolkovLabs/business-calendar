@@ -6,7 +6,7 @@ import { Badge, stylesFactory, useTheme } from '@grafana/ui';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 dayjs.extend(localizedFormat);
 import dayjs from 'dayjs';
-import { GrafanaTheme } from '@grafana/data';
+import { GrafanaTheme, textUtil } from '@grafana/data';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { CalendarEvent } from 'types';
 import Tippy from '@tippyjs/react';
@@ -100,9 +100,7 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
       <div
         className={css`
           & > * {
-            &:not(&:last-child) {
-              margin-bottom: ${theme.spacing.sm};
-            }
+            margin-bottom: ${theme.spacing.sm};
           }
         `}
       >
@@ -139,7 +137,7 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
             ))}
           </div>
         )}
-        {event.description && <div>{event.description}</div>}
+        {event.description && <div dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />}
       </div>
     );
   };

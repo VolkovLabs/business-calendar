@@ -1,14 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import {
-  classicColors,
-  FieldType,
-  getColorForTheme,
-  getNamedColorPalette,
-  GrafanaTheme,
-  PanelProps,
-} from '@grafana/data';
+import { classicColors, FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
 import { Button, stylesFactory, useTheme } from '@grafana/ui';
 
 import { alignEvents } from 'alignEvents';
@@ -85,7 +78,6 @@ export const CalendarPanel: React.FC<Props> = ({
             // end time dimension, but it's missing values. The panel interpretes
             // this as an open interval.
             end: frame.end ? (end ? dayjs(end) : endOfWeek) : undefined,
-            open: !!frame.end && !end,
           }))
       : [];
   });

@@ -8,6 +8,7 @@ describe('alignEvents', () => {
       {
         text: 'Deployed to test',
         start: dayjs('2020-01-01T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -24,6 +25,7 @@ describe('alignEvents', () => {
         text: 'Deployed to test for two days',
         start: dayjs('2020-01-01T15:06:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -42,12 +44,14 @@ describe('alignEvents', () => {
         text: 'Deployed to test for two days',
         start: dayjs('2020-01-01T15:06:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
       {
         text: 'Tested for two days',
         start: dayjs('2020-01-01T15:06:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -65,12 +69,14 @@ describe('alignEvents', () => {
         text: 'Deployed to test for two days',
         start: dayjs('2020-01-01T15:02:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
       {
         text: 'Tested for two days',
         start: dayjs('2020-01-02T15:06:02Z'),
         end: dayjs('2020-01-03T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -89,18 +95,21 @@ describe('alignEvents', () => {
         text: 'Deployed to test for two days',
         start: dayjs('2020-01-01T15:06:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
       {
         text: 'Tested for two days',
         start: dayjs('2020-01-02T15:06:02Z'),
         end: dayjs('2020-01-03T15:06:02Z'),
+        color: '',
         open: false,
       },
       {
         text: 'QA for two days',
         start: dayjs('2020-01-03T15:06:02Z'),
         end: dayjs('2020-01-04T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -124,6 +133,7 @@ describe('alignEvents', () => {
         text: `Event ${i}`,
         start: start.add(i, 'day'),
         end: start.add(eventDuration - 1, 'day').add(i, 'day'),
+        color: '',
         open: false,
       };
     });

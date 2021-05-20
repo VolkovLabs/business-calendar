@@ -31,6 +31,7 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
     e.end ? e.end.startOf('day').isSame(day) : e.end === undefined ? eventStartsToday(e) : false;
 
   const startOfWeek = day.startOf('day').isSame(day.startOf('isoWeek'));
+  const endOfWeek = day.endOf('day').isSame(day.endOf('isoWeek'));
   const startsToday = eventStartsToday(event);
   const endsToday = eventEndsToday(event);
 
@@ -70,8 +71,8 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
           background: ${event.color};
         `,
         {
-          [styles.startDayStyle]: startsToday,
-          [styles.endDayStyle]: endsToday && !event.open,
+          [styles.startDayStyle]: startOfWeek || startsToday,
+          [styles.endDayStyle]: endOfWeek || endsToday,
           [styles.summary]: summary,
         }
       )}
@@ -91,11 +92,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       box-sizing: border-box;
       height: 1.1rem;
       padding: 0 ${theme.spacing.xs};
-      width: 100%;
-
-      &:not(&:last-child) {
-        margin-bottom: 1px;
-      }
+      margin-bottom: 1px;
 
       color: ${theme.colors.textSemiWeak};
 
@@ -133,11 +130,11 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     startDayStyle: css`
       width: calc(100% - ${theme.spacing.xs});
       margin-left: ${theme.spacing.xs};
-      border-radius: ${theme.border.radius.lg} 0 0 ${theme.border.radius.lg};
+      border-radius: ${theme.border.radius.md} 0 0 ${theme.border.radius.md};
     `,
     endDayStyle: css`
       width: calc(100% - ${theme.spacing.xs});
-      border-radius: 0 ${theme.border.radius.lg} ${theme.border.radius.lg} 0;
+      border-radius: 0 ${theme.border.radius.md} ${theme.border.radius.md} 0;
     `,
     summary: css`
       width: calc(100% - 2 * ${theme.spacing.xs});

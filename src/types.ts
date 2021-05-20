@@ -14,6 +14,5 @@ export interface CalendarEvent {
   end?: dayjs.Dayjs;
   description?: string;
   labels?: string[];
-  open: boolean;
   color: string;
 }

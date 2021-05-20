@@ -41,7 +41,7 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
         height={theme.spacing.sm}
         viewBox="0 0 10 10"
         xmlns="http://www.w3.org/2000/svg"
-        fill={theme.palette.brandSuccess}
+        fill={event.color}
         className={css`
           margin-right: ${theme.spacing.xs};
           min-width: ${theme.spacing.sm};
@@ -63,11 +63,18 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
   ) : (
     <div
       title={event.text}
-      className={cx(styles.event, styles.multiDayEvent, {
-        [styles.startDayStyle]: startsToday,
-        [styles.endDayStyle]: endsToday && !event.open,
-        [styles.summary]: summary,
-      })}
+      className={cx(
+        styles.event,
+        styles.multiDayEvent,
+        css`
+          background: ${event.color};
+        `,
+        {
+          [styles.startDayStyle]: startsToday,
+          [styles.endDayStyle]: endsToday && !event.open,
+          [styles.summary]: summary,
+        }
+      )}
       onClick={onClick}
     >
       {/* Only display the event text on the day it starts. */}
@@ -107,7 +114,6 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     `,
     multiDayEvent: css`
       padding-left: calc(3 * ${theme.spacing.xs});
-      background: ${theme.colors.textBlue};
       color: ${theme.palette.dark5};
       &:hover {
         color: ${theme.palette.black};

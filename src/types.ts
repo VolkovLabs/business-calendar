@@ -15,4 +15,5 @@ export interface CalendarEvent {
   description?: string;
   labels?: string[];
   open: boolean;
+  color: string;
 }

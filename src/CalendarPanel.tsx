@@ -1,7 +1,14 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
+import {
+  classicColors,
+  FieldType,
+  getColorForTheme,
+  getNamedColorPalette,
+  GrafanaTheme,
+  PanelProps,
+} from '@grafana/data';
 import { Button, stylesFactory, useTheme } from '@grafana/ui';
 
 import { alignEvents } from 'alignEvents';
@@ -33,27 +40,20 @@ export const CalendarPanel: React.FC<Props> = ({
 
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
 
-  const frame = data.series.length > 0 ? data.series[0] : undefined;
-
-  // Find the fields we're going to be using for the visualization. If the user
-  // has set the field explicitly we use that one, otherwise we guess based on
-  // the expected field type.
-  const textField = options.textField
-    ? frame?.fields.find((f) => f.name === options.textField)
-    : frame?.fields.find((f) => f.type === FieldType.string);
-
-  const descriptionField = frame?.fields.find((f) => f.name === options.descriptionField);
-
-  const startTimeField = toTimeField(
-    options.timeField
-      ? frame?.fields.find((f) => f.name === options.timeField)
-      : frame?.fields.find((f) => f.type === FieldType.time)
-  );
-
-  // No default for end time. If end time dimension isn't set, we assume that all events are instants.
-  const endTimeField = toTimeField(frame?.fields.find((f) => f.name === options.endTimeField));
-
-  const labelFields = frame?.fields.filter((f) => options.labelFields?.includes(f.name));
+  const frames = data.series.map((frame) => ({
+    text: options.textField
+      ? frame.fields.find((f) => f.name === options.textField)
+      : frame.fields.find((f) => f.type === FieldType.string),
+    description: frame.fields.find((f) => f.name === options.descriptionField),
+    start: toTimeField(
+      options.timeField
+        ? frame.fields.find((f) => f.name === options.timeField)
+        : frame.fields.find((f) => f.type === FieldType.time)
+    ),
+    // No default for end time. If end time dimension isn't set, we assume that all events are instants.
+    end: toTimeField(frame.fields.find((f) => f.name === options.endTimeField)),
+    labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
+  }));
 
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());
@@ -61,21 +61,22 @@ export const CalendarPanel: React.FC<Props> = ({
   const endOfWeek = to.endOf('isoWeek');
   const numDays = endOfWeek.diff(startOfWeek, 'days');
 
-  const events =
-    textField && startTimeField
-      ? Array.from({ length: frame?.length ?? 0 })
+  const events = frames.flatMap((frame, frameIdx) => {
+    return frame.text && frame.start
+      ? Array.from({ length: frame.text.values.length })
           .map((_, i) => ({
-            text: textField?.values.get(i),
-            description: descriptionField?.values.get(i),
-            start: startTimeField?.values.get(i),
-            end: endTimeField?.values.get(i),
-            labels: labelFields?.map((field) => field.values.get(i)).filter((label) => label),
+            text: frame.text?.values.get(i),
+            description: frame.description?.values.get(i),
+            start: frame.start?.values.get(i),
+            end: frame.end?.values.get(i),
+            labels: frame.labels?.map((field) => field.values.get(i)).filter((label) => label),
           }))
-          .map<CalendarEvent>(({ text, description, labels, start, end }) => ({
+          .map<CalendarEvent>(({ text, description, labels, start, end }, i) => ({
             text,
             description,
             labels,
             start: dayjs(start),
+            color: classicColors[Math.floor(frameIdx % classicColors.length)],
 
             // Set undefined if the user hasn't explicitly configured the dimension
             // for end time.
@@ -83,10 +84,11 @@ export const CalendarPanel: React.FC<Props> = ({
             // Set end time to the end of the time interval if the user configured the
             // end time dimension, but it's missing values. The panel interpretes
             // this as an open interval.
-            end: endTimeField ? (end ? dayjs(end) : endOfWeek) : undefined,
-            open: !!endTimeField && !end,
+            end: frame.end ? (end ? dayjs(end) : endOfWeek) : undefined,
+            open: !!frame.end && !end,
           }))
       : [];
+  });
 
   const alignedEvents = alignEvents(events);
 
@@ -153,7 +155,7 @@ export const CalendarPanel: React.FC<Props> = ({
 
           const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
           const entries = events.map<CalendarEvent | undefined>((event) =>
-            event ? { ...event, color: theme.palette.brandSuccess } : undefined
+            event ? { ...event, color: event.color } : undefined
           );
 
           return (

@@ -30,6 +30,7 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
   const eventEndsToday = (e: CalendarEvent): boolean =>
     e.end ? e.end.startOf('day').isSame(day) : e.end === undefined ? eventStartsToday(e) : false;
 
+  const startOfWeek = day.startOf('day').isSame(day.startOf('isoWeek'));
   const startsToday = eventStartsToday(event);
   const endsToday = eventEndsToday(event);
 
@@ -70,7 +71,7 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
       onClick={onClick}
     >
       {/* Only display the event text on the day it starts. */}
-      {(startsToday || summary) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
+      {(startOfWeek || startsToday || summary) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
     </div>
   );
 };

@@ -7,6 +7,7 @@
 ### Bug fixes
 
 - classicColors is undefined ([#16](https://github.com/marcusolsson/grafana-calendar-panel/issues/16))
+- Improve legibility of event text ([#15](https://github.com/marcusolsson/grafana-calendar-panel/issues/15))
 
 ## 0.4.0 (2021-05-20)
 

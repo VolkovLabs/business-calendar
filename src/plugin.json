@@ -1,4 +1,5 @@
 {
+  "$schema": "https://github.com/grafana/grafana/raw/main/docs/sources/developers/plugins/plugin.schema.json",
   "type": "panel",
   "name": "Calendar",
   "id": "marcusolsson-calendar-panel",
@@ -15,7 +16,7 @@
     },
     "links": [
       { "name": "Website", "url": "https://github.com/marcusolsson/grafana-calendar-panel" },
-      { "name": "License", "url": "https://github.com/marcusolsson/grafana-calendar-panel/blob/master/LICENSE" }
+      { "name": "License", "url": "https://github.com/marcusolsson/grafana-calendar-panel/blob/main/LICENSE" }
     ],
     "screenshots": [
       {

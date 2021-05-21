@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2021-05-21)
+
+[Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.4.0...v0.4.1)
+
+### Bug fixes
+
+- classicColors is undefined ([#16](https://github.com/marcusolsson/grafana-calendar-panel/issues/16))
+
 ## 0.4.0 (2021-05-20)
 
 [Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.3.0...v0.4.0)

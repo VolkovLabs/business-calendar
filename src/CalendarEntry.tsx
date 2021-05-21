@@ -90,7 +90,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       display: flex;
       align-items: center;
       box-sizing: border-box;
-      height: 1.1rem;
+      height: 1.5rem;
       padding: 0 ${theme.spacing.xs};
       margin-bottom: 1px;
 
@@ -102,15 +102,16 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       }
     `,
     eventLabel: css`
-      font-size: ${theme.typography.size.xs};
-      user-select: none;
+      font-size: ${theme.typography.size.base};
+      font-weight: ${theme.typography.weight.semibold};
+      r-select: none;
       flex-grow: 1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     `,
     multiDayEvent: css`
-      padding-left: calc(3 * ${theme.spacing.xs});
+      padding-left: calc(4 * ${theme.spacing.xs});
       color: ${theme.palette.dark5};
       &:hover {
         color: ${theme.palette.black};
@@ -128,12 +129,10 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       }
     `,
     startDayStyle: css`
-      width: calc(100% - ${theme.spacing.xs});
-      margin-left: ${theme.spacing.xs};
       border-radius: ${theme.border.radius.md} 0 0 ${theme.border.radius.md};
     `,
     endDayStyle: css`
-      width: calc(100% - ${theme.spacing.xs});
+      width: calc(100% - ${theme.spacing.sm});
       border-radius: 0 ${theme.border.radius.md} ${theme.border.radius.md} 0;
     `,
     summary: css`

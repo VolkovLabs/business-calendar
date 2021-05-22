@@ -56,8 +56,6 @@ export const CalendarPanel: React.FC<Props> = ({
 
   const colors = classicColors ?? legacyClassicColors;
 
-  console.log(colors[0]);
-
   const events = frames.flatMap((frame, frameIdx) => {
     return frame.text && frame.start
       ? Array.from({ length: frame.text.values.length })
@@ -73,7 +71,7 @@ export const CalendarPanel: React.FC<Props> = ({
             description,
             labels,
             start: dayjs(start),
-            color: colors[Math.floor(frameIdx % classicColors.length)],
+            color: colors[Math.floor(frameIdx % colors.length)],
 
             // Set undefined if the user hasn't explicitly configured the dimension
             // for end time.

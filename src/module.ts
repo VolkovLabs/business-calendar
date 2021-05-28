@@ -7,6 +7,12 @@ export const plugin = getPanelPluginOrFallback(
   'marcusolsson-calendar-panel',
   new PanelPlugin<CalendarOptions>(CalendarPanel).setNoPadding().setPanelOptions((builder) => {
     return builder
+      .addBooleanSwitch({
+        path: 'autoScroll',
+        name: 'Scroll to bottom',
+        description: 'Automatically scroll to the end of the time interval.',
+        defaultValue: false,
+      })
       .addCustomEditor({
         id: 'textField',
         path: 'textField',

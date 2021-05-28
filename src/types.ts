@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 export interface CalendarOptions {
+  autoScroll: boolean;
   timeField?: string;
   descriptionField?: string;
   endTimeField?: string;

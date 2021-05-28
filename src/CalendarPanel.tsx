@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { css, cx } from 'emotion';
 
 import { classicColors, FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
@@ -19,15 +19,7 @@ dayjs.extend(utc);
 
 interface Props extends PanelProps<CalendarOptions> {}
 
-export const CalendarPanel: React.FC<Props> = ({
-  options,
-  data,
-  timeRange,
-  timeZone,
-  width,
-  height,
-  onChangeTimeRange,
-}) => {
+export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -47,6 +39,12 @@ export const CalendarPanel: React.FC<Props> = ({
     end: toTimeField(frame.fields.find((f) => f.name === options.endTimeField)),
     labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
   }));
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  if (ref.current && options.autoScroll) {
+    ref.current.scrollTo(0, ref.current.scrollHeight);
+  }
 
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());
@@ -126,6 +124,7 @@ export const CalendarPanel: React.FC<Props> = ({
 
       {/* Day grid */}
       <div
+        ref={ref}
         className={cx(
           styles.calendarContainer,
           css`

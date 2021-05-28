@@ -18,6 +18,12 @@ This section lists the available configuration options.
 
 ### Panel options
 
+#### Display
+
+| Option             | Description                                           |
+|--------------------|-------------------------------------------------------|
+| _Scroll to bottom_ | Automatically scroll to the end of the time interval. |
+
 #### Dimensions
 
 | Option        | Description                                                         |

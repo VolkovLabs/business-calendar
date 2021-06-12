@@ -108,7 +108,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               }
             }}
           >
-            Apply time interval
+            Apply time range
           </Button>
         </div>
       )}

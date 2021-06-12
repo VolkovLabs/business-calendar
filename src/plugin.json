@@ -3,9 +3,8 @@
   "type": "panel",
   "name": "Calendar",
   "id": "marcusolsson-calendar-panel",
-
   "info": {
-    "description": "Calendar for Grafana",
+    "description": "Display events and set time interval",
     "author": {
       "name": "Marcus Olsson"
     },
@@ -21,7 +20,7 @@
     "screenshots": [
       {
         "name": "Calendar",
-        "path": "img/screenshot.png"
+        "path": "img/product.png"
       }
     ],
     "version": "%VERSION%",

@@ -94,10 +94,10 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
       padding: 0 ${theme.spacing.xs};
       margin-bottom: 1px;
 
-      color: ${theme.colors.textSemiWeak};
+      color: ${theme.colors.text};
 
       &:hover {
-        color: ${theme.colors.text};
+        color: ${theme.colors.textStrong};
         cursor: pointer;
       }
     `,

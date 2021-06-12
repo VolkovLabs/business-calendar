@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.3 (2021-06-12)
+
+[Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.4.2...v0.4.3)
+
+### Enhancements
+
+- Change "Apply time interval" to "Apply time range" to match Grafana
+- Increase contrast for single-day events
+
 ## 0.4.2 (2021-05-22)
 
 [Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.4.1...v0.4.2)

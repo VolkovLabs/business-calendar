@@ -1,16 +1,15 @@
-import React, { useState, useRef } from 'react';
-import { css, cx } from 'emotion';
-
-import { Badge, stylesFactory, useTheme } from '@grafana/ui';
-
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-dayjs.extend(localizedFormat);
-import dayjs from 'dayjs';
 import { GrafanaTheme, textUtil } from '@grafana/data';
+import { Badge, stylesFactory, useTheme } from '@grafana/ui';
+import Tippy from '@tippyjs/react';
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { css, cx } from 'emotion';
+import React, { useRef, useState } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { CalendarEvent } from 'types';
-import Tippy from '@tippyjs/react';
 import { CalendarEntry } from './CalendarEntry';
+
+dayjs.extend(localizedFormat);
 
 interface Props {
   day: dayjs.Dayjs;

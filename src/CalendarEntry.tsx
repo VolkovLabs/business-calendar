@@ -1,10 +1,9 @@
-import React from 'react';
-
-import { stylesFactory, useTheme } from '@grafana/ui';
-import { css, cx } from 'emotion';
 import { GrafanaTheme } from '@grafana/data';
-import { CalendarEvent } from './types';
+import { stylesFactory, useTheme } from '@grafana/ui';
 import dayjs from 'dayjs';
+import { css, cx } from 'emotion';
+import React from 'react';
+import { CalendarEvent } from './types';
 
 interface Props {
   event?: CalendarEvent;

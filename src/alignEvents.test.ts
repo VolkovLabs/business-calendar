@@ -1,6 +1,5 @@
-import dayjs from 'dayjs';
-
 import { alignEvents } from 'alignEvents';
+import dayjs from 'dayjs';
 
 describe('alignEvents', () => {
   it('missing end time', () => {

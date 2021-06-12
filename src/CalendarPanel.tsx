@@ -1,18 +1,15 @@
-import React, { useRef } from 'react';
-import { css, cx } from 'emotion';
-
 import { classicColors, FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
 import { Button, stylesFactory, useTheme } from '@grafana/ui';
-
 import { alignEvents } from 'alignEvents';
-import { Day } from './Day';
-import { CalendarEvent, CalendarOptions } from './types';
-
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
-import { useIntervalSelection } from 'hooks';
+import { css, cx } from 'emotion';
 import { toTimeField } from 'grafana-plugin-support';
+import { useIntervalSelection } from 'hooks';
+import React, { useRef } from 'react';
+import { Day } from './Day';
+import { CalendarEvent, CalendarOptions } from './types';
 
 dayjs.extend(isoWeek);
 dayjs.extend(utc);

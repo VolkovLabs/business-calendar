@@ -1,7 +1,7 @@
 import { FieldType, PanelPlugin } from '@grafana/data';
-import { CalendarOptions } from './types';
-import { CalendarPanel } from './CalendarPanel';
 import { FieldSelectEditor, getPanelPluginOrFallback } from 'grafana-plugin-support';
+import { CalendarPanel } from './CalendarPanel';
+import { CalendarOptions } from './types';
 
 export const plugin = getPanelPluginOrFallback(
   'marcusolsson-calendar-panel',

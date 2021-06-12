@@ -7,7 +7,7 @@
 
 A panel plugin for [Grafana](https://grafana.com) to display calendar events from data sources.
 
-- **Change time interval** by selecting the days in the calendar
+- **Change time range** by selecting the days in the calendar
 - **Query calendar events** from any data source
 
 ![Screenshot](https://github.com/marcusolsson/grafana-calendar-panel/raw/main/src/img/screenshot.png)
@@ -20,9 +20,9 @@ This section lists the available configuration options.
 
 #### Display
 
-| Option             | Description                                           |
-|--------------------|-------------------------------------------------------|
-| _Scroll to bottom_ | Automatically scroll to the end of the time interval. |
+| Option             | Description                                        |
+|--------------------|----------------------------------------------------|
+| _Scroll to bottom_ | Automatically scroll to the end of the time range. |
 
 #### Dimensions
 

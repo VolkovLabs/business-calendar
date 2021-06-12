@@ -4,7 +4,7 @@
   "name": "Calendar",
   "id": "marcusolsson-calendar-panel",
   "info": {
-    "description": "Display events and set time interval",
+    "description": "Display events and set time range",
     "author": {
       "name": "Marcus Olsson"
     },

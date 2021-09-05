@@ -1,13 +1,14 @@
-import { classicColors, FieldType, GrafanaTheme, PanelProps } from '@grafana/data';
-import { Button, stylesFactory, useTheme } from '@grafana/ui';
+import { classicColors, FieldType, GrafanaTheme, PanelProps, textUtil } from '@grafana/data';
+import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, stylesFactory, useTheme } from '@grafana/ui';
 import { alignEvents } from 'alignEvents';
+import { CalendarEntry } from 'CalendarEntry';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
 import { css, cx } from 'emotion';
 import { toTimeField } from 'grafana-plugin-support';
 import { useIntervalSelection } from 'hooks';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Day } from './Day';
 import { CalendarEvent, CalendarOptions } from './types';
 
@@ -21,6 +22,8 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   const styles = getStyles(theme);
 
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
+
+  const [drawerProps, setDrawerProps] = useState<Record<string, any>>();
 
   const frames = data.series.map((frame) => ({
     text: options.textField
@@ -60,13 +63,15 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             start: frame.start?.values.get(i),
             end: frame.end?.values.get(i),
             labels: frame.labels?.map((field) => field.values.get(i)).filter((label) => label),
+            links: frame.text?.getLinks!({ valueRowIndex: i }),
           }))
-          .map<CalendarEvent>(({ text, description, labels, start, end }, i) => ({
+          .map<CalendarEvent>(({ text, description, labels, links, start, end }, i) => ({
             text,
             description,
             labels,
             start: dayjs(start),
             color: colors[Math.floor(frameIdx % colors.length)],
+            links,
 
             // Set undefined if the user hasn't explicitly configured the dimension
             // for end time.
@@ -81,6 +86,75 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
 
   const alignedEvents = alignEvents(events);
 
+  const drawerShowDay = (day: dayjs.Dayjs, isOutsideInterval: boolean) => {
+    const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
+
+    setDrawerProps({
+      title: day.format('LL'),
+      subtitle: day.format('dddd'),
+      children: (
+        <div>
+          {events
+            .filter((event) => event)
+            .map((event, i) => (
+              <CalendarEntry
+                key={i}
+                event={event}
+                day={day}
+                outsideInterval={isOutsideInterval}
+                summary={true}
+                onClick={() => {
+                  if (event) {
+                    drawerShowEvent(day, event, isOutsideInterval);
+                  }
+                }}
+              />
+            ))}
+        </div>
+      ),
+    });
+  };
+
+  const drawerShowEvent = (day: dayjs.Dayjs, event: CalendarEvent, isOutsideInterval: boolean) => {
+    setDrawerProps({
+      title: event.text,
+      subtitle: formatEventInterval(event),
+      children: (
+        <>
+          <Button variant={'link'} onClick={() => drawerShowDay(day, isOutsideInterval)}>
+            <Icon name="angle-left" />
+            Back to {day.format('LL')}
+          </Button>
+          {!!event.labels?.length && (
+            <div
+              className={css`
+                margin: ${theme.spacing.sm} 0;
+              `}
+            >
+              {event.labels?.map((label, i) => (
+                <Badge key={i} text={label} color={'blue'} />
+              ))}
+            </div>
+          )}
+          {event.description && <p dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />}
+          <HorizontalGroup>
+            {event.links?.map((link) => (
+              <LinkButton
+                icon={link.target === '_self' ? 'link' : 'external-link-alt'}
+                href={link.href}
+                target={link.target}
+                variant={'secondary'}
+                onClick={link.onClick}
+              >
+                {link.title}
+              </LinkButton>
+            ))}
+          </HorizontalGroup>
+        </>
+      ),
+    });
+  };
+
   return (
     <div
       className={cx(
@@ -93,6 +167,17 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         `
       )}
     >
+      {drawerProps && (
+        <Drawer
+          scrollableContent={true}
+          inline={true}
+          expandable={true}
+          onClose={() => setDrawerProps(undefined)}
+          {...drawerProps}
+        >
+          {drawerProps.children}
+        </Drawer>
+      )}
       {/* Apply time interval */}
       {selectedInterval && (
         <div className={styles.applyIntervalButton}>
@@ -160,12 +245,24 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               outsideInterval={isOutsideInterval}
               from={startOfWeek}
               to={endOfWeek}
+              onShowEvent={(event) => drawerShowEvent(day, event, isOutsideInterval)}
+              onShowMore={() => drawerShowDay(day, isOutsideInterval)}
             />
           );
         })}
       </div>
     </div>
   );
+};
+
+const formatEventInterval = (event: CalendarEvent): string => {
+  if (event.end) {
+    if (event.start.startOf('day').isSame(event.end?.startOf('day'))) {
+      return `${event.start.format('LLL')}–${event.end.format('LT')}`;
+    }
+    return `${event.start.format('LLL')}–${event.end.format('LLL')}`;
+  }
+  return `${event.start.format('LLL')}`;
 };
 
 const getStyles = stylesFactory((theme: GrafanaTheme) => {

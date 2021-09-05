@@ -1,3 +1,4 @@
+import { Field, LinkModel } from '@grafana/data';
 import dayjs from 'dayjs';
 
 export interface CalendarOptions {
@@ -16,4 +17,5 @@ export interface CalendarEvent {
   description?: string;
   labels?: string[];
   color: string;
+  links?: Array<LinkModel<Field>>;
 }

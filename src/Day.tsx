@@ -1,10 +1,9 @@
-import { GrafanaTheme, textUtil } from '@grafana/data';
-import { Badge, stylesFactory, useTheme } from '@grafana/ui';
-import Tippy from '@tippyjs/react';
+import { GrafanaTheme } from '@grafana/data';
+import { stylesFactory, useTheme } from '@grafana/ui';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { css, cx } from 'emotion';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { CalendarEvent } from 'types';
 import { CalendarEntry } from './CalendarEntry';
@@ -21,28 +20,21 @@ interface Props {
   outsideInterval: boolean;
   from: dayjs.Dayjs;
   to: dayjs.Dayjs;
+  onShowMore: () => void;
+  onShowEvent: (event: CalendarEvent) => void;
 }
 
-export const Day = ({ day, weekend, today, events, selected, onSelectionChange, outsideInterval }: Props) => {
-  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent>();
-
-  const [moreVisible, setMoreVisible] = useState(false);
-  const hideMore = () => setMoreVisible(false);
-  const showMore = (e: any) => {
-    e.stopPropagation();
-    setEntryVisible(false);
-    setMoreVisible(true);
-  };
-
-  const [entryVisible, setEntryVisible] = useState(false);
-  const hideEntry = () => setEntryVisible(false);
-  const showEntry = (event?: CalendarEvent) => (e: any) => {
-    e.stopPropagation();
-    setSelectedEvent(event);
-    setMoreVisible(false);
-    setEntryVisible(true);
-  };
-
+export const Day = ({
+  day,
+  weekend,
+  today,
+  events,
+  selected,
+  onSelectionChange,
+  outsideInterval,
+  onShowMore,
+  onShowEvent,
+}: Props) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -90,140 +82,54 @@ export const Day = ({ day, weekend, today, events, selected, onSelectionChange, 
       day={day}
       outsideInterval={outsideInterval}
       summary={false}
-      onClick={showEntry(event)}
+      onClick={() => {
+        if (event) {
+          onShowEvent(event);
+        }
+      }}
     />
   ));
 
-  const eventSummary = (event: CalendarEvent) => {
-    return (
-      <div
-        className={css`
-          & > * {
-            margin-bottom: ${theme.spacing.sm};
-          }
-        `}
-      >
-        <h4>{event.text}</h4>
-        <div>
-          {event.start.format('LL')}
-
-          {event.end ? (
-            // If the event has a duration, check if starts and finishes in the
-            // same day. In that case, we'll display a more detailed time format.
-            event.start.startOf('day').isSame(event.end?.startOf('day')) ? (
-              <>
-                <span
-                  className={css`
-                    margin: 0 ${theme.spacing.sm};
-                  `}
-                >
-                  &middot;
-                </span>
-                {event.start.format('LT')}&ndash;{event.end.format('LT')}
-              </>
-            ) : (
-              <>&ndash;{event.end.format('LL')}</>
-            )
-          ) : (
-            // Instant event
-            event.start.format('LT')
-          )}
-        </div>
-        {!!event.labels?.length && (
-          <div>
-            {event.labels?.map((label, i) => (
-              <Badge key={i} text={label} color={'blue'} />
-            ))}
-          </div>
-        )}
-        {event.description && <div dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />}
-      </div>
-    );
-  };
-
   return (
-    <div
-      ref={rootRef}
-      className={cx(
-        styles.root,
-        { [styles.weekend]: weekend },
-        { [styles.today]: today },
-        { [styles.selected]: selected },
-        { [styles.outsideInterval]: outsideInterval }
-      )}
-      onClick={() => {
-        setEntryVisible(false);
-        setMoreVisible(false);
-        onSelectionChange(!selected);
-      }}
-    >
-      {dateHeader}
-
-      <AutoSizer disableWidth>
-        {({ height }) => {
-          // TODO: Can we compute this rather than having it hard-coded?
-          const heightPerEntry = 17;
-
-          const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
-
-          return (
-            <>
-              {selectedEvent && (
-                <Tippy
-                  maxWidth={500}
-                  content={eventSummary(selectedEvent)}
-                  placement="auto-start"
-                  animation={false}
-                  className={styles.tooltip}
-                  visible={entryVisible}
-                  onClickOutside={hideEntry}
-                  interactive={true}
-                  appendTo={document.body}
-                  trigger="manual"
-                  reference={rootRef}
-                />
-              )}
-
-              {entries.filter((_, i) => i < maxNumEvents)}
-              {entries.length - maxNumEvents > 0 && (
-                <>
-                  <div onClick={showMore} className={styles.moreEntriesLabel}>{`${
-                    entries.length - maxNumEvents
-                  } more…`}</div>
-                  <Tippy
-                    maxWidth={500}
-                    content={
-                      <div>
-                        {events
-                          .filter((event) => event)
-                          .map((event, i) => (
-                            <CalendarEntry
-                              key={i}
-                              event={event}
-                              day={day}
-                              outsideInterval={outsideInterval}
-                              summary={true}
-                              onClick={showEntry(event)}
-                            />
-                          ))}
-                      </div>
-                    }
-                    placement="bottom"
-                    animation={false}
-                    className={styles.tooltip}
-                    visible={moreVisible}
-                    onClickOutside={hideMore}
-                    interactive={true}
-                    appendTo={document.body}
-                    reference={rootRef}
-                  />
-                </>
-              )}
-            </>
-          );
+    <>
+      <div
+        ref={rootRef}
+        className={cx(
+          styles.root,
+          { [styles.weekend]: weekend },
+          { [styles.today]: today },
+          { [styles.selected]: selected },
+          { [styles.outsideInterval]: outsideInterval }
+        )}
+        onClick={(e) => {
+          onSelectionChange(!selected);
         }}
-      </AutoSizer>
-    </div>
+      >
+        {dateHeader}
+
+        <AutoSizer disableWidth>
+          {({ height }) => {
+            // TODO: Can we compute this rather than having it hard-coded?
+            const heightPerEntry = 17;
+
+            const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
+
+            return (
+              <>
+                {entries.filter((_, i) => i < maxNumEvents)}
+                {entries.length - maxNumEvents > 0 && (
+                  <>
+                    <div onClick={onShowMore} className={styles.moreEntriesLabel}>{`${
+                      entries.length - maxNumEvents
+                    } more…`}</div>
+                  </>
+                )}
+              </>
+            );
+          }}
+        </AutoSizer>
+      </div>
+    </>
   );
 };
 
@@ -303,7 +209,7 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     },
     tooltip: css`
       min-width: 200px;
-      border-radius: ${theme.border.radius.md};
+      border-radius: ${theme.border.radius.sm};
       background-color: ${theme.colors.bg2};
       padding: ${theme.spacing.sm};
       box-shadow: 0px 0px 20px ${theme.colors.dropdownShadow};

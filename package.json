@@ -28,10 +28,10 @@
     "grafana-plugin-support": "0.4.0"
   },
   "devDependencies": {
-    "@grafana/data": "8.0.6",
-    "@grafana/runtime": "8.0.6",
-    "@grafana/toolkit": "8.0.6",
-    "@grafana/ui": "8.0.6",
+    "@grafana/data": "8.1.1",
+    "@grafana/runtime": "8.1.1",
+    "@grafana/toolkit": "8.1.1",
+    "@grafana/ui": "8.1.1",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
     "emotion": "10.0.27",
     "react-virtualized-auto-sizer": "^1.0.4"

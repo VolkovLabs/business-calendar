@@ -138,8 +138,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
           )}
           {event.description && <p dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />}
           <HorizontalGroup>
-            {event.links?.map((link) => (
+            {event.links?.map((link, index) => (
               <LinkButton
+                key={index}
                 icon={link.target === '_self' ? 'link' : 'external-link-alt'}
                 href={link.href}
                 target={link.target}

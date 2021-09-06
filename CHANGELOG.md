@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0 (2021-09-06)
+
+[Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.4.3...v0.5.0)
+
+### Enhancements
+
+- Data links support ([#25](https://github.com/marcusolsson/grafana-calendar-panel/issues/25))
+- **New details view:** Instead of relying on tooltips, this version uses an inline drawer to display additional details. I like this better, but the built-in drawer component has some limitations. I'm not sure I like that it's a modal for example. I might end up creating a custom sidebar component. Let me know what you think about the new design!
+
 ## 0.4.3 (2021-06-12)
 
 [Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.4.2...v0.4.3)

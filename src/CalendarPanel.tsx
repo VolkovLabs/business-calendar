@@ -1,11 +1,11 @@
-import { classicColors, FieldType, GrafanaTheme, PanelProps, textUtil } from '@grafana/data';
-import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, stylesFactory, useTheme } from '@grafana/ui';
+import { css, cx } from '@emotion/css';
+import { classicColors, FieldType, GrafanaTheme2, PanelProps, textUtil } from '@grafana/data';
+import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useStyles2, useTheme2 } from '@grafana/ui';
 import { alignEvents } from 'alignEvents';
 import { CalendarEntry } from 'CalendarEntry';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
-import { css, cx } from 'emotion';
 import { toTimeField } from 'grafana-plugin-support';
 import { useIntervalSelection } from 'hooks';
 import React, { useRef, useState } from 'react';
@@ -18,8 +18,8 @@ dayjs.extend(utc);
 interface Props extends PanelProps<CalendarOptions> {}
 
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
-  const theme = useTheme();
-  const styles = getStyles(theme);
+  const theme = useTheme2();
+  const styles = useStyles2(getStyles);
 
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
 
@@ -128,7 +128,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
           {!!event.labels?.length && (
             <div
               className={css`
-                margin: ${theme.spacing.sm} 0;
+                margin: ${theme.v1.spacing.sm} 0;
               `}
             >
               {event.labels?.map((label, i) => (
@@ -266,38 +266,36 @@ const formatEventInterval = (event: CalendarEvent): string => {
   return `${event.start.format('LLL')}`;
 };
 
-const getStyles = stylesFactory((theme: GrafanaTheme) => {
-  return {
-    applyIntervalButton: css`
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      padding: ${theme.spacing.sm};
-      z-index: 1000;
-    `,
-    weekdayContainer: css`
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      font-size: ${theme.typography.size.md};
-      font-weight: ${theme.typography.weight.regular};
-      border-bottom: 1px solid ${theme.colors.border2};
-    `,
-    weekdayLabel: css`
-      text-align: right;
-      padding: ${theme.spacing.xxs} ${theme.spacing.xs};
-      overflow: hidden;
-    `,
-    calendarContainer: css`
-      width: 100%;
-      display: grid;
-      flex-grow: 1;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      grid-auto-rows: 20%;
-      overflow: auto;
-      user-select: none;
-    `,
-  };
+const getStyles = (theme: GrafanaTheme2) => ({
+  applyIntervalButton: css`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: ${theme.v1.spacing.sm};
+    z-index: 1000;
+  `,
+  weekdayContainer: css`
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: ${theme.typography.size.md};
+    font-weight: ${theme.v1.typography.weight.regular};
+    border-bottom: 1px solid ${theme.v1.colors.border2};
+  `,
+  weekdayLabel: css`
+    text-align: right;
+    padding: ${theme.v1.spacing.xxs} ${theme.v1.spacing.xs};
+    overflow: hidden;
+  `,
+  calendarContainer: css`
+    width: 100%;
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-auto-rows: 20%;
+    overflow: auto;
+    user-select: none;
+  `,
 });
 
 // For Grafana versions older than 7.3.0.

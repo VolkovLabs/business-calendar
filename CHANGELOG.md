@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 (2022-01-28)
+
+[Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.5.0...v0.6.0)
+
+This release bumps the minimum required Grafana to >=8.0. Grafana 8 introduces a new theming engine for panel plugins.
+
+- If you're running a Grafana version before 8.0, you should stay with v0.5.0.
+- If you're running Grafana 8.0 or above, you should update to v0.6.0.
+
 ## 0.5.0 (2021-09-06)
 
 [Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.4.3...v0.5.0)

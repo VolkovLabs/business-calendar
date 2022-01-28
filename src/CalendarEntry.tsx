@@ -1,7 +1,7 @@
-import { GrafanaTheme } from '@grafana/data';
-import { stylesFactory, useTheme } from '@grafana/ui';
+import { css, cx } from '@emotion/css';
+import { GrafanaTheme2 } from '@grafana/data';
+import { useStyles2, useTheme2 } from '@grafana/ui';
 import dayjs from 'dayjs';
-import { css, cx } from 'emotion';
 import React from 'react';
 import { CalendarEvent } from './types';
 
@@ -14,8 +14,8 @@ interface Props {
 }
 
 export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }: Props) => {
-  const theme = useTheme();
-  const styles = getStyles(theme);
+  const theme = useTheme2().v1;
+  const styles = useStyles2(getStyles);
 
   // A filler is added to offset entries that started on a day with previously
   // ongoing events.
@@ -83,68 +83,66 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
   );
 };
 
-const getStyles = stylesFactory((theme: GrafanaTheme) => {
-  return {
-    event: css`
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      height: 1.5rem;
-      padding: 0 ${theme.spacing.xs};
-      margin-bottom: 1px;
+const getStyles = (theme: GrafanaTheme2) => ({
+  event: css`
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 1.5rem;
+    padding: 0 ${theme.v1.spacing.xs};
+    margin-bottom: 1px;
 
-      color: ${theme.colors.text};
+    color: ${theme.colors.text};
 
-      &:hover {
-        color: ${theme.colors.textStrong};
-        cursor: pointer;
-      }
-    `,
-    eventLabel: css`
-      font-size: ${theme.typography.size.base};
-      font-weight: ${theme.typography.weight.semibold};
-      r-select: none;
-      flex-grow: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    `,
-    multiDayEvent: css`
-      padding-left: calc(4 * ${theme.spacing.xs});
-      color: ${theme.palette.dark5};
-      &:hover {
-        color: ${theme.palette.black};
-        cursor: pointer;
-      }
-    `,
-    centerItems: css`
-      display: flex;
-      align-items: center;
-    `,
-    filler: css`
-      background: transparent;
-      &:hover {
-        cursor: initial;
-      }
-    `,
-    startDayStyle: css`
-      border-radius: ${theme.border.radius.md} 0 0 ${theme.border.radius.md};
-    `,
-    endDayStyle: css`
-      width: calc(100% - ${theme.spacing.sm});
-      border-radius: 0 ${theme.border.radius.md} ${theme.border.radius.md} 0;
-    `,
-    summary: css`
-      width: calc(100% - 2 * ${theme.spacing.xs});
-      margin-left: ${theme.spacing.xs};
-      border-radius: ${theme.border.radius.lg};
-    `,
-    tooltip: css`
-      min-width: 200px;
-      border-radius: ${theme.border.radius.md};
-      background-color: ${theme.colors.bg2};
-      padding: ${theme.spacing.sm};
-      box-shadow: 0px 0px 20px ${theme.colors.dropdownShadow};
-    `,
-  };
+    &:hover {
+      color: ${theme.v1.colors.textStrong};
+      cursor: pointer;
+    }
+  `,
+  eventLabel: css`
+    font-size: ${theme.typography.size.base};
+    font-weight: ${theme.v1.typography.weight.semibold};
+    r-select: none;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
+  multiDayEvent: css`
+    padding-left: calc(4 * ${theme.v1.spacing.xs});
+    color: ${theme.v1.palette.dark5};
+    &:hover {
+      color: ${theme.v1.palette.black};
+      cursor: pointer;
+    }
+  `,
+  centerItems: css`
+    display: flex;
+    align-items: center;
+  `,
+  filler: css`
+    background: transparent;
+    &:hover {
+      cursor: initial;
+    }
+  `,
+  startDayStyle: css`
+    border-radius: ${theme.v1.border.radius.md} 0 0 ${theme.v1.border.radius.md};
+  `,
+  endDayStyle: css`
+    width: calc(100% - ${theme.v1.spacing.sm});
+    border-radius: 0 ${theme.v1.border.radius.md} ${theme.v1.border.radius.md} 0;
+  `,
+  summary: css`
+    width: calc(100% - 2 * ${theme.v1.spacing.xs});
+    margin-left: ${theme.v1.spacing.xs};
+    border-radius: ${theme.v1.border.radius.lg};
+  `,
+  tooltip: css`
+    min-width: 200px;
+    border-radius: ${theme.v1.border.radius.md};
+    background-color: ${theme.v1.colors.bg2};
+    padding: ${theme.v1.spacing.sm};
+    box-shadow: 0px 0px 20px ${theme.v1.colors.dropdownShadow};
+  `,
 });

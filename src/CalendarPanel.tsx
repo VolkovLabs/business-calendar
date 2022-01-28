@@ -248,6 +248,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               to={endOfWeek}
               onShowEvent={(event) => drawerShowEvent(day, event, isOutsideInterval)}
               onShowMore={() => drawerShowDay(day, isOutsideInterval)}
+              quickLinks={!!options.quickLinks}
             />
           );
         })}

@@ -11,9 +11,10 @@ interface Props {
   outsideInterval: boolean;
   summary: boolean;
   onClick?: (e: any) => void;
+  quickLinks?: boolean;
 }
 
-export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }: Props) => {
+export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, quickLinks }: Props) => {
   const theme = useTheme2().v1;
   const styles = useStyles2(getStyles);
 
@@ -34,8 +35,21 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
   const startsToday = eventStartsToday(event);
   const endsToday = eventEndsToday(event);
 
+  const firstLink = event.links?.[0];
+
+  const Link = quickLinks ? 'a' : 'div';
+  const linkProps = quickLinks
+    ? {
+        href: firstLink?.href,
+        target: firstLink?.target,
+        onClick: firstLink?.onClick,
+      }
+    : {
+        onClick: onClick,
+      };
+
   return startsToday && endsToday ? (
-    <div title={event.text} className={cx(styles.event, styles.centerItems)} onClick={onClick}>
+    <Link title={event.text} className={cx(styles.event, styles.centerItems)} {...linkProps}>
       <svg
         width={theme.spacing.sm}
         height={theme.spacing.sm}
@@ -59,9 +73,9 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
       >
         {event.text}
       </div>
-    </div>
+    </Link>
   ) : (
-    <div
+    <Link
       title={event.text}
       className={cx(
         styles.event,
@@ -75,11 +89,11 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick }:
           [styles.summary]: summary,
         }
       )}
-      onClick={onClick}
+      {...linkProps}
     >
       {/* Only display the event text on the day it starts. */}
       {(startOfWeek || startsToday || summary) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
-    </div>
+    </Link>
   );
 };
 

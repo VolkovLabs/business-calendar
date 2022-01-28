@@ -22,6 +22,7 @@ interface Props {
   to: dayjs.Dayjs;
   onShowMore: () => void;
   onShowEvent: (event: CalendarEvent) => void;
+  quickLinks: boolean;
 }
 
 export const Day = ({
@@ -34,6 +35,7 @@ export const Day = ({
   outsideInterval,
   onShowMore,
   onShowEvent,
+  quickLinks,
 }: Props) => {
   const theme = useTheme2().v1;
   const styles = useStyles2(getStyles);
@@ -87,6 +89,7 @@ export const Day = ({
           onShowEvent(event);
         }
       }}
+      quickLinks={quickLinks}
     />
   ));
 

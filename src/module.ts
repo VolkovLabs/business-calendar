@@ -16,6 +16,12 @@ export const plugin = getPanelPluginOrFallback(
           description: 'Automatically scroll to the end of the time interval.',
           defaultValue: false,
         })
+        .addBooleanSwitch({
+          path: 'quickLinks',
+          name: 'Quick links',
+          description: 'Open data link instead of sidebar when clicking an event.',
+          defaultValue: false,
+        })
         .addCustomEditor({
           id: 'textField',
           path: 'textField',

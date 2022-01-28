@@ -8,6 +8,7 @@ export interface CalendarOptions {
   endTimeField?: string;
   textField?: string;
   labelFields?: string[];
+  quickLinks?: boolean;
 }
 
 export interface CalendarEvent {

@@ -1,6 +1,6 @@
 {
   "name": "marcusolsson-calendar-panel",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "A calendar panel for Grafana",
   "keywords": [
     "grafana",
@@ -28,10 +28,10 @@
     "grafana-plugin-support": "0.4.0"
   },
   "devDependencies": {
-    "@grafana/data": "8.3.4",
-    "@grafana/runtime": "8.3.4",
-    "@grafana/toolkit": "8.3.4",
-    "@grafana/ui": "8.3.4",
+    "@grafana/data": "8.4.3",
+    "@grafana/runtime": "8.4.3",
+    "@grafana/toolkit": "8.4.3",
+    "@grafana/ui": "8.4.3",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
     "@emotion/css": "11.7.1",
     "react-virtualized-auto-sizer": "^1.0.4"

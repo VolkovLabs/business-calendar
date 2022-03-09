@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.0 (2022-03-09)
+
+[Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.6.0...v0.7.0)
+
+- Quick links: Enable quick links to follow the data link when you click the event rather than opening a modal.
+- Update to Grafana 8.4.3
+
 ## 0.6.0 (2022-01-28)
 
 [Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.5.0...v0.6.0)

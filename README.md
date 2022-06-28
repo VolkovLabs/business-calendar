@@ -4,6 +4,9 @@
 [![Release](https://github.com/marcusolsson/grafana-calendar-panel/workflows/Release/badge.svg)](https://github.com/marcusolsson/grafana-calendar-panel/actions?query=workflow%3ARelease)
 [![License](https://img.shields.io/github/license/marcusolsson/grafana-calendar-panel)](LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/marcusolsson?color=%231DA1F2&label=twitter&style=plastic)](https://twitter.com/marcusolsson)
+![Maintenance](https://img.shields.io/maintenance/no/2022?style=plastic)
+
+> **Important:** As of July 2022, I'm no longer actively maintaining this plugin. At the time of writing, I'm not aware of any replacement panel.
 
 A panel plugin for [Grafana](https://grafana.com) to display calendar events from data sources.
 
@@ -11,12 +14,6 @@ A panel plugin for [Grafana](https://grafana.com) to display calendar events fro
 - **Query calendar events** from any data source
 
 ![Screenshot](https://github.com/marcusolsson/grafana-calendar-panel/raw/main/src/img/screenshot.png)
-
-## Maintenance
-
-I maintain [several plugins](https://marcus.se.net/projects/) for Grafana. While my employer allows me to spend some time on developing plugins, most of the work happens on evenings and weekends. At the moment, I'm prioritizing fixing bugs and reviewing PRs over introducing new features.
-
-If you'd still like to propose a new feature, [create a new Discussion](https://github.com/marcusolsson/grafana-calendar-panel/discussions/new?category=ideas). While I likely won't be able to work on features myself, I'd be happy to accept pull requests. If you'd like to contribute a feature, please let me know before you start working on it.
 
 ## Configuration
 

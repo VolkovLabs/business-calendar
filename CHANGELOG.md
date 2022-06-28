@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.1 (2022-08-28)
+
+[Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.7.0...v0.7.1)
+
+Update to Grafana 9.
+
 ## 0.7.0 (2022-03-09)
 
 [Full changelog](https://github.com/marcusolsson/grafana-calendar-panel/compare/v0.6.0...v0.7.0)

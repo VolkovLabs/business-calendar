@@ -121,7 +121,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       subtitle: formatEventInterval(event),
       children: (
         <>
-          <Button variant={'link'} onClick={() => drawerShowDay(day, isOutsideInterval)}>
+          <Button fill={'text'} onClick={() => drawerShowDay(day, isOutsideInterval)}>
             <Icon name="angle-left" />
             Back to {day.format('LL')}
           </Button>

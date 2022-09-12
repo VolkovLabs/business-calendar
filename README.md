@@ -6,7 +6,7 @@
 [![Twitter](https://img.shields.io/twitter/follow/marcusolsson?color=%231DA1F2&label=twitter&style=plastic)](https://twitter.com/marcusolsson)
 ![Maintenance](https://img.shields.io/maintenance/no/2022?style=plastic)
 
-> **Important:** As of July 2022, I'm no longer actively maintaining this plugin. At the time of writing, I'm not aware of any replacement panel.
+> **Maintenance**: As I'm no longer working at Grafana Labs, nor am I using Grafana where I'm at now, **I'm no longer able to actively maintain this plugin**. I'm exploring ways to keep the project going. Check back here to stay updated!
 
 A panel plugin for [Grafana](https://grafana.com) to display calendar events from data sources.
 

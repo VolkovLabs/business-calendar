@@ -33,7 +33,7 @@ This release bumps the minimum required Grafana to >=8.0. Grafana 8 introduces a
 
 ### Features / Enhancements
 
-- Data links support ([#25](https://github.com/marcusolsson/grafana-calendar-panel/issues/25))
+- Data links support (#25)
 - **New details view:** Instead of relying on tooltips, this version uses an inline drawer to display additional details. I like this better, but the built-in drawer component has some limitations. I'm not sure I like that it's a modal for example. I might end up creating a custom sidebar component. Let me know what you think about the new design!
 
 ## 0.4.3 (2021-06-12)
@@ -47,35 +47,35 @@ This release bumps the minimum required Grafana to >=8.0. Grafana 8 introduces a
 
 ### Bug fixes
 
-- classicColors is (still) undefined ([#16](https://github.com/marcusolsson/grafana-calendar-panel/issues/16))
+- classicColors is (still) undefined (#16)
 
 ## 0.4.1 (2021-05-21)
 
 ### Bug fixes
 
-- classicColors is undefined ([#16](https://github.com/marcusolsson/grafana-calendar-panel/issues/16))
-- Improve legibility of event text ([#15](https://github.com/marcusolsson/grafana-calendar-panel/issues/15))
+- classicColors is undefined (#16)
+- Improve legibility of event text (#15)
 
 ## 0.4.0 (2021-05-20)
 
 ### Features / Enhancements
 
-- Show event name if event starts in day out of filter ([#13](https://github.com/marcusolsson/grafana-calendar-panel/issues/13))
-- More calendars and colors ([#14](https://github.com/marcusolsson/grafana-calendar-panel/issues/14))
-- Line breaks in event description ([#11](https://github.com/marcusolsson/grafana-calendar-panel/issues/11))
+- Show event name if event starts in day out of filter (#13)
+- More calendars and colors (#14)
+- Line breaks in event description (#11)
 
 ## 0.3.0 (2021-05-18)
 
 ### Features / Enhancements
 
-- Show more details for individual events ([#10](https://github.com/marcusolsson/grafana-calendar-panel/issues/10))
+- Show more details for individual events (#10)
 
 ## 0.2.0 (2021-05-09)
 
 ### Features / Enhancements
 
-- Multi-day events ([#1](https://github.com/marcusolsson/grafana-calendar-panel/issues/1))
-- Display truncated events ([#6](https://github.com/marcusolsson/grafana-calendar-panel/issues/6))
+- Multi-day events (#1)
+- Display truncated events (#6)
 - Allow string and number fields for time dimensions
 
 ## 0.1.1 (2021-02-10)

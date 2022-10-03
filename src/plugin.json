@@ -1,35 +1,40 @@
 {
   "$schema": "https://github.com/grafana/grafana/raw/main/docs/sources/developers/plugins/plugin.schema.json",
-  "type": "panel",
-  "name": "Calendar",
+  "dependencies": {
+    "grafanaDependency": ">=8.5.0",
+    "plugins": []
+  },
   "id": "marcusolsson-calendar-panel",
   "info": {
-    "description": "Display events and set time range",
     "author": {
-      "name": "Marcus Olsson"
+      "name": "Volkov Labs",
+      "url": "https://volkovlabs.io"
     },
+    "description": "Display events and set time range",
     "keywords": ["panel", "calendar"],
-    "logos": {
-      "small": "img/logo.svg",
-      "large": "img/logo.svg"
-    },
     "links": [
-      { "name": "Website", "url": "https://github.com/marcusolsson/grafana-calendar-panel" },
-      { "name": "License", "url": "https://github.com/marcusolsson/grafana-calendar-panel/blob/main/LICENSE" }
-    ],
-    "screenshots": [
       {
-        "name": "Calendar",
-        "path": "img/product.png"
+        "name": "GitHub",
+        "url": "https://github.com/VolkovLabs/volkovlabs-calendar-panel"
+      },
+      {
+        "name": "Website",
+        "url": "https://volkovlabs.io"
       }
     ],
-    "version": "%VERSION%",
-    "updated": "%TODAY%"
+    "logos": {
+      "large": "img/logo.svg",
+      "small": "img/logo.svg"
+    },
+    "screenshots": [
+      {
+        "name": "Panel",
+        "path": "img/screenshot.png"
+      }
+    ],
+    "updated": "%TODAY%",
+    "version": "%VERSION%"
   },
-
-  "dependencies": {
-    "grafanaDependency": ">=8.0.0",
-    "grafanaVersion": "8.0.0",
-    "plugins": []
-  }
+  "name": "Calendar",
+  "type": "panel"
 }

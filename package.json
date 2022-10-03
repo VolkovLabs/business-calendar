@@ -1,11 +1,6 @@
 {
   "author": "Volkov Labs",
   "bugs": "https://github.com/volkovlabs/volkovlabs-calendar-panel/issues",
-  "dependencies": {
-    "@tippyjs/react": "^4.1.0",
-    "dayjs": "^1.10.4",
-    "grafana-plugin-support": "0.4.0"
-  },
   "description": "A calendar panel for Grafana",
   "devDependencies": {
     "@emotion/css": "11.7.1",
@@ -13,16 +8,19 @@
     "@grafana/runtime": "9.0.1",
     "@grafana/toolkit": "9.0.1",
     "@grafana/ui": "9.0.1",
+    "@tippyjs/react": "^4.1.0",
+    "@types/enzyme": "^3.10.12",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
+    "dayjs": "^1.10.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "grafana-plugin-support": "0.4.0",
     "react-virtualized-auto-sizer": "^1.0.4"
   },
   "engines": {
     "node": ">=16"
   },
-  "keywords": [
-    "grafana",
-    "calendar"
-  ],
   "license": "Apache-2.0",
   "name": "marcusolsson-calendar-panel",
   "scripts": {

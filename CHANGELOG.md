@@ -5,7 +5,7 @@
 ### Features / Enhancements
 
 - Maintained by Volkov Labs (#51)
-- Updated based on Volkov Labs Panel Template 2.1.0 (#51)
+- Updated based on Volkov Labs Panel Template (#51)
 
 ## 0.7.1 (2022-08-28)
 

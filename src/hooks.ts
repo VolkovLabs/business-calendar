@@ -5,7 +5,7 @@ type Range = [dayjs.Dayjs, dayjs.Dayjs];
 
 export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => void) => {
   const keydownListener = useCallback(
-    (e) => {
+    (e: any) => {
       if (e.key === 'Shift') {
         onKeyPressed(true);
       }
@@ -14,7 +14,7 @@ export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => voi
   );
 
   const keyupListener = useCallback(
-    (e) => {
+    (e: any) => {
       if (e.key === 'Shift') {
         onKeyPressed(false);
       }

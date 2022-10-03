@@ -6,6 +6,7 @@
 
 - Maintained by Volkov Labs (#51)
 - Updated based on Volkov Labs Panel Template (#51)
+- Update to Grafana 9.1.6 (#52)
 
 ## 0.7.1 (2022-08-28)
 

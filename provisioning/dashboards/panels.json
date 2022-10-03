@@ -55,7 +55,12 @@
           "color": {
             "mode": "thresholds"
           },
-          "links": [],
+          "links": [
+            {
+              "title": "URL",
+              "url": "${__data.fields.url}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -111,7 +116,6 @@
           }
         }
       ],
-      "transparent": true,
       "type": "marcusolsson-calendar-panel"
     },
     {
@@ -471,7 +475,6 @@
           }
         }
       ],
-      "transparent": true,
       "type": "table"
     }
   ],

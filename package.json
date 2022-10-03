@@ -3,20 +3,19 @@
   "bugs": "https://github.com/volkovlabs/volkovlabs-calendar-panel/issues",
   "description": "A calendar panel for Grafana",
   "devDependencies": {
-    "@emotion/css": "11.7.1",
-    "@grafana/data": "9.0.1",
-    "@grafana/runtime": "9.0.1",
-    "@grafana/toolkit": "9.0.1",
-    "@grafana/ui": "9.0.1",
+    "@grafana/data": "9.1.6",
+    "@grafana/runtime": "9.1.6",
+    "@grafana/toolkit": "9.1.6",
+    "@grafana/ui": "9.1.6",
     "@tippyjs/react": "^4.1.0",
     "@types/enzyme": "^3.10.12",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
-    "dayjs": "^1.10.4",
+    "dayjs": "^1.11.5",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "grafana-plugin-support": "0.4.0",
-    "react-virtualized-auto-sizer": "^1.0.4"
+    "react-virtualized-auto-sizer": "^1.0.7"
   },
   "engines": {
     "node": ">=16"

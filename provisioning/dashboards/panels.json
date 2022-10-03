@@ -111,7 +111,6 @@
           }
         }
       ],
-      "transparent": true,
       "type": "marcusolsson-calendar-panel"
     },
     {
@@ -471,7 +470,6 @@
           }
         }
       ],
-      "transparent": true,
       "type": "table"
     }
   ],

@@ -1,42 +1,38 @@
 {
-  "name": "marcusolsson-calendar-panel",
-  "version": "0.7.1",
+  "author": "Volkov Labs",
+  "bugs": "https://github.com/volkovlabs/volkovlabs-calendar-panel/issues",
   "description": "A calendar panel for Grafana",
-  "keywords": [
-    "grafana",
-    "calendar"
-  ],
-  "license": "Apache-2.0",
-  "scripts": {
-    "build": "grafana-toolkit plugin:build",
-    "test": "grafana-toolkit plugin:test",
-    "dev": "grafana-toolkit plugin:dev",
-    "watch": "grafana-toolkit plugin:dev --watch",
-    "sign": "grafana-toolkit plugin:sign"
-  },
-  "homepage": "https://grafana.com/plugins/marcusolsson-calendar-panel",
-  "bugs": "https://github.com/marcusolsson/grafana-calendar-panel/issues",
-  "repository": "github:marcusolsson/grafana-calendar-panel",
-  "author": {
-    "name": "Marcus Olsson",
-    "email": "marcus.olsson@hey.com",
-    "url": "https://marcus.se.net"
-  },
-  "dependencies": {
-    "@tippyjs/react": "^4.1.0",
-    "dayjs": "^1.10.4",
-    "grafana-plugin-support": "0.4.0"
-  },
   "devDependencies": {
+    "@emotion/css": "11.7.1",
     "@grafana/data": "9.0.1",
     "@grafana/runtime": "9.0.1",
     "@grafana/toolkit": "9.0.1",
     "@grafana/ui": "9.0.1",
+    "@tippyjs/react": "^4.1.0",
+    "@types/enzyme": "^3.10.12",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
-    "@emotion/css": "11.7.1",
+    "dayjs": "^1.10.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "grafana-plugin-support": "0.4.0",
     "react-virtualized-auto-sizer": "^1.0.4"
   },
   "engines": {
-    "node": ">=14"
-  }
+    "node": ">=16"
+  },
+  "license": "Apache-2.0",
+  "name": "marcusolsson-calendar-panel",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build --coverage",
+    "dev": "grafana-toolkit plugin:dev",
+    "format": "prettier --write \"**\"",
+    "sign": "grafana-toolkit plugin:sign",
+    "start": "docker-compose pull && docker-compose up",
+    "stop": "docker-compose down",
+    "test": "grafana-toolkit plugin:test",
+    "upgrade": "yarn upgrade --latest",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "version": "1.0.0"
 }

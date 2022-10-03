@@ -1,0 +1,496 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 20,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "panels": [],
+      "title": "Calendar",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 10,
+      "options": {
+        "autoScroll": true,
+        "descriptionField": "description",
+        "quickLinks": true,
+        "textField": "name",
+        "timeField": "updatedAt"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 15,
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "id (count)"
+              }
+            ]
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "marcusolsson-calendar-panel"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 14,
+      "panels": [],
+      "title": "Details",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "X6tfeT2nz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Type"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 142
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 353
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "url"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 626
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "auto"
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "URL",
+                    "url": "${__value.text}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Downloads"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 274
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Show info",
+                    "url": "https://demo.volkovlabs.io/d/O73WAt27z/grafana-plugin-info?orgId=1&var-plugin=${__data.fields.Slug}&from=now-90d&to=now"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Slug"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 243
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "https://grafana.org/plugins/${__data.fields.slug}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Updated At"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "createdAt"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "URL"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 456
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 30,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 15,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": ["sum"],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Updated At"
+          }
+        ]
+      },
+      "pluginVersion": "9.1.6",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "X6tfeT2nz"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.items[*].name",
+              "language": "jsonpath"
+            },
+            {
+              "jsonPath": "$.items[*].slug",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].typeName",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].version",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].downloads",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].description",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].signatureType",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].orgName",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].createdAt",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].updatedAt",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].url",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/"
+        }
+      ],
+      "title": "Grafana Marketplace",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "downloadSlug": true,
+              "featured": true,
+              "id": true,
+              "internal": true,
+              "orgId": true,
+              "orgSlug": true,
+              "orgUrl": true,
+              "packages": true,
+              "popularity": true,
+              "signatureType": true,
+              "status": true,
+              "typeCode": true,
+              "typeId": true,
+              "userId": true,
+              "verified": true,
+              "versionSignatureType": false,
+              "versionSignedByOrg": true,
+              "versionSignedByOrgName": true,
+              "versionStatus": true
+            },
+            "indexByName": {
+              "createdAt": 17,
+              "description": 6,
+              "downloadSlug": 2,
+              "downloads": 7,
+              "featured": 23,
+              "id": 12,
+              "internal": 19,
+              "name": 0,
+              "orgId": 22,
+              "orgName": 14,
+              "orgSlug": 25,
+              "orgUrl": 15,
+              "popularity": 10,
+              "signatureType": 16,
+              "slug": 1,
+              "status": 20,
+              "typeCode": 5,
+              "typeId": 21,
+              "typeName": 3,
+              "updatedAt": 18,
+              "url": 8,
+              "userId": 13,
+              "verified": 9,
+              "version": 4,
+              "versionSignatureType": 11,
+              "versionSignedByOrg": 24,
+              "versionSignedByOrgName": 27,
+              "versionStatus": 26
+            },
+            "renameByName": {
+              "createdAt": "Created At",
+              "description": "Description",
+              "downloadSlug": "",
+              "downloads": "Downloads",
+              "id": "",
+              "name": "Name",
+              "orgName": "Organization",
+              "orgUrl": "",
+              "signatureType": "Signature",
+              "slug": "Slug",
+              "status": "Status",
+              "typeCode": "",
+              "typeId": "",
+              "typeName": "Type",
+              "updatedAt": "Updated At",
+              "url": "URL",
+              "version": "Version",
+              "versionSignatureType": "Signature"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false
+  },
+  "timezone": "",
+  "title": "Grafana Plugins",
+  "uid": "hHK1qmpnk",
+  "version": 63,
+  "weekStart": ""
+}

@@ -1,0 +1,12 @@
+apiVersion: 1
+
+datasources:
+  - name: API Plugins
+    type: marcusolsson-json-datasource
+    url: https://grafana.com/api/plugins
+    access: proxy
+    uid: X6tfeT2nz
+    isDefault: true
+    orgId: 1
+    version: 1
+    editable: true

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Update Panel options in README (#53)
+
 ## 1.0.0 (2022-10-02)
 
 ### Features / Enhancements

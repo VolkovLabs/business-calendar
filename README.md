@@ -16,7 +16,7 @@ The Calendar panel plugin for Grafana to display calendar events from data sourc
 
 ## Getting Started
 
-Calendar panel can be installed from the Grafana Marketplace or use the `grafana-cli` tool to install from the command line:
+Calendar panel can be installed from the Grafana Catalog or use the `grafana-cli` tool to install from the command line:
 
 ```bash
 grafana-cli plugins install marcusolsson-calendar-panel
@@ -29,11 +29,10 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 ## Panel options
 
-### Display
-
-| Option             | Description                                        |
-| ------------------ | -------------------------------------------------- |
-| _Scroll to bottom_ | Automatically scroll to the end of the time range. |
+| Option             | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| _Scroll to bottom_ | Automatically scroll to the end of the time range.        |
+| _Quick links_      | Open data link instead of sidebar when clicking an event. |
 
 ### Dimensions
 

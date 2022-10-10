@@ -10,6 +10,8 @@
 
 The Calendar panel plugin for Grafana to display calendar events from data sources.
 
+[![Calendar plugin for Grafana tutorial | Step by step | JSON API plugin example](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/video.png)](https://youtu.be/iPJ122x0oos)
+
 ### Requirements
 
 - Grafana 8.5+, Grafana 9.0+ is required.

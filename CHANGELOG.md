@@ -5,6 +5,7 @@
 ### Features / Enhancements
 
 - Update Panel options in README (#53)
+- Add Youtube tutorial for Calendar with JSON API datasource (#54)
 
 ## 1.0.0 (2022-10-02)
 

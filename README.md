@@ -2,7 +2,7 @@
 
 ![Calendar](https://github.com/VolkovLabs/volkovlabs-calendar-panel/raw/main/src/img/screenshot.png)
 
-[![Grafana 9](https://img.shields.io/badge/Grafana-9.1.6-orange)](https://www.grafana.com)
+[![Grafana 9](https://img.shields.io/badge/Grafana-9.2.2-orange)](https://www.grafana.com)
 ![CI](https://github.com/volkovlabs/volkovlabs-calendar-panel/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel/branch/main/graph/badge.svg?token=0m6f0ktUar)](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel)
 
@@ -14,11 +14,11 @@ The Calendar panel plugin for Grafana to display calendar events from data sourc
 
 ### Requirements
 
-- Grafana 8.5+, Grafana 9.0+ is required.
+- **Grafana 8.5+, Grafana 9.0+** is required.
 
 ## Getting Started
 
-Calendar panel can be installed from the Grafana Catalog or use the `grafana-cli` tool to install from the command line:
+Calendar panel can be installed from the [Grafana Catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the `grafana-cli` tool to install from the command line:
 
 ```bash
 grafana-cli plugins install marcusolsson-calendar-panel
@@ -55,6 +55,7 @@ If **End** are configured, events are considered to have a duration. Any events 
 We love to hear from users, developers, and the whole community interested in this plugin. These are various ways to get in touch with us:
 
 - Ask a question, request a new feature, and file a bug with [GitHub issues](https://github.com/volkovlabs/volkovlabs-calendar-panel/issues/new/choose).
+- Sponsor our open-source plugins for Grafana with [GitHub Sponsor](https://github.com/sponsors/VolkovLabs).
 - Star the repository to show your support.
 
 ## License

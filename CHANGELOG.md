@@ -6,7 +6,7 @@
 
 - Update Panel options in README (#53)
 - Add Youtube tutorial for Calendar with JSON API datasource (#54)
-- Update CI to Node 16 and Synchronize with Release workflow
+- Update CI to Node 16 and Synchronize with Release workflow (#56)
 
 ## 1.0.0 (2022-10-02)
 

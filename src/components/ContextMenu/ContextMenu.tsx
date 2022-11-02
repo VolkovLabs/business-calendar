@@ -1,3 +1,5 @@
+import React from 'react';
+import { gte } from 'semver';
 import { config } from '@grafana/runtime';
 import {
   ContextMenu as GrafanaContextMenu,
@@ -5,9 +7,7 @@ import {
   MenuItem as GrafanaMenuItem,
   MenuItemProps as GrafanaMenuItemProps,
 } from '@grafana/ui';
-import React from 'react';
-import { gte } from 'semver';
-import { LegacyContextMenu } from './LegacyContextMenu';
+import { LegacyContextMenu } from '../LegacyContextMenu';
 
 export interface MenuGroup {
   label: string;

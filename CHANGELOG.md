@@ -8,6 +8,7 @@
 - Add Youtube tutorial for Calendar with JSON API datasource (#54)
 - Update CI to Node 16 and Synchronize with Release workflow (#56)
 - Update to Grafana 9.2.2 (#57)
+- Code Refactoring (#58)
 
 ## 1.0.0 (2022-10-02)
 

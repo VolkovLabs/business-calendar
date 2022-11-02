@@ -3,6 +3,9 @@ import { useCallback, useEffect, useState } from 'react';
 
 type Range = [dayjs.Dayjs, dayjs.Dayjs];
 
+/**
+ * Key Press
+ */
 export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => void) => {
   const keydownListener = useCallback(
     (e: any) => {
@@ -33,6 +36,9 @@ export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => voi
   }, [keyupListener]);
 };
 
+/**
+ * Interval Selection
+ */
 export const useIntervalSelection = (): [Range | undefined, () => void, (time: dayjs.Dayjs) => void] => {
   const [selectedInterval, setSelectedInterval] = useState<Range>();
   const [intervalSelection, setIntervalSelection] = useState(false);

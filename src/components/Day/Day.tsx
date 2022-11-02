@@ -1,15 +1,18 @@
-import { GrafanaTheme2 } from '@grafana/data';
-import { useStyles2, useTheme2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
-import { css, cx } from '@emotion/css';
 import React, { useRef } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import { CalendarEvent } from 'types';
-import { CalendarEntry } from './CalendarEntry';
+import { css, cx } from '@emotion/css';
+import { GrafanaTheme2 } from '@grafana/data';
+import { useStyles2, useTheme2 } from '@grafana/ui';
+import { CalendarEvent } from '../../types';
+import { CalendarEntry } from '../CalendarEntry';
 
 dayjs.extend(localizedFormat);
 
+/**
+ * Properties
+ */
 interface Props {
   day: dayjs.Dayjs;
   weekend: boolean;
@@ -25,6 +28,9 @@ interface Props {
   quickLinks: boolean;
 }
 
+/**
+ * Day
+ */
 export const Day = ({
   day,
   weekend,

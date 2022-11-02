@@ -1,5 +1,5 @@
-import { ContextMenu, MenuItemProps } from '@grafana/ui';
 import React from 'react';
+import { ContextMenu, MenuItemProps } from '@grafana/ui';
 
 const AnyContextMenu: any = ContextMenu;
 

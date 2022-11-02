@@ -1,10 +1,13 @@
+import dayjs from 'dayjs';
+import React from 'react';
 import { css, cx } from '@emotion/css';
 import { GrafanaTheme2 } from '@grafana/data';
 import { useStyles2, useTheme2 } from '@grafana/ui';
-import dayjs from 'dayjs';
-import React from 'react';
-import { CalendarEvent } from './types';
+import { CalendarEvent } from '../../types';
 
+/**
+ * Properties
+ */
 interface Props {
   event?: CalendarEvent;
   day: dayjs.Dayjs;
@@ -14,14 +17,17 @@ interface Props {
   quickLinks?: boolean;
 }
 
+/**
+ * Calendar Entry
+ */
 export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, quickLinks }: Props) => {
   const theme = useTheme2().v1;
   const styles = useStyles2(getStyles);
 
-  // A filler is added to offset entries that started on a day with previously
-  // ongoing events.
+  /**
+   * A filler is added to offset entries that started on a day with previously ongoing events.
+   */
   const filler = <div className={cx(styles.event, styles.multiDayEvent, styles.filler)}></div>;
-
   if (!event) {
     return filler;
   }

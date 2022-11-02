@@ -1,22 +1,28 @@
-import { css, cx } from '@emotion/css';
-import { classicColors, FieldType, GrafanaTheme2, PanelProps, textUtil } from '@grafana/data';
-import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useStyles2, useTheme2 } from '@grafana/ui';
-import { alignEvents } from 'alignEvents';
-import { CalendarEntry } from 'CalendarEntry';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
 import { toTimeField } from 'grafana-plugin-support';
 import { useIntervalSelection } from 'hooks';
 import React, { useRef, useState } from 'react';
-import { Day } from './Day';
-import { CalendarEvent, CalendarOptions } from './types';
+import { css, cx } from '@emotion/css';
+import { classicColors, FieldType, GrafanaTheme2, PanelProps, textUtil } from '@grafana/data';
+import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useStyles2, useTheme2 } from '@grafana/ui';
+import { alignEvents } from '../../alignEvents';
+import { CalendarEvent, CalendarOptions } from '../../types';
+import { CalendarEntry } from '../CalendarEntry';
+import { Day } from '../Day/Day';
 
 dayjs.extend(isoWeek);
 dayjs.extend(utc);
 
+/**
+ * Properties
+ */
 interface Props extends PanelProps<CalendarOptions> {}
 
+/**
+ * Calendar Panel
+ */
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
   const theme = useTheme2();
   const styles = useStyles2(getStyles);

@@ -9,6 +9,7 @@
 - Update CI to Node 16 and Synchronize with Release workflow (#56)
 - Update to Grafana 9.2.2 (#57)
 - Code Refactoring (#58)
+- Update to Grafana 9.3.1 (#57)
 
 ## 1.0.0 (2022-10-02)
 

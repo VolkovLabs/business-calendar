@@ -1,14 +1,15 @@
-# Calendar panel plugin for Grafana
+# Calendar panel for Grafana
 
 ![Calendar](https://github.com/VolkovLabs/volkovlabs-calendar-panel/raw/main/src/img/screenshot.png)
 
 [![Grafana 9](https://img.shields.io/badge/Grafana-9.3.1-orange)](https://www.grafana.com)
 ![CI](https://github.com/volkovlabs/volkovlabs-calendar-panel/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel/branch/main/graph/badge.svg?token=0m6f0ktUar)](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel)
+[![CodeQL](https://github.com/VolkovLabs/volkovlabs-calendar-panel/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/VolkovLabs/volkovlabs-calendar-panel/actions/workflows/codeql-analysis.yml)
 
 ## Introduction
 
-The Calendar panel plugin for Grafana to display calendar events from data sources.
+The Calendar panel for Grafana to display calendar events from data sources.
 
 [![Calendar plugin for Grafana tutorial | Step by step | JSON API plugin example](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/video.png)](https://youtu.be/iPJ122x0oos)
 
@@ -28,15 +29,10 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 - Allows to change time range by selecting the days in the calendar.
 - Query calendar events from any data source.
+- Supports automatically scroll to the end of the time range.
+- Allows to open data link instead of sidebar when clicking an event.
 
-## Panel options
-
-| Option             | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| _Scroll to bottom_ | Automatically scroll to the end of the time range.        |
-| _Quick links_      | Open data link instead of sidebar when clicking an event. |
-
-### Dimensions
+## Dimensions
 
 | Option        | Description                                                         |
 | ------------- | ------------------------------------------------------------------- |

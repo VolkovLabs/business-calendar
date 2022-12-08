@@ -1,9 +1,6 @@
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
-import { AnnotationEvent } from '@grafana/data';
-import { getBackendSrv } from '@grafana/runtime';
-
-type Range = [dayjs.Dayjs, dayjs.Dayjs];
+import { Range } from '../types';
 
 /**
  * Key Press
@@ -92,18 +89,4 @@ export const useIntervalSelection = (): [Range | undefined, () => void, (time: d
   };
 
   return [selectedInterval, clear, onTimeSelection];
-};
-
-export const useAnnotations = () => {
-  const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
-
-  useEffect(() => {
-    getAnnotations().then((res) => setAnnotations(res));
-  }, []);
-
-  return annotations;
-};
-
-const getAnnotations = async (): Promise<AnnotationEvent[]> => {
-  return getBackendSrv().get('/api/annotations', {});
 };

@@ -13,6 +13,7 @@
 - Update CI to upload signed artifacts (#60)
 - Refactor panel options and increase test coverage (#61)
 - Add annotation support (#8)
+- Refactoring and Removing legacy code (#62)
 
 ## 1.0.0 (2022-10-02)
 

@@ -32,7 +32,7 @@ grafana-cli plugins install marcusolsson-calendar-panel
 - Supports automatically scroll to the end of the time range.
 - Allows to open data link instead of sidebar when clicking an event.
 
-## Dimensions
+## Data
 
 | Option        | Description                                                         |
 | ------------- | ------------------------------------------------------------------- |

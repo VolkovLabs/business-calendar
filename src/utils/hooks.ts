@@ -1,13 +1,16 @@
-import { useState, useCallback, useEffect } from 'react';
 import dayjs from 'dayjs';
+import { useCallback, useEffect, useState } from 'react';
 import { AnnotationEvent } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 
 type Range = [dayjs.Dayjs, dayjs.Dayjs];
 
+/**
+ * Key Press
+ */
 export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => void) => {
   const keydownListener = useCallback(
-    e => {
+    (e: any) => {
       if (e.key === 'Shift') {
         onKeyPressed(true);
       }
@@ -16,7 +19,7 @@ export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => voi
   );
 
   const keyupListener = useCallback(
-    e => {
+    (e: any) => {
       if (e.key === 'Shift') {
         onKeyPressed(false);
       }
@@ -35,11 +38,14 @@ export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => voi
   }, [keyupListener]);
 };
 
+/**
+ * Interval Selection
+ */
 export const useIntervalSelection = (): [Range | undefined, () => void, (time: dayjs.Dayjs) => void] => {
   const [selectedInterval, setSelectedInterval] = useState<Range>();
   const [intervalSelection, setIntervalSelection] = useState(false);
 
-  useKeyPress('Shift', pressed => {
+  useKeyPress('Shift', (pressed) => {
     setIntervalSelection(pressed);
   });
 
@@ -92,13 +98,12 @@ export const useAnnotations = () => {
   const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
 
   useEffect(() => {
-    getAnnotations().then(res => setAnnotations(res));
+    getAnnotations().then((res) => setAnnotations(res));
   }, []);
 
   return annotations;
 };
 
 const getAnnotations = async (): Promise<AnnotationEvent[]> => {
-  const params = {};
-  return getBackendSrv().get('/api/annotations', params);
+  return getBackendSrv().get('/api/annotations', {});
 };

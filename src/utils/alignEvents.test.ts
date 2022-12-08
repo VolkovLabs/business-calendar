@@ -1,13 +1,13 @@
 import dayjs from 'dayjs';
-
-import { alignEvents } from 'alignEvents';
+import { alignEvents } from './alignEvents';
 
 describe('alignEvents', () => {
   it('missing end time', () => {
     const events = [
       {
-        label: 'Deployed to test',
+        text: 'Deployed to test',
         start: dayjs('2020-01-01T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -21,9 +21,10 @@ describe('alignEvents', () => {
   it('two-day event', () => {
     const events = [
       {
-        label: 'Deployed to test for two days',
+        text: 'Deployed to test for two days',
         start: dayjs('2020-01-01T15:06:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -39,15 +40,17 @@ describe('alignEvents', () => {
   it('parallel two-day events', () => {
     const events = [
       {
-        label: 'Deployed to test for two days',
+        text: 'Deployed to test for two days',
         start: dayjs('2020-01-01T15:06:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
       {
-        label: 'Tested for two days',
+        text: 'Tested for two days',
         start: dayjs('2020-01-01T15:06:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -62,15 +65,17 @@ describe('alignEvents', () => {
   it('overlapping two-day events', () => {
     const events = [
       {
-        label: 'Deployed to test for two days',
+        text: 'Deployed to test for two days',
         start: dayjs('2020-01-01T15:02:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
       {
-        label: 'Tested for two days',
+        text: 'Tested for two days',
         start: dayjs('2020-01-02T15:06:02Z'),
         end: dayjs('2020-01-03T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -86,21 +91,24 @@ describe('alignEvents', () => {
   it('staggered two-day events', () => {
     const events = [
       {
-        label: 'Deployed to test for two days',
+        text: 'Deployed to test for two days',
         start: dayjs('2020-01-01T15:06:02Z'),
         end: dayjs('2020-01-02T15:06:02Z'),
+        color: '',
         open: false,
       },
       {
-        label: 'Tested for two days',
+        text: 'Tested for two days',
         start: dayjs('2020-01-02T15:06:02Z'),
         end: dayjs('2020-01-03T15:06:02Z'),
+        color: '',
         open: false,
       },
       {
-        label: 'QA for two days',
+        text: 'QA for two days',
         start: dayjs('2020-01-03T15:06:02Z'),
         end: dayjs('2020-01-04T15:06:02Z'),
+        color: '',
         open: false,
       },
     ];
@@ -121,9 +129,10 @@ describe('alignEvents', () => {
 
     const events = Array.from({ length: numEvents }).map((_, i) => {
       return {
-        label: `Event ${i}`,
+        text: `Event ${i}`,
         start: start.add(i, 'day'),
         end: start.add(eventDuration - 1, 'day').add(i, 'day'),
+        color: '',
         open: false,
       };
     });
@@ -135,6 +144,6 @@ describe('alignEvents', () => {
 
     expect(Object.keys(aligned).length).toEqual(numEvents + 1);
     expect(lastDay.length).toEqual(eventDuration);
-    expect(lastEvent?.label).toEqual(`Event ${numEvents - 1}`);
+    expect(lastEvent?.text).toEqual(`Event ${numEvents - 1}`);
   });
 });

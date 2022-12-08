@@ -1,4 +1,4 @@
-import { CalendarEvent } from './types';
+import { CalendarEvent } from '../types';
 
 /**
  * alignEvents expands the calendar events and creates an entry for every day

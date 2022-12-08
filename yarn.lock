@@ -5658,11 +5658,6 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, 
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
-grafana-plugin-support@0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/grafana-plugin-support/-/grafana-plugin-support-0.4.0.tgz#0eacb41670e4c0ba38922efa23e0e190f3e1dcb5"
-  integrity sha512-1NbI6HvoFrreo0nS9lpD59SwIfjB2VWdIPddS91PpI1j6g0WkilCvWYEKb4ZmTiC7+EhaRM5QHs4WMEG0TYy8w==
-
 gzip-size@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-6.0.0.tgz#065367fd50c239c0671cbcbad5be3e2eeb10e462"

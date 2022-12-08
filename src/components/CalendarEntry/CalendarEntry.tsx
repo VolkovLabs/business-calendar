@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import React from 'react';
 import { css, cx } from '@emotion/css';
-import { GrafanaTheme2 } from '@grafana/data';
 import { useStyles2, useTheme2 } from '@grafana/ui';
+import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
 
 /**
@@ -102,67 +102,3 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, q
     </Link>
   );
 };
-
-const getStyles = (theme: GrafanaTheme2) => ({
-  event: css`
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    height: 1.5rem;
-    padding: 0 ${theme.v1.spacing.xs};
-    margin-bottom: 1px;
-
-    color: ${theme.colors.text};
-
-    &:hover {
-      color: ${theme.v1.colors.textStrong};
-      cursor: pointer;
-    }
-  `,
-  eventLabel: css`
-    font-size: ${theme.typography.size.base};
-    font-weight: ${theme.v1.typography.weight.semibold};
-    r-select: none;
-    flex-grow: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  `,
-  multiDayEvent: css`
-    padding-left: calc(4 * ${theme.v1.spacing.xs});
-    color: ${theme.v1.palette.dark5};
-    &:hover {
-      color: ${theme.v1.palette.black};
-      cursor: pointer;
-    }
-  `,
-  centerItems: css`
-    display: flex;
-    align-items: center;
-  `,
-  filler: css`
-    background: transparent;
-    &:hover {
-      cursor: initial;
-    }
-  `,
-  startDayStyle: css`
-    border-radius: ${theme.v1.border.radius.md} 0 0 ${theme.v1.border.radius.md};
-  `,
-  endDayStyle: css`
-    width: calc(100% - ${theme.v1.spacing.sm});
-    border-radius: 0 ${theme.v1.border.radius.md} ${theme.v1.border.radius.md} 0;
-  `,
-  summary: css`
-    width: calc(100% - 2 * ${theme.v1.spacing.xs});
-    margin-left: ${theme.v1.spacing.xs};
-    border-radius: ${theme.v1.border.radius.lg};
-  `,
-  tooltip: css`
-    min-width: 200px;
-    border-radius: ${theme.v1.border.radius.md};
-    background-color: ${theme.v1.colors.bg2};
-    padding: ${theme.v1.spacing.sm};
-    box-shadow: 0px 0px 20px ${theme.v1.colors.dropdownShadow};
-  `,
-});

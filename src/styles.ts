@@ -34,4 +34,127 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     overflow: auto;
     user-select: none;
   `,
+  event: css`
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 1.5rem;
+    padding: 0 ${theme.v1.spacing.xs};
+    margin-bottom: 1px;
+
+    color: ${theme.colors.text};
+
+    &:hover {
+      color: ${theme.v1.colors.textStrong};
+      cursor: pointer;
+    }
+  `,
+  eventLabel: css`
+    font-size: ${theme.typography.size.base};
+    font-weight: ${theme.v1.typography.weight.semibold};
+    r-select: none;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
+  multiDayEvent: css`
+    padding-left: calc(4 * ${theme.v1.spacing.xs});
+    color: ${theme.v1.palette.dark5};
+    &:hover {
+      color: ${theme.v1.palette.black};
+      cursor: pointer;
+    }
+  `,
+  centerItems: css`
+    display: flex;
+    align-items: center;
+  `,
+  filler: css`
+    background: transparent;
+    &:hover {
+      cursor: initial;
+    }
+  `,
+  startDayStyle: css`
+    border-radius: ${theme.v1.border.radius.md} 0 0 ${theme.v1.border.radius.md};
+  `,
+  endDayStyle: css`
+    width: calc(100% - ${theme.v1.spacing.sm});
+    border-radius: 0 ${theme.v1.border.radius.md} ${theme.v1.border.radius.md} 0;
+  `,
+  summary: css`
+    width: calc(100% - 2 * ${theme.v1.spacing.xs});
+    margin-left: ${theme.v1.spacing.xs};
+    border-radius: ${theme.v1.border.radius.lg};
+  `,
+  tooltip: css`
+    min-width: 200px;
+    border-radius: ${theme.v1.border.radius.md};
+    background-color: ${theme.v1.colors.bg2};
+    padding: ${theme.v1.spacing.sm};
+    box-shadow: 0px 0px 20px ${theme.v1.colors.dropdownShadow};
+  `,
+  root: css`
+    background: ${theme.v1.colors.panelBg};
+    border-top: 1px solid ${theme.v1.colors.border2};
+    border-left: 1px solid ${theme.v1.colors.border2};
+    overflow: hidden;
+
+    &:nth-last-child(-n + 7) {
+      border-bottom: 1px solid ${theme.v1.colors.border2};
+    }
+    &:nth-child(7n) {
+    }
+    &:nth-child(7n + 1) {
+      border-left: 0;
+    }
+    &:nth-child(-n + 7) {
+      border-top: 0;
+    }
+  `,
+  weekend: css`
+    background: ${theme.v1.colors.bg2};
+  `,
+  outsideInterval: css`
+    background: ${theme.v1.colors.dashboardBg};
+  `,
+  today: css``,
+  selected: css``,
+  moreEntriesLabel: css`
+    margin-top: 1px;
+    display: inline-block;
+    font-size: ${theme.typography.size.xs};
+    padding: ${theme.v1.spacing.xs};
+    user-select: none;
+    color: ${theme.v1.colors.textWeak};
+    cursor: pointer;
+
+    &:hover {
+      background: ${theme.v1.colors.bg3};
+      border-radius: 0 ${theme.v1.border.radius.lg} ${theme.v1.border.radius.lg} 0;
+    }
+  `,
+  dateHeader: {
+    root: css`
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: ${theme.v1.spacing.xs};
+    `,
+    monthLabel: css`
+      color: ${theme.v1.palette.brandPrimary};
+      font-weight: 500;
+    `,
+    dayLabel: css`
+      color: ${theme.v1.colors.textSemiWeak};
+      border-radius: 50%;
+      width: 3ch;
+      height: 3ch;
+      text-align: center;
+      font-size: ${theme.typography.size.md};
+      line-height: 3.1ch;
+      user-select: none;
+    `,
+  },
 });

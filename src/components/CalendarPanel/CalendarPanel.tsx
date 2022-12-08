@@ -7,7 +7,7 @@ import { AnnotationEvent, classicColors, FieldType, PanelProps, textUtil } from 
 import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useStyles2, useTheme2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
-import { alignEvents, toTimeField, useAnnotations, useIntervalSelection } from '../../utils';
+import { alignEvents, formatEventInterval, toTimeField, useAnnotations, useIntervalSelection } from '../../utils';
 import { CalendarEntry } from '../CalendarEntry';
 import { Day } from '../Day';
 
@@ -278,14 +278,4 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       </div>
     </div>
   );
-};
-
-const formatEventInterval = (event: CalendarEvent): string => {
-  if (event.end) {
-    if (event.start.startOf('day').isSame(event.end?.startOf('day'))) {
-      return `${event.start.format('LLL')}–${event.end.format('LT')}`;
-    }
-    return `${event.start.format('LLL')}–${event.end.format('LLL')}`;
-  }
-  return `${event.start.format('LLL')}`;
 };

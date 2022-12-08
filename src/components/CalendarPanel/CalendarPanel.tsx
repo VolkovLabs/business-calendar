@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
-import { toTimeField } from 'grafana-plugin-support';
 import { useIntervalSelection } from 'hooks';
 import React, { useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
@@ -9,6 +8,7 @@ import { classicColors, FieldType, GrafanaTheme2, PanelProps, textUtil } from '@
 import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useStyles2, useTheme2 } from '@grafana/ui';
 import { alignEvents } from '../../alignEvents';
 import { CalendarEvent, CalendarOptions } from '../../types';
+import { toTimeField } from '../../utils';
 import { CalendarEntry } from '../CalendarEntry';
 import { Day } from '../Day/Day';
 

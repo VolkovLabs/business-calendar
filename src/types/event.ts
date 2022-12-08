@@ -2,6 +2,11 @@ import dayjs from 'dayjs';
 import { Field, LinkModel } from '@grafana/data';
 
 /**
+ * Range
+ */
+export type Range = [dayjs.Dayjs, dayjs.Dayjs];
+
+/**
  * Calendar Event
  */
 export interface CalendarEvent {

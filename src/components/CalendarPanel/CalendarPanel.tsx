@@ -3,10 +3,11 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
 import React, { useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
-import { classicColors, FieldType, GrafanaTheme2, PanelProps, textUtil } from '@grafana/data';
+import { AnnotationEvent, classicColors, FieldType, PanelProps, textUtil } from '@grafana/data';
 import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useStyles2, useTheme2 } from '@grafana/ui';
+import { getStyles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
-import { alignEvents, toTimeField, useIntervalSelection } from '../../utils';
+import { alignEvents, toTimeField, useAnnotations, useIntervalSelection } from '../../utils';
 import { CalendarEntry } from '../CalendarEntry';
 import { Day } from '../Day';
 
@@ -24,6 +25,7 @@ interface Props extends PanelProps<CalendarOptions> {}
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
   const theme = useTheme2();
   const styles = useStyles2(getStyles);
+  const annotations = useAnnotations();
 
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
 
@@ -56,8 +58,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   const endOfWeek = to.endOf('isoWeek');
   const numDays = endOfWeek.diff(startOfWeek, 'days');
 
-  const colors = classicColors ?? legacyClassicColors;
-
   const events = frames.flatMap((frame, frameIdx) => {
     return frame.text && frame.start
       ? Array.from({ length: frame.text.values.length })
@@ -74,7 +74,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             description,
             labels,
             start: dayjs(start),
-            color: colors[Math.floor(frameIdx % colors.length)],
+            color: classicColors[Math.floor(frameIdx % classicColors.length)],
             links,
 
             // Set undefined if the user hasn't explicitly configured the dimension
@@ -88,6 +88,25 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       : [];
   });
 
+  /**
+   * Annotations
+   */
+  annotations
+    .map<CalendarEvent>(
+      (annotation: AnnotationEvent) =>
+        ({
+          text: annotation.text ?? '',
+          start: dayjs(annotation.time),
+          end: annotation.time ? dayjs(annotation.timeEnd) : undefined,
+          open: false,
+          color: annotation.color,
+        } as CalendarEvent)
+    )
+    .forEach((event: CalendarEvent) => events.push(event));
+
+  /**
+   * Events
+   */
   const alignedEvents = alignEvents(events);
 
   const drawerShowDay = (day: dayjs.Dayjs, isOutsideInterval: boolean) => {
@@ -270,95 +289,3 @@ const formatEventInterval = (event: CalendarEvent): string => {
   }
   return `${event.start.format('LLL')}`;
 };
-
-const getStyles = (theme: GrafanaTheme2) => ({
-  applyIntervalButton: css`
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: ${theme.v1.spacing.sm};
-    z-index: 1000;
-  `,
-  weekdayContainer: css`
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    font-size: ${theme.typography.size.md};
-    font-weight: ${theme.v1.typography.weight.regular};
-    border-bottom: 1px solid ${theme.v1.colors.border2};
-  `,
-  weekdayLabel: css`
-    text-align: right;
-    padding: ${theme.v1.spacing.xxs} ${theme.v1.spacing.xs};
-    overflow: hidden;
-  `,
-  calendarContainer: css`
-    width: 100%;
-    display: grid;
-    flex-grow: 1;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    grid-auto-rows: 20%;
-    overflow: auto;
-    user-select: none;
-  `,
-});
-
-// For Grafana versions older than 7.3.0.
-export const legacyClassicColors = [
-  '#7EB26D', // 0: pale green
-  '#EAB839', // 1: mustard
-  '#6ED0E0', // 2: light blue
-  '#EF843C', // 3: orange
-  '#E24D42', // 4: red
-  '#1F78C1', // 5: ocean
-  '#BA43A9', // 6: purple
-  '#705DA0', // 7: violet
-  '#508642', // 8: dark green
-  '#CCA300', // 9: dark sand
-  '#447EBC',
-  '#C15C17',
-  '#890F02',
-  '#0A437C',
-  '#6D1F62',
-  '#584477',
-  '#B7DBAB',
-  '#F4D598',
-  '#70DBED',
-  '#F9BA8F',
-  '#F29191',
-  '#82B5D8',
-  '#E5A8E2',
-  '#AEA2E0',
-  '#629E51',
-  '#E5AC0E',
-  '#64B0C8',
-  '#E0752D',
-  '#BF1B00',
-  '#0A50A1',
-  '#962D82',
-  '#614D93',
-  '#9AC48A',
-  '#F2C96D',
-  '#65C5DB',
-  '#F9934E',
-  '#EA6460',
-  '#5195CE',
-  '#D683CE',
-  '#806EB7',
-  '#3F6833',
-  '#967302',
-  '#2F575E',
-  '#99440A',
-  '#58140C',
-  '#052B51',
-  '#511749',
-  '#3F2B5B',
-  '#E0F9D7',
-  '#FCEACA',
-  '#CFFAFF',
-  '#F9E2D2',
-  '#FCE2DE',
-  '#BADFF4',
-  '#F9D9F9',
-  '#DEDAF7',
-];

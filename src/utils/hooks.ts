@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
-
-type Range = [dayjs.Dayjs, dayjs.Dayjs];
+import { Range } from '../types';
 
 /**
  * Key Press

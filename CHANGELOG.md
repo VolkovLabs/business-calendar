@@ -12,6 +12,7 @@
 - Update to Grafana 9.3.1 (#59)
 - Update CI to upload signed artifacts (#60)
 - Refactor panel options and increase test coverage (#61)
+- Add annotation support (#8)
 
 ## 1.0.0 (2022-10-02)
 

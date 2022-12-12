@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0 (IN PROGRESS)
+## 1.1.0 (2022-12-12)
 
 ### Breaking changes
 

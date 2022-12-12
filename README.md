@@ -29,6 +29,7 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 - Allows to change time range by selecting the days in the calendar.
 - Query calendar events from any data source.
+- Allows to display Annotations.
 - Supports automatically scroll to the end of the time range.
 - Allows to open data link instead of sidebar when clicking an event.
 

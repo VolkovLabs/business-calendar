@@ -2,6 +2,10 @@
 
 ## 1.1.0 (IN PROGRESS)
 
+### Breaking changes
+
+Refactoring may introduce breaking changes. Please test before upgrading in Production.
+
 ### Features / Enhancements
 
 - Update Panel options in README (#53)
@@ -14,6 +18,7 @@
 - Refactor panel options and increase test coverage (#61)
 - Add annotation support (#8)
 - Refactoring and Removing legacy code (#62)
+- Refactor Panel Options and add add display Annotations (#63)
 
 ## 1.0.0 (2022-10-02)
 

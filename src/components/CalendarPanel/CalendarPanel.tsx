@@ -25,7 +25,7 @@ interface Props extends PanelProps<CalendarOptions> {}
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
   const theme = useTheme2();
   const styles = useStyles2(getStyles);
-  const annotations = useAnnotations();
+  const annotations = useAnnotations(timeRange);
 
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
 
@@ -91,18 +91,20 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   /**
    * Annotations
    */
-  annotations
-    .map<CalendarEvent>(
-      (annotation: AnnotationEvent) =>
-        ({
-          text: annotation.text ?? '',
-          start: dayjs(annotation.time),
-          end: annotation.time ? dayjs(annotation.timeEnd) : undefined,
-          open: false,
-          color: annotation.color,
-        } as CalendarEvent)
-    )
-    .forEach((event: CalendarEvent) => events.push(event));
+  if (options.annotations) {
+    annotations
+      .map<CalendarEvent>(
+        (annotation: AnnotationEvent) =>
+          ({
+            text: annotation.text ?? '',
+            start: dayjs(annotation.time),
+            end: annotation.time ? dayjs(annotation.timeEnd) : undefined,
+            open: false,
+            color: annotation.color,
+          } as CalendarEvent)
+      )
+      .forEach((event: CalendarEvent) => events.push(event));
+  }
 
   /**
    * Events

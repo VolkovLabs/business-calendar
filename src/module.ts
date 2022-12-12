@@ -1,5 +1,6 @@
 import { FieldType, PanelPlugin } from '@grafana/data';
 import { CalendarPanel, FieldSelectEditor } from './components';
+import { AnnotationsOptions, DefaultOptions, LinksOptions, ScrollOptions } from './constants';
 import { CalendarOptions } from './types';
 
 /**
@@ -7,17 +8,32 @@ import { CalendarOptions } from './types';
  */
 export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldConfig().setPanelOptions((builder) => {
   builder
-    .addBooleanSwitch({
+    .addRadio({
       path: 'autoScroll',
       name: 'Scroll to bottom',
       description: 'Automatically scroll to the end of the time interval.',
-      defaultValue: false,
+      settings: {
+        options: ScrollOptions,
+      },
+      defaultValue: DefaultOptions.autoScroll,
     })
-    .addBooleanSwitch({
+    .addRadio({
       path: 'quickLinks',
-      name: 'Quick links',
+      name: 'Links',
       description: 'Open data link instead of sidebar when clicking an event.',
-      defaultValue: false,
+      settings: {
+        options: LinksOptions,
+      },
+      defaultValue: DefaultOptions.quickLinks,
+    })
+    .addRadio({
+      path: 'annotations',
+      name: 'Annotations',
+      description: 'Display annotations.',
+      settings: {
+        options: AnnotationsOptions,
+      },
+      defaultValue: DefaultOptions.annotations,
     });
 
   /**

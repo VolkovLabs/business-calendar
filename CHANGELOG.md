@@ -18,7 +18,7 @@ Refactoring may introduce breaking changes. Please test before upgrading in Prod
 - Refactor panel options and increase test coverage (#61)
 - Add annotation support (#8)
 - Refactoring and Removing legacy code (#62)
-- Refactor Panel Options and add add display Annotations (#63)
+- Refactor Panel Options and add Annotations options (#63)
 
 ## 1.0.0 (2022-10-02)
 

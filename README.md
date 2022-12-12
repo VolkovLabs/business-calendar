@@ -46,9 +46,9 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 ### Duration
 
-If event has only Start time, events are considered instantaneous.
-If events has start and end time, events are considered to have a duration.
-Any events that are missing an end time are considered ongoing.
+- If event has only Start time configured, events are considered instantaneous.
+- If event has start and end time, events are considered to have a duration.
+- Any events that are missing an end time are considered ongoing.
 
 ## Feedback
 

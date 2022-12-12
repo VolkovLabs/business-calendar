@@ -159,7 +159,7 @@
       },
       "id": 2,
       "options": {
-        "annotations": false,
+        "annotations": true,
         "autoScroll": false,
         "descriptionField": "description",
         "endTimeField": "end",
@@ -239,6 +239,6 @@
   "timezone": "",
   "title": "Weekly",
   "uid": "pKxZUM5Vz",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }

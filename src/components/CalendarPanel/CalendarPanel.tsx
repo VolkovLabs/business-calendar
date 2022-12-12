@@ -25,7 +25,6 @@ interface Props extends PanelProps<CalendarOptions> {}
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
   const theme = useTheme2();
   const styles = useStyles2(getStyles);
-  const annotations = useAnnotations(timeRange);
 
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
 
@@ -46,18 +45,26 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
     labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
   }));
 
+  /**
+   * Auto Scroll
+   */
   const ref = useRef<HTMLDivElement>(null);
-
   if (ref.current && options.autoScroll) {
     ref.current.scrollTo(0, ref.current.scrollHeight);
   }
 
+  /**
+   * Time Range
+   */
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());
   const startOfWeek = from.startOf('isoWeek');
   const endOfWeek = to.endOf('isoWeek');
   const numDays = endOfWeek.diff(startOfWeek, 'days');
 
+  /**
+   * Events
+   */
   const events = frames.flatMap((frame, frameIdx) => {
     return frame.text && frame.start
       ? Array.from({ length: frame.text.values.length })
@@ -89,27 +96,28 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   });
 
   /**
+   * Align Events
+   */
+  const alignedEvents = alignEvents(events);
+
+  /**
    * Annotations
    */
-  if (options.annotations) {
+  const annotations = useAnnotations(timeRange);
+  if (options.annotations && annotations.length) {
     annotations
       .map<CalendarEvent>(
         (annotation: AnnotationEvent) =>
           ({
             text: annotation.text ?? '',
             start: dayjs(annotation.time),
-            end: annotation.time ? dayjs(annotation.timeEnd) : undefined,
+            end: annotation.timeEnd ? dayjs(annotation.timeEnd) : undefined,
             open: false,
             color: annotation.color,
           } as CalendarEvent)
       )
       .forEach((event: CalendarEvent) => events.push(event));
   }
-
-  /**
-   * Events
-   */
-  const alignedEvents = alignEvents(events);
 
   const drawerShowDay = (day: dayjs.Dayjs, isOutsideInterval: boolean) => {
     const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];

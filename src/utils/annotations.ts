@@ -10,7 +10,7 @@ export const useAnnotations = (timeRange: TimeRange) => {
 
   useEffect(() => {
     getBackendSrv()
-      .get('/api/annotations', { from: timeRange.from, to: timeRange.to })
+      .get('/api/annotations', { from: timeRange.from.valueOf(), to: timeRange.to.valueOf() })
       .then((res) => setAnnotations(res));
   }, [timeRange]);
 

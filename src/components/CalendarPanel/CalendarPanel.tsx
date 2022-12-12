@@ -23,13 +23,25 @@ interface Props extends PanelProps<CalendarOptions> {}
  * Calendar Panel
  */
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
+  /**
+   * States
+   */
+  const [drawerProps, setDrawerProps] = useState<Record<string, any>>();
+
+  /**
+   * Theme
+   */
   const theme = useTheme2();
   const styles = useStyles2(getStyles);
 
+  /**
+   * Interval
+   */
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
 
-  const [drawerProps, setDrawerProps] = useState<Record<string, any>>();
-
+  /**
+   * Frames
+   */
   const frames = data.series.map((frame) => ({
     text: options.textField
       ? frame.fields.find((f) => f.name === options.textField)
@@ -96,11 +108,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   });
 
   /**
-   * Align Events
-   */
-  const alignedEvents = alignEvents(events);
-
-  /**
    * Annotations
    */
   const annotations = useAnnotations(timeRange);
@@ -119,6 +126,14 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       .forEach((event: CalendarEvent) => events.push(event));
   }
 
+  /**
+   * Align Events
+   */
+  const alignedEvents = alignEvents(events);
+
+  /**
+   * Day Drawer
+   */
   const drawerShowDay = (day: dayjs.Dayjs, isOutsideInterval: boolean) => {
     const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
 
@@ -212,16 +227,16 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
           {drawerProps.children}
         </Drawer>
       )}
+
       {/* Apply time interval */}
+
       {selectedInterval && (
         <div className={styles.applyIntervalButton}>
           <Button
             onClick={() => {
-              if (selectedInterval) {
-                const [from, to] = selectedInterval;
-                clearSelection();
-                onChangeTimeRange({ from: from.valueOf(), to: to.valueOf() });
-              }
+              const [from, to] = selectedInterval;
+              clearSelection();
+              onChangeTimeRange({ from: from.valueOf(), to: to.valueOf() });
             }}
           >
             Apply time range

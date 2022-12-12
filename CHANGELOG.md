@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.1.0 (IN PROGRESS)
+## 1.1.0 (2022-12-12)
+
+### Breaking changes
+
+Refactoring may introduce breaking changes. Please test before upgrading in Production.
 
 ### Features / Enhancements
 
@@ -14,6 +18,7 @@
 - Refactor panel options and increase test coverage (#61)
 - Add annotation support (#8)
 - Refactoring and Removing legacy code (#62)
+- Refactor Panel Options and add Annotations options (#63)
 
 ## 1.0.0 (2022-10-02)
 

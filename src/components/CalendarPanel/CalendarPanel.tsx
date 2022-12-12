@@ -23,14 +23,25 @@ interface Props extends PanelProps<CalendarOptions> {}
  * Calendar Panel
  */
 export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
-  const theme = useTheme2();
-  const styles = useStyles2(getStyles);
-  const annotations = useAnnotations();
-
-  const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
-
+  /**
+   * States
+   */
   const [drawerProps, setDrawerProps] = useState<Record<string, any>>();
 
+  /**
+   * Theme
+   */
+  const theme = useTheme2();
+  const styles = useStyles2(getStyles);
+
+  /**
+   * Interval
+   */
+  const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
+
+  /**
+   * Frames
+   */
   const frames = data.series.map((frame) => ({
     text: options.textField
       ? frame.fields.find((f) => f.name === options.textField)
@@ -46,18 +57,26 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
     labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
   }));
 
+  /**
+   * Auto Scroll
+   */
   const ref = useRef<HTMLDivElement>(null);
-
   if (ref.current && options.autoScroll) {
     ref.current.scrollTo(0, ref.current.scrollHeight);
   }
 
+  /**
+   * Time Range
+   */
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());
   const startOfWeek = from.startOf('isoWeek');
   const endOfWeek = to.endOf('isoWeek');
   const numDays = endOfWeek.diff(startOfWeek, 'days');
 
+  /**
+   * Events
+   */
   const events = frames.flatMap((frame, frameIdx) => {
     return frame.text && frame.start
       ? Array.from({ length: frame.text.values.length })
@@ -91,24 +110,30 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   /**
    * Annotations
    */
-  annotations
-    .map<CalendarEvent>(
-      (annotation: AnnotationEvent) =>
-        ({
-          text: annotation.text ?? '',
-          start: dayjs(annotation.time),
-          end: annotation.time ? dayjs(annotation.timeEnd) : undefined,
-          open: false,
-          color: annotation.color,
-        } as CalendarEvent)
-    )
-    .forEach((event: CalendarEvent) => events.push(event));
+  const annotations = useAnnotations(timeRange);
+  if (options.annotations && annotations.length) {
+    annotations
+      .map<CalendarEvent>(
+        (annotation: AnnotationEvent) =>
+          ({
+            text: annotation.text ?? '',
+            start: dayjs(annotation.time),
+            end: annotation.timeEnd ? dayjs(annotation.timeEnd) : undefined,
+            open: false,
+            color: annotation.color,
+          } as CalendarEvent)
+      )
+      .forEach((event: CalendarEvent) => events.push(event));
+  }
 
   /**
-   * Events
+   * Align Events
    */
   const alignedEvents = alignEvents(events);
 
+  /**
+   * Day Drawer
+   */
   const drawerShowDay = (day: dayjs.Dayjs, isOutsideInterval: boolean) => {
     const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
 
@@ -202,16 +227,16 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
           {drawerProps.children}
         </Drawer>
       )}
+
       {/* Apply time interval */}
+
       {selectedInterval && (
         <div className={styles.applyIntervalButton}>
           <Button
             onClick={() => {
-              if (selectedInterval) {
-                const [from, to] = selectedInterval;
-                clearSelection();
-                onChangeTimeRange({ from: from.valueOf(), to: to.valueOf() });
-              }
+              const [from, to] = selectedInterval;
+              clearSelection();
+              onChangeTimeRange({ from: from.valueOf(), to: to.valueOf() });
             }}
           >
             Apply time range

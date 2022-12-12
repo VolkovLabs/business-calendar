@@ -27,24 +27,28 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 ## Features
 
-- Allows to change time range by selecting the days in the calendar.
+- Displays events in Weekly or Daily layout depends on the selected Time Range.
+- Allows to change Time Range by selecting the days in the calendar.
 - Query calendar events from any data source.
-- Supports automatically scroll to the end of the time range.
+- Allows to display Annotations across all dashboards for the selected Time Range.
+- Supports automatically scroll to the end of the Time Range.
 - Allows to open data link instead of sidebar when clicking an event.
 
-## Data
+## Events
 
 | Option        | Description                                                         |
 | ------------- | ------------------------------------------------------------------- |
-| _Text_        | Field to use as event text. Defaults to the first text field.       |
-| _Description_ | Field to use as event description.                                  |
-| _Start time_  | Field to use as event start time. Defaults to the first time field. |
-| _End time_    | Field to use as event end time.                                     |
-| _Labels_      | Fields to use as event labels.                                      |
+| Text          | Field to use as event text. Defaults to the first text field.       |
+| Description   | Field to use as event description.                                  |
+| Start time    | Field to use as event start time. Defaults to the first time field. |
+| End time      | Field to use as event end time.                                     |
+| Labels        | Fields to use as event labels.                                      |
 
-If only **Start** is configured, events are considered instantaneous.
+### Duration
 
-If **End** are configured, events are considered to have a duration. Any events that are missing an end time are considered ongoing.
+- If event has only Start time configured, events are considered instantaneous.
+- If event has Start and End time, events are considered to have a duration.
+- Any events that are missing an End time are considered ongoing.
 
 ## Feedback
 

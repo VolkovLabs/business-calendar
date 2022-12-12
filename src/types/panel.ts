@@ -50,4 +50,11 @@ export interface CalendarOptions {
    * @type {boolean}
    */
   quickLinks?: boolean;
+
+  /**
+   * Annotations
+   *
+   * @type {boolean}
+   */
+  annotations?: boolean;
 }

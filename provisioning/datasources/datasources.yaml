@@ -10,3 +10,8 @@ datasources:
     orgId: 1
     version: 1
     editable: true
+  - name: Static
+    type: marcusolsson-static-datasource
+    access: proxy
+    orgId: 1
+    uid: U0HP2Rv4z

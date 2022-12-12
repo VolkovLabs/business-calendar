@@ -38,17 +38,17 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 | Option        | Description                                                         |
 | ------------- | ------------------------------------------------------------------- |
-| _Text_        | Field to use as event text. Defaults to the first text field.       |
-| _Description_ | Field to use as event description.                                  |
-| _Start time_  | Field to use as event start time. Defaults to the first time field. |
-| _End time_    | Field to use as event end time.                                     |
-| _Labels_      | Fields to use as event labels.                                      |
+| Text          | Field to use as event text. Defaults to the first text field.       |
+| Description   | Field to use as event description.                                  |
+| Start time    | Field to use as event start time. Defaults to the first time field. |
+| End time      | Field to use as event end time.                                     |
+| Labels        | Fields to use as event labels.                                      |
 
 ### Duration
 
 - If event has only Start time configured, events are considered instantaneous.
-- If event has start and end time, events are considered to have a duration.
-- Any events that are missing an end time are considered ongoing.
+- If event has Start and End time, events are considered to have a duration.
+- Any events that are missing an End time are considered ongoing.
 
 ## Feedback
 

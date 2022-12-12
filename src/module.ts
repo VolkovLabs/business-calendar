@@ -37,7 +37,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
     });
 
   /**
-   * Data
+   * Events
    */
   builder
     .addCustomEditor({
@@ -46,7 +46,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
       name: 'Text',
       description: 'Field to use for the event text. Defaults to the first textual field.',
       editor: FieldSelectEditor,
-      category: ['Data'],
+      category: ['Events'],
       settings: {
         filterByType: [FieldType.string],
       },
@@ -57,7 +57,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
       name: 'Description',
       description: 'Field to use for the event description.',
       editor: FieldSelectEditor,
-      category: ['Data'],
+      category: ['Events'],
       settings: {
         filterByType: [FieldType.string],
       },
@@ -68,7 +68,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
       name: 'Start time',
       description: 'Field to use for the event start time. Defaults to the first time field.',
       editor: FieldSelectEditor,
-      category: ['Data'],
+      category: ['Events'],
       settings: {
         filterByType: [FieldType.time, FieldType.string, FieldType.number],
       },
@@ -79,7 +79,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
       name: 'End time',
       description: 'Field to use for the event end time. Defaults to the first time field.',
       editor: FieldSelectEditor,
-      category: ['Data'],
+      category: ['Events'],
       settings: {
         filterByType: [FieldType.time, FieldType.string, FieldType.number],
       },
@@ -90,7 +90,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
       name: 'Labels',
       description: 'Fields to use as event labels.',
       editor: FieldSelectEditor,
-      category: ['Data'],
+      category: ['Events'],
       settings: {
         filterByType: [FieldType.string],
         multi: true,

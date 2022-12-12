@@ -27,14 +27,14 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 ## Features
 
-- Allows to change time range by selecting the days in the calendar.
+- Displays events in Weekly or Daily layout depends on the selected Time Range.
+- Allows to change Time Range by selecting the days in the calendar.
 - Query calendar events from any data source.
-- Allows to display Annotations.
-- Supports automatically scroll to the end of the time range.
+- Allows to display Annotations across all dashboards for the selected Time Range.
+- Supports automatically scroll to the end of the Time Range.
 - Allows to open data link instead of sidebar when clicking an event.
-- Supports Weekly and Dayly views.
 
-## Data
+## Events
 
 | Option        | Description                                                         |
 | ------------- | ------------------------------------------------------------------- |
@@ -44,9 +44,11 @@ grafana-cli plugins install marcusolsson-calendar-panel
 | _End time_    | Field to use as event end time.                                     |
 | _Labels_      | Fields to use as event labels.                                      |
 
-If only **Start** is configured, events are considered instantaneous.
+### Duration
 
-If **End** are configured, events are considered to have a duration. Any events that are missing an end time are considered ongoing.
+If event has only Start time, events are considered instantaneous.
+If events has start and end time, events are considered to have a duration.
+Any events that are missing an end time are considered ongoing.
 
 ## Feedback
 

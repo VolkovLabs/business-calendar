@@ -32,7 +32,7 @@ grafana-cli plugins install marcusolsson-calendar-panel
 - Allows to display Annotations.
 - Supports automatically scroll to the end of the time range.
 - Allows to open data link instead of sidebar when clicking an event.
-- Supports Weekly and Days views.
+- Supports Weekly and Dayly views.
 
 ## Data
 

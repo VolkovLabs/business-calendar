@@ -278,9 +278,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
           const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
 
           const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
-          const entries = events.map<CalendarEvent | undefined>((event) =>
-            event ? { ...event, color: event.color } : undefined
-          );
+          const entries = events
+            .map<CalendarEvent | undefined>((event) => (event ? { ...event, color: event.color } : undefined))
+            .filter((i) => i !== undefined);
 
           return (
             <Day

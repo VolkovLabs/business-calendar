@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Select color for calender entry queries (#67)
+
 ## 1.1.0 (2022-12-12)
 
 ### Breaking changes

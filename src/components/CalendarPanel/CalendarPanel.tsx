@@ -80,6 +80,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
    */
   const events = frames.flatMap((frame, frameIdx) => {
     const colorFn = frame.color?.display;
+
     return frame.text && frame.start
       ? Array.from({ length: frame.text.values.length })
           .map((_, i) => ({

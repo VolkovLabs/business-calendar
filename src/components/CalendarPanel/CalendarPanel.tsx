@@ -277,11 +277,20 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             selectedInterval[0].valueOf() <= day.valueOf() &&
             day.valueOf() <= selectedInterval[1].valueOf();
 
-          // Since the calendar always displays full weeks, the day may be
-          // rendered even if it's outside of the selected time interval.
+          /**
+           * Since the calendar always displays full weeks, the day may be
+           * rendered even if it's outside of the selected time interval.
+           */
           const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
 
+          /**
+           * Events
+           */
           const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
+
+          /**
+           * Entries
+           */
           const entries = events
             .map<CalendarEvent | undefined>((event) => (event ? { ...event, color: event.color } : undefined))
             .filter((i) => i !== undefined);

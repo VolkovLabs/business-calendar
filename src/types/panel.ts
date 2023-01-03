@@ -57,4 +57,11 @@ export interface CalendarOptions {
    * @type {boolean}
    */
   annotations?: boolean;
+
+  /**
+   * Color
+   *
+   * @type {string}
+   */
+  colorField?: string;
 }

@@ -95,5 +95,16 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
         filterByType: [FieldType.string],
         multi: true,
       },
+    })
+    .addCustomEditor({
+      id: 'colorField',
+      path: 'colorField',
+      name: 'Color',
+      description: 'Fields to use as event color.',
+      editor: FieldSelectEditor,
+      category: ['Events'],
+      settings: {
+        multi: false,
+      },
     });
 });

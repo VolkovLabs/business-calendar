@@ -55,6 +55,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
     // No default for end time. If end time dimension isn't set, we assume that all events are instants.
     end: toTimeField(frame.fields.find((f) => f.name === options.endTimeField)),
     labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
+    color: frame.fields.find((f) => f.name === options.colorField),
   }));
 
   /**
@@ -78,6 +79,8 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
    * Events
    */
   const events = frames.flatMap((frame, frameIdx) => {
+    const colorFn = frame.color?.display;
+
     return frame.text && frame.start
       ? Array.from({ length: frame.text.values.length })
           .map((_, i) => ({
@@ -87,13 +90,14 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             end: frame.end?.values.get(i),
             labels: frame.labels?.map((field) => field.values.get(i)).filter((label) => label),
             links: frame.text?.getLinks!({ valueRowIndex: i }),
+            color: frame.color?.values.get(i),
           }))
-          .map<CalendarEvent>(({ text, description, labels, links, start, end }, i) => ({
+          .map<CalendarEvent>(({ text, description, labels, links, start, end, color }, i) => ({
             text,
             description,
             labels,
             start: dayjs(start),
-            color: classicColors[Math.floor(frameIdx % classicColors.length)],
+            color: colorFn?.(color).color ?? classicColors[Math.floor(frameIdx % classicColors.length)],
             links,
 
             // Set undefined if the user hasn't explicitly configured the dimension

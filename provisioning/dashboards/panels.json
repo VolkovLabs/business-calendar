@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 20,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -90,12 +89,13 @@
       },
       "id": 10,
       "options": {
+        "annotations": false,
         "autoScroll": true,
+        "colorField": "downloads",
         "descriptionField": "description",
         "quickLinks": true,
         "textField": "name",
-        "timeField": "updatedAt",
-        "colorField": "downloads"
+        "timeField": "updatedAt"
       },
       "targets": [
         {
@@ -331,7 +331,7 @@
           }
         ]
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "9.3.6",
       "targets": [
         {
           "cacheDurationSeconds": 300,
@@ -401,7 +401,7 @@
           "urlPath": "/"
         }
       ],
-      "title": "Grafana Marketplace",
+      "title": "Grafana Catalog",
       "transformations": [
         {
           "id": "organize",
@@ -499,6 +499,6 @@
   "timezone": "",
   "title": "Grafana Plugins",
   "uid": "hHK1qmpnk",
-  "version": 63,
+  "version": 1,
   "weekStart": ""
 }

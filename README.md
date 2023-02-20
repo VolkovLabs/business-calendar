@@ -36,21 +36,12 @@ grafana-cli plugins install marcusolsson-calendar-panel
 - Supports auto-scrolling to the end of the `Time Range`.
 - Allows opening data link instead of a sidebar when clicking an event.
 
-## Events
+## Documentation
 
-| Option        | Description                                                         |
-| ------------- | ------------------------------------------------------------------- |
-| Text          | Field to use as event text. Defaults to the first text field.       |
-| Description   | Field to use as event description.                                  |
-| Start time    | Field to use as event start time. Defaults to the first time field. |
-| End time      | Field to use as event end time.                                     |
-| Labels        | Fields to use as event labels.                                      |
-
-### Duration
-
-- If event has only Start time configured, events are considered instantaneous.
-- If event has Start and End time, events are considered to have a duration.
-- Any events that are missing an End time are considered ongoing.
+| Section                  | Description                                             |
+| ------------------------ | ------------------------------------------------------- |
+| [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display your data. |
+| [Release Notes](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/release/) | Stay up to date with the latest features and updates.   |
 
 ## Feedback
 

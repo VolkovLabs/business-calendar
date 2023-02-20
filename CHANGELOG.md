@@ -6,6 +6,7 @@
 
 - Select color for calender entry queries (#67)
 - Filtering out undefined events (#69)
+- Update CI and Release Workflows ()
 
 ## 1.1.0 (2022-12-12)
 

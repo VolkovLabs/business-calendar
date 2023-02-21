@@ -1,5 +1,5 @@
-import { FieldType, PanelPlugin } from '@grafana/data';
-import { CalendarPanel, FieldSelectEditor } from './components';
+import { Field, FieldType, PanelPlugin } from '@grafana/data';
+import { CalendarPanel, MultiFieldEditor } from './components';
 import { AnnotationsOptions, DefaultOptions, LinksOptions, ScrollOptions } from './constants';
 import { CalendarOptions } from './types';
 
@@ -40,48 +40,42 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
    * Events
    */
   builder
-    .addCustomEditor({
-      id: 'textField',
+    .addFieldNamePicker({
       path: 'textField',
       name: 'Text',
       description: 'Field to use for the event text. Defaults to the first textual field.',
-      editor: FieldSelectEditor,
       category: ['Events'],
       settings: {
-        filterByType: [FieldType.string],
+        filter: (f: Field) => f.type === FieldType.string,
+        noFieldsMessage: 'No string fields found',
       },
     })
-    .addCustomEditor({
-      id: 'descriptionField',
+    .addFieldNamePicker({
       path: 'descriptionField',
       name: 'Description',
       description: 'Field to use for the event description.',
-      editor: FieldSelectEditor,
       category: ['Events'],
       settings: {
-        filterByType: [FieldType.string],
+        filter: (f: Field) => f.type === FieldType.string,
+        noFieldsMessage: 'No string fields found',
       },
     })
-    .addCustomEditor({
-      id: 'timeField',
+    .addFieldNamePicker({
       path: 'timeField',
       name: 'Start time',
       description: 'Field to use for the event start time. Defaults to the first time field.',
-      editor: FieldSelectEditor,
       category: ['Events'],
       settings: {
-        filterByType: [FieldType.time, FieldType.string, FieldType.number],
+        filter: (f: Field) => [FieldType.time, FieldType.string, FieldType.number].includes(f.type),
       },
     })
-    .addCustomEditor({
-      id: 'endTimeField',
+    .addFieldNamePicker({
       path: 'endTimeField',
       name: 'End time',
       description: 'Field to use for the event end time. Defaults to the first time field.',
-      editor: FieldSelectEditor,
       category: ['Events'],
       settings: {
-        filterByType: [FieldType.time, FieldType.string, FieldType.number],
+        filter: (f: Field) => [FieldType.time, FieldType.string, FieldType.number].includes(f.type),
       },
     })
     .addCustomEditor({
@@ -89,22 +83,19 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel).useFieldCo
       path: 'labelFields',
       name: 'Labels',
       description: 'Fields to use as event labels.',
-      editor: FieldSelectEditor,
+      editor: MultiFieldEditor,
       category: ['Events'],
       settings: {
         filterByType: [FieldType.string],
-        multi: true,
       },
     })
-    .addCustomEditor({
-      id: 'colorField',
+    .addFieldNamePicker({
       path: 'colorField',
       name: 'Color',
-      description: 'Fields to use as event color.',
-      editor: FieldSelectEditor,
+      description: 'Field to use as event color.',
       category: ['Events'],
       settings: {
-        multi: false,
+        filter: (f: Field) => [FieldType.string, FieldType.number].includes(f.type),
       },
     });
 });

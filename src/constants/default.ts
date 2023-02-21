@@ -29,6 +29,6 @@ export const ScrollOptions = [
  * Annotations Options
  */
 export const AnnotationsOptions = [
-  { value: true, label: 'Display' },
+  { value: true, label: 'Enabled' },
   { value: false, label: 'Disabled' },
 ];

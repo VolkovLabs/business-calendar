@@ -16,6 +16,7 @@ describe('plugin', () => {
     const builder: any = {
       addCustomEditor: jest.fn().mockImplementation(() => builder),
       addRadio: jest.fn().mockImplementation(() => builder),
+      addFieldNamePicker: jest.fn().mockImplementation(() => builder),
     };
 
     /**
@@ -28,5 +29,6 @@ describe('plugin', () => {
      */
     expect(builder.addCustomEditor).toHaveBeenCalled();
     expect(builder.addRadio).toHaveBeenCalled();
+    expect(builder.addFieldNamePicker).toHaveBeenCalled();
   });
 });

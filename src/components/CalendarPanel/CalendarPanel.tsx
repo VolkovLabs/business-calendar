@@ -3,14 +3,19 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
 import React, { useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
-import { AnnotationEvent, classicColors, FieldType, PanelProps, textUtil } from '@grafana/data';
-import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useStyles2, useTheme2 } from '@grafana/ui';
+import { AnnotationEvent, classicColors, FieldType, PanelProps } from '@grafana/data';
+import { Button, useStyles2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
-import { alignEvents, formatEventInterval, toTimeField, useAnnotations, useIntervalSelection } from '../../utils';
-import { CalendarEntry } from '../CalendarEntry';
+import { alignEvents, toTimeField, useAnnotations, useIntervalSelection } from '../../utils';
 import { Day } from '../Day';
+import { DayDrawer } from '../DayDrawer';
 
+/**
+ * Day.js Plugins
+ * - https://day.js.org/docs/en/plugin/iso-week
+ * - https://day.js.org/docs/en/plugin/utc
+ */
 dayjs.extend(isoWeek);
 dayjs.extend(utc);
 
@@ -26,12 +31,12 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   /**
    * States
    */
-  const [drawerProps, setDrawerProps] = useState<Record<string, any>>();
+  const [day, setDay] = useState<dayjs.Dayjs | undefined>(undefined);
+  const [event, setEvent] = useState<CalendarEvent | undefined>(undefined);
 
   /**
    * Theme
    */
-  const theme = useTheme2();
   const styles = useStyles2(getStyles);
 
   /**
@@ -52,7 +57,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         ? frame.fields.find((f) => f.name === options.timeField)
         : frame.fields.find((f) => f.type === FieldType.time)
     ),
-    // No default for end time. If end time dimension isn't set, we assume that all events are instants.
     end: toTimeField(frame.fields.find((f) => f.name === options.endTimeField)),
     labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
     color: frame.fields.find((f) => f.name === options.colorField),
@@ -81,34 +85,29 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   const events = frames.flatMap((frame, frameIdx) => {
     const colorFn = frame.color?.display;
 
-    return frame.text && frame.start
-      ? Array.from({ length: frame.text.values.length })
-          .map((_, i) => ({
-            text: frame.text?.values.get(i),
-            description: frame.description?.values.get(i),
-            start: frame.start?.values.get(i),
-            end: frame.end?.values.get(i),
-            labels: frame.labels?.map((field) => field.values.get(i)).filter((label) => label),
-            links: frame.text?.getLinks!({ valueRowIndex: i }),
-            color: frame.color?.values.get(i),
-          }))
-          .map<CalendarEvent>(({ text, description, labels, links, start, end, color }, i) => ({
-            text,
-            description,
-            labels,
-            start: dayjs(start),
-            color: colorFn?.(color).color ?? classicColors[Math.floor(frameIdx % classicColors.length)],
-            links,
+    if (!frame.text || !frame.start) {
+      return [];
+    }
 
-            // Set undefined if the user hasn't explicitly configured the dimension
-            // for end time.
-            //
-            // Set end time to the end of the time interval if the user configured the
-            // end time dimension, but it's missing values. The panel interpretes
-            // this as an open interval.
-            end: frame.end ? (end ? dayjs(end) : endOfWeek) : undefined,
-          }))
-      : [];
+    return Array.from({ length: frame.text.values.length })
+      .map((_, i) => ({
+        text: frame.text?.values.get(i),
+        description: frame.description?.values.get(i),
+        start: frame.start?.values.get(i),
+        end: frame.end?.values.get(i),
+        labels: frame.labels?.map((field) => field.values.get(i)).filter((label) => label),
+        links: frame.text?.getLinks!({ valueRowIndex: i }),
+        color: frame.color?.values.get(i),
+      }))
+      .map<CalendarEvent>(({ text, description, labels, links, start, end, color }, i) => ({
+        text,
+        description,
+        labels,
+        start: dayjs(start),
+        color: colorFn?.(color).color ?? classicColors[Math.floor(frameIdx % classicColors.length)],
+        links,
+        end: frame.end ? (end ? dayjs(end) : endOfWeek) : undefined,
+      }));
   });
 
   /**
@@ -135,104 +134,32 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
    */
   const alignedEvents = alignEvents(events);
 
-  /**
-   * Day Drawer
-   */
-  const drawerShowDay = (day: dayjs.Dayjs, isOutsideInterval: boolean) => {
-    const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
-
-    setDrawerProps({
-      title: day.format('LL'),
-      subtitle: day.format('dddd'),
-      children: (
-        <div>
-          {events
-            .filter((event) => event)
-            .map((event, i) => (
-              <CalendarEntry
-                key={i}
-                event={event}
-                day={day}
-                outsideInterval={isOutsideInterval}
-                summary={true}
-                onClick={() => {
-                  if (event) {
-                    drawerShowEvent(day, event, isOutsideInterval);
-                  }
-                }}
-              />
-            ))}
-        </div>
-      ),
-    });
-  };
-
-  const drawerShowEvent = (day: dayjs.Dayjs, event: CalendarEvent, isOutsideInterval: boolean) => {
-    setDrawerProps({
-      title: event.text,
-      subtitle: formatEventInterval(event),
-      children: (
-        <>
-          <Button fill={'text'} onClick={() => drawerShowDay(day, isOutsideInterval)}>
-            <Icon name="angle-left" />
-            Back to {day.format('LL')}
-          </Button>
-          {!!event.labels?.length && (
-            <div
-              className={css`
-                margin: ${theme.v1.spacing.sm} 0;
-              `}
-            >
-              {event.labels?.map((label, i) => (
-                <Badge key={i} text={label} color={'blue'} />
-              ))}
-            </div>
-          )}
-          {event.description && <p dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />}
-          <HorizontalGroup>
-            {event.links?.map((link, index) => (
-              <LinkButton
-                key={index}
-                icon={link.target === '_self' ? 'link' : 'external-link-alt'}
-                href={link.href}
-                target={link.target}
-                variant={'secondary'}
-                onClick={link.onClick}
-              >
-                {link.title}
-              </LinkButton>
-            ))}
-          </HorizontalGroup>
-        </>
-      ),
-    });
-  };
-
   return (
     <div
       className={cx(
         css`
           width: ${width}px;
           height: ${height}px;
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
-        `
+        `,
+        styles.panel
       )}
     >
-      {drawerProps && (
-        <Drawer
-          scrollableContent={true}
-          inline={true}
-          expandable={true}
-          onClose={() => setDrawerProps(undefined)}
-          {...drawerProps}
-        >
-          {drawerProps.children}
-        </Drawer>
+      {day && (
+        <DayDrawer
+          day={day}
+          events={alignedEvents}
+          event={event}
+          setEvent={setEvent}
+          onClose={() => {
+            setDay(undefined);
+            setEvent(undefined);
+          }}
+        />
       )}
 
-      {/* Apply time interval */}
+      {/*
+       * Apply time interval
+       */}
 
       {selectedInterval && (
         <div className={styles.applyIntervalButton}>
@@ -248,7 +175,10 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         </div>
       )}
 
-      {/* Header displaying the weekdays */}
+      {/*
+       * Header displaying the weekdays
+       */}
+
       <div className={styles.weekdayContainer}>
         {Array.from({ length: 7 }).map((_, i) => (
           <div key={i} className={styles.weekdayLabel}>
@@ -257,7 +187,10 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         ))}
       </div>
 
-      {/* Day grid */}
+      {/*
+       * Day grid
+       */}
+
       <div
         ref={ref}
         className={cx(
@@ -307,8 +240,11 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               outsideInterval={isOutsideInterval}
               from={startOfWeek}
               to={endOfWeek}
-              onShowEvent={(event) => drawerShowEvent(day, event, isOutsideInterval)}
-              onShowMore={() => drawerShowDay(day, isOutsideInterval)}
+              onShowEvent={(event) => {
+                setDay(day);
+                setEvent(event);
+              }}
+              onShowMore={() => setDay(day)}
               quickLinks={!!options.quickLinks}
             />
           );

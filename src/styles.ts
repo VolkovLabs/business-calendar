@@ -5,6 +5,11 @@ import { GrafanaTheme2 } from '@grafana/data';
  * Styles
  */
 export const getStyles = (theme: GrafanaTheme2) => ({
+  panel: css`
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  `,
   applyIntervalButton: css`
     position: absolute;
     bottom: 0;

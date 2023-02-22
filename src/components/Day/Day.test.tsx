@@ -12,7 +12,9 @@ describe('Day', () => {
       return <Day {...restProps} />;
     };
 
-    const wrapper = shallow(getComponent({ day: dayjs(Date.now()), events: [] }));
+    const wrapper = shallow(
+      getComponent({ day: dayjs(Date.now()), from: dayjs(Date.now()), to: dayjs(Date.now()), events: [] })
+    );
     const div = wrapper.find('div');
     expect(div.exists()).toBeTruthy();
   });

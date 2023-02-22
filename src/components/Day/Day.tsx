@@ -55,6 +55,9 @@ export const Day = ({
    */
   const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
 
+  /**
+   * Entries
+   */
   const entries = events.map((event, i) => (
     <CalendarEntry
       key={i}
@@ -126,8 +129,7 @@ export const Day = ({
           return (
             <>
               {entries.filter((_, i) => i < maxNumEvents)}
-
-              {entries.length - maxNumEvents > 0 && (
+              {moreEvents > 0 && (
                 <div onClick={onShowMore} className={styles.moreEntriesLabel}>{`${moreEvents} more`}</div>
               )}
             </>

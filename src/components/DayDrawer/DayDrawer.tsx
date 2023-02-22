@@ -97,11 +97,9 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
      */
     subtitle = `${event.start.format('LLL')}`;
     if (event.end) {
-      if (event.start.startOf('day').isSame(event.end?.startOf('day'))) {
-        subtitle = `${event.start.format('LLL')} - ${event.end.format('LT')}`;
-      }
-
-      subtitle = `${event.start.format('LLL')} - ${event.end.format('LLL')}`;
+      subtitle = `${event.start.format('LLL')} - ${
+        event.start.startOf('day').isSame(event.end?.startOf('day')) ? event.end.format('LT') : event.end.format('LLL')
+      }`;
     }
 
     children = (

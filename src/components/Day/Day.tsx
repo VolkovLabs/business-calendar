@@ -22,7 +22,6 @@ interface Props {
   events: Array<CalendarEvent | undefined>;
   selected: boolean;
   onSelectionChange: (selected: boolean) => void;
-  outsideInterval: boolean;
   from: dayjs.Dayjs;
   to: dayjs.Dayjs;
   onShowMore: () => void;
@@ -38,7 +37,8 @@ export const Day = ({
   events,
   selected,
   onSelectionChange,
-  outsideInterval,
+  from,
+  to,
   onShowMore,
   onShowEvent,
   quickLinks,
@@ -49,12 +49,18 @@ export const Day = ({
   const isWeekend = day.isoWeekday() > 5;
   const isToday = day.isSame(dayjs().startOf('day'));
 
+  /**
+   * Since the calendar always displays full weeks, the day may be
+   * rendered even if it's outside of the selected time interval.
+   */
+  const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
+
   const entries = events.map((event, i) => (
     <CalendarEntry
       key={i}
       event={event}
       day={day}
-      outsideInterval={outsideInterval}
+      outsideInterval={isOutsideInterval}
       summary={false}
       onClick={() => {
         if (event) {
@@ -72,7 +78,7 @@ export const Day = ({
         { [styles.weekend]: isWeekend },
         { [styles.today]: isToday },
         { [styles.selected]: selected },
-        { [styles.outsideInterval]: outsideInterval }
+        { [styles.outsideInterval]: isOutsideInterval }
       )}
       onClick={(e) => {
         onSelectionChange(!selected);
@@ -91,7 +97,7 @@ export const Day = ({
             {
               [css`
                 color: ${theme.v1.colors.textFaint};
-              `]: outsideInterval,
+              `]: isOutsideInterval,
             },
             {
               [css`

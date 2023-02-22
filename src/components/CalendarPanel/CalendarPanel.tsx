@@ -205,12 +205,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             day.valueOf() <= selectedInterval[1].valueOf();
 
           /**
-           * Since the calendar always displays full weeks, the day may be
-           * rendered even if it's outside of the selected time interval.
-           */
-          const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
-
-          /**
            * Events
            */
           const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
@@ -221,10 +215,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               day={day}
               events={events.filter((event) => event !== undefined)}
               selected={!!isSelected}
+              from={from}
+              to={to}
               onSelectionChange={() => onTimeSelection(day)}
-              outsideInterval={isOutsideInterval}
-              from={startOfWeek}
-              to={endOfWeek}
               onShowEvent={(event) => {
                 setDay(day);
                 setEvent(event);

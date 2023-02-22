@@ -8,6 +8,10 @@ import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
 import { CalendarEntry } from '../CalendarEntry';
 
+/**
+ * Day.js Plugins
+ * - https://day.js.org/docs/en/plugin/localized-format
+ */
 dayjs.extend(localizedFormat);
 
 /**
@@ -43,45 +47,9 @@ export const Day = ({
   onShowEvent,
   quickLinks,
 }: Props) => {
-  const theme = useTheme2().v1;
+  const theme = useTheme2();
   const styles = useStyles2(getStyles);
-
   const rootRef = useRef<HTMLDivElement | null>(null);
-
-  const dateHeader = (
-    <div className={styles.dateHeader.root}>
-      <div className={styles.dateHeader.monthLabel}>{day.format('D') === '1' && day.format('MMM')}</div>
-      <div
-        className={cx(
-          styles.dateHeader.dayLabel,
-          {
-            [css`
-              color: ${theme.colors.textWeak};
-            `]: weekend,
-          },
-          {
-            [css`
-              color: ${theme.colors.textFaint};
-            `]: outsideInterval,
-          },
-          {
-            [css`
-              background: ${theme.palette.queryRed};
-              color: ${theme.palette.black};
-            `]: today,
-          },
-          {
-            [css`
-              background: ${theme.colors.textBlue};
-              color: ${theme.palette.black};
-            `]: selected,
-          }
-        )}
-      >
-        {day.format('D')}
-      </div>
-    </div>
-  );
 
   const entries = events.map((event, i) => (
     <CalendarEntry
@@ -100,44 +68,70 @@ export const Day = ({
   ));
 
   return (
-    <>
-      <div
-        ref={rootRef}
-        className={cx(
-          styles.root,
-          { [styles.weekend]: weekend },
-          { [styles.today]: today },
-          { [styles.selected]: selected },
-          { [styles.outsideInterval]: outsideInterval }
-        )}
-        onClick={(e) => {
-          onSelectionChange(!selected);
-        }}
-      >
-        {dateHeader}
-
-        <AutoSizer disableWidth>
-          {({ height }) => {
-            // TODO: Can we compute this rather than having it hard-coded?
-            const heightPerEntry = 17;
-
-            const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
-
-            return (
-              <>
-                {entries.filter((_, i) => i < maxNumEvents)}
-                {entries.length - maxNumEvents > 0 && (
-                  <>
-                    <div onClick={onShowMore} className={styles.moreEntriesLabel}>{`${
-                      entries.length - maxNumEvents
-                    } more…`}</div>
-                  </>
-                )}
-              </>
-            );
-          }}
-        </AutoSizer>
+    <div
+      ref={rootRef}
+      className={cx(
+        styles.day,
+        { [styles.weekend]: weekend },
+        { [styles.today]: today },
+        { [styles.selected]: selected },
+        { [styles.outsideInterval]: outsideInterval }
+      )}
+      onClick={(e) => {
+        onSelectionChange(!selected);
+      }}
+    >
+      <div className={styles.dateHeader.root}>
+        <div className={styles.dateHeader.monthLabel}>{day.format('D') === '1' && day.format('MMM')}</div>
+        <div
+          className={cx(
+            styles.dateHeader.dayLabel,
+            {
+              [css`
+                color: ${theme.v1.colors.textWeak};
+              `]: weekend,
+            },
+            {
+              [css`
+                color: ${theme.v1.colors.textFaint};
+              `]: outsideInterval,
+            },
+            {
+              [css`
+                background: ${theme.v1.palette.queryRed};
+                color: ${theme.v1.palette.black};
+              `]: today,
+            },
+            {
+              [css`
+                background: ${theme.v1.colors.textBlue};
+                color: ${theme.v1.palette.black};
+              `]: selected,
+            }
+          )}
+        >
+          {day.format('D')}
+        </div>
       </div>
-    </>
+
+      <AutoSizer disableWidth>
+        {({ height }) => {
+          const heightPerEntry = 17;
+          const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
+
+          return (
+            <>
+              {entries.filter((_, i) => i < maxNumEvents)}
+
+              {entries.length - maxNumEvents > 0 && (
+                <div onClick={onShowMore} className={styles.moreEntriesLabel}>{`${
+                  entries.length - maxNumEvents
+                } more…`}</div>
+              )}
+            </>
+          );
+        }}
+      </AutoSizer>
+    </div>
   );
 };

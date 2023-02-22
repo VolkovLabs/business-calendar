@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import utc from 'dayjs/plugin/utc';
 import React, { useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
@@ -15,9 +16,11 @@ import { DayDrawer } from '../DayDrawer';
  * Day.js Plugins
  * - https://day.js.org/docs/en/plugin/iso-week
  * - https://day.js.org/docs/en/plugin/utc
+ * - https://day.js.org/docs/en/plugin/localized-format
  */
 dayjs.extend(isoWeek);
 dayjs.extend(utc);
+dayjs.extend(localizedFormat);
 
 /**
  * Properties

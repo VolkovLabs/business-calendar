@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React, { useRef } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { css, cx } from '@emotion/css';
@@ -7,12 +6,6 @@ import { useStyles2, useTheme2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
 import { CalendarEntry } from '../CalendarEntry';
-
-/**
- * Day.js Plugins
- * - https://day.js.org/docs/en/plugin/localized-format
- */
-dayjs.extend(localizedFormat);
 
 /**
  * Properties

@@ -1,10 +1,17 @@
 import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { css } from '@emotion/css';
 import { textUtil } from '@grafana/data';
 import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useTheme2 } from '@grafana/ui';
 import { CalendarEvent } from '../../types';
 import { CalendarEntry } from '../CalendarEntry';
+
+/**
+ * Day.js Plugins
+ * - https://day.js.org/docs/en/plugin/localized-format
+ */
+dayjs.extend(localizedFormat);
 
 /**
  * Properties

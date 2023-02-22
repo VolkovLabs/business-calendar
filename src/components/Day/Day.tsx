@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import isoWeek from 'dayjs/plugin/isoWeek';
 import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { css, cx } from '@emotion/css';
@@ -6,6 +7,12 @@ import { useStyles2, useTheme2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
 import { CalendarEntry } from '../CalendarEntry';
+
+/**
+ * Day.js Plugins
+ * - https://day.js.org/docs/en/plugin/iso-week
+ */
+dayjs.extend(isoWeek);
 
 /**
  * Properties

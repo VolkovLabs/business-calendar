@@ -44,7 +44,7 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     align-items: center;
     box-sizing: border-box;
     height: 1.5rem;
-    padding: 0 ${theme.v1.spacing.xs};
+    padding: 0 ${theme.spacing(1)};
     margin-bottom: 1px;
     color: ${theme.colors.text};
     &:hover {
@@ -53,8 +53,7 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     }
   `,
   eventLabel: css`
-    font-size: ${theme.typography.size.base};
-    font-weight: ${theme.v1.typography.weight.semibold};
+    font-size: ${theme.typography.body.fontSize};
     r-select: none;
     flex-grow: 1;
     white-space: nowrap;
@@ -126,10 +125,10 @@ export const getStyles = (theme: GrafanaTheme2) => ({
   moreEntriesLabel: css`
     margin-top: 1px;
     display: inline-block;
-    font-size: ${theme.typography.size.xs};
-    padding: ${theme.v1.spacing.xs};
+    font-size: ${theme.typography.bodySmall.fontSize};
+    padding: 0 ${theme.spacing(1)};
+    font-weight: ${theme.typography.fontWeightBold};
     user-select: none;
-    color: ${theme.v1.colors.textWeak};
     cursor: pointer;
     &:hover {
       background: ${theme.v1.colors.bg3};

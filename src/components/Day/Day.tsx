@@ -24,25 +24,15 @@ interface Props {
   onSelectionChange: (selected: boolean) => void;
   from: dayjs.Dayjs;
   to: dayjs.Dayjs;
-  onShowMore: () => void;
-  onShowEvent: (event: CalendarEvent) => void;
+  setDay: any;
+  setEvent: any;
   quickLinks: boolean;
 }
 
 /**
  * Day
  */
-export const Day = ({
-  day,
-  events,
-  selected,
-  onSelectionChange,
-  from,
-  to,
-  onShowMore,
-  onShowEvent,
-  quickLinks,
-}: Props) => {
+export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay, setEvent, quickLinks }: Props) => {
   const theme = useTheme2();
   const styles = useStyles2(getStyles);
 
@@ -66,9 +56,8 @@ export const Day = ({
       outsideInterval={isOutsideInterval}
       summary={false}
       onClick={() => {
-        if (event) {
-          onShowEvent(event);
-        }
+        setDay(day);
+        setEvent(event);
       }}
       quickLinks={quickLinks}
     />
@@ -130,7 +119,7 @@ export const Day = ({
             <>
               {entries.filter((_, i) => i < maxNumEvents)}
               {moreEvents > 0 && (
-                <div onClick={onShowMore} className={styles.moreEntriesLabel}>{`${moreEvents} more`}</div>
+                <div onClick={() => setDay(day)} className={styles.moreEntriesLabel}>{`${moreEvents} more`}</div>
               )}
             </>
           );

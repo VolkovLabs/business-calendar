@@ -218,11 +218,8 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               from={from}
               to={to}
               onSelectionChange={() => onTimeSelection(day)}
-              onShowEvent={(event) => {
-                setDay(day);
-                setEvent(event);
-              }}
-              onShowMore={() => setDay(day)}
+              setEvent={setEvent}
+              setDay={setDay}
               quickLinks={!!options.quickLinks}
             />
           );

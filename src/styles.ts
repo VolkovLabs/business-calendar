@@ -5,6 +5,11 @@ import { GrafanaTheme2 } from '@grafana/data';
  * Styles
  */
 export const getStyles = (theme: GrafanaTheme2) => ({
+  panel: css`
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  `,
   applyIntervalButton: css`
     position: absolute;
     bottom: 0;
@@ -16,13 +21,13 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     width: 100%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    font-size: ${theme.typography.size.md};
-    font-weight: ${theme.v1.typography.weight.regular};
-    border-bottom: 1px solid ${theme.v1.colors.border2};
+    font-size: ${theme.typography.body.fontSize};
+    font-weight: ${theme.typography.body.fontWeight};
+    border-bottom: 1px solid ${theme.colors.border.medium};
   `,
   weekdayLabel: css`
-    text-align: right;
-    padding: ${theme.v1.spacing.xxs} ${theme.v1.spacing.xs};
+    text-align: center;
+    padding: ${theme.spacing(0.5)} ${theme.spacing(1)};
     overflow: hidden;
   `,
   calendarContainer: css`
@@ -41,9 +46,7 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     height: 1.5rem;
     padding: 0 ${theme.v1.spacing.xs};
     margin-bottom: 1px;
-
     color: ${theme.colors.text};
-
     &:hover {
       color: ${theme.v1.colors.textStrong};
       cursor: pointer;
@@ -95,12 +98,11 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     padding: ${theme.v1.spacing.sm};
     box-shadow: 0px 0px 20px ${theme.v1.colors.dropdownShadow};
   `,
-  root: css`
+  day: css`
     background: ${theme.v1.colors.panelBg};
     border-top: 1px solid ${theme.v1.colors.border2};
     border-left: 1px solid ${theme.v1.colors.border2};
     overflow: hidden;
-
     &:nth-last-child(-n + 7) {
       border-bottom: 1px solid ${theme.v1.colors.border2};
     }
@@ -129,7 +131,6 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     user-select: none;
     color: ${theme.v1.colors.textWeak};
     cursor: pointer;
-
     &:hover {
       background: ${theme.v1.colors.bg3};
       border-radius: 0 ${theme.v1.border.radius.lg} ${theme.v1.border.radius.lg} 0;

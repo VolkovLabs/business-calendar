@@ -8,6 +8,9 @@
 - Filtering out undefined events (#69)
 - Update CI and Release Workflows (#72)
 - Rebuild using 9.3.6 (#73)
+- Refactor Options Editors to use Field pickers (#74)
+- Refactor Day and Events Drawer (#75)
+- Set No Padding for the Panel (#75)
 
 ## 1.1.0 (2022-12-12)
 

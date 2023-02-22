@@ -23,7 +23,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       .addRadio({
         path: 'quickLinks',
         name: 'Links',
-        description: 'Open data link instead of sidebar when clicking an event.',
+        description: 'Open data link or display drawer when clicking an event.',
         settings: {
           options: LinksOptions,
         },

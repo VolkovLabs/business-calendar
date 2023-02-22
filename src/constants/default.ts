@@ -13,8 +13,8 @@ export const DefaultOptions: CalendarOptions = {
  * Links Options
  */
 export const LinksOptions = [
-  { value: true, label: 'Quick' },
-  { value: false, label: 'Normal' },
+  { value: true, label: 'Open Link' },
+  { value: false, label: 'Show Details' },
 ];
 
 /**

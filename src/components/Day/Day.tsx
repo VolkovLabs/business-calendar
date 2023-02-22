@@ -12,7 +12,6 @@ import { CalendarEntry } from '../CalendarEntry';
  */
 interface Props {
   day: dayjs.Dayjs;
-  today: boolean;
   events: Array<CalendarEvent | undefined>;
   selected: boolean;
   onSelectionChange: (selected: boolean) => void;
@@ -29,7 +28,6 @@ interface Props {
  */
 export const Day = ({
   day,
-  today,
   events,
   selected,
   onSelectionChange,
@@ -42,6 +40,7 @@ export const Day = ({
   const styles = useStyles2(getStyles);
 
   const isWeekend = day.isoWeekday() > 5;
+  const isToday = day.isSame(dayjs().startOf('day'));
 
   const entries = events.map((event, i) => (
     <CalendarEntry
@@ -64,7 +63,7 @@ export const Day = ({
       className={cx(
         styles.day,
         { [styles.weekend]: isWeekend },
-        { [styles.today]: today },
+        { [styles.today]: isToday },
         { [styles.selected]: selected },
         { [styles.outsideInterval]: outsideInterval }
       )}
@@ -91,7 +90,7 @@ export const Day = ({
               [css`
                 background: ${theme.v1.palette.queryRed};
                 color: ${theme.v1.palette.black};
-              `]: today,
+              `]: isToday,
             },
             {
               [css`

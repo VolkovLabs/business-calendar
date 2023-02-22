@@ -205,7 +205,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         {Array.from({ length: numDays + 1 }).map((_, i) => {
           const day = dayjs(startOfWeek.valueOf()).startOf('day').add(i, 'days');
 
-          const isToday = day.isSame(dayjs().startOf('day'));
           const isSelected =
             selectedInterval &&
             selectedInterval[0].valueOf() <= day.valueOf() &&
@@ -226,7 +225,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             <Day
               key={i}
               day={day}
-              today={isToday}
               events={events.filter((event) => event !== undefined)}
               selected={!!isSelected}
               onSelectionChange={() => onTimeSelection(day)}

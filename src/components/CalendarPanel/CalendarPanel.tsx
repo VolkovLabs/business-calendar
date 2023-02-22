@@ -178,7 +178,6 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       {/*
        * Header displaying the weekdays
        */}
-
       <div className={styles.weekdayContainer}>
         {Array.from({ length: 7 }).map((_, i) => (
           <div key={i} className={styles.weekdayLabel}>
@@ -221,20 +220,13 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
            */
           const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
 
-          /**
-           * Entries
-           */
-          const entries = events
-            .map<CalendarEvent | undefined>((event) => (event ? { ...event, color: event.color } : undefined))
-            .filter((i) => i !== undefined);
-
           return (
             <Day
               key={i}
               day={day}
               weekend={isWeekend}
               today={isToday}
-              events={entries}
+              events={events.filter((event) => event !== undefined)}
               selected={!!isSelected}
               onSelectionChange={() => onTimeSelection(day)}
               outsideInterval={isOutsideInterval}

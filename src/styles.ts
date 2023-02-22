@@ -60,6 +60,14 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     overflow: hidden;
     text-overflow: ellipsis;
   `,
+  eventSvg: css`
+    margin-right: ${theme.spacing(0.5)};
+    width: ${theme.spacing(1)};
+    height: ${theme.spacing(1)};
+  `,
+  eventOutside: css`
+    color: ${theme.colors.text.secondary};
+  `,
   multiDayEvent: css`
     padding-left: calc(4 * ${theme.v1.spacing.xs});
     color: ${theme.v1.palette.dark5};

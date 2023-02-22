@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import React from 'react';
 import { css, cx } from '@emotion/css';
-import { useStyles2, useTheme2 } from '@grafana/ui';
+import { useStyles2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
 
@@ -9,11 +9,34 @@ import { CalendarEvent } from '../../types';
  * Properties
  */
 interface Props {
+  /**
+   * Event
+   */
   event?: CalendarEvent;
+
+  /**
+   * Day
+   */
   day: dayjs.Dayjs;
+
+  /**
+   * Outside Interval
+   */
   outsideInterval: boolean;
+
+  /**
+   * Summary
+   */
   summary: boolean;
+
+  /**
+   * On Click
+   */
   onClick?: (e: any) => void;
+
+  /**
+   * Quick Links
+   */
   quickLinks?: boolean;
 }
 
@@ -21,7 +44,6 @@ interface Props {
  * Calendar Entry
  */
 export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, quickLinks }: Props) => {
-  const theme = useTheme2().v1;
   const styles = useStyles2(getStyles);
 
   /**
@@ -41,6 +63,9 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, q
   const startsToday = eventStartsToday(event);
   const endsToday = eventEndsToday(event);
 
+  /**
+   * Link
+   */
   const firstLink = event.links?.[0];
 
   const Link = quickLinks ? 'a' : 'div';
@@ -54,33 +79,33 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, q
         onClick: onClick,
       };
 
-  return startsToday && endsToday ? (
-    <Link title={event.text} className={cx(styles.event, styles.centerItems)} {...linkProps}>
-      <svg
-        width={theme.spacing.sm}
-        height={theme.spacing.sm}
-        viewBox="0 0 10 10"
-        xmlns="http://www.w3.org/2000/svg"
-        fill={event.color}
-        className={css`
-          margin-right: ${theme.spacing.xs};
-          min-width: ${theme.spacing.sm};
-          min-height: ${theme.spacing.sm};
-        `}
-      >
-        <circle cx={5} cy={5} r={5} />
-      </svg>
-      <div
-        className={cx(styles.eventLabel, {
-          [css`
-            color: ${theme.colors.textFaint};
-          `]: outsideInterval,
-        })}
-      >
-        {event.text}
-      </div>
-    </Link>
-  ) : (
+  const text = `${event.start.format('ha')} ${event.text}`;
+
+  /**
+   * Today's event
+   */
+  if (startsToday && endsToday) {
+    return (
+      <Link title={event.text} className={cx(styles.event, styles.centerItems)} {...linkProps}>
+        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.eventSvg}>
+          <circle cx={5} cy={5} r={5} />
+        </svg>
+        <div
+          className={cx(styles.eventLabel, {
+            [styles.eventOutside]: outsideInterval,
+          })}
+        >
+          {text}
+        </div>
+      </Link>
+    );
+  }
+
+  /**
+   * Multi-day event
+   * Display the event text on the day it starts.
+   */
+  return (
     <Link
       title={event.text}
       className={cx(
@@ -97,7 +122,6 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, q
       )}
       {...linkProps}
     >
-      {/* Only display the event text on the day it starts. */}
       {(startOfWeek || startsToday || summary) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
     </Link>
   );

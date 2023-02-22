@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { useRef } from 'react';
+import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { css, cx } from '@emotion/css';
 import { useStyles2, useTheme2 } from '@grafana/ui';
@@ -12,7 +12,6 @@ import { CalendarEntry } from '../CalendarEntry';
  */
 interface Props {
   day: dayjs.Dayjs;
-  weekend: boolean;
   today: boolean;
   events: Array<CalendarEvent | undefined>;
   selected: boolean;
@@ -30,7 +29,6 @@ interface Props {
  */
 export const Day = ({
   day,
-  weekend,
   today,
   events,
   selected,
@@ -42,7 +40,8 @@ export const Day = ({
 }: Props) => {
   const theme = useTheme2();
   const styles = useStyles2(getStyles);
-  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  const isWeekend = day.isoWeekday() > 5;
 
   const entries = events.map((event, i) => (
     <CalendarEntry
@@ -62,10 +61,9 @@ export const Day = ({
 
   return (
     <div
-      ref={rootRef}
       className={cx(
         styles.day,
-        { [styles.weekend]: weekend },
+        { [styles.weekend]: isWeekend },
         { [styles.today]: today },
         { [styles.selected]: selected },
         { [styles.outsideInterval]: outsideInterval }
@@ -82,7 +80,7 @@ export const Day = ({
             {
               [css`
                 color: ${theme.v1.colors.textWeak};
-              `]: weekend,
+              `]: isWeekend,
             },
             {
               [css`
@@ -111,15 +109,14 @@ export const Day = ({
         {({ height }) => {
           const heightPerEntry = 17;
           const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
+          const moreEvents = entries.length - maxNumEvents;
 
           return (
             <>
               {entries.filter((_, i) => i < maxNumEvents)}
 
               {entries.length - maxNumEvents > 0 && (
-                <div onClick={onShowMore} className={styles.moreEntriesLabel}>{`${
-                  entries.length - maxNumEvents
-                } more…`}</div>
+                <div onClick={onShowMore} className={styles.moreEntriesLabel}>{`${moreEvents} more`}</div>
               )}
             </>
           );

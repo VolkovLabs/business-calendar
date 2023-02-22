@@ -1,7 +1,5 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import utc from 'dayjs/plugin/utc';
 import React, { useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
 import { AnnotationEvent, classicColors, FieldType, PanelProps } from '@grafana/data';
@@ -15,12 +13,8 @@ import { DayDrawer } from '../DayDrawer';
 /**
  * Day.js Plugins
  * - https://day.js.org/docs/en/plugin/iso-week
- * - https://day.js.org/docs/en/plugin/utc
- * - https://day.js.org/docs/en/plugin/localized-format
  */
 dayjs.extend(isoWeek);
-dayjs.extend(utc);
-dayjs.extend(localizedFormat);
 
 /**
  * Properties
@@ -205,18 +199,10 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         {Array.from({ length: numDays + 1 }).map((_, i) => {
           const day = dayjs(startOfWeek.valueOf()).startOf('day').add(i, 'days');
 
-          const isWeekend = day.isoWeekday() > 5;
-          const isToday = day.isSame(dayjs().startOf('day'));
           const isSelected =
             selectedInterval &&
             selectedInterval[0].valueOf() <= day.valueOf() &&
             day.valueOf() <= selectedInterval[1].valueOf();
-
-          /**
-           * Since the calendar always displays full weeks, the day may be
-           * rendered even if it's outside of the selected time interval.
-           */
-          const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
 
           /**
            * Events
@@ -227,19 +213,13 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             <Day
               key={i}
               day={day}
-              weekend={isWeekend}
-              today={isToday}
               events={events.filter((event) => event !== undefined)}
               selected={!!isSelected}
+              from={from}
+              to={to}
               onSelectionChange={() => onTimeSelection(day)}
-              outsideInterval={isOutsideInterval}
-              from={startOfWeek}
-              to={endOfWeek}
-              onShowEvent={(event) => {
-                setDay(day);
-                setEvent(event);
-              }}
-              onShowMore={() => setDay(day)}
+              setEvent={setEvent}
+              setDay={setDay}
               quickLinks={!!options.quickLinks}
             />
           );

@@ -11,6 +11,7 @@
 - Refactor Options Editors to use Field pickers (#74)
 - Refactor Day and Events Drawer (#75)
 - Set No Padding for the Panel (#75)
+- Refactor Day and update Styles (#76)
 
 ## 1.1.0 (2022-12-12)
 

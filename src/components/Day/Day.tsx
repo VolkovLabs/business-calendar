@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
-import React, { useRef } from 'react';
+import isoWeek from 'dayjs/plugin/isoWeek';
+import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { css, cx } from '@emotion/css';
 import { useStyles2, useTheme2 } from '@grafana/ui';
@@ -8,53 +9,55 @@ import { CalendarEvent } from '../../types';
 import { CalendarEntry } from '../CalendarEntry';
 
 /**
+ * Day.js Plugins
+ * - https://day.js.org/docs/en/plugin/iso-week
+ */
+dayjs.extend(isoWeek);
+
+/**
  * Properties
  */
 interface Props {
   day: dayjs.Dayjs;
-  weekend: boolean;
-  today: boolean;
   events: Array<CalendarEvent | undefined>;
   selected: boolean;
   onSelectionChange: (selected: boolean) => void;
-  outsideInterval: boolean;
   from: dayjs.Dayjs;
   to: dayjs.Dayjs;
-  onShowMore: () => void;
-  onShowEvent: (event: CalendarEvent) => void;
+  setDay: any;
+  setEvent: any;
   quickLinks: boolean;
 }
 
 /**
  * Day
  */
-export const Day = ({
-  day,
-  weekend,
-  today,
-  events,
-  selected,
-  onSelectionChange,
-  outsideInterval,
-  onShowMore,
-  onShowEvent,
-  quickLinks,
-}: Props) => {
+export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay, setEvent, quickLinks }: Props) => {
   const theme = useTheme2();
   const styles = useStyles2(getStyles);
-  const rootRef = useRef<HTMLDivElement | null>(null);
 
+  const isWeekend = day.isoWeekday() > 5;
+  const isToday = day.isSame(dayjs().startOf('day'));
+
+  /**
+   * Since the calendar always displays full weeks, the day may be
+   * rendered even if it's outside of the selected time interval.
+   */
+  const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
+
+  /**
+   * Entries
+   */
   const entries = events.map((event, i) => (
     <CalendarEntry
       key={i}
       event={event}
       day={day}
-      outsideInterval={outsideInterval}
+      outsideInterval={isOutsideInterval}
       summary={false}
       onClick={() => {
-        if (event) {
-          onShowEvent(event);
-        }
+        setDay(day);
+        setEvent(event);
       }}
       quickLinks={quickLinks}
     />
@@ -62,13 +65,12 @@ export const Day = ({
 
   return (
     <div
-      ref={rootRef}
       className={cx(
         styles.day,
-        { [styles.weekend]: weekend },
-        { [styles.today]: today },
+        { [styles.weekend]: isWeekend },
+        { [styles.today]: isToday },
         { [styles.selected]: selected },
-        { [styles.outsideInterval]: outsideInterval }
+        { [styles.outsideInterval]: isOutsideInterval }
       )}
       onClick={(e) => {
         onSelectionChange(!selected);
@@ -82,18 +84,18 @@ export const Day = ({
             {
               [css`
                 color: ${theme.v1.colors.textWeak};
-              `]: weekend,
+              `]: isWeekend,
             },
             {
               [css`
                 color: ${theme.v1.colors.textFaint};
-              `]: outsideInterval,
+              `]: isOutsideInterval,
             },
             {
               [css`
                 background: ${theme.v1.palette.queryRed};
                 color: ${theme.v1.palette.black};
-              `]: today,
+              `]: isToday,
             },
             {
               [css`
@@ -111,15 +113,13 @@ export const Day = ({
         {({ height }) => {
           const heightPerEntry = 17;
           const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
+          const moreEvents = entries.length - maxNumEvents;
 
           return (
             <>
               {entries.filter((_, i) => i < maxNumEvents)}
-
-              {entries.length - maxNumEvents > 0 && (
-                <div onClick={onShowMore} className={styles.moreEntriesLabel}>{`${
-                  entries.length - maxNumEvents
-                } more…`}</div>
+              {moreEvents > 0 && (
+                <div onClick={() => setDay(day)} className={styles.moreEntriesLabel}>{`${moreEvents} more`}</div>
               )}
             </>
           );

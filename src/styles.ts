@@ -65,6 +65,12 @@ export const getStyles = (theme: GrafanaTheme2) => ({
         color: ${theme.colors.background.secondary};
       }
     `,
+    filler: css`
+      background: transparent;
+      &:hover {
+        cursor: initial;
+      }
+    `,
     label: css`
       font-size: ${theme.typography.body.fontSize};
       flex-grow: 1;

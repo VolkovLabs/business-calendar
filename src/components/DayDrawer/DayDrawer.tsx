@@ -59,7 +59,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
   /**
    * Events
    */
-  const dayEvents = events[day.format('YYYY-MM-DD')] ?? [];
+  const dayEvents = events[day.format('YYYY-MM-DD')].filter((event) => event !== undefined) ?? [];
 
   /**
    * Meta
@@ -91,7 +91,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
    */
   const tabs = (
     <TabsBar>
-      <Tab label={'All Events'} active={!event} onChangeTab={() => setEvent(undefined)} />
+      <Tab label={'All Events'} active={!event} onChangeTab={() => setEvent(undefined)} counter={dayEvents.length} />
       {event && <Tab label={event.text} active={!!event} />}
     </TabsBar>
   );

@@ -46,6 +46,14 @@ interface Props {
 export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks, firstDay }: Props) => {
   const styles = useStyles2(getStyles);
 
+  /**
+   * A filler is added to offset entries that started on a day with previously ongoing events.
+   */
+  const filler = <div className={cx(styles.event.text, styles.event.multiDay, styles.event.filler)}></div>;
+  if (!event) {
+    return filler;
+  }
+
   const startOfWeek = day.startOf('day').isSame(day.startOf(firstDay as OpUnitType));
   const startsToday = event.start.startOf('day').isSame(day);
   const endsToday = (event: CalendarEvent): boolean => {

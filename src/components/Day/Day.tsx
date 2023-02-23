@@ -128,7 +128,7 @@ export const Day = ({
 
           return (
             <>
-              {entries.filter((_, i) => i < maxNumEvents)}
+              {entries.slice(0, maxNumEvents)}
               {moreEvents > 0 && (
                 <div onClick={() => setDay(day)} className={styles.day.moreLabel}>{`${moreEvents} more`}</div>
               )}

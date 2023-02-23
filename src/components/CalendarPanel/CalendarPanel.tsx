@@ -219,7 +219,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             <Day
               key={i}
               day={day}
-              events={events.filter((event) => event !== undefined)}
+              events={events}
               selected={!!isSelected}
               from={from}
               to={to}

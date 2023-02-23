@@ -1,11 +1,10 @@
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
-import { css } from '@emotion/css';
 import { textUtil } from '@grafana/data';
-import { Badge, Button, Drawer, HorizontalGroup, Icon, LinkButton, useTheme2 } from '@grafana/ui';
+import { Card, Drawer, LinkButton, Tab, TabsBar, TagList, useStyles2 } from '@grafana/ui';
+import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
-import { CalendarEntry } from '../CalendarEntry';
 
 /**
  * Day.js Plugins
@@ -47,7 +46,7 @@ interface Props {
  * Day Drawer
  */
 export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
-  const theme = useTheme2();
+  const styles = useStyles2(getStyles);
 
   if (!day) {
     return (
@@ -58,95 +57,104 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
   }
 
   /**
-   * Day
-   */
-  let title = day.format('LL');
-  let subtitle = day.format('dddd');
-
-  /**
    * Events
    */
   const dayEvents = events[day.format('YYYY-MM-DD')] ?? [];
-  let children = (
-    <div>
-      {dayEvents
-        .filter((event) => event)
-        .map((event, i) => (
-          <CalendarEntry
-            key={i}
-            event={event}
-            day={day}
-            outsideInterval={false}
-            summary={true}
-            onClick={() => {
-              setEvent(event);
-            }}
-          />
-        ))}
-    </div>
-  );
 
   /**
-   * Event
+   * Meta
    */
-  if (event) {
-    title = event.text;
-
-    /**
-     * Subtitle
-     */
-    subtitle = `${event.start.format('LLL')}`;
+  const meta = (event: CalendarEvent) => {
     if (event.end) {
-      subtitle = `${event.start.format('LLL')} - ${
+      return `${event.start.format('LLL')} - ${
         event.start.startOf('day').isSame(event.end?.startOf('day')) ? event.end.format('LT') : event.end.format('LLL')
       }`;
     }
 
-    children = (
-      <>
-        <Button fill={'text'} onClick={() => setEvent(undefined)}>
-          <Icon name="angle-left" />
-          Back to {day.format('LL')}
-        </Button>
+    return `${event.start.format('LLL')}`;
+  };
 
-        {!!event.labels?.length && (
-          <div
-            className={css`
-              margin: ${theme.v1.spacing.sm} 0;
-            `}
-          >
-            {event.labels?.map((label, i) => (
-              <Badge key={i} text={label} color={'blue'} />
-            ))}
-          </div>
-        )}
+  /**
+   * Svg
+   */
+  const heading = (event: CalendarEvent) => (
+    <div>
+      <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.eventSvg}>
+        <circle cx={5} cy={5} r={5} />
+      </svg>
+      {event.text}
+    </div>
+  );
 
-        {event.description && <p dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />}
-
-        <HorizontalGroup>
-          {event.links?.map((link, index) => (
-            <LinkButton
-              key={index}
-              icon={link.target === '_self' ? 'link' : 'external-link-alt'}
-              href={link.href}
-              target={link.target}
-              variant={'secondary'}
-              onClick={link.onClick}
-            >
-              {link.title}
-            </LinkButton>
-          ))}
-        </HorizontalGroup>
-      </>
-    );
-  }
+  /**
+   * Tabs
+   */
+  const tabs = (
+    <TabsBar>
+      <Tab label={'All Events'} active={!event} onChangeTab={() => setEvent(undefined)} />
+      {event && <Tab label={event.text} active={!!event} />}
+    </TabsBar>
+  );
 
   /**
    * Return
    */
   return (
-    <Drawer title={title} subtitle={subtitle} scrollableContent={true} onClose={onClose}>
-      {children}
+    <Drawer
+      title={day.format('LL')}
+      tabs={tabs}
+      subtitle={day.format('dddd')}
+      scrollableContent={true}
+      onClose={onClose}
+    >
+      {event && (
+        <Card>
+          <Card.Heading>{heading(event)}</Card.Heading>
+          <Card.Meta>{meta(event)}</Card.Meta>
+          <Card.Tags>
+            <TagList tags={event.labels} />
+          </Card.Tags>
+          <Card.Description>
+            {event.description && <p dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />}
+          </Card.Description>
+          <Card.Actions>
+            {event.links
+              ?.filter((link) => link.href)
+              .map((link, index) => (
+                <LinkButton
+                  key={index}
+                  icon={link.target === '_self' ? 'link' : 'external-link-alt'}
+                  href={link.href}
+                  target={link.target}
+                  variant={'secondary'}
+                  onClick={link.onClick}
+                >
+                  {link.title}
+                </LinkButton>
+              ))}
+          </Card.Actions>
+        </Card>
+      )}
+
+      {!event && (
+        <>
+          {dayEvents.map((event, i) => {
+            if (!event) {
+              return;
+            }
+
+            return (
+              <Card key={i} onClick={() => setEvent(event)}>
+                <Card.Heading>{heading(event)}</Card.Heading>
+                <Card.Meta>{meta(event)}</Card.Meta>
+                <Card.Tags>
+                  <TagList tags={event.labels} />
+                </Card.Tags>
+              </Card>
+            );
+          })}
+        </>
+      )}
     </Drawer>
   );
 };

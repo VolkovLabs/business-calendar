@@ -43,7 +43,7 @@ export interface CalendarEvent {
    *
    * @type {string[]}
    */
-  labels?: string[];
+  labels: string[];
 
   /**
    * Color

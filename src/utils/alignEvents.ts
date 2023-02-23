@@ -1,13 +1,15 @@
 import { CalendarEvent } from '../types';
 
 /**
- * alignEvents expands the calendar events and creates an entry for every day
+ * Expands the calendar events and creates an entry for every day
  * for the duration of the event.
  */
-export const alignEvents = (events: CalendarEvent[]): Record<string, Array<CalendarEvent | undefined>> => {
-  const alignedEvents: Record<string, Array<CalendarEvent | undefined>> = {};
+export const alignEvents = (events: CalendarEvent[]): Record<string, CalendarEvent[]> => {
+  const alignedEvents: Record<string, CalendarEvent[]> = {};
 
-  // TODO: Is this the right place to sort?
+  /**
+   * Sort
+   */
   events.sort((a, b) => {
     if (a.start.isSame(b.start)) {
       return a.text.localeCompare(b.text);
@@ -19,12 +21,14 @@ export const alignEvents = (events: CalendarEvent[]): Record<string, Array<Calen
     const eventsOnStart = alignedEvents[event.start.format('YYYY-MM-DD')];
 
     /**
-     * offset determines the vertical position of the event. It's used to make
+     * Offset determines the vertical position of the event. It's used to make
      * sure the entries are vertically aligned.
      */
     let offset = 0;
     if (eventsOnStart) {
-      // Find the first available vertical slot, or add it to the end.
+      /**
+       * Find the first available vertical slot, or add it to the end.
+       */
       const firstAvailableIndex = eventsOnStart.findIndex((event) => !event);
       offset = firstAvailableIndex < 0 ? eventsOnStart.length : firstAvailableIndex;
     }
@@ -43,7 +47,7 @@ export const alignEvents = (events: CalendarEvent[]): Record<string, Array<Calen
        * Create a temporary array to ensure we can insert the event at the right
        * index. Feels like this can be cleaned up.
        */
-      const tmp = Array.from<CalendarEvent | undefined>({ length: numEvents });
+      const tmp = Array.from<CalendarEvent>({ length: numEvents });
       alignedEvents[entry.day].forEach((e, i) => (tmp[i] = e));
       tmp[offset] = entry.event;
       alignedEvents[entry.day] = tmp;
@@ -64,6 +68,9 @@ const expandInterval = (event: CalendarEvent): Array<{ day: string; event: Calen
     return [{ day: event.start.format('YYYY-MM-DD'), event }];
   }
 
+  /**
+   * Duration
+   */
   const eventDurationInDays = event.end.endOf('day').diff(event.start.startOf('day'), 'days') + 1;
 
   /**

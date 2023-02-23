@@ -1,31 +1,59 @@
 import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
 import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import { css, cx } from '@emotion/css';
-import { useStyles2, useTheme2 } from '@grafana/ui';
+import { cx } from '@emotion/css';
+import { useStyles2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
 import { CalendarEntry } from '../CalendarEntry';
 
 /**
- * Day.js Plugins
- * - https://day.js.org/docs/en/plugin/iso-week
- */
-dayjs.extend(isoWeek);
-
-/**
  * Properties
  */
 interface Props {
+  /**
+   * Day
+   */
   day: dayjs.Dayjs;
-  events: Array<CalendarEvent | undefined>;
+
+  /**
+   * Events
+   */
+  events: CalendarEvent[];
+
+  /**
+   * Selected
+   */
   selected: boolean;
+
+  /**
+   * On Selection Change
+   */
   onSelectionChange: (selected: boolean) => void;
+
+  /**
+   * From
+   */
   from: dayjs.Dayjs;
+
+  /**
+   * To
+   */
   to: dayjs.Dayjs;
+
+  /**
+   * Set Day
+   */
   setDay: any;
+
+  /**
+   * Set Event
+   */
   setEvent: any;
+
+  /**
+   * Quick Links
+   */
   quickLinks: boolean;
 }
 
@@ -33,16 +61,9 @@ interface Props {
  * Day
  */
 export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay, setEvent, quickLinks }: Props) => {
-  const theme = useTheme2();
   const styles = useStyles2(getStyles);
 
-  const isWeekend = day.isoWeekday() > 5;
   const isToday = day.isSame(dayjs().startOf('day'));
-
-  /**
-   * Since the calendar always displays full weeks, the day may be
-   * rendered even if it's outside of the selected time interval.
-   */
   const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
 
   /**
@@ -64,42 +85,18 @@ export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay
 
   return (
     <div
-      className={cx(
-        styles.day,
-        { [styles.weekend]: isWeekend },
-        { [styles.today]: isToday },
-        { [styles.selected]: selected },
-        { [styles.outsideInterval]: isOutsideInterval }
-      )}
+      className={cx(styles.day.background, isOutsideInterval && styles.day.backgroundOutside)}
       onClick={(e) => {
         onSelectionChange(!selected);
       }}
     >
-      <div className={cx(styles.dayHeader)}>
+      <div className={cx(styles.day.header)}>
         <div
           className={cx(
-            styles.dayStyle,
-            {
-              [css`
-                color: ${theme.v1.colors.textWeak};
-              `]: isWeekend,
-            },
-            {
-              [css`
-                color: ${theme.v1.colors.textFaint};
-              `]: isOutsideInterval,
-            },
-            {
-              [css`
-                background: ${theme.colors.primary.main};
-                color: ${theme.colors.background.primary};
-              `]: isToday,
-            },
-            {
-              [css`
-                background: ${theme.colors.secondary.main};
-              `]: selected,
-            }
+            styles.day.text,
+            isOutsideInterval && styles.day.outside,
+            isToday && styles.day.today,
+            selected && styles.day.selected
           )}
         >
           {day.format('D') === '1' ? day.format('MMM D') : day.format('D')}
@@ -108,7 +105,7 @@ export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay
 
       <AutoSizer disableWidth>
         {({ height }) => {
-          const heightPerEntry = 17;
+          const heightPerEntry = 19;
           const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
           const moreEvents = entries.length - maxNumEvents;
 
@@ -116,7 +113,7 @@ export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay
             <>
               {entries.filter((_, i) => i < maxNumEvents)}
               {moreEvents > 0 && (
-                <div onClick={() => setDay(day)} className={styles.moreEntriesLabel}>{`${moreEvents} more`}</div>
+                <div onClick={() => setDay(day)} className={styles.day.moreLabel}>{`${moreEvents} more`}</div>
               )}
             </>
           );

@@ -12,7 +12,7 @@ interface Props {
   /**
    * Event
    */
-  event?: CalendarEvent;
+  event: CalendarEvent;
 
   /**
    * Day
@@ -41,28 +41,30 @@ interface Props {
 export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks }: Props) => {
   const styles = useStyles2(getStyles);
 
-  /**
-   * A filler is added to offset entries that started on a day with previously ongoing events.
-   */
-  const filler = <div className={cx(styles.event, styles.multiDayEvent, styles.filler)}></div>;
-  if (!event) {
-    return filler;
-  }
-
-  const eventStartsToday = (e: CalendarEvent): boolean => e.start.startOf('day').isSame(day);
-  const eventEndsToday = (e: CalendarEvent): boolean =>
-    e.end ? e.end.startOf('day').isSame(day) : e.end === undefined ? eventStartsToday(e) : false;
-
   const startOfWeek = day.startOf('day').isSame(day.startOf('isoWeek'));
-  const endOfWeek = day.endOf('day').isSame(day.endOf('isoWeek'));
-  const startsToday = eventStartsToday(event);
-  const endsToday = eventEndsToday(event);
+  const startsToday = event.start.startOf('day').isSame(day);
+  const endsToday = (event: CalendarEvent): boolean => {
+    /**
+     * Ends Today
+     */
+    if (event.end) {
+      return event.end.startOf('day').isSame(day);
+    }
+
+    /**
+     * Open Ended
+     */
+    if (event.end === undefined) {
+      return event.start.startOf('day').isSame(day);
+    }
+
+    return false;
+  };
 
   /**
    * Link
    */
   const firstLink = event.links?.[0];
-
   const Link = quickLinks ? 'a' : 'div';
   const linkProps = quickLinks
     ? {
@@ -77,44 +79,39 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
   /**
    * Today's event
    */
-  if (startsToday && endsToday) {
+  if (startsToday && endsToday(event)) {
     return (
-      <Link title={event.text} className={cx(styles.event, styles.centerItems)} {...linkProps}>
-        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.eventSvg}>
+      <Link title={event.text} className={styles.event.text} {...linkProps}>
+        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.event.svg}>
           <circle cx={5} cy={5} r={5} />
         </svg>
-        <div
-          className={cx(styles.eventLabel, {
-            [styles.eventOutside]: outsideInterval,
-          })}
-        >
-          {event.text}
-        </div>
+        <div className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}>{event.text}</div>
       </Link>
     );
   }
 
   /**
-   * Multi-day event
+   * Multi-day event.
    * Display the event text on the day it starts.
    */
   return (
     <Link
       title={event.text}
       className={cx(
-        styles.event,
-        styles.multiDayEvent,
+        styles.event.text,
+        styles.event.multiDay,
         css`
           background: ${event.color};
+          &:hover {
+            background: ${event.color};
+          }
         `,
-        {
-          [styles.startDayStyle]: startOfWeek || startsToday,
-          [styles.endDayStyle]: endOfWeek || endsToday,
-        }
+        startsToday && styles.event.startDay,
+        endsToday(event) && styles.event.endDay
       )}
       {...linkProps}
     >
-      {(startOfWeek || startsToday) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
+      {(startOfWeek || startsToday) && <div className={cx(styles.event.label)}>{event.text}</div>}
     </Link>
   );
 };

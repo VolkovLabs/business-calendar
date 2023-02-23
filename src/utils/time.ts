@@ -4,11 +4,19 @@ import { ArrayVector, dateTimeParse, Field, FieldType, getDisplayProcessor, Time
  * Time Field
  */
 export const toTimeField = (field?: Field, timeZone?: TimeZone, theme?: any): Field | undefined => {
+  /**
+   * Number
+   */
   if (field?.type === FieldType.number) {
     const tmp = { ...field, type: FieldType.time };
     tmp.display = getDisplayProcessor({ field: tmp, timeZone, theme });
     return tmp;
-  } else if (field?.type === FieldType.string) {
+  }
+
+  /**
+   * String
+   */
+  if (field?.type === FieldType.string) {
     const tmp = {
       ...field,
       type: FieldType.time,

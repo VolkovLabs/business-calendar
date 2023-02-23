@@ -12,7 +12,7 @@ interface Props {
   /**
    * Event
    */
-  event?: CalendarEvent;
+  event: CalendarEvent;
 
   /**
    * Day
@@ -40,14 +40,6 @@ interface Props {
  */
 export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks }: Props) => {
   const styles = useStyles2(getStyles);
-
-  /**
-   * A filler is added to offset entries that started on a day with previously ongoing events.
-   */
-  const filler = <div className={cx(styles.event, styles.multiDayEvent, styles.filler)}></div>;
-  if (!event) {
-    return filler;
-  }
 
   const eventStartsToday = (e: CalendarEvent): boolean => e.start.startOf('day').isSame(day);
   const eventEndsToday = (e: CalendarEvent): boolean =>
@@ -79,17 +71,11 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
    */
   if (startsToday && endsToday) {
     return (
-      <Link title={event.text} className={cx(styles.event, styles.centerItems)} {...linkProps}>
-        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.eventSvg}>
+      <Link title={event.text} className={styles.event.text} {...linkProps}>
+        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.event.svg}>
           <circle cx={5} cy={5} r={5} />
         </svg>
-        <div
-          className={cx(styles.eventLabel, {
-            [styles.eventOutside]: outsideInterval,
-          })}
-        >
-          {event.text}
-        </div>
+        <div className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}>{event.text}</div>
       </Link>
     );
   }
@@ -102,19 +88,19 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
     <Link
       title={event.text}
       className={cx(
-        styles.event,
-        styles.multiDayEvent,
+        styles.event.text,
+        styles.event.multiDay,
         css`
           background: ${event.color};
         `,
         {
-          [styles.startDayStyle]: startOfWeek || startsToday,
-          [styles.endDayStyle]: endOfWeek || endsToday,
+          [styles.event.startDay]: startOfWeek || startsToday,
+          [styles.event.endDay]: endOfWeek || endsToday,
         }
       )}
       {...linkProps}
     >
-      {(startOfWeek || startsToday) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
+      {(startOfWeek || startsToday) && <div className={cx(styles.event.label)}>{event.text}</div>}
     </Link>
   );
 };

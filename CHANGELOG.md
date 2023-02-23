@@ -12,6 +12,7 @@
 - Refactor Day and Events Drawer (#75)
 - Set No Padding for the Panel (#75)
 - Refactor Day and update Styles (#76)
+- Migrate Styles to v2 (#78)
 
 ## 1.1.0 (2022-12-12)
 

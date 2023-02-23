@@ -79,7 +79,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
    */
   const heading = (event: CalendarEvent) => (
     <div>
-      <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.eventSvg}>
+      <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.event.svg}>
         <circle cx={5} cy={5} r={5} />
       </svg>
       {event.text}

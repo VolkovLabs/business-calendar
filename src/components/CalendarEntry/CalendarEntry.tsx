@@ -35,6 +35,11 @@ interface Props {
   quickLinks?: boolean;
 
   /**
+   * Display Time
+   */
+  displayTime: boolean;
+
+  /**
    * First Day
    */
   firstDay: string;
@@ -43,7 +48,7 @@ interface Props {
 /**
  * Calendar Entry
  */
-export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks, firstDay }: Props) => {
+export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks, displayTime, firstDay }: Props) => {
   const styles = useStyles2(getStyles);
 
   /**
@@ -98,7 +103,15 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
         <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.event.svg}>
           <circle cx={5} cy={5} r={5} />
         </svg>
-        <div className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}>{event.text}</div>
+        {!displayTime && (
+          <div className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}>{event.text}</div>
+        )}
+
+        {displayTime && (
+          <div className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}>
+            {event.start.format('h:mma')} <b>{event.text}</b>
+          </div>
+        )}
       </Link>
     );
   }
@@ -124,7 +137,14 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
       )}
       {...linkProps}
     >
-      {(startOfWeek || startsToday) && <div className={cx(styles.event.label)}>{event.text}</div>}
+      {startsToday && displayTime && (
+        <div className={cx(styles.event.label)}>
+          {event.start.format('h:mma')} <b>{event.text}</b>
+        </div>
+      )}
+
+      {startsToday && !displayTime && <div className={cx(styles.event.label)}>{event.text}</div>}
+      {startOfWeek && !startsToday && <div className={cx(styles.event.label)}>{event.text}</div>}
     </Link>
   );
 };

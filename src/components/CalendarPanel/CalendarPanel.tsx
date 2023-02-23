@@ -227,6 +227,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               setEvent={setEvent}
               setDay={setDay}
               quickLinks={!!options.quickLinks}
+              displayTime={!!options.displayTime}
               firstDay={firstDay}
             />
           );

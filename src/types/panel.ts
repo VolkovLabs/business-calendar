@@ -64,4 +64,11 @@ export interface CalendarOptions {
    * @type {string}
    */
   colorField?: string;
+
+  /**
+   * Display Time
+   *
+   * @type {boolean}
+   */
+  displayTime?: boolean;
 }

@@ -57,6 +57,11 @@ interface Props {
   quickLinks: boolean;
 
   /**
+   * Display Time
+   */
+  displayTime: boolean;
+
+  /**
    * First Day
    */
   firstDay: string;
@@ -75,6 +80,7 @@ export const Day = ({
   setDay,
   setEvent,
   quickLinks,
+  displayTime,
   firstDay,
 }: Props) => {
   const styles = useStyles2(getStyles);
@@ -96,6 +102,7 @@ export const Day = ({
         setEvent(event);
       }}
       quickLinks={quickLinks}
+      displayTime={displayTime}
       firstDay={firstDay}
     />
   ));

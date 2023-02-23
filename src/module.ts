@@ -1,6 +1,6 @@
 import { Field, FieldType, PanelPlugin } from '@grafana/data';
 import { CalendarPanel, MultiFieldEditor } from './components';
-import { AnnotationsOptions, DefaultOptions, LinksOptions, ScrollOptions } from './constants';
+import { AnnotationsOptions, DefaultOptions, DisplayTimeOptions, LinksOptions, ScrollOptions } from './constants';
 import { CalendarOptions } from './types';
 
 /**
@@ -19,6 +19,15 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: ScrollOptions,
         },
         defaultValue: DefaultOptions.autoScroll,
+      })
+      .addRadio({
+        path: 'displayTime',
+        name: 'Display Time',
+        description: 'Display Time for each entry.',
+        settings: {
+          options: DisplayTimeOptions,
+        },
+        defaultValue: DefaultOptions.annotations,
       })
       .addRadio({
         path: 'quickLinks',

@@ -7,6 +7,7 @@ export const DefaultOptions: CalendarOptions = {
   quickLinks: false,
   autoScroll: false,
   annotations: false,
+  displayTime: false,
 };
 
 /**
@@ -29,6 +30,14 @@ export const ScrollOptions = [
  * Annotations Options
  */
 export const AnnotationsOptions = [
+  { value: true, label: 'Enabled' },
+  { value: false, label: 'Disabled' },
+];
+
+/**
+ * Display Time Options
+ */
+export const DisplayTimeOptions = [
   { value: true, label: 'Enabled' },
   { value: false, label: 'Disabled' },
 ];

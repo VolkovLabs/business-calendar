@@ -1,16 +1,9 @@
 import dayjs from 'dayjs';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
-
-/**
- * Day.js Plugins
- * - https://day.js.org/docs/en/plugin/localized-format
- */
-dayjs.extend(localizedFormat);
 
 /**
  * Properties
@@ -81,8 +74,6 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
         onClick: onClick,
       };
 
-  const text = `${event.start.format('LT')} ${event.text}`;
-
   /**
    * Today's event
    */
@@ -97,7 +88,7 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
             [styles.eventOutside]: outsideInterval,
           })}
         >
-          {text}
+          {event.text}
         </div>
       </Link>
     );

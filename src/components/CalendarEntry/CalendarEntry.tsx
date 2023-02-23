@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs, { OpUnitType } from 'dayjs';
 import React from 'react';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
@@ -33,15 +33,20 @@ interface Props {
    * Quick Links
    */
   quickLinks?: boolean;
+
+  /**
+   * First Day
+   */
+  firstDay: string;
 }
 
 /**
  * Calendar Entry
  */
-export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks }: Props) => {
+export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks, firstDay }: Props) => {
   const styles = useStyles2(getStyles);
 
-  const startOfWeek = day.startOf('day').isSame(day.startOf('isoWeek'));
+  const startOfWeek = day.startOf('day').isSame(day.startOf(firstDay as OpUnitType));
   const startsToday = event.start.startOf('day').isSame(day);
   const endsToday = (event: CalendarEvent): boolean => {
     /**

@@ -14,7 +14,7 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     position: absolute;
     bottom: 0;
     right: 0;
-    padding: ${theme.v1.spacing.sm};
+    padding: ${theme.spacing(1)};
     z-index: 1000;
   `,
   weekdayContainer: css`
@@ -29,6 +29,8 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     text-align: center;
     padding: ${theme.spacing(0.5)} ${theme.spacing(1)};
     overflow: hidden;
+    text-transform: uppercase;
+    color: ${theme.colors.text.secondary};
   `,
   calendarContainer: css`
     width: 100%;
@@ -93,11 +95,6 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     width: calc(100% - ${theme.v1.spacing.sm});
     border-radius: 0 ${theme.v1.border.radius.md} ${theme.v1.border.radius.md} 0;
   `,
-  summary: css`
-    width: calc(100% - 2 * ${theme.v1.spacing.xs});
-    margin-left: ${theme.v1.spacing.xs};
-    border-radius: ${theme.v1.border.radius.lg};
-  `,
   tooltip: css`
     min-width: 200px;
     border-radius: ${theme.v1.border.radius.md};
@@ -143,26 +140,23 @@ export const getStyles = (theme: GrafanaTheme2) => ({
       border-radius: 0 ${theme.v1.border.radius.lg} ${theme.v1.border.radius.lg} 0;
     }
   `,
-  dateHeader: {
-    root: css`
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: ${theme.v1.spacing.xs};
-    `,
-    monthLabel: css`
-      color: ${theme.v1.palette.brandPrimary};
-      font-weight: 500;
-    `,
-    dayLabel: css`
-      color: ${theme.v1.colors.textSemiWeak};
-      border-radius: 50%;
-      width: 3ch;
-      height: 3ch;
-      text-align: center;
-      font-size: ${theme.typography.size.md};
-      line-height: 3.1ch;
-      user-select: none;
-    `,
-  },
+  dayHeader: css`
+    display: flex;
+    justify-content: center;
+    font-size: ${theme.typography.bodySmall.fontSize};
+    margin: ${theme.spacing(0.5)};
+    color: ${theme.colors.text.secondary};
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+  `,
+  dayStyle: css`
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: ${theme.typography.h2.fontSize};
+    height: ${theme.typography.h3.fontSize};
+  `,
 });

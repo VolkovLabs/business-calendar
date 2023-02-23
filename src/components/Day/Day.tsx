@@ -54,7 +54,6 @@ export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay
       event={event}
       day={day}
       outsideInterval={isOutsideInterval}
-      summary={false}
       onClick={() => {
         setDay(day);
         setEvent(event);
@@ -76,11 +75,10 @@ export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay
         onSelectionChange(!selected);
       }}
     >
-      <div className={styles.dateHeader.root}>
-        <div className={styles.dateHeader.monthLabel}>{day.format('D') === '1' && day.format('MMM')}</div>
+      <div className={cx(styles.dayHeader)}>
         <div
           className={cx(
-            styles.dateHeader.dayLabel,
+            styles.dayStyle,
             {
               [css`
                 color: ${theme.v1.colors.textWeak};
@@ -93,19 +91,18 @@ export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay
             },
             {
               [css`
-                background: ${theme.v1.palette.queryRed};
-                color: ${theme.v1.palette.black};
+                background: ${theme.colors.primary.main};
+                color: ${theme.colors.background.primary};
               `]: isToday,
             },
             {
               [css`
-                background: ${theme.v1.colors.textBlue};
-                color: ${theme.v1.palette.black};
+                background: ${theme.colors.secondary.main};
               `]: selected,
             }
           )}
         >
-          {day.format('D')}
+          {day.format('D') === '1' ? day.format('MMM D') : day.format('D')}
         </div>
       </div>
 

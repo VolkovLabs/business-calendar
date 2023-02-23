@@ -55,12 +55,28 @@ interface Props {
    * Quick Links
    */
   quickLinks: boolean;
+
+  /**
+   * First Day
+   */
+  firstDay: string;
 }
 
 /**
  * Day
  */
-export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay, setEvent, quickLinks }: Props) => {
+export const Day = ({
+  day,
+  events,
+  selected,
+  onSelectionChange,
+  from,
+  to,
+  setDay,
+  setEvent,
+  quickLinks,
+  firstDay,
+}: Props) => {
   const styles = useStyles2(getStyles);
 
   const isToday = day.isSame(dayjs().startOf('day'));
@@ -80,6 +96,7 @@ export const Day = ({ day, events, selected, onSelectionChange, from, to, setDay
         setEvent(event);
       }}
       quickLinks={quickLinks}
+      firstDay={firstDay}
     />
   ));
 

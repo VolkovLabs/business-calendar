@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.2.0 (IN PROGRESS)
+## 1.2.0 (2023-02-23)
+
+### Breaking changes
+
+Refactoring and Styles migration may introduce breaking changes. Please test before upgrading in Production.
 
 ### Features / Enhancements
 
@@ -13,6 +17,7 @@
 - Set No Padding for the Panel (#75)
 - Refactor Day and update Styles (#76)
 - Migrate Styles to v2 (#79)
+- Match Grafana settings for Week Start in User or Global Preferences (#43)
 
 ## 1.1.0 (2022-12-12)
 

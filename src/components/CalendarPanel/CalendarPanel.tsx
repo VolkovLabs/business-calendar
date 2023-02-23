@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import React, { useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
-import { AnnotationEvent, classicColors, FieldType, PanelProps } from '@grafana/data';
+import { AnnotationEvent, classicColors, FieldType, getLocaleData, PanelProps } from '@grafana/data';
 import { Button, useStyles2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
@@ -68,12 +68,17 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   }
 
   /**
+   * Week Start
+   */
+  const firstDay = getLocaleData().firstDayOfWeek() === 0 ? 'week' : 'isoWeek';
+
+  /**
    * Time Range
    */
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());
-  const startOfWeek = from.startOf('isoWeek');
-  const endOfWeek = to.endOf('isoWeek');
+  const startOfWeek = from.startOf(firstDay);
+  const endOfWeek = to.endOf(firstDay);
   const numDays = endOfWeek.diff(startOfWeek, 'days');
 
   /**
@@ -179,7 +184,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       <div className={styles.calendar.weekday}>
         {Array.from({ length: 7 }).map((_, i) => (
           <div key={i} className={styles.calendar.weekdayLabel}>
-            {dayjs().startOf('isoWeek').add(i, 'days').format('ddd')}
+            {dayjs().startOf(firstDay).add(i, 'days').format('ddd')}
           </div>
         ))}
       </div>
@@ -222,6 +227,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
               setEvent={setEvent}
               setDay={setDay}
               quickLinks={!!options.quickLinks}
+              firstDay={firstDay}
             />
           );
         })}

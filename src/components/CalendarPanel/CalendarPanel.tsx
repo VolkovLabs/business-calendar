@@ -176,9 +176,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       {/*
        * Header displaying the weekdays
        */}
-      <div className={styles.weekdayContainer}>
+      <div className={styles.calendar.weekday}>
         {Array.from({ length: 7 }).map((_, i) => (
-          <div key={i} className={styles.weekdayLabel}>
+          <div key={i} className={styles.calendar.weekdayLabel}>
             {dayjs().startOf('isoWeek').add(i, 'days').format('ddd')}
           </div>
         ))}
@@ -191,7 +191,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
       <div
         ref={ref}
         className={cx(
-          styles.calendarContainer,
+          styles.calendar.grid,
           css`
             grid-auto-rows: ${Math.max(100 / Math.ceil(numDays / 7), 20)}%;
           `

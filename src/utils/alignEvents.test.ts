@@ -9,6 +9,7 @@ describe('alignEvents', () => {
         start: dayjs('2020-01-01T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
     ];
 
@@ -26,6 +27,7 @@ describe('alignEvents', () => {
         end: dayjs('2020-01-02T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
     ];
 
@@ -45,6 +47,7 @@ describe('alignEvents', () => {
         end: dayjs('2020-01-02T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
       {
         text: 'Tested for two days',
@@ -52,6 +55,7 @@ describe('alignEvents', () => {
         end: dayjs('2020-01-02T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
     ];
 
@@ -70,6 +74,7 @@ describe('alignEvents', () => {
         end: dayjs('2020-01-02T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
       {
         text: 'Tested for two days',
@@ -77,6 +82,7 @@ describe('alignEvents', () => {
         end: dayjs('2020-01-03T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
     ];
 
@@ -96,6 +102,7 @@ describe('alignEvents', () => {
         end: dayjs('2020-01-02T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
       {
         text: 'Tested for two days',
@@ -103,6 +110,7 @@ describe('alignEvents', () => {
         end: dayjs('2020-01-03T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
       {
         text: 'QA for two days',
@@ -110,6 +118,7 @@ describe('alignEvents', () => {
         end: dayjs('2020-01-04T15:06:02Z'),
         color: '',
         open: false,
+        labels: [],
       },
     ];
 
@@ -134,6 +143,7 @@ describe('alignEvents', () => {
         end: start.add(eventDuration - 1, 'day').add(i, 'day'),
         color: '',
         open: false,
+        labels: [],
       };
     });
 

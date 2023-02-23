@@ -56,7 +56,7 @@
           },
           "links": [
             {
-              "title": "URL",
+              "title": "Grafana Catalog",
               "url": "${__data.fields.url}"
             }
           ],
@@ -93,7 +93,8 @@
         "autoScroll": true,
         "colorField": "downloads",
         "descriptionField": "description",
-        "quickLinks": true,
+        "labelFields": ["slug", "version"],
+        "quickLinks": false,
         "textField": "name",
         "timeField": "updatedAt"
       },

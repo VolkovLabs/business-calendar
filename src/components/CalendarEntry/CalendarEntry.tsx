@@ -1,9 +1,16 @@
 import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
 import { getStyles } from '../../styles';
 import { CalendarEvent } from '../../types';
+
+/**
+ * Day.js Plugins
+ * - https://day.js.org/docs/en/plugin/localized-format
+ */
+dayjs.extend(localizedFormat);
 
 /**
  * Properties
@@ -25,11 +32,6 @@ interface Props {
   outsideInterval: boolean;
 
   /**
-   * Summary
-   */
-  summary: boolean;
-
-  /**
    * On Click
    */
   onClick?: (e: any) => void;
@@ -43,7 +45,7 @@ interface Props {
 /**
  * Calendar Entry
  */
-export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, quickLinks }: Props) => {
+export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks }: Props) => {
   const styles = useStyles2(getStyles);
 
   /**
@@ -79,7 +81,7 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, q
         onClick: onClick,
       };
 
-  const text = `${event.start.format('ha')} ${event.text}`;
+  const text = `${event.start.format('LT')} ${event.text}`;
 
   /**
    * Today's event
@@ -117,12 +119,11 @@ export const CalendarEntry = ({ event, day, outsideInterval, summary, onClick, q
         {
           [styles.startDayStyle]: startOfWeek || startsToday,
           [styles.endDayStyle]: endOfWeek || endsToday,
-          [styles.summary]: summary,
         }
       )}
       {...linkProps}
     >
-      {(startOfWeek || startsToday || summary) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
+      {(startOfWeek || startsToday) && <div className={cx(styles.eventLabel)}>{event.text}</div>}
     </Link>
   );
 };

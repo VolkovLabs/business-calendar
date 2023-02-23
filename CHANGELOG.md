@@ -23,7 +23,7 @@ Refactoring may introduce breaking changes. Please test before upgrading in Prod
 ### Features / Enhancements
 
 - Update Panel options in README (#53)
-- Add Youtube tutorial for Calendar with JSON API datasource (#54)
+- Add Youtube tutorial for Calendar with JSON API data source (#54)
 - Update CI to Node 16 and Synchronize with Release workflow (#56)
 - Update to Grafana 9.2.2 (#57)
 - Code Refactoring (#58)

@@ -57,9 +57,14 @@ export const getStyles = (theme: GrafanaTheme2) => ({
         cursor: pointer;
       }
     `,
+    multiDay: css`
+      color: ${theme.colors.background.primary};
+      &:hover {
+        color: ${theme.colors.background.secondary};
+      }
+    `,
     label: css`
       font-size: ${theme.typography.body.fontSize};
-      r-select: none;
       flex-grow: 1;
       white-space: nowrap;
       overflow: hidden;
@@ -72,14 +77,6 @@ export const getStyles = (theme: GrafanaTheme2) => ({
       margin-right: ${theme.spacing(0.5)};
       width: ${theme.spacing(1)};
       height: ${theme.spacing(1)};
-    `,
-    multiDay: css`
-      padding-left: calc(4 * ${theme.v1.spacing.xs});
-      color: ${theme.v1.palette.dark5};
-      &:hover {
-        color: ${theme.v1.palette.black};
-        cursor: pointer;
-      }
     `,
     startDay: css`
       border-radius: ${theme.shape.borderRadius(2)} 0 0 ${theme.shape.borderRadius(2)};

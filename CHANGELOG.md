@@ -17,7 +17,10 @@ Refactoring and Styles migration may introduce breaking changes. Please test bef
 - Set No Padding for the Panel (#75)
 - Refactor Day and update Styles (#76)
 - Migrate Styles to v2 (#79)
-- Match Grafana settings for Week Start in User or Global Preferences (#43)
+- Match Grafana settings for Week Start (#80)
+- Skip undefined events in Drawer (#81)
+- Add Display Time (#82)
+- Update Styles and Screenshot (#83)
 
 ## 1.1.0 (2022-12-12)
 

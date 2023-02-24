@@ -91,6 +91,7 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     `,
     endDay: css`
       border-radius: 0 ${theme.shape.borderRadius(2)} ${theme.shape.borderRadius(2)} 0;
+      width: calc(100% - ${theme.spacing(1)});
     `,
   },
   day: {

@@ -5,6 +5,8 @@
 ### Features / Enhancements
 
 - Rebuild using Grafana 9.4.3 (#87)
+- Add labels split to display in the drawer (#88)
+- Add annotation tags as labels (#88)
 
 ## 1.2.0 (2023-02-23)
 

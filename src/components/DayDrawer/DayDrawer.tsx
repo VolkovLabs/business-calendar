@@ -97,6 +97,11 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
   );
 
   /**
+   * Tags
+   */
+  const tags = (labels: string[]) => labels.flatMap((label) => label.split(','));
+
+  /**
    * Return
    */
   return (
@@ -112,7 +117,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
           <Card.Heading>{heading(event)}</Card.Heading>
           <Card.Meta>{meta(event)}</Card.Meta>
           <Card.Tags>
-            <TagList tags={event.labels} />
+            <TagList tags={tags(event.labels)} />
           </Card.Tags>
           <Card.Description>
             {event.description && <p dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />}
@@ -148,7 +153,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
                 <Card.Heading>{heading(event)}</Card.Heading>
                 <Card.Meta>{meta(event)}</Card.Meta>
                 <Card.Tags>
-                  <TagList tags={event.labels} />
+                  <TagList tags={tags(event.labels)} />
                 </Card.Tags>
               </Card>
             );

@@ -4,7 +4,7 @@
 
 ### Features / Enhancements
 
-- Rebuild using Grafana 9.4.3
+- Rebuild using Grafana 9.4.3 (#87)
 
 ## 1.2.0 (2023-02-23)
 

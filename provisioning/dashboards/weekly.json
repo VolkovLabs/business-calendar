@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -73,6 +72,7 @@
         "descriptionField": "description",
         "displayTime": false,
         "endTimeField": "end",
+        "labelFields": ["labels"],
         "quickLinks": false,
         "textField": "text",
         "timeField": "start"
@@ -119,7 +119,7 @@
                 "config": {},
                 "name": "labels",
                 "type": "string",
-                "values": ["hello", "", "", "", ""]
+                "values": ["hello", "hard,work", "this,that,who?", "", ""]
               },
               {
                 "config": {},
@@ -185,8 +185,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -253,6 +252,6 @@
   "timezone": "",
   "title": "Weekly",
   "uid": "pKxZUM5Vz",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }

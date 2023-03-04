@@ -125,7 +125,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
             start: dayjs(annotation.time),
             end: annotation.timeEnd ? dayjs(annotation.timeEnd) : undefined,
             open: false,
-            labels: [],
+            labels: annotation.tags,
             color: annotation.color,
           } as CalendarEvent)
       )

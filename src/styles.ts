@@ -84,6 +84,7 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     svg: css`
       margin-right: ${theme.spacing(0.5)};
       width: ${theme.spacing(1)};
+      min-width: ${theme.spacing(1)};
       height: ${theme.spacing(1)};
     `,
     startDay: css`

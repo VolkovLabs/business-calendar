@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Rebuild using Grafana 9.4.3 (#87)
+
 ## 1.2.0 (2023-02-23)
 
 ### Breaking changes
@@ -11,7 +17,7 @@ Refactoring and Styles migration may introduce breaking changes. Please test bef
 - Select color for calender entry queries (#67)
 - Filtering out undefined events (#69)
 - Update CI and Release Workflows (#72)
-- Rebuild using 9.3.6 (#73)
+- Rebuild using Grafana 9.3.6 (#73)
 - Refactor Options Editors to use Field pickers (#74)
 - Refactor Day and Events Drawer (#75)
 - Set No Padding for the Panel (#75)

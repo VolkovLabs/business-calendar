@@ -57,7 +57,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       .addRadio({
         path: 'colors',
         name: 'Colors',
-        description: 'Display colors based on Event or Frame id if Color field is not specified.',
+        description: 'Display colors based on Frame or Event id if Color field is not specified.',
         settings: {
           options: ColorsOptions,
         },

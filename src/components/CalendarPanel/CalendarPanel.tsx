@@ -135,7 +135,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   /**
    * Align Events
    */
-  const alignedEvents = alignEvents(events);
+  const alignedEvents = alignEvents(events, firstDay);
 
   return (
     <div

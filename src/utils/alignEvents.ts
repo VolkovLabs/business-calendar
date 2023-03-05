@@ -1,10 +1,14 @@
+import { OpUnitType } from 'dayjs';
 import { CalendarEvent } from '../types';
 
 /**
  * Expands the calendar events and creates an entry for every day
  * for the duration of the event.
  */
-export const alignEvents = (events: CalendarEvent[]): Record<string, CalendarEvent[]> => {
+export const alignEvents = (
+  events: CalendarEvent[],
+  firstDay: OpUnitType | 'isoWeek'
+): Record<string, CalendarEvent[]> => {
   const alignedEvents: Record<string, CalendarEvent[]> = {};
 
   /**
@@ -18,21 +22,6 @@ export const alignEvents = (events: CalendarEvent[]): Record<string, CalendarEve
   });
 
   events.forEach((event) => {
-    const eventsOnStart = alignedEvents[event.start.format('YYYY-MM-DD')];
-
-    /**
-     * Offset determines the vertical position of the event. It's used to make
-     * sure the entries are vertically aligned.
-     */
-    let offset = 0;
-    if (eventsOnStart) {
-      /**
-       * Find the first available vertical slot, or add it to the end.
-       */
-      const firstAvailableIndex = eventsOnStart.findIndex((event) => !event);
-      offset = firstAvailableIndex < 0 ? eventsOnStart.length : firstAvailableIndex;
-    }
-
     /**
      * Single day event
      */
@@ -42,10 +31,25 @@ export const alignEvents = (events: CalendarEvent[]): Record<string, CalendarEve
      * Multi-Day
      */
     if (event.end) {
-      const duration = event.end.endOf('day').diff(event.start.startOf('day'), 'days') + 1;
+      let duration = event.end.endOf('day').diff(event.start.startOf('day'), 'days') + 1;
+
       interval = Array.from({ length: duration })
         .map((_, i) => event.start.add(i, 'days'))
         .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
+    }
+
+    /**
+     * Offset determines the vertical position of the event. It's used to make
+     * sure the entries are vertically aligned.
+     */
+    const eventsOnStart = alignedEvents[event.start.format('YYYY-MM-DD')];
+    let offset = 0;
+    if (eventsOnStart) {
+      /**
+       * Find the first available vertical slot, or add it to the end.
+       */
+      const firstAvailableIndex = eventsOnStart.findIndex((event) => !event);
+      offset = firstAvailableIndex < 0 ? eventsOnStart.length : firstAvailableIndex;
     }
 
     /**

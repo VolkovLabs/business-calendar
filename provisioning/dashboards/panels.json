@@ -74,7 +74,7 @@
       "options": {
         "annotations": false,
         "autoScroll": true,
-        "colorField": "downloads",
+        "colors": "event",
         "descriptionField": "description",
         "displayTime": true,
         "labelFields": ["slug", "version"],
@@ -491,6 +491,6 @@
   "timezone": "",
   "title": "Grafana Plugins",
   "uid": "hHK1qmpnk",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

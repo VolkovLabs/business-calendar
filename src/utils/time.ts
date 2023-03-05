@@ -1,4 +1,5 @@
-import { ArrayVector, dateTimeParse, Field, FieldType, getDisplayProcessor, TimeZone } from '@grafana/data';
+import { ArrayVector, dateTimeParse, Field, FieldType, getDisplayProcessor } from '@grafana/data';
+import { TimeZone } from '@grafana/schema';
 
 /**
  * Time Field

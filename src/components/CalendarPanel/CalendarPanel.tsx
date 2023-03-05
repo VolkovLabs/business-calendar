@@ -3,7 +3,8 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import React, { useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
 import { AnnotationEvent, classicColors, FieldType, getLocaleData, PanelProps } from '@grafana/data';
-import { Button, useStyles2 } from '@grafana/ui';
+import { Button, useStyles2, useTheme2 } from '@grafana/ui';
+import { Colors } from '../../constants';
 import { getStyles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
 import { alignEvents, toTimeField, useAnnotations, useIntervalSelection } from '../../utils';
@@ -24,7 +25,15 @@ interface Props extends PanelProps<CalendarOptions> {}
 /**
  * Calendar Panel
  */
-export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width, height, onChangeTimeRange }) => {
+export const CalendarPanel: React.FC<Props> = ({
+  options,
+  data,
+  timeRange,
+  timeZone,
+  width,
+  height,
+  onChangeTimeRange,
+}) => {
   /**
    * States
    */
@@ -34,6 +43,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
   /**
    * Theme
    */
+  const theme = useTheme2();
   const styles = useStyles2(getStyles);
 
   /**
@@ -52,9 +62,15 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
     start: toTimeField(
       options.timeField
         ? frame.fields.find((f) => f.name === options.timeField)
-        : frame.fields.find((f) => f.type === FieldType.time)
+        : frame.fields.find((f) => f.type === FieldType.time),
+      timeZone,
+      theme
     ),
-    end: toTimeField(frame.fields.find((f) => f.name === options.endTimeField)),
+    end: toTimeField(
+      frame.fields.find((f) => f.name === options.endTimeField),
+      timeZone,
+      theme
+    ),
     labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
     color: frame.fields.find((f) => f.name === options.colorField),
   }));
@@ -106,7 +122,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         description,
         labels,
         start: dayjs(start),
-        color: colorFn?.(color).color ?? classicColors[Math.floor(frameIdx % classicColors.length)],
+        color:
+          colorFn?.(color).color ??
+          classicColors[Math.floor((options.colors === Colors.FRAME ? frameIdx : i) % classicColors.length)],
         links,
         end: frame.end ? (end ? dayjs(end) : endOfRangeWeek) : undefined,
       }));

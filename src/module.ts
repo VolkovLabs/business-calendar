@@ -1,6 +1,13 @@
 import { Field, FieldType, PanelPlugin } from '@grafana/data';
 import { CalendarPanel, MultiFieldEditor } from './components';
-import { AnnotationsOptions, DefaultOptions, DisplayTimeOptions, LinksOptions, ScrollOptions } from './constants';
+import {
+  AnnotationsOptions,
+  ColorsOptions,
+  DefaultOptions,
+  DisplayTimeOptions,
+  LinksOptions,
+  ScrollOptions,
+} from './constants';
 import { CalendarOptions } from './types';
 
 /**
@@ -46,6 +53,15 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: AnnotationsOptions,
         },
         defaultValue: DefaultOptions.annotations,
+      })
+      .addRadio({
+        path: 'colors',
+        name: 'Colors',
+        description: 'Display colors based on Event or Frame id if Color field is not specified.',
+        settings: {
+          options: ColorsOptions,
+        },
+        defaultValue: DefaultOptions.colors,
       });
 
     /**

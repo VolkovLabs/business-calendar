@@ -77,9 +77,9 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
    */
   const from = dayjs(timeRange.from.valueOf());
   const to = dayjs(timeRange.to.valueOf());
-  const startOfWeek = from.startOf(firstDay);
-  const endOfWeek = to.endOf(firstDay);
-  const numDays = endOfWeek.diff(startOfWeek, 'days');
+  const startOfRangeWeek = from.startOf(firstDay);
+  const endOfRangeWeek = to.endOf(firstDay);
+  const numDays = endOfRangeWeek.diff(startOfRangeWeek, 'days');
 
   /**
    * Events
@@ -108,7 +108,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         start: dayjs(start),
         color: colorFn?.(color).color ?? classicColors[Math.floor(frameIdx % classicColors.length)],
         links,
-        end: frame.end ? (end ? dayjs(end) : endOfWeek) : undefined,
+        end: frame.end ? (end ? dayjs(end) : endOfRangeWeek) : undefined,
       }));
   });
 
@@ -203,7 +203,7 @@ export const CalendarPanel: React.FC<Props> = ({ options, data, timeRange, width
         )}
       >
         {Array.from({ length: numDays + 1 }).map((_, i) => {
-          const day = dayjs(startOfWeek.valueOf()).startOf('day').add(i, 'days');
+          const day = dayjs(startOfRangeWeek.valueOf()).startOf('day').add(i, 'days');
 
           const isSelected =
             selectedInterval &&

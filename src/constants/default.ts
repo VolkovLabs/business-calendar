@@ -1,6 +1,14 @@
 import { CalendarOptions } from '../types';
 
 /**
+ * Colors
+ */
+export const enum Colors {
+  FRAME = 'frame',
+  EVENT = 'event',
+}
+
+/**
  * Default Options
  */
 export const DefaultOptions: CalendarOptions = {
@@ -8,6 +16,7 @@ export const DefaultOptions: CalendarOptions = {
   autoScroll: false,
   annotations: false,
   displayTime: false,
+  colors: Colors.FRAME,
 };
 
 /**
@@ -40,4 +49,12 @@ export const AnnotationsOptions = [
 export const DisplayTimeOptions = [
   { value: true, label: 'Enabled' },
   { value: false, label: 'Disabled' },
+];
+
+/**
+ * Color Options
+ */
+export const ColorsOptions = [
+  { value: Colors.FRAME, label: 'Frame' },
+  { value: Colors.EVENT, label: 'Event' },
 ];

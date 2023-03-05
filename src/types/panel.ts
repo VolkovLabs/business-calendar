@@ -1,3 +1,5 @@
+import { Colors } from '../constants';
+
 /**
  * Calendar Options
  */
@@ -59,7 +61,14 @@ export interface CalendarOptions {
   annotations?: boolean;
 
   /**
-   * Color
+   * Colors
+   *
+   * @type {Colors}
+   */
+  colors?: Colors;
+
+  /**
+   * Color Field
    *
    * @type {string}
    */

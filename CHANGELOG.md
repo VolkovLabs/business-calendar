@@ -7,6 +7,8 @@
 - Rebuild using Grafana 9.4.3 (#87)
 - Add labels split to display in the drawer (#88)
 - Add annotation tags as labels (#88)
+- Refactor multi-day interval (#89)
+- Add display colors based on Event or Frame id if the Color field is not specified (#90)
 
 ## 1.2.0 (2023-02-23)
 

@@ -1,14 +1,18 @@
+import dayjs, { OpUnitType } from 'dayjs';
 import { CalendarEvent } from '../types';
 
 /**
  * Expands the calendar events and creates an entry for every day
  * for the duration of the event.
  */
-export const alignEvents = (events: CalendarEvent[]): Record<string, CalendarEvent[]> => {
+export const alignEvents = (
+  events: CalendarEvent[],
+  firstDay: OpUnitType | 'isoWeek'
+): Record<string, CalendarEvent[]> => {
   const alignedEvents: Record<string, CalendarEvent[]> = {};
 
   /**
-   * Sort
+   * Sorting by Event start
    */
   events.sort((a, b) => {
     if (a.start.isSame(b.start)) {
@@ -18,65 +22,70 @@ export const alignEvents = (events: CalendarEvent[]): Record<string, CalendarEve
   });
 
   events.forEach((event) => {
-    const eventsOnStart = alignedEvents[event.start.format('YYYY-MM-DD')];
-
     /**
-     * Offset determines the vertical position of the event. It's used to make
-     * sure the entries are vertically aligned.
+     * Single day event
      */
-    let offset = 0;
-    if (eventsOnStart) {
-      /**
-       * Find the first available vertical slot, or add it to the end.
-       */
-      const firstAvailableIndex = eventsOnStart.findIndex((event) => !event);
-      offset = firstAvailableIndex < 0 ? eventsOnStart.length : firstAvailableIndex;
+    if (!event.end) {
+      const interval = [{ day: event.start.format('YYYY-MM-DD'), event }];
+      return addEvents(event.start, alignedEvents, interval);
     }
 
     /**
-     * We expand each event to an entry for each day it spans.
+     * Multi-Day
      */
-    expandInterval(event).forEach((entry) => {
-      if (!alignedEvents[entry.day]) {
-        alignedEvents[entry.day] = [];
-      }
+    let start = event.start;
+    let duration = event.end.endOf('day').diff(start.startOf('day'), 'days') + 1;
+    while (event.end.endOf('day').diff(start.endOf('day'), 'day') > 7) {
+      duration = start.endOf(firstDay).diff(start.startOf('day'), 'days') + 1;
 
-      const numEvents = Math.max(alignedEvents[entry.day].length, offset + 1);
+      const interval = Array.from({ length: duration })
+        .map((_, i) => start.add(i, 'days'))
+        .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
 
-      /**
-       * Create a temporary array to ensure we can insert the event at the right
-       * index. Feels like this can be cleaned up.
-       */
-      const tmp = Array.from<CalendarEvent>({ length: numEvents });
-      alignedEvents[entry.day].forEach((e, i) => (tmp[i] = e));
-      tmp[offset] = entry.event;
-      alignedEvents[entry.day] = tmp;
-    });
+      addEvents(start, alignedEvents, interval);
+      start = start.endOf(firstDay).add(1, 'days');
+      duration = event.end.endOf('day').diff(start.startOf('day'), 'days') + 1;
+    }
+
+    const interval = Array.from({ length: duration })
+      .map((_, i) => start.add(i, 'days'))
+      .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
+
+    addEvents(start, alignedEvents, interval);
   });
 
   return alignedEvents;
 };
 
 /**
- * Expands the event interval to an array for each day, containing a reference to the event.
+ * Add Events starting from the Start day
  */
-const expandInterval = (event: CalendarEvent): Array<{ day: string; event: CalendarEvent }> => {
+const addEvents = (start: dayjs.Dayjs, alignedEvents: Record<string, CalendarEvent[]>, interval: any) => {
   /**
-   * If no end time has been defined, we consider it a single day event.
+   * Offset determines the vertical position of the event. It's used to make
+   * sure the entries are vertically aligned.
    */
-  if (!event.end) {
-    return [{ day: event.start.format('YYYY-MM-DD'), event }];
+  const eventsOnStart = alignedEvents[start.format('YYYY-MM-DD')];
+  let offset = 0;
+  if (eventsOnStart) {
+    /**
+     * Find the first available vertical slot, or add it to the end.
+     */
+    const firstAvailableIndex = eventsOnStart.findIndex((event) => !event);
+    offset = firstAvailableIndex < 0 ? eventsOnStart.length : firstAvailableIndex;
   }
 
   /**
-   * Duration
+   * We expand each event to an entry for each day it spans.
    */
-  const eventDurationInDays = event.end.endOf('day').diff(event.start.startOf('day'), 'days') + 1;
+  interval.forEach((entry: any) => {
+    if (!alignedEvents[entry.day]) {
+      alignedEvents[entry.day] = [];
+    }
 
-  /**
-   * Create an entry per day within the duration of the event.
-   */
-  return Array.from({ length: eventDurationInDays })
-    .map((_, i) => event.start.add(i, 'days'))
-    .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
+    while (alignedEvents[entry.day].length < offset) {
+      alignedEvents[entry.day].push(undefined as any);
+    }
+    alignedEvents[entry.day].splice(offset, 1, entry.event);
+  });
 };

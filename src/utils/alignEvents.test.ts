@@ -13,7 +13,7 @@ describe('alignEvents', () => {
       },
     ];
 
-    const aligned = alignEvents(events);
+    const aligned = alignEvents(events, 'week');
 
     expect(Object.keys(aligned)).toEqual(['2020-01-01']);
     expect(aligned['2020-01-01']).toEqual(events);
@@ -31,7 +31,7 @@ describe('alignEvents', () => {
       },
     ];
 
-    const aligned = alignEvents(events);
+    const aligned = alignEvents(events, 'week');
 
     expect(Object.keys(aligned)).toEqual(['2020-01-01', '2020-01-02']);
     expect(aligned['2020-01-01']).toEqual(events);
@@ -59,7 +59,7 @@ describe('alignEvents', () => {
       },
     ];
 
-    const aligned = alignEvents(events);
+    const aligned = alignEvents(events, 'week');
 
     expect(Object.keys(aligned)).toEqual(['2020-01-01', '2020-01-02']);
     expect(aligned['2020-01-01']).toEqual(events);
@@ -86,7 +86,7 @@ describe('alignEvents', () => {
       },
     ];
 
-    const aligned = alignEvents(events);
+    const aligned = alignEvents(events, 'week');
 
     expect(Object.keys(aligned)).toEqual(['2020-01-01', '2020-01-02', '2020-01-03']);
     expect(aligned['2020-01-01']).toEqual([events[0]]);
@@ -122,7 +122,7 @@ describe('alignEvents', () => {
       },
     ];
 
-    const aligned = alignEvents(events);
+    const aligned = alignEvents(events, 'week');
 
     expect(Object.keys(aligned)).toStrictEqual(['2020-01-01', '2020-01-02', '2020-01-03', '2020-01-04']);
     expect(aligned['2020-01-01']).toEqual([events[0]]);
@@ -147,7 +147,7 @@ describe('alignEvents', () => {
       };
     });
 
-    const aligned = alignEvents(events);
+    const aligned = alignEvents(events, 'week');
 
     const lastDay = aligned[start.add(numEvents, 'days').format('YYYY-MM-DD')];
     const lastEvent = lastDay[lastDay.length - 1];

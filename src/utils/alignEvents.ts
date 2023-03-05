@@ -12,7 +12,7 @@ export const alignEvents = (
   const alignedEvents: Record<string, CalendarEvent[]> = {};
 
   /**
-   * Sort
+   * Sorting by Event start
    */
   events.sort((a, b) => {
     if (a.start.isSame(b.start)) {
@@ -33,13 +33,25 @@ export const alignEvents = (
     /**
      * Multi-Day
      */
-    const duration = event.end.endOf('day').diff(event.start.startOf('day'), 'days') + 1;
+    let start = event.start;
+    let duration = event.end.endOf('day').diff(start.startOf('day'), 'days') + 1;
+    while (event.end.endOf('day').diff(start.endOf('day'), 'day') > 7) {
+      duration = start.endOf(firstDay).diff(start.startOf('day'), 'days') + 1;
+
+      const interval = Array.from({ length: duration })
+        .map((_, i) => start.add(i, 'days'))
+        .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
+
+      addEvents(start, alignedEvents, interval);
+      start = start.endOf(firstDay).add(1, 'days');
+      duration = event.end.endOf('day').diff(start.startOf('day'), 'days') + 1;
+    }
 
     const interval = Array.from({ length: duration })
-      .map((_, i) => event.start.add(i, 'days'))
+      .map((_, i) => start.add(i, 'days'))
       .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
 
-    addEvents(event.start, alignedEvents, interval);
+    addEvents(start, alignedEvents, interval);
   });
 
   return alignedEvents;

@@ -2,7 +2,15 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import React, { useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
-import { AnnotationEvent, classicColors, FieldType, getLocaleData, PanelProps } from '@grafana/data';
+import {
+  AnnotationEvent,
+  classicColors,
+  FieldColorModeId,
+  FieldType,
+  getFieldColorMode,
+  getLocaleData,
+  PanelProps,
+} from '@grafana/data';
 import { Button, useStyles2, useTheme2 } from '@grafana/ui';
 import { Colors } from '../../constants';
 import { getStyles } from '../../styles';
@@ -33,6 +41,7 @@ export const CalendarPanel: React.FC<Props> = ({
   width,
   height,
   onChangeTimeRange,
+  fieldConfig,
 }) => {
   /**
    * States
@@ -98,6 +107,19 @@ export const CalendarPanel: React.FC<Props> = ({
   const numDays = endOfRangeWeek.diff(startOfRangeWeek, 'days');
 
   /**
+   * Colors
+   */
+  let colors = classicColors;
+  if (fieldConfig?.defaults.color) {
+    const mode = getFieldColorMode(fieldConfig.defaults.color.mode);
+    if (mode && mode.getColors) {
+      colors = mode.getColors(theme);
+    } else if (fieldConfig.defaults.color.mode === FieldColorModeId.Fixed && fieldConfig.defaults.color.fixedColor) {
+      colors = [fieldConfig.defaults.color.fixedColor];
+    }
+  }
+
+  /**
    * Events
    */
   const events = frames.flatMap((frame, frameIdx) => {
@@ -117,17 +139,18 @@ export const CalendarPanel: React.FC<Props> = ({
         links: frame.text?.getLinks!({ valueRowIndex: i }),
         color: frame.color?.values.get(i),
       }))
-      .map<CalendarEvent>(({ text, description, labels, links, start, end, color }, i) => ({
-        text,
-        description,
-        labels,
-        start: dayjs(start),
-        color:
-          colorFn?.(color).color ??
-          classicColors[Math.floor((options.colors === Colors.FRAME ? frameIdx : i) % classicColors.length)],
-        links,
-        end: frame.end ? (end ? dayjs(end) : endOfRangeWeek) : undefined,
-      }));
+      .map<CalendarEvent>(({ text, description, labels, links, start, end, color }, i) => {
+        const idx = options.colors === Colors.FRAME ? frameIdx : i;
+        return {
+          text,
+          description,
+          labels,
+          start: dayjs(start),
+          color: colorFn?.(color).color ?? colors[Math.floor(idx % colors.length)],
+          links,
+          end: frame.end ? (end ? dayjs(end) : endOfRangeWeek) : undefined,
+        };
+      });
   });
 
   /**

@@ -9,6 +9,7 @@
 - Add annotation tags as labels (#88)
 - Refactor multi-day interval (#89)
 - Add display colors based on Event or Frame id if the Color field is not specified (#90)
+- Add support for Color schemes (#91)
 
 ## 1.2.0 (2023-02-23)
 

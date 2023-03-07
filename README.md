@@ -44,6 +44,12 @@ grafana-cli plugins install marcusolsson-calendar-panel
 | [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display your data. |
 | [Release Notes](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/release/) | Stay up to date with the latest features and updates.   |
 
+## Tutorial
+
+This video outlines all the new features we implemented and explains how to configure events.
+
+[![How to display events from PostgreSQL | Calendar plugin for Grafana | February 2023 Release](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/release.png)](https://youtu.be/6WGmm5y4fs4)
+
 ## Feedback
 
 We love to hear from you. There are various ways to get in touch with us.

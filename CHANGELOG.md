@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.0 (IN PROGRESS)
+## 1.3.0 (2023-03-07)
 
 ### Features / Enhancements
 
@@ -10,6 +10,7 @@
 - Refactor multi-day interval (#89)
 - Add display colors based on Event or Frame id if the Color field is not specified (#90)
 - Add support for Color schemes (#91)
+- Add video configuration tutorial (#92)
 
 ## 1.2.0 (2023-02-23)
 

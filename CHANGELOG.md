@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.0 (2023-03-07)
+## 1.3.0 (2023-03-08)
 
 ### Features / Enhancements
 
@@ -11,6 +11,10 @@
 - Add display colors based on Event or Frame id if the Color field is not specified (#90)
 - Add support for Color schemes (#91)
 - Add video configuration tutorial (#92)
+
+### Bug fixes
+
+- Fix scrollable content in the Day drawer (#93)
 
 ## 1.2.0 (2023-02-23)
 

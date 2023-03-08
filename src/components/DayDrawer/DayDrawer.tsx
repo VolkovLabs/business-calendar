@@ -50,7 +50,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
 
   if (!day) {
     return (
-      <Drawer title="Day" scrollableContent={true} onClose={onClose}>
+      <Drawer title="Day" scrollableContent onClose={onClose}>
         Events not found.
       </Drawer>
     );
@@ -105,13 +105,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
    * Return
    */
   return (
-    <Drawer
-      title={day.format('LL')}
-      tabs={tabs}
-      subtitle={day.format('dddd')}
-      scrollableContent={true}
-      onClose={onClose}
-    >
+    <Drawer title={day.format('LL')} tabs={tabs} subtitle={day.format('dddd')} scrollableContent onClose={onClose}>
       {event && (
         <Card>
           <Card.Heading>{heading(event)}</Card.Heading>

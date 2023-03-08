@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.0 (2023-03-07)
+## 1.3.0 (2023-03-08)
 
 ### Features / Enhancements
 

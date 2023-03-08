@@ -12,6 +12,10 @@
 - Add support for Color schemes (#91)
 - Add video configuration tutorial (#92)
 
+### Bug fixes
+
+- Fix scrollable content in the Day drawer (#93)
+
 ## 1.2.0 (2023-02-23)
 
 ### Breaking changes

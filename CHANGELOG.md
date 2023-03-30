@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.4.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Rebuild using Grafana 9.4.7 (#96)
+
+### Bug fixes
+
+- Increase event spacing to prevent overflow (#96)
+
 ## 1.3.0 (2023-03-08)
 
 ### Features / Enhancements

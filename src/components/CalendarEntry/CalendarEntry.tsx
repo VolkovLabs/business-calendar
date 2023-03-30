@@ -2,7 +2,7 @@ import dayjs, { OpUnitType } from 'dayjs';
 import React from 'react';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
-import { getStyles } from '../../styles';
+import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
 
 /**
@@ -49,7 +49,10 @@ interface Props {
  * Calendar Entry
  */
 export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks, displayTime, firstDay }: Props) => {
-  const styles = useStyles2(getStyles);
+  /**
+   * Styles
+   */
+  const styles = useStyles2(Styles);
 
   /**
    * A filler is added to offset entries that started on a day with previously ongoing events.

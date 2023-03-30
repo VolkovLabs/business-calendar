@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { cx } from '@emotion/css';
-import { useStyles2 } from '@grafana/ui';
-import { getStyles } from '../../styles';
+import { useStyles2, useTheme2 } from '@grafana/ui';
+import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
 import { CalendarEntry } from '../CalendarEntry';
 
@@ -83,8 +83,15 @@ export const Day = ({
   displayTime,
   firstDay,
 }: Props) => {
-  const styles = useStyles2(getStyles);
+  /**
+   * Styles
+   */
+  const theme = useTheme2();
+  const styles = useStyles2(Styles);
 
+  /**
+   * Day
+   */
   const isToday = day.isSame(dayjs().startOf('day'));
   const isOutsideInterval = day.isBefore(from.startOf('day')) || day.isAfter(to.startOf('day'));
 
@@ -129,7 +136,11 @@ export const Day = ({
 
       <AutoSizer disableWidth>
         {({ height }) => {
-          const heightPerEntry = 19;
+          const heightPerEntry = theme.typography.fontSize + 6;
+          if (!height) {
+            height = 0;
+          }
+
           const maxNumEvents = Math.max(Math.floor((height - 3 * heightPerEntry) / heightPerEntry), 0);
           const moreEvents = entries.length - maxNumEvents;
 

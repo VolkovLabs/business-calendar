@@ -3,7 +3,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { textUtil } from '@grafana/data';
 import { Card, Drawer, LinkButton, Tab, TabsBar, TagList, useStyles2 } from '@grafana/ui';
-import { getStyles } from '../../styles';
+import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
 
 /**
@@ -46,7 +46,10 @@ interface Props {
  * Day Drawer
  */
 export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
-  const styles = useStyles2(getStyles);
+  /**
+   * Styles
+   */
+  const styles = useStyles2(Styles);
 
   if (!day) {
     return (

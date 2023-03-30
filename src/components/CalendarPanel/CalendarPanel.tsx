@@ -13,7 +13,7 @@ import {
 } from '@grafana/data';
 import { Button, useStyles2, useTheme2 } from '@grafana/ui';
 import { Colors } from '../../constants';
-import { getStyles } from '../../styles';
+import { Styles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
 import { alignEvents, toTimeField, useAnnotations, useIntervalSelection } from '../../utils';
 import { Day } from '../Day';
@@ -53,7 +53,7 @@ export const CalendarPanel: React.FC<Props> = ({
    * Theme
    */
   const theme = useTheme2();
-  const styles = useStyles2(getStyles);
+  const styles = useStyles2(Styles);
 
   /**
    * Interval

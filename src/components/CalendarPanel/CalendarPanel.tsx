@@ -7,6 +7,7 @@ import {
   classicColors,
   FieldColorModeId,
   FieldType,
+  formattedValueToString,
   getFieldColorMode,
   getLocaleData,
   PanelProps,
@@ -131,7 +132,9 @@ export const CalendarPanel: React.FC<Props> = ({
 
     return Array.from({ length: frame.text.values.length })
       .map((_, i) => ({
-        text: frame.text?.values.get(i),
+        text: frame.text?.display
+          ? (formattedValueToString(frame.text.display(frame.text?.values.get(i))) as any)
+          : frame.text?.values.get(i),
         description: frame.description?.values.get(i),
         start: frame.start?.values.get(i),
         end: frame.end?.values.get(i),

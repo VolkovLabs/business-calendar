@@ -1,4 +1,4 @@
-import { Field, FieldType, PanelPlugin } from '@grafana/data';
+import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
 import { CalendarPanel, MultiFieldEditor } from './components';
 import {
   AnnotationsOptions,
@@ -15,7 +15,15 @@ import { CalendarOptions } from './types';
  */
 export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
   .setNoPadding()
-  .useFieldConfig()
+  .useFieldConfig({
+    disableStandardOptions: [
+      FieldConfigProperty.Min,
+      FieldConfigProperty.Max,
+      FieldConfigProperty.Decimals,
+      FieldConfigProperty.DisplayName,
+      FieldConfigProperty.NoValue,
+    ],
+  })
   .setPanelOptions((builder) => {
     builder
       .addRadio({

@@ -2,6 +2,7 @@ import dayjs, { OpUnitType } from 'dayjs';
 import React from 'react';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
+import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
 
@@ -57,7 +58,12 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
   /**
    * A filler is added to offset entries that started on a day with previously ongoing events.
    */
-  const filler = <div className={cx(styles.event.text, styles.event.multiDay, styles.event.filler)}></div>;
+  const filler = (
+    <div
+      className={cx(styles.event.text, styles.event.multiDay, styles.event.filler)}
+      data-testid={TestIds.calendarEntry.filler}
+    />
+  );
   if (!event) {
     return filler;
   }
@@ -139,6 +145,7 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
         endsToday(event) && styles.event.endDay
       )}
       {...linkProps}
+      data-testid={TestIds.calendarEntry.event}
     >
       {startsToday && displayTime && (
         <div className={cx(styles.event.label)}>

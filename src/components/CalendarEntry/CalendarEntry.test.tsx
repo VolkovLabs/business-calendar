@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
-import { shallow } from 'enzyme';
 import React from 'react';
+import { screen, render } from '@testing-library/react';
+import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
 import { CalendarEntry } from './CalendarEntry';
 
@@ -20,8 +21,9 @@ describe('Calendar Entry', () => {
       labels: [],
       color: '',
     };
-    const wrapper = shallow(getComponent({ day: dayjs(Date.now()), event }));
-    const div = wrapper.find('div');
-    expect(div.exists()).toBeTruthy();
+
+    render(getComponent({ day: dayjs(Date.now()), event }));
+
+    expect(screen.getByTestId(TestIds.calendarEntry.event)).toBeInTheDocument();
   });
 });

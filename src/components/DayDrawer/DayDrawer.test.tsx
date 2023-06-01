@@ -1,5 +1,7 @@
-import { shallow } from 'enzyme';
+import dayjs from 'dayjs';
 import React from 'react';
+import { screen, render } from '@testing-library/react';
+import { TestIds } from '../../constants';
 import { DayDrawer } from './DayDrawer';
 
 /**
@@ -12,9 +14,18 @@ describe('DayDrawer', () => {
     const getComponent = ({ options = {}, ...restProps }: any) => {
       return <DayDrawer {...restProps} onClose={() => {}} />;
     };
+    const day = dayjs();
 
-    const wrapper = shallow(getComponent({ data }));
-    const div = wrapper.find('Drawer');
-    expect(div.exists()).toBeTruthy();
+    render(
+      getComponent({
+        data,
+        day,
+        events: {
+          [day.format('YYYY-MM-DD')]: [],
+        },
+      })
+    );
+
+    expect(screen.getByLabelText(TestIds.dayDrawer.root(day.format('LL')))).toBeInTheDocument();
   });
 });

@@ -3,6 +3,7 @@ import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { cx } from '@emotion/css';
 import { useStyles2, useTheme2 } from '@grafana/ui';
+import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
 import { CalendarEntry } from '../CalendarEntry';
@@ -120,6 +121,7 @@ export const Day = ({
       onClick={(e) => {
         onSelectionChange(!selected);
       }}
+      data-testid={TestIds.day.root}
     >
       <div className={cx(styles.day.header)}>
         <div

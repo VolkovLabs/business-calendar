@@ -8,13 +8,11 @@
     "@grafana/schema": "9.4.7",
     "@grafana/toolkit": "9.4.7",
     "@grafana/ui": "9.4.7",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@tippyjs/react": "^4.1.0",
-    "@types/enzyme": "^3.10.12",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
     "dayjs": "^1.11.7",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-virtualized-auto-sizer": "^1.0.9"
@@ -35,5 +33,8 @@
     "upgrade": "yarn upgrade --latest",
     "watch": "grafana-toolkit plugin:dev --watch"
   },
-  "version": "1.4.0"
+  "version": "1.4.0",
+  "dependencies": {
+    "@grafana/e2e-selectors": "^9.5.2"
+  }
 }

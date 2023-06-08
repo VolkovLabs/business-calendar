@@ -6,10 +6,17 @@ import { selectors } from '@grafana/e2e-selectors';
 export const TestIds = {
   calendarEntry: {
     filler: 'data-testid calendar-entry filler',
-    event: 'data-testid calendar-entry event',
+    eventOneDay: 'data-testid calendar-entry event-one-day',
+    eventOneDayWithTime: 'data-testid calendar-entry event-one-day-with-time',
+    eventOneDayWithoutTime: 'data-testid calendar-entry event-one-day-without-time',
+    eventFewDays: 'data-testid calendar-entry event-few-days',
+    eventFewDaysWithTime: 'data-testid calendar-entry event-few-days-with-time',
+    eventFewDaysWithoutTime: 'data-testid calendar-entry event-few-days-without-time',
+    eventFewDaysNotStartedToday: 'data-testid calendar-entry event-few-days-not-started-today',
   },
   panel: {
     root: 'data-testid calendar-panel',
+    buttonApplyInterval: 'data-testid calendar-panel button-apply-interval',
   },
   day: {
     root: 'data-testid day',

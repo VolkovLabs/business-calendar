@@ -58,14 +58,13 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
   /**
    * A filler is added to offset entries that started on a day with previously ongoing events.
    */
-  const filler = (
-    <div
-      className={cx(styles.event.text, styles.event.multiDay, styles.event.filler)}
-      data-testid={TestIds.calendarEntry.filler}
-    />
-  );
   if (!event) {
-    return filler;
+    return (
+      <div
+        className={cx(styles.event.text, styles.event.multiDay, styles.event.filler)}
+        data-testid={TestIds.calendarEntry.filler}
+      />
+    );
   }
 
   const startOfWeek = day.startOf('day').isSame(day.startOf(firstDay as OpUnitType));
@@ -108,16 +107,29 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
    */
   if (startsToday && endsToday(event)) {
     return (
-      <Link title={event.text} className={styles.event.text} {...linkProps}>
+      <Link
+        title={event.text}
+        className={styles.event.text}
+        {...linkProps}
+        data-testid={TestIds.calendarEntry.eventOneDay}
+      >
         <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.event.svg}>
           <circle cx={5} cy={5} r={5} />
         </svg>
         {!displayTime && (
-          <div className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}>{event.text}</div>
+          <div
+            className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}
+            data-testid={TestIds.calendarEntry.eventOneDayWithoutTime}
+          >
+            {event.text}
+          </div>
         )}
 
         {displayTime && (
-          <div className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}>
+          <div
+            className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}
+            data-testid={TestIds.calendarEntry.eventOneDayWithTime}
+          >
             {event.start.format('h:mma')} <b>{event.text}</b>
           </div>
         )}
@@ -145,16 +157,24 @@ export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks
         endsToday(event) && styles.event.endDay
       )}
       {...linkProps}
-      data-testid={TestIds.calendarEntry.event}
+      data-testid={TestIds.calendarEntry.eventFewDays}
     >
       {startsToday && displayTime && (
-        <div className={cx(styles.event.label)}>
+        <div className={cx(styles.event.label)} data-testid={TestIds.calendarEntry.eventFewDaysWithTime}>
           {event.start.format('h:mma')} <b>{event.text}</b>
         </div>
       )}
 
-      {startsToday && !displayTime && <div className={cx(styles.event.label)}>{event.text}</div>}
-      {startOfWeek && !startsToday && <div className={cx(styles.event.label)}>{event.text}</div>}
+      {startsToday && !displayTime && (
+        <div className={cx(styles.event.label)} data-testid={TestIds.calendarEntry.eventFewDaysWithoutTime}>
+          {event.text}
+        </div>
+      )}
+      {startOfWeek && !startsToday && (
+        <div className={cx(styles.event.label)} data-testid={TestIds.calendarEntry.eventFewDaysNotStartedToday}>
+          {event.text}
+        </div>
+      )}
     </Link>
   );
 };

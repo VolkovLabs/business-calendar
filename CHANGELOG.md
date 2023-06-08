@@ -10,6 +10,7 @@
 - Increase Test Coverage and update testing library (#100)
 - Migrate to Plugin Tools 1.5.2 (#101)
 - Update to Node 18 (#101)
+- Add E2E Cypress testing (#102)
 
 ### Bug fixes
 

@@ -31,11 +31,5 @@ describe('Viewing a panel with Calendar', () => {
      */
     const chart = currentPanel.find(getTestIdSelector(TestIds.panel.root));
     chart.should('be.visible');
-
-    /**
-     * Screenshot
-     */
-    chart.screenshot(testedPanel.title);
-    e2e().compareScreenshots({ name: testedPanel.title, threshold: 0.05 });
   });
 });

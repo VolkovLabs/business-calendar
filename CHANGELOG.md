@@ -7,7 +7,7 @@
 - Rebuild using Grafana 9.5.2 (#96, #101)
 - Add Text Formatting, Mappings and Overrides (#97)
 - Remove unused Standard Options (#97)
-- Increase Test Coverage and update testing library (#100)
+- Increase Test Coverage and update testing library (#100, #103)
 - Migrate to Plugin Tools 1.5.2 (#101)
 - Update to Node 18 (#101)
 - Add E2E Cypress testing (#102)

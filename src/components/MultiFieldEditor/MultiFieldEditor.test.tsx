@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { TestIds } from '../../constants';
 import { MultiFieldEditor } from './MultiFieldEditor';
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { getBackendSrv } from '@grafana/runtime';
-import { act, screen, render, waitFor } from '@testing-library/react';
 import { toDataFrame } from '@grafana/data';
+import { getBackendSrv } from '@grafana/runtime';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { TestIds } from '../../constants';
 import { CalendarPanel } from './CalendarPanel';
 

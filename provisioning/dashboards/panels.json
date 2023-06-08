@@ -92,6 +92,7 @@
           "refId": "A"
         }
       ],
+      "title": "Calendar",
       "transformations": [
         {
           "id": "sortBy",
@@ -307,6 +308,7 @@
       },
       "id": 15,
       "options": {
+        "cellHeight": "sm",
         "footer": {
           "countRows": false,
           "fields": "",
@@ -321,7 +323,7 @@
           }
         ]
       },
-      "pluginVersion": "9.4.3",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "cacheDurationSeconds": 300,

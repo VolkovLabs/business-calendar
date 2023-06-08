@@ -137,7 +137,7 @@ export const Day = ({
       </div>
 
       <AutoSizer disableWidth>
-        {({ height }) => {
+        {({ height }: { height: any }) => {
           const heightPerEntry = theme.typography.fontSize + 6;
           if (!height) {
             height = 0;

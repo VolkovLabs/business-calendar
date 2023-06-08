@@ -13,7 +13,7 @@ import {
   PanelProps,
 } from '@grafana/data';
 import { Button, useStyles2, useTheme2 } from '@grafana/ui';
-import { Colors } from '../../constants';
+import { Colors, TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
 import { alignEvents, toTimeField, useAnnotations, useIntervalSelection } from '../../utils';
@@ -190,6 +190,7 @@ export const CalendarPanel: React.FC<Props> = ({
         `,
         styles.panel
       )}
+      data-testid={TestIds.panel.root}
     >
       {day && (
         <DayDrawer

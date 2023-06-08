@@ -1,5 +1,6 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { TestIds } from '../../constants';
 import { MultiFieldEditor } from './MultiFieldEditor';
 
 /**
@@ -15,8 +16,8 @@ describe('Editor', () => {
       return <MultiFieldEditor {...restProps} context={context} />;
     };
 
-    const wrapper = shallow(getComponent({}));
-    const select = wrapper.find('Select');
-    expect(select.exists()).toBeTruthy();
+    render(getComponent({}));
+
+    expect(screen.getByLabelText(TestIds.multiFieldEditor.select));
   });
 });

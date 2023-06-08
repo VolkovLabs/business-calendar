@@ -217,6 +217,7 @@ export const CalendarPanel: React.FC<Props> = ({
               clearSelection();
               onChangeTimeRange({ from: from.valueOf(), to: to.valueOf() });
             }}
+            data-testid={TestIds.panel.buttonApplyInterval}
           >
             Apply time range
           </Button>

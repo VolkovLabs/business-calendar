@@ -8,6 +8,8 @@
 - Add Text Formatting, Mappings and Overrides (#97)
 - Remove unused Standard Options (#97)
 - Increase Test Coverage and update testing library (#100)
+- Migrate to Plugin Tools 1.5.2 (#101)
+- Update to Node 18 (#101)
 
 ### Bug fixes
 

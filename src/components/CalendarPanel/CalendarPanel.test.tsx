@@ -1,9 +1,10 @@
 import React from 'react';
-import { toDataFrame } from '@grafana/data';
+import { dateTime, FieldType, LoadingState, PanelData, toDataFrame, FieldColorModeId } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { TestIds } from '../../constants';
 import { DayDrawer } from '../DayDrawer';
+import { useAnnotations } from '../../utils';
 import { CalendarPanel } from './CalendarPanel';
 
 /**
@@ -14,6 +15,11 @@ const InTestIds = {
   dayDrawerClose: 'day-drawer-close',
   buttonDay: 'button-day',
   daySelectInterval: 'day-select-interval',
+  dayEvents: 'day-events',
+  dayEvent: 'day-events event',
+  dayEventName: 'day-events event-name',
+  dayEventLabel: 'day-events event-label',
+  dayEventColor: 'day-events event-color',
 };
 
 /**
@@ -29,9 +35,20 @@ jest.mock('@grafana/runtime', () => ({
  * Mock Day
  */
 jest.mock('../Day', () => ({
-  Day: jest.fn(({ setDay, day, onSelectionChange }) => {
+  Day: jest.fn(({ setDay, day, onSelectionChange, events }) => {
     return (
       <div>
+        {events.length && (
+          <div data-testid={InTestIds.dayEvents}>
+            {events.map((event: any, index: number) => (
+              <div key={index} data-testid={InTestIds.dayEvent}>
+                <div data-testid={InTestIds.dayEventName}>{event.name}</div>
+                <div data-testid={InTestIds.dayEventLabel}>{event.label}</div>
+                <div data-testid={InTestIds.dayEventColor}>{event.color}</div>
+              </div>
+            ))}
+          </div>
+        )}
         <button data-testid={InTestIds.buttonDay} onClick={() => setDay(day)}>
           open
         </button>
@@ -51,9 +68,29 @@ jest.mock('../DayDrawer', () => ({
 }));
 
 /**
+ * Mock utils
+ */
+jest.mock('../../utils', () => ({
+  ...jest.requireActual('../../utils'),
+  useAnnotations: jest.fn(() => [{ id: '123' }]),
+}));
+
+type Props = React.ComponentProps<typeof CalendarPanel>;
+
+/**
  * Panel
  */
 describe('Panel', () => {
+  /**
+   * Add ScrollTo method
+   */
+  window.HTMLElement.prototype.scrollTo = jest.fn();
+
+  /**
+   * Return particular day to prevent unexpected behaviors with dates
+   */
+  const getSafeDate = () => new Date('2023-02-02');
+
   /**
    * Render Without Warning
    * @param component
@@ -75,18 +112,50 @@ describe('Panel', () => {
    * @param options
    * @param restProps
    */
-  const getComponent = ({ options = { name: 'data' }, ...restProps }: any) => {
-    const data = {
+  const getComponent = ({ options = { autoScroll: true }, ...restProps }: Partial<Props>) => {
+    const allOptions = {
+      textField: 'Event Name',
+      timeField: 'Event Start',
+      endTimeField: 'Event End',
+      labelFields: ['Event Name'],
+      ...options,
+    };
+    const timeRange = {
+      from: dateTime(getSafeDate()),
+      to: dateTime(getSafeDate()),
+      raw: {
+        from: dateTime(getSafeDate()),
+        to: dateTime(getSafeDate()),
+      },
+    };
+    const data: PanelData = {
+      state: LoadingState.Done,
+      timeRange,
       series: [
         toDataFrame({
           name: 'data',
-          fields: [],
+          fields: [
+            {
+              type: FieldType.string,
+              name: allOptions.textField,
+              values: ['event1', 'event2', 'event3'],
+              getLinks: () => null,
+            },
+            {
+              type: FieldType.time,
+              name: allOptions.timeField,
+              values: [getSafeDate(), getSafeDate(), getSafeDate()],
+            },
+            {
+              type: FieldType.time,
+              name: allOptions.endTimeField,
+              values: [getSafeDate(), getSafeDate(), getSafeDate()],
+            },
+          ],
         }),
       ],
     };
-    return (
-      <CalendarPanel data={data} options={options} timeRange={{ from: Date.now(), to: Date.now() }} {...restProps} />
-    );
+    return <CalendarPanel data={data} options={allOptions} timeRange={timeRange} {...(restProps as any)} />;
   };
 
   beforeAll(() => {
@@ -170,5 +239,124 @@ describe('Panel', () => {
     fireEvent.click(screen.getByTestId(TestIds.panel.buttonApplyInterval));
 
     expect(onChangeTimeRange).toHaveBeenCalled();
+  });
+
+  it('Should apply events', async () => {
+    await renderWithoutWarning(getComponent({}));
+
+    expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
+    expect(within(screen.getByTestId(InTestIds.dayEvents)).getAllByTestId(InTestIds.dayEvent)).toHaveLength(3);
+  });
+
+  it('Should apply annotations', async () => {
+    jest.mocked(useAnnotations).mockImplementation(
+      () =>
+        [
+          {
+            time: getSafeDate(),
+            timeEnd: getSafeDate(),
+          },
+          {
+            time: getSafeDate(),
+          },
+        ] as any
+    );
+
+    await renderWithoutWarning(
+      getComponent({
+        options: {
+          autoScroll: true,
+          annotations: true,
+        },
+      })
+    );
+
+    expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
+    expect(within(screen.getByTestId(InTestIds.dayEvents)).getAllByTestId(InTestIds.dayEvent)).toHaveLength(5);
+  });
+
+  it('Should work if frame does not contain text and start fields', async () => {
+    await renderWithoutWarning(
+      getComponent({
+        data: {
+          state: LoadingState.Done,
+          timeRange: null as any,
+          series: [
+            toDataFrame({
+              name: 'data',
+              fields: [
+                {
+                  type: FieldType.string,
+                  name: 'some field',
+                  values: ['event1', 'event2', 'event3'],
+                  getLinks: () => null,
+                },
+              ],
+            }),
+          ],
+        },
+      })
+    );
+
+    expect(screen.queryByTestId(InTestIds.dayEvents)).not.toBeInTheDocument();
+  });
+
+  it('Should apply events if no textField and timeField in options', async () => {
+    await renderWithoutWarning(
+      getComponent({
+        options: {
+          textField: '',
+          timeField: '',
+        } as any,
+      })
+    );
+
+    expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
+    expect(within(screen.getByTestId(InTestIds.dayEvents)).getAllByTestId(InTestIds.dayEvent)).toHaveLength(3);
+  });
+
+  it('Should apply color mode', async () => {
+    await renderWithoutWarning(
+      getComponent({
+        fieldConfig: {
+          defaults: {
+            color: {
+              mode: FieldColorModeId.ContinuousBlPu,
+            },
+          },
+          overrides: [],
+        },
+      })
+    );
+
+    expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
+    const eventsScreen = within(screen.getByTestId(InTestIds.dayEvents));
+    const eventColors = eventsScreen.getAllByTestId(InTestIds.dayEventColor);
+    expect(eventColors[0]).toHaveTextContent('#5794F2');
+    expect(eventColors[1]).toHaveTextContent('#B877D9');
+    expect(eventColors[2]).toHaveTextContent('#5794F2');
+  });
+
+  it('Should apply fixed color mode', async () => {
+    await renderWithoutWarning(
+      getComponent({
+        fieldConfig: {
+          defaults: {
+            color: {
+              mode: FieldColorModeId.Fixed,
+              fixedColor: '#999999',
+            },
+          },
+          overrides: [],
+        },
+      })
+    );
+
+    expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
+    const eventsScreen = within(screen.getByTestId(InTestIds.dayEvents));
+    const eventColors = eventsScreen.getAllByTestId(InTestIds.dayEventColor);
+    expect(eventColors[0]).toHaveTextContent('#999999');
+    expect(eventColors[1]).toHaveTextContent('#999999');
+    expect(eventColors[2]).toHaveTextContent('#999999');
   });
 });

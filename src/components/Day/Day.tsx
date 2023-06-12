@@ -71,7 +71,7 @@ interface Props {
 /**
  * Day
  */
-export const Day = ({
+export const Day: React.FC<Props> = ({
   day,
   events,
   selected,
@@ -83,7 +83,7 @@ export const Day = ({
   quickLinks,
   displayTime,
   firstDay,
-}: Props) => {
+}) => {
   /**
    * Styles
    */
@@ -131,6 +131,7 @@ export const Day = ({
             isToday && styles.day.today,
             selected && styles.day.selected
           )}
+          data-testid={TestIds.day.dayDate}
         >
           {day.format('D') === '1' ? day.format('MMM D') : day.format('D')}
         </div>
@@ -150,7 +151,11 @@ export const Day = ({
             <>
               {entries.slice(0, maxNumEvents)}
               {moreEvents > 0 && (
-                <div onClick={() => setDay(day)} className={styles.day.moreLabel}>{`${moreEvents} more`}</div>
+                <div
+                  onClick={() => setDay(day)}
+                  className={styles.day.moreLabel}
+                  data-testid={TestIds.day.buttonShowMore}
+                >{`${moreEvents} more`}</div>
               )}
             </>
           );

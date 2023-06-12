@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
 import {
   AnnotationEvent,
@@ -51,6 +51,11 @@ export const CalendarPanel: React.FC<Props> = ({
   const [event, setEvent] = useState<CalendarEvent | undefined>(undefined);
 
   /**
+   * Day grid ref
+   */
+  const dayGridRef = useRef<HTMLDivElement>(null);
+
+  /**
    * Theme
    */
   const theme = useTheme2();
@@ -64,34 +69,49 @@ export const CalendarPanel: React.FC<Props> = ({
   /**
    * Frames
    */
-  const frames = data.series.map((frame) => ({
-    text: options.textField
-      ? frame.fields.find((f) => f.name === options.textField)
-      : frame.fields.find((f) => f.type === FieldType.string),
-    description: frame.fields.find((f) => f.name === options.descriptionField),
-    start: toTimeField(
-      options.timeField
-        ? frame.fields.find((f) => f.name === options.timeField)
-        : frame.fields.find((f) => f.type === FieldType.time),
+  const frames = useMemo(
+    () =>
+      data.series.map((frame) => ({
+        text: options.textField
+          ? frame.fields.find((f) => f.name === options.textField)
+          : frame.fields.find((f) => f.type === FieldType.string),
+        description: frame.fields.find((f) => f.name === options.descriptionField),
+        start: toTimeField(
+          options.timeField
+            ? frame.fields.find((f) => f.name === options.timeField)
+            : frame.fields.find((f) => f.type === FieldType.time),
+          timeZone,
+          theme
+        ),
+        end: toTimeField(
+          frame.fields.find((f) => f.name === options.endTimeField),
+          timeZone,
+          theme
+        ),
+        labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
+        color: frame.fields.find((f) => f.name === options.colorField),
+      })),
+    [
+      data.series,
+      options.colorField,
+      options.descriptionField,
+      options.endTimeField,
+      options.labelFields,
+      options.textField,
+      options.timeField,
+      theme,
       timeZone,
-      theme
-    ),
-    end: toTimeField(
-      frame.fields.find((f) => f.name === options.endTimeField),
-      timeZone,
-      theme
-    ),
-    labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
-    color: frame.fields.find((f) => f.name === options.colorField),
-  }));
+    ]
+  );
 
   /**
    * Auto Scroll
    */
-  const ref = useRef<HTMLDivElement>(null);
-  if (ref.current && options.autoScroll) {
-    ref.current.scrollTo(0, ref.current.scrollHeight);
-  }
+  useEffect(() => {
+    if (dayGridRef.current && options.autoScroll) {
+      dayGridRef.current.scrollTo(0, dayGridRef.current.scrollHeight);
+    }
+  }, [options.autoScroll]);
 
   /**
    * Week Start
@@ -240,7 +260,7 @@ export const CalendarPanel: React.FC<Props> = ({
        */}
 
       <div
-        ref={ref}
+        ref={dayGridRef}
         className={cx(
           styles.calendar.grid,
           css`

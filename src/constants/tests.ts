@@ -20,6 +20,8 @@ export const TestIds = {
   },
   day: {
     root: 'data-testid day',
+    dayDate: 'data-testid day date',
+    buttonShowMore: 'data-testid day button-show-more',
   },
   dayDrawer: {
     /**
@@ -27,6 +29,11 @@ export const TestIds = {
      * https://github.com/grafana/grafana/blob/186cd96447fdd3a9ae26907a48023998c825c6d6/packages/grafana-ui/src/components/Drawer/Drawer.tsx#L106
      */
     root: selectors.components.Drawer.General.title,
+    event: 'data-testid day-drawer event',
+    eventTitle: 'data-testid day-drawer event-title',
+    eventLink: 'day-drawer event-link',
+    dayEvent: 'data-testid day-drawer day-event',
+    dayEventTitle: 'day-drawer day-event-title',
   },
   multiFieldEditor: {
     select: 'multi-field-editor select',

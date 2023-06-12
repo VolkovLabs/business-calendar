@@ -75,6 +75,9 @@ jest.mock('../../utils', () => ({
   useAnnotations: jest.fn(() => [{ id: '123' }]),
 }));
 
+/**
+ * Component Props
+ */
 type Props = React.ComponentProps<typeof CalendarPanel>;
 
 /**
@@ -271,6 +274,9 @@ describe('Panel', () => {
       })
     );
 
+    /**
+     * Check if all passed and annotation events are rendered
+     */
     expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
     expect(within(screen.getByTestId(InTestIds.dayEvents)).getAllByTestId(InTestIds.dayEvent)).toHaveLength(5);
   });
@@ -330,6 +336,10 @@ describe('Panel', () => {
     );
 
     expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
+
+    /**
+     * Check applying mode colors
+     */
     const eventsScreen = within(screen.getByTestId(InTestIds.dayEvents));
     const eventColors = eventsScreen.getAllByTestId(InTestIds.dayEventColor);
     expect(eventColors[0]).toHaveTextContent('#5794F2');
@@ -353,6 +363,10 @@ describe('Panel', () => {
     );
 
     expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
+
+    /**
+     * Check applying fixed color
+     */
     const eventsScreen = within(screen.getByTestId(InTestIds.dayEvents));
     const eventColors = eventsScreen.getAllByTestId(InTestIds.dayEventColor);
     expect(eventColors[0]).toHaveTextContent('#999999');

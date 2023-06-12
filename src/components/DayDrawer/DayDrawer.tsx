@@ -3,6 +3,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { textUtil } from '@grafana/data';
 import { Card, Drawer, LinkButton, Tab, TabsBar, TagList, useStyles2 } from '@grafana/ui';
+import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
 
@@ -45,7 +46,7 @@ interface Props {
 /**
  * Day Drawer
  */
-export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
+export const DayDrawer: React.FC<Props> = ({ day, events, event, setEvent, onClose }) => {
   /**
    * Styles
    */
@@ -81,7 +82,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
    * Svg
    */
   const heading = (event: CalendarEvent) => (
-    <div>
+    <div data-testid={TestIds.dayDrawer.eventTitle}>
       <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.event.svg}>
         <circle cx={5} cy={5} r={5} />
       </svg>
@@ -110,7 +111,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
   return (
     <Drawer title={day.format('LL')} tabs={tabs} subtitle={day.format('dddd')} scrollableContent onClose={onClose}>
       {event && (
-        <Card>
+        <Card data-testid={TestIds.dayDrawer.event}>
           <Card.Heading>{heading(event)}</Card.Heading>
           <Card.Meta>{meta(event)}</Card.Meta>
           <Card.Tags>
@@ -130,6 +131,7 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
                   target={link.target}
                   variant={'secondary'}
                   onClick={link.onClick}
+                  aria-label={TestIds.dayDrawer.eventLink}
                 >
                   {link.title}
                 </LinkButton>
@@ -146,8 +148,8 @@ export const DayDrawer = ({ day, events, event, setEvent, onClose }: Props) => {
             }
 
             return (
-              <Card key={i} onClick={() => setEvent(event)}>
-                <Card.Heading>{heading(event)}</Card.Heading>
+              <Card key={i} onClick={() => setEvent(event)} data-testid={TestIds.dayDrawer.dayEvent}>
+                <Card.Heading aria-label={TestIds.dayDrawer.dayEventTitle}>{heading(event)}</Card.Heading>
                 <Card.Meta>{meta(event)}</Card.Meta>
                 <Card.Tags>
                   <TagList tags={tags(event.labels)} />

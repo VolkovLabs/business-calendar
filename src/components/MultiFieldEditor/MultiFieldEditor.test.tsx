@@ -1,5 +1,5 @@
 import React from 'react';
-import { toDataFrame, FieldType } from '@grafana/data';
+import { FieldType, toDataFrame } from '@grafana/data';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { TestIds } from '../../constants';
 import { MultiFieldEditor } from './MultiFieldEditor';

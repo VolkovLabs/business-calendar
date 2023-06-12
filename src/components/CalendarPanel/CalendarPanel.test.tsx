@@ -1,25 +1,25 @@
 import React from 'react';
-import { dateTime, FieldType, LoadingState, PanelData, toDataFrame, FieldColorModeId } from '@grafana/data';
+import { dateTime, FieldColorModeId, FieldType, LoadingState, PanelData, toDataFrame } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { TestIds } from '../../constants';
-import { DayDrawer } from '../DayDrawer';
 import { useAnnotations } from '../../utils';
+import { DayDrawer } from '../DayDrawer';
 import { CalendarPanel } from './CalendarPanel';
 
 /**
  * Test Ids that are used only in tests
  */
 const InTestIds = {
+  buttonDay: 'button-day',
   dayDrawer: 'day-drawer',
   dayDrawerClose: 'day-drawer-close',
-  buttonDay: 'button-day',
-  daySelectInterval: 'day-select-interval',
-  dayEvents: 'day-events',
   dayEvent: 'day-events event',
-  dayEventName: 'day-events event-name',
-  dayEventLabel: 'day-events event-label',
   dayEventColor: 'day-events event-color',
+  dayEventLabel: 'day-events event-label',
+  dayEventName: 'day-events event-name',
+  dayEvents: 'day-events',
+  daySelectInterval: 'day-select-interval',
 };
 
 /**

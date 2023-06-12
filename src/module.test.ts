@@ -1,4 +1,4 @@
-import { PanelPlugin, FieldType, Field } from '@grafana/data';
+import { Field, FieldType, PanelPlugin } from '@grafana/data';
 import { plugin } from './module';
 
 /**

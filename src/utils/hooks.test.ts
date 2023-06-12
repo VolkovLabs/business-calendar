@@ -1,5 +1,5 @@
 import days from 'dayjs';
-import { act, renderHook, fireEvent } from '@testing-library/react';
+import { act, fireEvent, renderHook } from '@testing-library/react';
 import { useIntervalSelection } from './hooks';
 
 /**

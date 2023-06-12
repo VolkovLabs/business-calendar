@@ -79,7 +79,7 @@ export const DayDrawer: React.FC<Props> = ({ day, events, event, setEvent, onClo
   };
 
   /**
-   * Svg
+   * SVG
    */
   const heading = (event: CalendarEvent) => (
     <div data-testid={TestIds.dayDrawer.eventTitle}>

@@ -5,6 +5,11 @@ import { Colors } from '../constants';
  */
 export interface CalendarOptions {
   /**
+   * Calendar Type
+   */
+  calendarType?: 'custom' | 'library';
+
+  /**
    * Auto Scroll
    *
    * @type {boolean}

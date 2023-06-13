@@ -12,6 +12,7 @@ export const enum Colors {
  * Default Options
  */
 export const DefaultOptions: CalendarOptions = {
+  calendarType: 'custom',
   quickLinks: false,
   autoScroll: false,
   annotations: false,

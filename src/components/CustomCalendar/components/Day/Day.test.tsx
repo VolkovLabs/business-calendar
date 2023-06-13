@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { TestIds } from '../../constants';
+import { TestIds } from '../../../../constants';
 import { Day } from './Day';
 
 /**

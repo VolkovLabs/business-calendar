@@ -27,6 +27,18 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
   .setPanelOptions((builder) => {
     builder
       .addRadio({
+        path: 'calendarType',
+        name: 'Calendar Type',
+        description: 'What component to use',
+        settings: {
+          options: [
+            { value: 'custom', label: 'Custom' },
+            { value: 'library', label: 'Library' },
+          ],
+        },
+        defaultValue: 'custom',
+      })
+      .addRadio({
         path: 'autoScroll',
         name: 'Scroll to bottom',
         description: 'Automatically scroll to the end of the time interval.',

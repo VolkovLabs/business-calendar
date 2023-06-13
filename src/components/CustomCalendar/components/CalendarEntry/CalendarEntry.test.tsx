@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { TestIds } from '../../constants';
-import { CalendarEvent } from '../../types';
+import { TestIds } from '../../../../constants';
+import { CalendarEvent } from '../../../../types';
 import { CalendarEntry } from './CalendarEntry';
 
 /**

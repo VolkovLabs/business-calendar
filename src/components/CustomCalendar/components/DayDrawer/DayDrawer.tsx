@@ -3,9 +3,9 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { textUtil } from '@grafana/data';
 import { Card, Drawer, LinkButton, Tab, TabsBar, TagList, useStyles2 } from '@grafana/ui';
-import { TestIds } from '../../constants';
-import { Styles } from '../../styles';
-import { CalendarEvent } from '../../types';
+import { TestIds } from '../../../../constants';
+import { Styles } from '../../../../styles';
+import { CalendarEvent } from '../../../../types';
 
 /**
  * Day.js Plugins

@@ -10,6 +10,7 @@ import { useEventFrames, useColors, useCalendarEvents } from '../../utils';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Styles } from './styles';
 import { Toolbar } from './components';
+import { useCalendarRange } from './useCalendarRange';
 
 const useLibCalendarEvents = (events: CalendarEvent[]): Event[] => {
   return useMemo(() => {
@@ -37,7 +38,15 @@ const localizer = dayjsLocalizer(dayjs);
  */
 interface Props extends PanelProps<CalendarOptions> {}
 
-export const LibCalendar: React.FC<Props> = ({ height, data, options, timeZone, fieldConfig, timeRange }) => {
+export const LibCalendar: React.FC<Props> = ({
+  height,
+  data,
+  options,
+  timeZone,
+  fieldConfig,
+  timeRange,
+  onChangeTimeRange,
+}) => {
   /**
    * Theme
    */
@@ -63,6 +72,9 @@ export const LibCalendar: React.FC<Props> = ({ height, data, options, timeZone, 
    */
   const events = useLibCalendarEvents(defaultEvents);
 
+  /**
+   * Get props for event div element
+   */
   const eventPropGetter = useCallback(
     (event: any) => ({
       style: {
@@ -72,12 +84,20 @@ export const LibCalendar: React.FC<Props> = ({ height, data, options, timeZone, 
     []
   );
 
+  /**
+   * Custom Calendar Components
+   */
   const components = useMemo(
     () => ({
       toolbar: Toolbar,
     }),
     []
   );
+
+  /**
+   * Manage calendar time range and view
+   */
+  const { date, view, onChangeView, onNavigate } = useCalendarRange(timeRange, onChangeTimeRange);
 
   return (
     <div>
@@ -95,6 +115,10 @@ export const LibCalendar: React.FC<Props> = ({ height, data, options, timeZone, 
           day: true,
         }}
         components={components}
+        onNavigate={onNavigate}
+        onView={onChangeView}
+        date={date}
+        view={view}
       />
     </div>
   );

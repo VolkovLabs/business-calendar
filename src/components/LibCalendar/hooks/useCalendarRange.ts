@@ -10,7 +10,7 @@ import { TimeRange, AbsoluteTimeRange } from '@grafana/data';
  */
 export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeRange: AbsoluteTimeRange) => void) => {
   const [view, setView] = useState<'month' | 'week' | 'day'>(Views.MONTH);
-  const [calendarFrom, setCalendarFrom] = useState(timeRange.from.toDate());
+  const [calendarFrom, setCalendarFrom] = useState(dayjs(timeRange.to.toDate()).startOf(view).toDate());
   const [calendarTo, setCalendarTo] = useState(timeRange.to.toDate());
 
   /**

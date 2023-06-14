@@ -1,13 +1,20 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { css, cx } from '@emotion/css';
-import { AnnotationEvent, getLocaleData, PanelProps } from '@grafana/data';
+import { getLocaleData, PanelProps } from '@grafana/data';
 import { Button, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
-import { alignEvents, useAnnotations, useIntervalSelection, useEventFrames, useColors, useCalendarEvents } from 'utils';
+import {
+  alignEvents,
+  useCalendarEvents,
+  useIntervalSelection,
+  useEventFrames,
+  useColors,
+  useAnnotationEvents,
+} from '../../utils';
 import { Day, DayDrawer } from './components';
 
 /**
@@ -89,29 +96,21 @@ export const CustomCalendar: React.FC<Props> = ({
   const colors = useColors(fieldConfig);
 
   /**
-   * Events
+   * DataFrame Events
    */
-  const events = useCalendarEvents(frames, options, colors, timeRange);
+  const dataFrameEvents = useCalendarEvents(frames, options, colors, timeRange);
 
   /**
-   * Annotations
+   * Annotations events
    */
-  const annotations = useAnnotations(timeRange);
-  if (options.annotations && annotations.length) {
-    annotations
-      .map<CalendarEvent>(
-        (annotation: AnnotationEvent) =>
-          ({
-            text: annotation.text ?? '',
-            start: dayjs(annotation.time),
-            end: annotation.timeEnd ? dayjs(annotation.timeEnd) : undefined,
-            open: false,
-            labels: annotation.tags,
-            color: annotation.color,
-          } as CalendarEvent)
-      )
-      .forEach((event: CalendarEvent) => events.push(event));
-  }
+  const annotationsEvents = useAnnotationEvents(timeRange);
+
+  /**
+   * Events
+   */
+  const events = useMemo(() => {
+    return dataFrameEvents.concat(annotationsEvents);
+  }, [annotationsEvents, dataFrameEvents]);
 
   /**
    * Align Events

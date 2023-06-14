@@ -5,23 +5,12 @@ import { PanelProps, getLocaleData } from '@grafana/data';
 import { useStyles2 } from '@grafana/ui';
 import { Calendar, dayjsLocalizer, Event } from 'react-big-calendar';
 import dayjs from 'dayjs';
-import { CalendarOptions, CalendarEvent } from '../../types';
-import { useEventFrames, useColors, useCalendarEvents } from '../../utils';
+import { CalendarOptions } from '../../types';
+import { useEventFrames, useColors, useCalendarEvents, useAnnotationEvents } from '../../utils';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Styles } from './styles';
 import { Toolbar } from './components';
-import { useCalendarRange } from './useCalendarRange';
-
-const useLibCalendarEvents = (events: CalendarEvent[]): Event[] => {
-  return useMemo(() => {
-    return events.map<Event>((event) => ({
-      ...event,
-      title: event.text,
-      start: event.start.toDate(),
-      end: event.end ? event.end.toDate() : event.end,
-    }));
-  }, [events]);
-};
+import { useCalendarRange, useCalendarEvents as useLibCalendarEvents } from './hooks';
 
 /**
  * Update dayjs locale to support different first day of week
@@ -63,22 +52,34 @@ export const LibCalendar: React.FC<Props> = ({
   const colors = useColors(fieldConfig);
 
   /**
-   * Default events
+   * DataFrame events
    */
-  const defaultEvents = useCalendarEvents(frames, options, colors, timeRange);
+  const dataFrameEvents = useCalendarEvents(frames, options, colors, timeRange);
+
+  /**
+   * Annotations Events
+   */
+  const annotationsEvents = useAnnotationEvents(timeRange);
+
+  /**
+   * All Events
+   */
+  const allEvents = useMemo(() => {
+    return dataFrameEvents.concat(annotationsEvents);
+  }, [dataFrameEvents, annotationsEvents]);
 
   /**
    * Adopted Events for BigCalendar
    */
-  const events = useLibCalendarEvents(defaultEvents);
+  const events = useLibCalendarEvents(allEvents);
 
   /**
    * Get props for event div element
    */
   const eventPropGetter = useCallback(
-    (event: any) => ({
+    (event: Event) => ({
       style: {
-        backgroundColor: event.color,
+        backgroundColor: event.resource.color,
       },
     }),
     []

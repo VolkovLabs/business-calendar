@@ -31,6 +31,9 @@ export const Styles = (theme: GrafanaTheme2) => {
       [borderColorOverrideSelectors]: {
         borderColor: theme.colors.border.weak,
       },
+      '.rbc-event': {
+        backgroundColor: theme.colors.primary.main,
+      },
     },
     toolbar: css`
       display: flex;

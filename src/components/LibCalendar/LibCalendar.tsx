@@ -1,11 +1,15 @@
 import React, { useMemo, useCallback } from 'react';
+import { Global } from '@emotion/react';
 import en from 'dayjs/locale/en';
 import { PanelProps, getLocaleData } from '@grafana/data';
+import { useStyles2 } from '@grafana/ui';
 import { Calendar, dayjsLocalizer, Event } from 'react-big-calendar';
 import dayjs from 'dayjs';
 import { CalendarOptions, CalendarEvent } from '../../types';
 import { useEventFrames, useColors, useCalendarEvents } from '../../utils';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { Styles } from './styles';
+import { Toolbar } from './components';
 
 const useLibCalendarEvents = (events: CalendarEvent[]): Event[] => {
   return useMemo(() => {
@@ -35,6 +39,11 @@ interface Props extends PanelProps<CalendarOptions> {}
 
 export const LibCalendar: React.FC<Props> = ({ height, data, options, timeZone, fieldConfig, timeRange }) => {
   /**
+   * Theme
+   */
+  const styles = useStyles2(Styles);
+
+  /**
    * Frame events
    */
   const frames = useEventFrames(data.series, options, timeZone);
@@ -63,19 +72,30 @@ export const LibCalendar: React.FC<Props> = ({ height, data, options, timeZone, 
     []
   );
 
+  const components = useMemo(
+    () => ({
+      toolbar: Toolbar,
+    }),
+    []
+  );
+
   return (
-    <Calendar
-      localizer={localizer}
-      events={events}
-      eventPropGetter={eventPropGetter}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height }}
-      views={{
-        month: true,
-        week: true,
-        day: true,
-      }}
-    />
+    <div>
+      <Global styles={styles.global} />
+      <Calendar
+        localizer={localizer}
+        events={events}
+        eventPropGetter={eventPropGetter}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height }}
+        views={{
+          month: true,
+          week: true,
+          day: true,
+        }}
+        components={components}
+      />
+    </div>
   );
 };

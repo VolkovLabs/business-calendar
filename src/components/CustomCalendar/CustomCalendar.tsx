@@ -1,20 +1,13 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
 import { getLocaleData, PanelProps } from '@grafana/data';
 import { Button, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
-import {
-  alignEvents,
-  useCalendarEvents,
-  useIntervalSelection,
-  useEventFrames,
-  useColors,
-  useAnnotationEvents,
-} from '../../utils';
+import { alignEvents, useIntervalSelection } from '../../utils';
 import { Day, DayDrawer } from './components';
 
 /**
@@ -26,21 +19,15 @@ dayjs.extend(isoWeek);
 /**
  * Properties
  */
-interface Props extends PanelProps<CalendarOptions> {}
+interface Props
+  extends Pick<PanelProps<CalendarOptions>, 'width' | 'height' | 'timeRange' | 'onChangeTimeRange' | 'options'> {
+  events: CalendarEvent[];
+}
 
 /**
  * Custom Calendar
  */
-export const CustomCalendar: React.FC<Props> = ({
-  options,
-  data,
-  timeRange,
-  timeZone,
-  width,
-  height,
-  onChangeTimeRange,
-  fieldConfig,
-}) => {
+export const CustomCalendar: React.FC<Props> = ({ options, timeRange, width, height, onChangeTimeRange, events }) => {
   /**
    * States
    */
@@ -61,11 +48,6 @@ export const CustomCalendar: React.FC<Props> = ({
    * Interval
    */
   const [selectedInterval, clearSelection, onTimeSelection] = useIntervalSelection();
-
-  /**
-   * Frames
-   */
-  const frames = useEventFrames(data.series, options, timeZone);
 
   /**
    * Auto Scroll
@@ -89,28 +71,6 @@ export const CustomCalendar: React.FC<Props> = ({
   const startOfRangeWeek = from.startOf(firstDay);
   const endOfRangeWeek = to.endOf(firstDay);
   const numDays = endOfRangeWeek.diff(startOfRangeWeek, 'days');
-
-  /**
-   * Colors
-   */
-  const colors = useColors(fieldConfig);
-
-  /**
-   * DataFrame Events
-   */
-  const dataFrameEvents = useCalendarEvents(frames, options, colors, timeRange);
-
-  /**
-   * Annotations events
-   */
-  const annotationsEvents = useAnnotationEvents(timeRange);
-
-  /**
-   * Events
-   */
-  const events = useMemo(() => {
-    return dataFrameEvents.concat(annotationsEvents);
-  }, [annotationsEvents, dataFrameEvents]);
 
   /**
    * Align Events

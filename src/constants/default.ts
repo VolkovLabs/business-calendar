@@ -1,4 +1,4 @@
-import { CalendarOptions } from '../types';
+import { CalendarOptions, CalendarType } from '../types';
 
 /**
  * Colors
@@ -12,7 +12,7 @@ export const enum Colors {
  * Default Options
  */
 export const DefaultOptions: CalendarOptions = {
-  calendarType: 'custom',
+  calendarType: CalendarType.CUSTOM,
   quickLinks: false,
   autoScroll: false,
   annotations: false,
@@ -58,4 +58,12 @@ export const DisplayTimeOptions = [
 export const ColorsOptions = [
   { value: Colors.FRAME, label: 'Frame' },
   { value: Colors.EVENT, label: 'Event' },
+];
+
+/**
+ * Calendar Type Options
+ */
+export const CalendarTypeOptions = [
+  { value: CalendarType.CUSTOM, label: 'Custom' },
+  { value: CalendarType.BIG_CALENDAR, label: 'Big Calendar' },
 ];

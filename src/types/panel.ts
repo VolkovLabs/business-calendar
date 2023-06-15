@@ -1,5 +1,10 @@
 import { Colors } from '../constants';
 
+export enum CalendarType {
+  CUSTOM = 'custom',
+  BIG_CALENDAR = 'bigCalendar',
+}
+
 /**
  * Calendar Options
  */
@@ -7,7 +12,7 @@ export interface CalendarOptions {
   /**
    * Calendar Type
    */
-  calendarType?: 'custom' | 'library';
+  calendarType?: CalendarType;
 
   /**
    * Auto Scroll

@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { Views, View, NavigateAction } from 'react-big-calendar';
 import { TimeRange, AbsoluteTimeRange } from '@grafana/data';
@@ -87,12 +87,23 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
           };
         }
         default: {
-          return;
+          return {
+            from: newDate,
+            to: newDate,
+          };
         }
       }
     },
     [onChangeTimeRange, timeRange]
   );
+
+  /**
+   * Update calendar range if time range updated
+   */
+  useEffect(() => {
+    setCalendarFrom(dayjs(timeRange.to.toDate()).startOf('month').toDate());
+    setCalendarTo(timeRange.to.toDate());
+  }, [timeRange.from, timeRange.to]);
 
   return {
     date: middleDate,

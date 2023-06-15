@@ -1,9 +1,9 @@
 import React from 'react';
-import { dateTime, FieldColorModeId, FieldType, LoadingState, PanelData, toDataFrame } from '@grafana/data';
+import dayjs from 'dayjs';
+import { dateTime } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { TestIds } from '../../constants';
-import { useAnnotations } from '../../utils';
 import { DayDrawer } from './components';
 import { CustomCalendar } from './CustomCalendar';
 
@@ -62,14 +62,6 @@ jest.mock('./components', () => ({
 }));
 
 /**
- * Mock utils
- */
-jest.mock('../../utils', () => ({
-  ...jest.requireActual('../../utils'),
-  useAnnotations: jest.fn(() => [{ id: '123' }]),
-}));
-
-/**
  * Component Props
  */
 type Props = React.ComponentProps<typeof CustomCalendar>;
@@ -89,32 +81,12 @@ describe('Custom Calendar', () => {
   const getSafeDate = () => new Date('2023-02-02');
 
   /**
-   * Render Without Warning
-   * @param component
-   */
-  const renderWithoutWarning = async (component: React.ReactElement) => {
-    await act(async () => {
-      await render(component);
-
-      /**
-       * Remove act warnings
-       * Wait timeout until promise resolves. Because there is not loading element for checking promise resolves
-       */
-      await new Promise((resolve) => setTimeout(resolve, 1));
-    });
-  };
-
-  /**
    * Get Tested Component
    * @param options
    * @param restProps
    */
   const getComponent = ({ options = { autoScroll: true }, ...restProps }: Partial<Props>) => {
     const allOptions = {
-      textField: 'Event Name',
-      timeField: 'Event Start',
-      endTimeField: 'Event End',
-      labelFields: ['Event Name'],
       ...options,
     };
     const timeRange = {
@@ -125,34 +97,12 @@ describe('Custom Calendar', () => {
         to: dateTime(getSafeDate()),
       },
     };
-    const data: PanelData = {
-      state: LoadingState.Done,
-      timeRange,
-      series: [
-        toDataFrame({
-          name: 'data',
-          fields: [
-            {
-              type: FieldType.string,
-              name: allOptions.textField,
-              values: ['event1', 'event2', 'event3'],
-              getLinks: () => null,
-            },
-            {
-              type: FieldType.time,
-              name: allOptions.timeField,
-              values: [getSafeDate(), getSafeDate(), getSafeDate()],
-            },
-            {
-              type: FieldType.time,
-              name: allOptions.endTimeField,
-              values: [getSafeDate(), getSafeDate(), getSafeDate()],
-            },
-          ],
-        }),
-      ],
-    };
-    return <CustomCalendar data={data} options={allOptions} timeRange={timeRange} {...(restProps as any)} />;
+    const events = [
+      { text: 'event1', start: dayjs(getSafeDate()), end: dayjs(getSafeDate()), color: '#5794F2' },
+      { text: 'event2', start: dayjs(getSafeDate()), end: dayjs(getSafeDate()), color: '#B877D9' },
+      { text: 'event3', start: dayjs(getSafeDate()), end: dayjs(getSafeDate()), color: '#5794F2' },
+    ];
+    return <CustomCalendar events={events} options={allOptions} timeRange={timeRange} {...(restProps as any)} />;
   };
 
   beforeAll(() => {
@@ -166,7 +116,7 @@ describe('Custom Calendar', () => {
   });
 
   it('Should find component', async () => {
-    await renderWithoutWarning(getComponent({}));
+    await render(getComponent({}));
 
     await waitFor(() => expect(screen.getByTestId(TestIds.panel.root)).toBeInTheDocument());
   });
@@ -180,7 +130,7 @@ describe('Custom Calendar', () => {
       </div>
     ));
 
-    await renderWithoutWarning(getComponent({}));
+    await render(getComponent({}));
 
     /**
      * Check if day drawer is hidden
@@ -211,7 +161,7 @@ describe('Custom Calendar', () => {
 
   it('Should apply time selection button', async () => {
     const onChangeTimeRange = jest.fn();
-    await renderWithoutWarning(
+    await render(
       getComponent({
         onChangeTimeRange,
       })
@@ -239,70 +189,14 @@ describe('Custom Calendar', () => {
   });
 
   it('Should apply events', async () => {
-    await renderWithoutWarning(getComponent({}));
+    await render(getComponent({}));
 
     expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
     expect(within(screen.getByTestId(InTestIds.dayEvents)).getAllByTestId(InTestIds.dayEvent)).toHaveLength(3);
   });
 
-  it('Should apply annotations', async () => {
-    jest.mocked(useAnnotations).mockImplementation(
-      () =>
-        [
-          {
-            time: getSafeDate(),
-            timeEnd: getSafeDate(),
-          },
-          {
-            time: getSafeDate(),
-          },
-        ] as any
-    );
-
-    await renderWithoutWarning(
-      getComponent({
-        options: {
-          autoScroll: true,
-          annotations: true,
-        },
-      })
-    );
-
-    /**
-     * Check if all passed and annotation events are rendered
-     */
-    expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
-    expect(within(screen.getByTestId(InTestIds.dayEvents)).getAllByTestId(InTestIds.dayEvent)).toHaveLength(5);
-  });
-
-  it('Should work if frame does not contain text and start fields', async () => {
-    await renderWithoutWarning(
-      getComponent({
-        data: {
-          state: LoadingState.Done,
-          timeRange: null as any,
-          series: [
-            toDataFrame({
-              name: 'data',
-              fields: [
-                {
-                  type: FieldType.string,
-                  name: 'some field',
-                  values: ['event1', 'event2', 'event3'],
-                  getLinks: () => null,
-                },
-              ],
-            }),
-          ],
-        },
-      })
-    );
-
-    expect(screen.queryByTestId(InTestIds.dayEvents)).not.toBeInTheDocument();
-  });
-
   it('Should apply events if no textField and timeField in options', async () => {
-    await renderWithoutWarning(
+    await render(
       getComponent({
         options: {
           textField: '',
@@ -315,56 +209,18 @@ describe('Custom Calendar', () => {
     expect(within(screen.getByTestId(InTestIds.dayEvents)).getAllByTestId(InTestIds.dayEvent)).toHaveLength(3);
   });
 
-  it('Should apply color mode', async () => {
-    await renderWithoutWarning(
-      getComponent({
-        fieldConfig: {
-          defaults: {
-            color: {
-              mode: FieldColorModeId.ContinuousBlPu,
-            },
-          },
-          overrides: [],
-        },
-      })
-    );
+  it('Should apply color', async () => {
+    await render(getComponent({}));
 
     expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
 
     /**
-     * Check applying mode colors
+     * Check applying colors
      */
     const eventsScreen = within(screen.getByTestId(InTestIds.dayEvents));
     const eventColors = eventsScreen.getAllByTestId(InTestIds.dayEventColor);
     expect(eventColors[0]).toHaveTextContent('#5794F2');
     expect(eventColors[1]).toHaveTextContent('#B877D9');
     expect(eventColors[2]).toHaveTextContent('#5794F2');
-  });
-
-  it('Should apply fixed color mode', async () => {
-    await renderWithoutWarning(
-      getComponent({
-        fieldConfig: {
-          defaults: {
-            color: {
-              mode: FieldColorModeId.Fixed,
-              fixedColor: '#999999',
-            },
-          },
-          overrides: [],
-        },
-      })
-    );
-
-    expect(screen.getByTestId(InTestIds.dayEvents)).toBeInTheDocument();
-
-    /**
-     * Check applying fixed color
-     */
-    const eventsScreen = within(screen.getByTestId(InTestIds.dayEvents));
-    const eventColors = eventsScreen.getAllByTestId(InTestIds.dayEventColor);
-    expect(eventColors[0]).toHaveTextContent('#999999');
-    expect(eventColors[1]).toHaveTextContent('#999999');
-    expect(eventColors[2]).toHaveTextContent('#999999');
   });
 });

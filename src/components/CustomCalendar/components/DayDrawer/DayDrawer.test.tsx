@@ -89,13 +89,14 @@ describe('DayDrawer', () => {
       })
     );
 
-    expect(screen.getByTestId(TestIds.dayDrawer.event)).toBeInTheDocument();
-    expect(screen.getByTestId(TestIds.dayDrawer.eventTitle)).toContainHTML(event.text);
+    expect(screen.getByTestId(TestIds.eventDetails.root)).toBeInTheDocument();
+    expect(screen.getByTestId(TestIds.eventDetails.titleText)).toBeInTheDocument();
+    expect(screen.getByTestId(TestIds.eventDetails.titleText)).toContainHTML(event.text);
 
     /**
      * Click event link
      */
-    fireEvent.click(screen.getAllByLabelText(TestIds.dayDrawer.eventLink)[0]);
+    fireEvent.click(screen.getAllByLabelText(TestIds.eventDetails.link)[0]);
 
     expect(onEventClick).toHaveBeenCalled();
   });
@@ -122,7 +123,7 @@ describe('DayDrawer', () => {
       })
     );
 
-    const dayEvents = screen.getAllByTestId(TestIds.dayDrawer.dayEvent);
+    const dayEvents = screen.getAllByTestId(TestIds.eventDetails.root);
 
     expect(dayEvents[0]).toBeInTheDocument();
     expect(dayEvents).toHaveLength(1);
@@ -130,7 +131,8 @@ describe('DayDrawer', () => {
     /**
      * Click on event
      */
-    fireEvent.click(screen.getByLabelText(TestIds.dayDrawer.dayEventTitle));
+    expect(screen.getByLabelText(TestIds.eventDetails.titleButton)).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText(TestIds.eventDetails.titleButton));
 
     expect(setEvent).toHaveBeenCalledWith(event);
   });

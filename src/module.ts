@@ -7,8 +7,9 @@ import {
   DisplayTimeOptions,
   LinksOptions,
   ScrollOptions,
+  CalendarTypeOptions,
 } from './constants';
-import { CalendarOptions } from './types';
+import { CalendarOptions, CalendarType } from './types';
 
 /**
  * Panel Plugin
@@ -29,14 +30,11 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       .addRadio({
         path: 'calendarType',
         name: 'Calendar Type',
-        description: 'What component to use',
+        description: 'Calendar Component to use',
         settings: {
-          options: [
-            { value: 'custom', label: 'Custom' },
-            { value: 'library', label: 'Library' },
-          ],
+          options: CalendarTypeOptions,
         },
-        defaultValue: 'custom',
+        defaultValue: CalendarType.CUSTOM,
       })
       .addRadio({
         path: 'autoScroll',

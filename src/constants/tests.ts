@@ -29,11 +29,20 @@ export const TestIds = {
      * https://github.com/grafana/grafana/blob/186cd96447fdd3a9ae26907a48023998c825c6d6/packages/grafana-ui/src/components/Drawer/Drawer.tsx#L106
      */
     root: selectors.components.Drawer.General.title,
-    event: 'data-testid day-drawer event',
-    eventTitle: 'data-testid day-drawer event-title',
-    eventLink: 'day-drawer event-link',
-    dayEvent: 'data-testid day-drawer day-event',
-    dayEventTitle: 'day-drawer day-event-title',
+  },
+  bigCalendar: {
+    root: 'data-testid lib-calendar',
+    /**
+     * Default Drawer selector
+     * https://github.com/grafana/grafana/blob/186cd96447fdd3a9ae26907a48023998c825c6d6/packages/grafana-ui/src/components/Drawer/Drawer.tsx#L106
+     */
+    drawerClose: selectors.components.Drawer.General.close,
+  },
+  eventDetails: {
+    root: 'data-testid event-details',
+    titleButton: 'event-details title-button',
+    titleText: 'data-testid event-details title-text',
+    link: 'event-details link',
   },
   multiFieldEditor: {
     select: 'multi-field-editor select',

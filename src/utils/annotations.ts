@@ -8,7 +8,7 @@ import { CalendarEvent } from '../types';
  * Get Annotations
  * @param timeRange
  */
-export const useAnnotations = (timeRange: TimeRange) => {
+const useAnnotations = (timeRange: TimeRange) => {
   const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
 
   useEffect(() => {

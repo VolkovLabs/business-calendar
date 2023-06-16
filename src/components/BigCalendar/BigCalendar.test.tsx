@@ -151,6 +151,50 @@ describe('Big Calendar', () => {
     );
   });
 
+  it('Should pass all event info with empty resource', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: dayjs(getSafeDate()),
+      labels: [],
+      color: '#99999',
+      description: '123',
+    };
+    render(getComponent({ events: [event] }));
+
+    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(() =>
+      calendarProps.onSelectEvent(
+        {
+          ...selectedEvent,
+          resource: null,
+        },
+        {} as any
+      )
+    );
+
+    expect(EventDetails).toHaveBeenCalledWith(
+      expect.objectContaining({
+        event: expect.objectContaining({
+          text: event.text,
+        }),
+      }),
+      expect.anything()
+    );
+  });
+
   it('Should not pass end time to event details', async () => {
     let calendarProps: Required<CalendarProps> = {} as any;
     jest.mocked(Calendar).mockImplementation((props: any): any => {

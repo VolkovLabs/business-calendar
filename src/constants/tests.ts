@@ -38,6 +38,12 @@ export const TestIds = {
      */
     drawerClose: selectors.components.Drawer.General.close,
   },
+  bigCalendarToolbar: {
+    buttonToday: 'data-testid big-calendar-toolbar button-today',
+    buttonBack: 'data-testid big-calendar-toolbar button-back',
+    buttonNext: 'data-testid big-calendar-toolbar button-next',
+    buttonView: (view: string) => `data-testid big-calendar-toolbar button-${view}`,
+  },
   eventDetails: {
     root: 'data-testid event-details',
     titleButton: 'event-details title-button',

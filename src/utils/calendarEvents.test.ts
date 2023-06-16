@@ -6,16 +6,22 @@ import {
   toDataFrame,
   getTimeZone,
   FieldColorModeId,
+  ArrayVector,
+  getLocaleData,
 } from '@grafana/data';
+import dayjs from 'dayjs';
 import { renderHook } from '@testing-library/react';
-import { useEventFrames, useColors } from './calendarEvents';
+import { useEventFrames, useColors, useCalendarEvents } from './calendarEvents';
 
 /**
- * Mock @grafana/ui
+ * Mock @grafana/data
  */
-// jest.mock('@grafana/ui', () => ({
-//   useTheme2: jest.fn(() => ''),
-// }));
+jest.mock('@grafana/data', () => ({
+  ...jest.requireActual('@grafana/data'),
+  getLocaleData: jest.fn(() => ({
+    firstDayOfWeek: jest.fn(() => 0),
+  })),
+}));
 
 /**
  * Calendar Events Utils
@@ -175,6 +181,164 @@ describe('Calendar Events Utils', () => {
       );
 
       expect(result.current).toEqual(['#999999']);
+    });
+  });
+
+  describe('Use Calendar Events', () => {
+    it('Should return events', () => {
+      const frames = [
+        {
+          labels: [{ values: new ArrayVector(['label 1']) }],
+          text: {
+            type: FieldType.string,
+            name: 'text',
+            values: new ArrayVector(['111']),
+            getLinks: () => null,
+          },
+          start: {
+            type: FieldType.string,
+            name: 'start',
+            values: new ArrayVector([getSafeDate()]),
+          },
+        },
+      ];
+      const { result } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+      );
+
+      expect(result.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            text: '111',
+            labels: ['label 1'],
+          }),
+        ])
+      );
+    });
+
+    it('Should return events with end', () => {
+      const frames = [
+        {
+          text: {
+            type: FieldType.string,
+            name: 'text',
+            values: new ArrayVector(['111']),
+            getLinks: () => null,
+          },
+          start: {
+            type: FieldType.string,
+            name: 'start',
+            values: new ArrayVector([getSafeDate()]),
+          },
+          end: {
+            type: FieldType.string,
+            name: 'end',
+            values: new ArrayVector([getSafeDate()]),
+          },
+        },
+      ];
+      const { result } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+      );
+
+      expect(result.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            end: dayjs(getSafeDate()),
+          }),
+        ])
+      );
+    });
+
+    it('Should return event with displayed text', () => {
+      const frames = [
+        {
+          text: {
+            type: FieldType.string,
+            name: 'text',
+            values: new ArrayVector(['111']),
+            getLinks: () => null,
+            display: () => ({ text: 'displayed' }),
+          },
+          start: {
+            type: FieldType.string,
+            name: 'start',
+            values: new ArrayVector([getSafeDate()]),
+          },
+          end: {
+            type: FieldType.string,
+            name: 'end',
+            values: new ArrayVector([getSafeDate()]),
+          },
+        },
+      ];
+      const { result } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+      );
+
+      expect(result.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            text: 'displayed',
+          }),
+        ])
+      );
+    });
+
+    it('Should not return event without start', () => {
+      const frames = [
+        {
+          labels: [{ values: new ArrayVector(['label 1']) }],
+          text: {
+            type: FieldType.string,
+            name: 'text',
+            values: new ArrayVector(['111']),
+            getLinks: () => null,
+          },
+        },
+      ];
+      const { result } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+      );
+
+      expect(result.current).toHaveLength(0);
+    });
+
+    it('Should return event with isoWeek date', () => {
+      jest.mocked(getLocaleData).mockImplementationOnce(() => ({
+        firstDayOfWeek: jest.fn(() => 1),
+      }));
+      const frames = [
+        {
+          text: {
+            type: FieldType.string,
+            name: 'text',
+            values: new ArrayVector(['111']),
+            getLinks: () => null,
+          },
+          start: {
+            type: FieldType.string,
+            name: 'start',
+            values: new ArrayVector([getSafeDate()]),
+          },
+          end: {
+            type: FieldType.string,
+            name: 'end',
+            values: new ArrayVector([]),
+          },
+        },
+      ];
+      const { result } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+      );
+
+      expect(result.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            end: dayjs(getSafeDate()),
+          }),
+        ])
+      );
     });
   });
 });

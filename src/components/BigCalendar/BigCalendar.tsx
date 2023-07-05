@@ -28,7 +28,6 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
    * Theme
    */
   const styles = useStyles2(Styles);
-  console.log();
 
   /**
    * Localizer

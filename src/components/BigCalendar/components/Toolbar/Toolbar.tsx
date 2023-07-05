@@ -1,6 +1,6 @@
 import React from 'react';
-import { ToolbarProps, Navigate, Messages } from 'react-big-calendar';
-import { ButtonGroup, Button, useStyles2 } from '@grafana/ui';
+import { Messages, Navigate, ToolbarProps } from 'react-big-calendar';
+import { Button, ButtonGroup, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../../../constants';
 import { Styles } from '../../styles';
 

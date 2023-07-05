@@ -1,7 +1,7 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
 import dayjs from 'dayjs';
-import { Views, View, NavigateAction } from 'react-big-calendar';
-import { TimeRange, AbsoluteTimeRange } from '@grafana/data';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { NavigateAction, View, Views } from 'react-big-calendar';
+import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
 
 /**
  * Use Calendar Range

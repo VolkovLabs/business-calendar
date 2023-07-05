@@ -1,17 +1,17 @@
+import dayjs from 'dayjs';
 import {
+  ArrayVector,
   dateTime,
+  FieldColorModeId,
   FieldType,
+  getLocaleData,
+  getTimeZone,
   LoadingState,
   PanelData,
   toDataFrame,
-  getTimeZone,
-  FieldColorModeId,
-  ArrayVector,
-  getLocaleData,
 } from '@grafana/data';
-import dayjs from 'dayjs';
 import { renderHook } from '@testing-library/react';
-import { useEventFrames, useColors, useCalendarEvents } from './calendarEvents';
+import { useCalendarEvents, useColors, useEventFrames } from './calendarEvents';
 
 /**
  * Mock @grafana/data

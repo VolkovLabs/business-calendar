@@ -1,8 +1,8 @@
-import React from 'react';
 import dayjs from 'dayjs';
-import { dateTime } from '@grafana/data';
+import React from 'react';
 import { Calendar, CalendarProps, Event } from 'react-big-calendar';
-import { act, render, screen, fireEvent } from '@testing-library/react';
+import { dateTime } from '@grafana/data';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
 import { EventDetails } from '../EventDetails';

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { TimeRange, dateTime } from '@grafana/data';
+import { dateTime, TimeRange } from '@grafana/data';
 import { act, renderHook } from '@testing-library/react';
 import { useCalendarRange } from './useCalendarRange';
 

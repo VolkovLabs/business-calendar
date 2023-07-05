@@ -1,16 +1,16 @@
-import React, { useMemo, useCallback, useState } from 'react';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import dayjs from 'dayjs';
+import React, { useCallback, useMemo, useState } from 'react';
+import { Calendar, Event } from 'react-big-calendar';
 import { Global } from '@emotion/react';
 import { PanelProps } from '@grafana/data';
-import { useStyles2, Drawer } from '@grafana/ui';
-import { Calendar, Event } from 'react-big-calendar';
+import { Drawer, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
 import { EventDetails } from '../EventDetails';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { Styles } from './styles';
 import { Toolbar } from './components';
-import { useCalendarRange, useCalendarEvents as useBigCalendarEvents, useLocalizer } from './hooks';
+import { useCalendarEvents as useBigCalendarEvents, useCalendarRange, useLocalizer } from './hooks';
+import { Styles } from './styles';
 
 /**
  * Properties

@@ -1,13 +1,13 @@
-import { getLocaleData } from '@grafana/data';
-import { useEffect, useState, useMemo } from 'react';
 import dayjs from 'dayjs';
+import deLocale from 'dayjs/locale/de';
 import enLocale from 'dayjs/locale/en';
 import esLocale from 'dayjs/locale/es';
 import frLocale from 'dayjs/locale/fr';
-import deLocale from 'dayjs/locale/de';
 import zhLocale from 'dayjs/locale/zh';
-import { config } from '@grafana/runtime';
+import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
+import { getLocaleData } from '@grafana/data';
+import { config } from '@grafana/runtime';
 
 /**
  * Dayjs locales per each grafana language

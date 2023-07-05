@@ -2,12 +2,12 @@ import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/dat
 import { CalendarPanel, MultiFieldEditor } from './components';
 import {
   AnnotationsOptions,
+  CalendarTypeOptions,
   ColorsOptions,
   DefaultOptions,
   DisplayTimeOptions,
   LinksOptions,
   ScrollOptions,
-  CalendarTypeOptions,
 } from './constants';
 import { CalendarOptions, CalendarType } from './types';
 

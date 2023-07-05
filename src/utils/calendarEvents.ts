@@ -1,20 +1,20 @@
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import {
+  classicColors,
   DataFrame,
+  FieldColorModeId,
+  FieldConfigSource,
   FieldType,
   formattedValueToString,
-  FieldConfigSource,
   getFieldColorMode,
-  classicColors,
-  FieldColorModeId,
-  TimeRange,
   getLocaleData,
+  TimeRange,
 } from '@grafana/data';
-import { useTheme2 } from '@grafana/ui';
 import { TimeZone } from '@grafana/schema';
-import { CalendarOptions, CalendarEvent } from '../types';
+import { useTheme2 } from '@grafana/ui';
 import { Colors } from '../constants';
+import { CalendarEvent, CalendarOptions } from '../types';
 import { toTimeField } from './time';
 
 /**

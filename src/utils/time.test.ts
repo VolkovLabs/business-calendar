@@ -1,4 +1,4 @@
-import { FieldType, ArrayVector } from '@grafana/data';
+import { ArrayVector, FieldType } from '@grafana/data';
 import { toTimeField } from './time';
 
 /**

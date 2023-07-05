@@ -29,13 +29,21 @@ describe('Use Calendar Events', () => {
     color: '#666',
     description: 'description',
   };
+  const event3: CalendarEvent = {
+    text: 'text',
+    start: dayjs(getSafeDate()),
+    end: null,
+    labels: [],
+    color: '#999',
+  };
+
   it('Should transform events to calendar events', () => {
-    const events: CalendarEvent[] = [event1, event2];
+    const events: CalendarEvent[] = [event1, event2, event3];
     const { result } = renderHook(() => useCalendarEvents(events));
 
     const calendarEvents = result.current;
 
-    expect(calendarEvents).toHaveLength(2);
+    expect(calendarEvents).toHaveLength(3);
 
     const calendarEvent1 = calendarEvents[0];
     expect(calendarEvent1).toEqual(
@@ -77,6 +85,22 @@ describe('Use Calendar Events', () => {
     expect(calendarEvent2?.start?.toISOString()).toEqual(event2.start.toISOString());
     expect(calendarEvent2?.end).toBeInstanceOf(Date);
     expect(calendarEvent2?.end?.toISOString()).toEqual(event2.end.toISOString());
+
+    const calendarEvent3 = calendarEvents[2];
+    expect(calendarEvent3).toEqual(
+      expect.objectContaining({
+        title: event3.text,
+        resource: {
+          color: event3.color,
+          labels: event3.labels,
+          description: event3.description,
+          isEndless: true,
+        },
+      })
+    );
+    expect(calendarEvent3?.start).toBeInstanceOf(Date);
+    expect(calendarEvent3?.start?.toISOString()).toEqual(event2.start.toISOString());
+    expect(calendarEvent3?.end).not.toBeDefined();
   });
 
   it('Should cache results', () => {

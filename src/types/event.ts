@@ -27,9 +27,9 @@ export interface CalendarEvent {
   /**
    * End
    *
-   * @type {dayjs.Dayjs}
+   * @type {dayjs.Dayjs | null}
    */
-  end?: dayjs.Dayjs;
+  end?: dayjs.Dayjs | null;
 
   /**
    * Description

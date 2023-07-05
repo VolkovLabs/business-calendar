@@ -44,12 +44,22 @@ describe('Use Calendar Events', () => {
         resource: {
           color: event1.color,
           labels: event1.labels,
+          isEndless: true,
         },
       })
     );
+
+    /**
+     * Check start date
+     */
     expect(calendarEvent1?.start).toBeInstanceOf(Date);
-    expect(calendarEvent1?.start?.valueOf()).toEqual(event1.start.valueOf());
-    expect(calendarEvent1?.end).not.toBeDefined();
+    expect(calendarEvent1?.start?.toISOString()).toEqual(event1.start.toISOString());
+
+    /**
+     * Check if end date of endless event is far enough
+     */
+    expect(calendarEvent1?.end).toBeInstanceOf(Date);
+    expect(calendarEvent1?.end?.toISOString()).toEqual(event1.start.add(100, 'years').toISOString());
 
     const calendarEvent2 = calendarEvents[1];
     expect(calendarEvent2).toEqual(
@@ -59,13 +69,14 @@ describe('Use Calendar Events', () => {
           color: event2.color,
           labels: event2.labels,
           description: event2.description,
+          isEndless: false,
         },
       })
     );
     expect(calendarEvent2?.start).toBeInstanceOf(Date);
-    expect(calendarEvent2?.start?.valueOf()).toEqual(event2.start.valueOf());
+    expect(calendarEvent2?.start?.toISOString()).toEqual(event2.start.toISOString());
     expect(calendarEvent2?.end).toBeInstanceOf(Date);
-    expect(calendarEvent2?.end?.valueOf()).toEqual(event2.end.valueOf());
+    expect(calendarEvent2?.end?.toISOString()).toEqual(event2.end.toISOString());
   });
 
   it('Should cache results', () => {

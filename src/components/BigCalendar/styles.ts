@@ -34,6 +34,13 @@ export const Styles = (theme: GrafanaTheme2) => {
       '.rbc-event': {
         backgroundColor: theme.colors.primary.main,
       },
+      '.rbc-row-content': {
+        /**
+         * Show max 10 all day events, the rest is scrolled
+         */
+        maxHeight: 27 * 10,
+        overflow: 'auto',
+      },
     },
     toolbar: css`
       display: flex;

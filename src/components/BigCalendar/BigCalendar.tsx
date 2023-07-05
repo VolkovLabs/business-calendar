@@ -78,7 +78,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     setActiveEvent({
       text: event.title as string,
       start: dayjs(event.start),
-      end: event.end ? dayjs(event.end) : undefined,
+      end: event.end && !event.resource?.isEndless ? dayjs(event.end) : undefined,
       ...(event.resource || {}),
     });
   }, []);

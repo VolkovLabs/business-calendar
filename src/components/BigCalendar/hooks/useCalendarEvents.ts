@@ -7,8 +7,12 @@ export const useCalendarEvents = (events: CalendarEvent[]): Event[] => {
     return events.map<Event>(({ text, start, end, ...restEvent }) => ({
       title: text,
       start: start.toDate(),
-      end: end ? end.toDate() : end,
+      /**
+       * Big Calendar doesn't support endless events so just set end date far enough
+       */
+      end: end ? end.toDate() : start.add(100, 'years').toDate(),
       resource: {
+        isEndless: !end,
         ...restEvent,
       },
     }));

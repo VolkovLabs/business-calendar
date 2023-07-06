@@ -9,7 +9,7 @@ import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
 import { EventDetails } from '../EventDetails';
 import { Toolbar } from './components';
-import { useCalendarEvents as useBigCalendarEvents, useCalendarRange, useLocalizer } from './hooks';
+import { useCalendarEvents, useCalendarRange, useLocalizer } from './hooks';
 import { Styles } from './styles';
 
 /**
@@ -37,7 +37,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Adopted Events for BigCalendar
    */
-  const calendarEvents = useBigCalendarEvents(events);
+  const calendarEvents = useCalendarEvents(events);
 
   /**
    * Get props for event div element

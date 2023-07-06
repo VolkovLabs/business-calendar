@@ -7,7 +7,7 @@ export const useCalendarEvents = (events: CalendarEvent[]): Event[] => {
     return events.map<Event>(({ text, start, end, ...restEvent }) => ({
       title: text,
       start: start.toDate(),
-      end: end ? end.toDate() : end === undefined ? start.add(100, 'years').toDate() : undefined,
+      end: end ? end.toDate() : end === null ? start.add(100, 'years').toDate() : start.toDate(),
       resource: {
         isEndless: !end,
         ...restEvent,

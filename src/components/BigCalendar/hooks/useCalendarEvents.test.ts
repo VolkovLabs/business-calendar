@@ -67,7 +67,7 @@ describe('Use Calendar Events', () => {
      * Check if end date of endless event is far enough
      */
     expect(calendarEvent1?.end).toBeInstanceOf(Date);
-    expect(calendarEvent1?.end?.toISOString()).toEqual(event1.start.add(100, 'years').toISOString());
+    expect(calendarEvent1?.end?.toISOString()).toEqual(event1.start.toISOString());
 
     const calendarEvent2 = calendarEvents[1];
     expect(calendarEvent2).toEqual(
@@ -100,7 +100,7 @@ describe('Use Calendar Events', () => {
     );
     expect(calendarEvent3?.start).toBeInstanceOf(Date);
     expect(calendarEvent3?.start?.toISOString()).toEqual(event2.start.toISOString());
-    expect(calendarEvent3?.end).not.toBeDefined();
+    expect(calendarEvent3?.end).toBeDefined();
   });
 
   it('Should cache results', () => {

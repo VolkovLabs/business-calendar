@@ -12,7 +12,7 @@ export const enum Colors {
  * Default Options
  */
 export const DefaultOptions: CalendarOptions = {
-  calendarType: CalendarType.CUSTOM,
+  calendarType: CalendarType.LEGACY,
   quickLinks: false,
   autoScroll: false,
   annotations: false,
@@ -64,6 +64,6 @@ export const ColorsOptions = [
  * Calendar Type Options
  */
 export const CalendarTypeOptions = [
-  { value: CalendarType.CUSTOM, label: 'Custom' },
+  { value: CalendarType.LEGACY, label: 'Legacy' },
   { value: CalendarType.BIG_CALENDAR, label: 'Big Calendar' },
 ];

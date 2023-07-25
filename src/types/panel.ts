@@ -1,7 +1,7 @@
 import { Colors } from '../constants';
 
 export enum CalendarType {
-  CUSTOM = 'custom',
+  LEGACY = 'legacy',
   BIG_CALENDAR = 'bigCalendar',
 }
 

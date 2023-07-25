@@ -34,7 +34,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           options: CalendarTypeOptions,
         },
-        defaultValue: CalendarType.CUSTOM,
+        defaultValue: CalendarType.LEGACY,
       })
       .addRadio({
         path: 'autoScroll',

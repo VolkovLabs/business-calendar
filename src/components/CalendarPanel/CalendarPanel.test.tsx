@@ -1,5 +1,5 @@
-import React from 'react';
 import dayjs from 'dayjs';
+import React from 'react';
 import { dateTime, FieldType, LoadingState, PanelData, toDataFrame } from '@grafana/data';
 import { act, render } from '@testing-library/react';
 import { CalendarType } from '../../types';
@@ -125,7 +125,7 @@ describe('Panel', () => {
   });
 
   it('Should render custom calendar', async () => {
-    await renderWithoutWarning(getComponent({ options: { calendarType: CalendarType.CUSTOM, autoScroll: true } }));
+    await renderWithoutWarning(getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true } }));
 
     expect(BigCalendar).not.toHaveBeenCalled();
     expect(CustomCalendar).toHaveBeenCalledWith(

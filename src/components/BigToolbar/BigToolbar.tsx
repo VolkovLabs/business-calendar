@@ -13,7 +13,7 @@ interface Props extends ToolbarProps {}
  * Toolbar for Big Calendar
  * @constructor
  */
-export const Toolbar: React.FC<Props> = ({ localizer: { messages }, label, onNavigate, views, view, onView }) => {
+export const BigToolbar: React.FC<Props> = ({ localizer: { messages }, label, onNavigate, views, view, onView }) => {
   /**
    * Theme
    */

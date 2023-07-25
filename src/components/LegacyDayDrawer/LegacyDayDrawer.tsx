@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { Drawer, Tab, TabsBar } from '@grafana/ui';
-import { EventDetails } from '../../../EventDetails';
-import { CalendarEvent } from '../../../../types';
+import { CalendarEvent } from '../../types';
+import { EventDetails } from '../EventDetails';
 
 /**
  * Day.js Plugins
@@ -44,7 +44,7 @@ interface Props {
 /**
  * Day Drawer
  */
-export const DayDrawer: React.FC<Props> = ({ day, events, event, setEvent, onClose }) => {
+export const LegacyDayDrawer: React.FC<Props> = ({ day, events, event, setEvent, onClose }) => {
   if (!day) {
     return (
       <Drawer title="Day" scrollableContent onClose={onClose}>

@@ -3,10 +3,10 @@ import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { cx } from '@emotion/css';
 import { useStyles2, useTheme2 } from '@grafana/ui';
-import { TestIds } from '../../../../constants';
-import { Styles } from '../../../../styles';
-import { CalendarEvent } from '../../../../types';
-import { CalendarEntry } from '../CalendarEntry';
+import { TestIds } from '../../constants';
+import { Styles } from '../../styles';
+import { CalendarEvent } from '../../types';
+import { LegacyCalendarEntry } from '../LegacyCalendarEntry';
 
 /**
  * Properties
@@ -71,7 +71,7 @@ interface Props {
 /**
  * Day
  */
-export const Day: React.FC<Props> = ({
+export const LegacyDay: React.FC<Props> = ({
   day,
   events,
   selected,
@@ -100,7 +100,7 @@ export const Day: React.FC<Props> = ({
    * Entries
    */
   const entries = events.map((event, i) => (
-    <CalendarEntry
+    <LegacyCalendarEntry
       key={i}
       event={event}
       day={day}

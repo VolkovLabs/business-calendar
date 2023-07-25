@@ -74,9 +74,7 @@
         "descriptionField": "description",
         "displayTime": false,
         "endTimeField": "end",
-        "labelFields": [
-          "labels"
-        ],
+        "labelFields": ["labels"],
         "quickLinks": false,
         "textField": "text",
         "timeField": "start"
@@ -99,79 +97,37 @@
                 "config": {},
                 "name": "text",
                 "type": "string",
-                "values": [
-                  "Meeting",
-                  "Hard Work",
-                  "This",
-                  "Planning",
-                  "First in line",
-                  "All day event"
-                ]
+                "values": ["Meeting", "Hard Work", "This", "Planning", "First in line", "All day event"]
               },
               {
                 "config": {},
                 "name": "description",
                 "type": "string",
-                "values": [
-                  "First event",
-                  "Working hard",
-                  "work",
-                  "What to do?",
-                  "Event",
-                  ""
-                ]
+                "values": ["First event", "Working hard", "work", "What to do?", "Event", ""]
               },
               {
                 "config": {},
                 "name": "start",
                 "type": "time",
-                "values": [
-                  1670710154622,
-                  1670609069806,
-                  1670609069806,
-                  1670809175025,
-                  1660610154622,
-                  1685625686000
-                ]
+                "values": [1670710154622, 1670609069806, 1670609069806, 1670809175025, 1660610154622, 1685625686000]
               },
               {
                 "config": {},
                 "name": "end",
                 "type": "time",
-                "values": [
-                  1670809017462,
-                  null,
-                  1670609079806,
-                  null,
-                  null,
-                  1686748886242
-                ]
+                "values": [1670809017462, null, 1670609079806, null, null, 1686748886242]
               },
               {
                 "config": {},
                 "name": "labels",
                 "type": "string",
-                "values": [
-                  "hello",
-                  "hard,work",
-                  "this,that,who?",
-                  "",
-                  "",
-                  ""
-                ]
+                "values": ["hello", "hard,work", "this,that,who?", "", "", ""]
               },
               {
                 "config": {},
                 "name": "Color",
                 "type": "number",
-                "values": [
-                  30,
-                  100,
-                  30,
-                  70,
-                  60,
-                  0
-                ]
+                "values": [30, 100, 30, 70, 60, 0]
               }
             ],
             "meta": {},
@@ -227,15 +183,13 @@
       "options": {
         "annotations": true,
         "autoScroll": false,
-        "calendarType": "custom",
+        "calendarType": "legacy",
         "colorField": "Color",
         "colors": "frame",
         "descriptionField": "description",
         "displayTime": false,
         "endTimeField": "end",
-        "labelFields": [
-          "labels"
-        ],
+        "labelFields": ["labels"],
         "quickLinks": false,
         "textField": "text",
         "timeField": "start"
@@ -258,73 +212,37 @@
                 "config": {},
                 "name": "text",
                 "type": "string",
-                "values": [
-                  "Meeting",
-                  "Hard Work",
-                  "This",
-                  "Planning",
-                  "First in line"
-                ]
+                "values": ["Meeting", "Hard Work", "This", "Planning", "First in line"]
               },
               {
                 "config": {},
                 "name": "description",
                 "type": "string",
-                "values": [
-                  "First event",
-                  "Working hard",
-                  "work",
-                  "What to do?",
-                  "Event"
-                ]
+                "values": ["First event", "Working hard", "work", "What to do?", "Event"]
               },
               {
                 "config": {},
                 "name": "start",
                 "type": "time",
-                "values": [
-                  1670710154622,
-                  1670609069806,
-                  1670609069806,
-                  1670809175025,
-                  1660610154622
-                ]
+                "values": [1670710154622, 1670609069806, 1670609069806, 1670809175025, 1660610154622]
               },
               {
                 "config": {},
                 "name": "end",
                 "type": "time",
-                "values": [
-                  1670809017462,
-                  null,
-                  1670609079806,
-                  null,
-                  null
-                ]
+                "values": [1670809017462, null, 1670609079806, null, null]
               },
               {
                 "config": {},
                 "name": "labels",
                 "type": "string",
-                "values": [
-                  "hello",
-                  "hard,work",
-                  "this,that,who?",
-                  "",
-                  ""
-                ]
+                "values": ["hello", "hard,work", "this,that,who?", "", ""]
               },
               {
                 "config": {},
                 "name": "Color",
                 "type": "number",
-                "values": [
-                  30,
-                  100,
-                  30,
-                  70,
-                  60
-                ]
+                "values": [30, 100, 30, 70, 60]
               }
             ],
             "meta": {},

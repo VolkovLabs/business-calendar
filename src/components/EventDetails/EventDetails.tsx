@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { Card, LinkButton, TagList, useStyles2 } from '@grafana/ui';
 import { textUtil } from '@grafana/data';
+import { Card, LinkButton, TagList, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
-import { CalendarEvent } from '../../types';
 import { Styles } from '../../styles';
+import { CalendarEvent } from '../../types';
 
 /**
  * Properties
@@ -15,7 +15,7 @@ interface Props {
 }
 
 /**
- *
+ * Event Details
  * @param event
  * @param showFullInfo
  * @param onClick

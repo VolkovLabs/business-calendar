@@ -8,7 +8,8 @@ import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
 import { alignEvents, useIntervalSelection } from '../../utils';
-import { Day, DayDrawer } from './components';
+import { LegacyDay } from '../LegacyDay';
+import { LegacyDayDrawer } from '../LegacyDayDrawer';
 
 /**
  * Day.js Plugins
@@ -25,9 +26,9 @@ interface Props
 }
 
 /**
- * Custom Calendar
+ * Legacy Calendar
  */
-export const CustomCalendar: React.FC<Props> = ({ options, timeRange, width, height, onChangeTimeRange, events }) => {
+export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, height, onChangeTimeRange, events }) => {
   /**
    * States
    */
@@ -89,7 +90,7 @@ export const CustomCalendar: React.FC<Props> = ({ options, timeRange, width, hei
       data-testid={TestIds.panel.root}
     >
       {day && (
-        <DayDrawer
+        <LegacyDayDrawer
           day={day}
           events={alignedEvents}
           event={event}
@@ -158,7 +159,7 @@ export const CustomCalendar: React.FC<Props> = ({ options, timeRange, width, hei
           const events = alignedEvents[day.format('YYYY-MM-DD')] ?? [];
 
           return (
-            <Day
+            <LegacyDay
               key={i}
               day={day}
               events={events}

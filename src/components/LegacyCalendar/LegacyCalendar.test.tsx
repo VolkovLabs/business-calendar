@@ -1,11 +1,11 @@
-import React from 'react';
 import dayjs from 'dayjs';
+import React from 'react';
 import { dateTime } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { TestIds } from '../../constants';
-import { DayDrawer } from './components';
-import { CustomCalendar } from './CustomCalendar';
+import { LegacyDayDrawer } from '../LegacyDayDrawer';
+import { LegacyCalendar } from './LegacyCalendar';
 
 /**
  * Test Ids that are used only in tests
@@ -32,10 +32,10 @@ jest.mock('@grafana/runtime', () => ({
 }));
 
 /**
- * Mock Calendar Components
+ * Mock Legacy Day
  */
-jest.mock('./components', () => ({
-  Day: jest.fn(({ setDay, day, onSelectionChange, events }) => {
+jest.mock('../LegacyDay', () => ({
+  LegacyDay: jest.fn(({ setDay, day, onSelectionChange, events }) => {
     return (
       <div>
         {events.length && (
@@ -58,18 +58,24 @@ jest.mock('./components', () => ({
       </div>
     );
   }),
-  DayDrawer: jest.fn(() => null),
+}));
+
+/**
+ * Mock Legacy Day
+ */
+jest.mock('../LegacyDayDrawer', () => ({
+  LegacyDayDrawer: jest.fn(() => null),
 }));
 
 /**
  * Component Props
  */
-type Props = React.ComponentProps<typeof CustomCalendar>;
+type Props = React.ComponentProps<typeof LegacyCalendar>;
 
 /**
- * Custom Calendar
+ * Legacy Calendar
  */
-describe('Custom Calendar', () => {
+describe('Legacy Calendar', () => {
   /**
    * Add ScrollTo method
    */
@@ -102,7 +108,7 @@ describe('Custom Calendar', () => {
       { text: 'event2', start: dayjs(getSafeDate()), end: dayjs(getSafeDate()), color: '#B877D9' },
       { text: 'event3', start: dayjs(getSafeDate()), end: dayjs(getSafeDate()), color: '#5794F2' },
     ];
-    return <CustomCalendar events={events} options={allOptions} timeRange={timeRange} {...(restProps as any)} />;
+    return <LegacyCalendar events={events} options={allOptions} timeRange={timeRange} {...(restProps as any)} />;
   };
 
   beforeAll(() => {
@@ -122,7 +128,7 @@ describe('Custom Calendar', () => {
   });
 
   it('Should open DayDrawer', async () => {
-    jest.mocked(DayDrawer).mockImplementation(({ onClose }) => (
+    jest.mocked(LegacyDayDrawer).mockImplementation(({ onClose }) => (
       <div data-testid={InTestIds.dayDrawer}>
         <button onClick={onClose} data-testid={InTestIds.dayDrawerClose}>
           close

@@ -1,12 +1,12 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { TestIds } from '../../constants';
-import { Toolbar } from './Toolbar';
+import { BigToolbar } from './BigToolbar';
 
 /**
  * Props
  */
-type Props = React.ComponentProps<typeof Toolbar>;
+type Props = React.ComponentProps<typeof BigToolbar>;
 
 /**
  * Toolbar
@@ -17,7 +17,7 @@ describe('Toolbar', () => {
    * @param props
    */
   const getComponent = (props: Partial<Props>) => {
-    return <Toolbar localizer={{ messages: {} }} {...(props as any)} />;
+    return <BigToolbar localizer={{ messages: {} }} {...(props as any)} />;
   };
 
   it('Should render navigation buttons', () => {

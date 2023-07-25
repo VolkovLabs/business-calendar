@@ -1,14 +1,14 @@
 import dayjs from 'dayjs';
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { TestIds } from '../../../../constants';
-import { CalendarEvent } from '../../../../types';
-import { DayDrawer } from './DayDrawer';
+import { TestIds } from '../../constants';
+import { CalendarEvent } from '../../types';
+import { LegacyDayDrawer } from './LegacyDayDrawer';
 
 /**
  * Component Props
  */
-type Props = React.ComponentProps<typeof DayDrawer>;
+type Props = React.ComponentProps<typeof LegacyDayDrawer>;
 
 /**
  * Day Drawer
@@ -21,7 +21,7 @@ describe('DayDrawer', () => {
    * @param restProps
    */
   const getComponent = ({ ...restProps }: Partial<Props>) => {
-    return <DayDrawer onClose={onClose} {...(restProps as any)} />;
+    return <LegacyDayDrawer onClose={onClose} {...(restProps as any)} />;
   };
 
   /**

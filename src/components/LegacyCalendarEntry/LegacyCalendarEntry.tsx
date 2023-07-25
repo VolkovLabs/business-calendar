@@ -2,9 +2,9 @@ import dayjs, { OpUnitType } from 'dayjs';
 import React from 'react';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
-import { TestIds } from '../../../../constants';
-import { Styles } from '../../../../styles';
-import { CalendarEvent } from '../../../../types';
+import { TestIds } from '../../constants';
+import { Styles } from '../../styles';
+import { CalendarEvent } from '../../types';
 
 /**
  * Properties
@@ -49,7 +49,15 @@ interface Props {
 /**
  * Calendar Entry
  */
-export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks, displayTime, firstDay }: Props) => {
+export const LegacyCalendarEntry = ({
+  event,
+  day,
+  outsideInterval,
+  onClick,
+  quickLinks,
+  displayTime,
+  firstDay,
+}: Props) => {
   /**
    * Styles
    */

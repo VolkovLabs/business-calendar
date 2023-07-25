@@ -8,8 +8,8 @@ import { Drawer, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent } from '../../types';
+import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
-import { Toolbar } from '../Toolbar';
 import { Styles } from './styles';
 
 /**
@@ -57,11 +57,11 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   );
 
   /**
-   * Custom Calendar Components
+   * Calendar Components
    */
   const components = useMemo(
     () => ({
-      toolbar: Toolbar,
+      toolbar: BigToolbar,
     }),
     []
   );

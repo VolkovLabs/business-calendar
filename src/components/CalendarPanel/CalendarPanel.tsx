@@ -3,7 +3,7 @@ import { PanelProps } from '@grafana/data';
 import { CalendarOptions, CalendarType } from '../../types';
 import { useAnnotationEvents, useCalendarEvents, useColors, useEventFrames } from '../../utils';
 import { BigCalendar } from '../BigCalendar';
-import { CustomCalendar } from '../CustomCalendar';
+import { LegacyCalendar } from '../LegacyCalendar';
 
 /**
  * Properties
@@ -57,7 +57,7 @@ export const CalendarPanel: React.FC<Props> = ({
   }
 
   return (
-    <CustomCalendar
+    <LegacyCalendar
       height={height}
       width={width}
       timeRange={timeRange}

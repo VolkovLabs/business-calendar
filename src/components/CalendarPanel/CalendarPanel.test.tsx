@@ -4,7 +4,7 @@ import { dateTime, FieldType, LoadingState, PanelData, toDataFrame } from '@graf
 import { act, render } from '@testing-library/react';
 import { CalendarType } from '../../types';
 import { BigCalendar } from '../BigCalendar';
-import { CustomCalendar } from '../CustomCalendar';
+import { LegacyCalendar } from '../LegacyCalendar';
 import { CalendarPanel } from './CalendarPanel';
 
 /**
@@ -32,10 +32,10 @@ jest.mock('../BigCalendar', () => ({
 }));
 
 /**
- * Mock Custom Calendar
+ * Mock Legacy Calendar
  */
-jest.mock('../CustomCalendar', () => ({
-  CustomCalendar: jest.fn(() => null),
+jest.mock('../LegacyCalendar', () => ({
+  LegacyCalendar: jest.fn(() => null),
 }));
 
 /**
@@ -121,14 +121,14 @@ describe('Panel', () => {
 
   beforeEach(() => {
     jest.mocked(BigCalendar).mockClear();
-    jest.mocked(CustomCalendar).mockClear();
+    jest.mocked(LegacyCalendar).mockClear();
   });
 
-  it('Should render custom calendar', async () => {
+  it('Should render legacy calendar', async () => {
     await renderWithoutWarning(getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true } }));
 
     expect(BigCalendar).not.toHaveBeenCalled();
-    expect(CustomCalendar).toHaveBeenCalledWith(
+    expect(LegacyCalendar).toHaveBeenCalledWith(
       expect.objectContaining({
         events: expect.arrayContaining([
           expect.objectContaining({
@@ -151,7 +151,7 @@ describe('Panel', () => {
       getComponent({ options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true } })
     );
 
-    expect(CustomCalendar).not.toHaveBeenCalled();
+    expect(LegacyCalendar).not.toHaveBeenCalled();
     expect(BigCalendar).toHaveBeenCalledWith(
       expect.objectContaining({
         events: expect.arrayContaining([

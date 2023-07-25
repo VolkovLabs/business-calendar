@@ -11,8 +11,8 @@ import { BigCalendar } from './BigCalendar';
 /**
  * Mock hooks
  */
-jest.mock('./hooks', () => ({
-  ...jest.requireActual('./hooks'),
+jest.mock('../../hooks', () => ({
+  ...jest.requireActual('../../hooks'),
   useLocalizer: jest.fn(),
 }));
 

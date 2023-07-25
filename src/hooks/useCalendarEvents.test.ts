@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { renderHook } from '@testing-library/react';
-import { CalendarEvent } from '../../../types';
+import { CalendarEvent } from '../types';
 import { useCalendarEvents } from './useCalendarEvents';
 
 /**

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Messages, Navigate, ToolbarProps } from 'react-big-calendar';
 import { Button, ButtonGroup, useStyles2 } from '@grafana/ui';
-import { TestIds } from '../../../../constants';
-import { Styles } from '../../styles';
+import { TestIds } from '../../constants';
+import { Styles } from '../BigCalendar/styles';
 
 /**
  * Properties
@@ -10,13 +10,7 @@ import { Styles } from '../../styles';
 interface Props extends ToolbarProps {}
 
 /**
- * Toolbar
- * @param messages
- * @param label
- * @param onNavigate
- * @param views
- * @param view
- * @param onView
+ * Toolbar for Big Calendar
  * @constructor
  */
 export const Toolbar: React.FC<Props> = ({ localizer: { messages }, label, onNavigate, views, view, onView }) => {
@@ -25,6 +19,9 @@ export const Toolbar: React.FC<Props> = ({ localizer: { messages }, label, onNav
    */
   const styles = useStyles2(Styles);
 
+  /**
+   * Render Views
+   */
   const renderViews = (messages: Messages) => {
     const viewNames = Array.isArray(views) ? views : [];
 

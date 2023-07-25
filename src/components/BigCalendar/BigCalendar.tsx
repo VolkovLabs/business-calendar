@@ -6,16 +6,21 @@ import { Global } from '@emotion/react';
 import { PanelProps } from '@grafana/data';
 import { Drawer, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
+import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent } from '../../types';
 import { EventDetails } from '../EventDetails';
-import { Toolbar } from './components';
-import { useCalendarEvents, useCalendarRange, useLocalizer } from './hooks';
+import { Toolbar } from '../Toolbar';
 import { Styles } from './styles';
 
 /**
  * Properties
  */
 interface Props extends Pick<PanelProps, 'height' | 'timeRange' | 'onChangeTimeRange'> {
+  /**
+   * Events
+   *
+   * @type {CalendarEvent[]}
+   */
   events: CalendarEvent[];
 }
 

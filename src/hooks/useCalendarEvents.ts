@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 import { Event } from 'react-big-calendar';
-import { CalendarEvent } from '../../../types';
+import { CalendarEvent } from '../types';
 
+/**
+ * Calendar Events for Big Calendar
+ */
 export const useCalendarEvents = (events: CalendarEvent[]): Event[] => {
   return useMemo(() => {
     return events.map<Event>(({ text, start, end, ...restEvent }) => ({

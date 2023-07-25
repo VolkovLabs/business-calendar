@@ -30,7 +30,6 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       .addRadio({
         path: 'calendarType',
         name: 'Calendar Type',
-        description: 'Calendar Component to use',
         settings: {
           options: CalendarTypeOptions,
         },

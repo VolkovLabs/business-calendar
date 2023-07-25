@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { TestIds } from '../../constants';
-import { Day } from './Day';
+import { LegacyDay } from './LegacyDay';
 
 /**
  * Test Ids that are used only in tests
@@ -14,8 +14,8 @@ const InTestIds = {
 /**
  * Mock Calendar Entry
  */
-jest.mock('../CalendarEntry', () => ({
-  CalendarEntry: jest.fn(({ onClick }) => <div data-testid={InTestIds.calendarEntry} onClick={onClick} />),
+jest.mock('../LegacyCalendarEntry', () => ({
+  LegacyCalendarEntry: jest.fn(({ onClick }) => <div data-testid={InTestIds.calendarEntry} onClick={onClick} />),
 }));
 
 /**
@@ -26,7 +26,7 @@ jest.mock('react-virtualized-auto-sizer', () => jest.fn(({ children }) => childr
 /**
  * Component Props
  */
-type Props = React.ComponentProps<typeof Day>;
+type Props = React.ComponentProps<typeof LegacyDay>;
 
 /**
  * Day
@@ -42,7 +42,7 @@ describe('Day', () => {
    */
   const getComponent = ({ ...restProps }: Partial<Props>) => {
     return (
-      <Day
+      <LegacyDay
         day={dayjs(getSafeDate())}
         from={dayjs(getSafeDate())}
         to={dayjs(getSafeDate())}

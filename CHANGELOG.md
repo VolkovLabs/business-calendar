@@ -1,10 +1,12 @@
 # Changelog
 
-## 1.5.0 (IN PROGRESS)
+## 2.0.0 (IN PROGRESS)
 
 ### Features / Enhancements
 
 - Increase tests coverage (#105)
+- Add BigCalendar component for rendering calendar (#106)
+- Update ESLint configuration (#106)
 
 ## 1.4.0 (2023-06-10)
 

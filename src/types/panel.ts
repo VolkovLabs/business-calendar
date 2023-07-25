@@ -1,9 +1,19 @@
 import { Colors } from '../constants';
 
+export enum CalendarType {
+  LEGACY = 'legacy',
+  BIG_CALENDAR = 'bigCalendar',
+}
+
 /**
  * Calendar Options
  */
 export interface CalendarOptions {
+  /**
+   * Calendar Type
+   */
+  calendarType?: CalendarType;
+
   /**
    * Auto Scroll
    *

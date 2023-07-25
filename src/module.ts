@@ -2,13 +2,14 @@ import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/dat
 import { CalendarPanel, MultiFieldEditor } from './components';
 import {
   AnnotationsOptions,
+  CalendarTypeOptions,
   ColorsOptions,
   DefaultOptions,
   DisplayTimeOptions,
   LinksOptions,
   ScrollOptions,
 } from './constants';
-import { CalendarOptions } from './types';
+import { CalendarOptions, CalendarType } from './types';
 
 /**
  * Panel Plugin
@@ -26,6 +27,14 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
   })
   .setPanelOptions((builder) => {
     builder
+      .addRadio({
+        path: 'calendarType',
+        name: 'Calendar Type',
+        settings: {
+          options: CalendarTypeOptions,
+        },
+        defaultValue: CalendarType.LEGACY,
+      })
       .addRadio({
         path: 'autoScroll',
         name: 'Scroll to bottom',

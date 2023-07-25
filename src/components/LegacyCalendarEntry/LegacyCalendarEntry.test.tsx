@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
-import { CalendarEntry } from './CalendarEntry';
+import { LegacyCalendarEntry } from './LegacyCalendarEntry';
 
 /**
  * Calendar Entry
@@ -14,7 +14,7 @@ describe('Calendar Entry', () => {
    * @param restProps
    */
   const getComponent = ({ ...restProps }: any) => {
-    return <CalendarEntry {...restProps} />;
+    return <LegacyCalendarEntry {...restProps} />;
   };
 
   /**

@@ -49,7 +49,15 @@ interface Props {
 /**
  * Calendar Entry
  */
-export const CalendarEntry = ({ event, day, outsideInterval, onClick, quickLinks, displayTime, firstDay }: Props) => {
+export const LegacyCalendarEntry = ({
+  event,
+  day,
+  outsideInterval,
+  onClick,
+  quickLinks,
+  displayTime,
+  firstDay,
+}: Props) => {
   /**
    * Styles
    */

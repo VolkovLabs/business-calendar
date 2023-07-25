@@ -68,7 +68,124 @@
       "options": {
         "annotations": true,
         "autoScroll": false,
+        "calendarType": "bigCalendar",
         "colorField": "Color",
+        "colors": "frame",
+        "descriptionField": "description",
+        "displayTime": false,
+        "endTimeField": "end",
+        "labelFields": ["labels"],
+        "quickLinks": false,
+        "textField": "text",
+        "timeField": "start"
+      },
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-static-datasource",
+            "uid": "U0HP2Rv4z"
+          },
+          "fields": [
+            {
+              "jsonPath": ""
+            }
+          ],
+          "frame": {
+            "fields": [
+              {
+                "config": {},
+                "name": "text",
+                "type": "string",
+                "values": ["Meeting", "Hard Work", "This", "Planning", "First in line", "All day event"]
+              },
+              {
+                "config": {},
+                "name": "description",
+                "type": "string",
+                "values": ["First event", "Working hard", "work", "What to do?", "Event", ""]
+              },
+              {
+                "config": {},
+                "name": "start",
+                "type": "time",
+                "values": [1670710154622, 1670609069806, 1670609069806, 1670809175025, 1660610154622, 1685625686000]
+              },
+              {
+                "config": {},
+                "name": "end",
+                "type": "time",
+                "values": [1670809017462, null, 1670609079806, null, null, 1686748886242]
+              },
+              {
+                "config": {},
+                "name": "labels",
+                "type": "string",
+                "values": ["hello", "hard,work", "this,that,who?", "", "", ""]
+              },
+              {
+                "config": {},
+                "name": "Color",
+                "type": "number",
+                "values": [30, 100, 30, 70, 60, 0]
+              }
+            ],
+            "meta": {},
+            "name": "Data"
+          },
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Weekly",
+      "type": "marcusolsson-calendar-panel"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-static-datasource",
+        "uid": "U0HP2Rv4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#b1b3b5",
+                "value": null
+              },
+              {
+                "color": "#9d70f9",
+                "value": 50
+              },
+              {
+                "color": "#eb4444",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 20,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 5,
+      "options": {
+        "annotations": true,
+        "autoScroll": false,
+        "calendarType": "legacy",
+        "colorField": "Color",
+        "colors": "frame",
         "descriptionField": "description",
         "displayTime": false,
         "endTimeField": "end",
@@ -185,7 +302,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -200,7 +318,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 20
+        "y": 40
       },
       "id": 4,
       "options": {
@@ -236,7 +354,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "revision": 1,
   "schemaVersion": 38,
   "style": "dark",
@@ -245,13 +363,13 @@
     "list": []
   },
   "time": {
-    "from": "now-90d",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Weekly",
   "uid": "pKxZUM5Vz",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }

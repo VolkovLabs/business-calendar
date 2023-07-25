@@ -24,22 +24,22 @@ export const BigToolbar: React.FC<Props> = ({ localizer: { messages }, label, on
    */
   const renderViews = (messages: Messages) => {
     const viewNames = Array.isArray(views) ? views : [];
-
-    if (viewNames.length > 1) {
-      return viewNames.map((name) => (
-        <Button
-          type="button"
-          key={name}
-          onClick={() => onView(name)}
-          disabled={view === name}
-          variant="secondary"
-          data-testid={TestIds.bigCalendarToolbar.buttonView(name)}
-        >
-          {messages[name]}
-        </Button>
-      ));
+    if (!viewNames.length) {
+      return null;
     }
-    return null;
+
+    return viewNames.map((name) => (
+      <Button
+        type="button"
+        key={name}
+        onClick={() => onView(name)}
+        disabled={view === name}
+        variant="secondary"
+        data-testid={TestIds.bigCalendarToolbar.buttonView(name)}
+      >
+        {messages[name]}
+      </Button>
+    ));
   };
 
   return (

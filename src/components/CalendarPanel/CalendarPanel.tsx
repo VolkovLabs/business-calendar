@@ -50,12 +50,18 @@ export const CalendarPanel: React.FC<Props> = ({
     return dataFrameEvents.concat(annotationsEvents);
   }, [dataFrameEvents, annotationsEvents]);
 
+  /**
+   * Big Calendar
+   */
   if (options.calendarType === CalendarType.BIG_CALENDAR) {
     return (
       <BigCalendar events={allEvents} timeRange={timeRange} onChangeTimeRange={onChangeTimeRange} height={height} />
     );
   }
 
+  /**
+   * Legacy
+   */
   return (
     <LegacyCalendar
       height={height}

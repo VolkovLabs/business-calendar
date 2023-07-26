@@ -2,11 +2,17 @@
 
 ## 2.0.0 (IN PROGRESS)
 
+### Breaking changes
+
+- Requires Grafana 9 and Grafana 10
+
 ### Features / Enhancements
 
 - Increase tests coverage (#105)
 - Add BigCalendar component for rendering calendar (#106)
 - Update ESLint configuration (#106)
+- Remove Grafana 8.5 support (#110)
+- Update to Grafana 10.0 (#110)
 
 ## 1.4.0 (2023-06-10)
 

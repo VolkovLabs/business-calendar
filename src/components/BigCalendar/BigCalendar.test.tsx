@@ -154,6 +154,47 @@ describe('Big Calendar', () => {
     expect(window.open).toHaveBeenCalledWith(link.href, link.target);
   });
 
+  it('Should open link with self by default', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    jest.spyOn(window, 'open').mockImplementationOnce(() => ({} as any));
+
+    const link = {
+      href: 'http://123.com',
+      target: undefined,
+      title: '',
+      origin: {} as any,
+    };
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: dayjs(getSafeDate()),
+      labels: [],
+      color: '',
+      links: [link],
+    };
+    render(getComponent({ events: [event], options: { quickLinks: true, autoScroll: false } }));
+
+    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(() => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Check if event link opened
+     */
+    expect(window.open).toHaveBeenCalledWith(link.href, '_self');
+  });
+
   it('Should show event details if link is not specified', async () => {
     let calendarProps: Required<CalendarProps> = {} as any;
     jest.mocked(Calendar).mockImplementation((props: any): any => {

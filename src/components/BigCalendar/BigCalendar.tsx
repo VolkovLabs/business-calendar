@@ -87,7 +87,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
          */
         const link = event.resource.links?.[0];
         if (link) {
-          window.open(link.href, link.target);
+          window.open(link.href, link.target || '_self');
           return;
         }
       }

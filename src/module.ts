@@ -26,6 +26,11 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
     ],
   })
   .setPanelOptions((builder) => {
+    /**
+     * Visibility
+     */
+    const showForLegacy = (config: CalendarOptions) => config.calendarType === CalendarType.LEGACY;
+
     builder
       .addRadio({
         path: 'calendarType',
@@ -43,6 +48,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: ScrollOptions,
         },
         defaultValue: DefaultOptions.autoScroll,
+        showIf: showForLegacy,
       })
       .addRadio({
         path: 'displayTime',
@@ -52,6 +58,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: DisplayTimeOptions,
         },
         defaultValue: DefaultOptions.annotations,
+        showIf: showForLegacy,
       })
       .addRadio({
         path: 'quickLinks',

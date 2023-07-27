@@ -77,7 +77,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   const [activeEvent, setActiveEvent] = useState<CalendarEvent | null>(null);
 
   /**
-   * Select event to show details
+   * Select event
    */
   const onSelectEvent = useCallback(
     (event: Event) => {

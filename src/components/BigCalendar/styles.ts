@@ -1,4 +1,3 @@
-import { css } from '@emotion/css';
 import { GrafanaTheme2 } from '@grafana/data';
 
 /**
@@ -41,13 +40,10 @@ export const Styles = (theme: GrafanaTheme2) => {
         maxHeight: 27 * 10,
         overflow: 'auto',
       },
+      '.rbc-row-segment .rbc-show-more': {
+        backgroundColor: 'transparent',
+        color: theme.colors.text.link,
+      },
     },
-    toolbar: css`
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: ${theme.spacing(1)};
-      padding: ${theme.spacing(0.5)};
-    `,
   };
 };

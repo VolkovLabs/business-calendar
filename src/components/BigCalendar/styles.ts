@@ -40,6 +40,10 @@ export const Styles = (theme: GrafanaTheme2) => {
         maxHeight: 27 * 10,
         overflow: 'auto',
       },
+      '.rbc-row-segment .rbc-show-more': {
+        backgroundColor: 'transparent',
+        color: theme.colors.text.link,
+      },
     },
   };
 };

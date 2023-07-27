@@ -2,7 +2,7 @@ import React from 'react';
 import { Messages, Navigate, ToolbarProps } from 'react-big-calendar';
 import { Button, ButtonGroup, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
-import { Styles } from '../BigCalendar/styles';
+import { Styles } from './styles';
 
 /**
  * Properties
@@ -44,7 +44,7 @@ export const BigToolbar: React.FC<Props> = ({ localizer: { messages }, label, on
 
   return (
     <div className={styles.toolbar}>
-      <ButtonGroup>
+      <div className={styles.div}>
         <Button
           type="button"
           onClick={() => onNavigate(Navigate.TODAY)}
@@ -53,25 +53,27 @@ export const BigToolbar: React.FC<Props> = ({ localizer: { messages }, label, on
         >
           {messages.today}
         </Button>
-        <Button
-          type="button"
-          onClick={() => onNavigate(Navigate.PREVIOUS)}
-          variant="secondary"
-          data-testid={TestIds.bigCalendarToolbar.buttonBack}
-        >
-          {messages.previous}
-        </Button>
-        <Button
-          type="button"
-          onClick={() => onNavigate(Navigate.NEXT)}
-          variant="secondary"
-          data-testid={TestIds.bigCalendarToolbar.buttonNext}
-        >
-          {messages.next}
-        </Button>
-      </ButtonGroup>
 
-      <span>{label}</span>
+        <ButtonGroup>
+          <Button
+            type="button"
+            className={styles.prev}
+            onClick={() => onNavigate(Navigate.PREVIOUS)}
+            variant="secondary"
+            data-testid={TestIds.bigCalendarToolbar.buttonBack}
+            icon="angle-left"
+          />
+          <Button
+            type="button"
+            onClick={() => onNavigate(Navigate.NEXT)}
+            variant="secondary"
+            data-testid={TestIds.bigCalendarToolbar.buttonNext}
+            icon="angle-right"
+          />
+        </ButtonGroup>
+      </div>
+
+      <span className={styles.date}>{label}</span>
 
       <ButtonGroup>{renderViews(messages)}</ButtonGroup>
     </div>

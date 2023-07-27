@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 (IN PROGRESS)
+## 2.0.0 (2023-07-27)
 
 ### Breaking changes
 
@@ -17,6 +17,7 @@
 - Add quick links for Big Calendar (#113)
 - Update back/next button for weekly and daily views in Big Calendar (#114)
 - Update button styles for Big Calendar (#115)
+- Update calendar resizing for Big Calendar (#116)
 
 ## 1.4.0 (2023-06-10)
 

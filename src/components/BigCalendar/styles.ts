@@ -1,4 +1,3 @@
-import { css } from '@emotion/css';
 import { GrafanaTheme2 } from '@grafana/data';
 
 /**
@@ -42,12 +41,5 @@ export const Styles = (theme: GrafanaTheme2) => {
         overflow: 'auto',
       },
     },
-    toolbar: css`
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: ${theme.spacing(1)};
-      padding: ${theme.spacing(0.5)};
-    `,
   };
 };

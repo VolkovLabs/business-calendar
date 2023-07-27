@@ -17,8 +17,18 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    * Middle date within the range to show current date in Calendar
    */
   const middleDate = useMemo(() => {
-    return new Date((calendarTo.valueOf() + calendarFrom.valueOf()) / 2);
-  }, [calendarFrom, calendarTo]);
+    let from = calendarFrom;
+    let to = calendarTo;
+
+    /**
+     * Show last month
+     */
+    if (view === Views.MONTH) {
+      from = dayjs(calendarTo).startOf(Views.MONTH).toDate();
+    }
+
+    return new Date((from.valueOf() + to.valueOf()) / 2);
+  }, [calendarFrom, calendarTo, view]);
 
   /**
    * Change Calendar View
@@ -26,9 +36,9 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
   const onChangeView = useCallback(
     (newView: View) => {
       switch (newView) {
-        case 'month':
-        case 'week':
-        case 'day': {
+        case Views.MONTH:
+        case Views.WEEK:
+        case Views.DAY: {
           const { from, to } = timeRange;
           const newFrom = dayjs(middleDate).startOf(newView);
           const newTo = dayjs(middleDate).endOf(newView);
@@ -58,11 +68,11 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    */
   const onNavigate = useCallback(
     (newDate: Date, currentView: View, action: NavigateAction) => {
-      const view: View = action === 'DATE' ? 'day' : currentView;
+      const view: View = action === 'DATE' ? Views.DAY : currentView;
       switch (view) {
-        case 'month':
-        case 'week':
-        case 'day': {
+        case Views.MONTH:
+        case Views.WEEK:
+        case Views.DAY: {
           const { from, to } = timeRange;
           const newFrom = dayjs(newDate).startOf(view);
           const newTo = dayjs(newDate).endOf(view);
@@ -101,7 +111,7 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    * Update calendar range if time range updated
    */
   useEffect(() => {
-    setCalendarFrom(dayjs(timeRange.to.toDate()).startOf('month').toDate());
+    setCalendarFrom(timeRange.from.toDate());
     setCalendarTo(timeRange.to.toDate());
   }, [timeRange.from, timeRange.to]);
 

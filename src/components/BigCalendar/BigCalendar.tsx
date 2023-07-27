@@ -114,6 +114,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       )}
       <Global styles={styles.global} />
       <Calendar
+        dayLayoutAlgorithm="no-overlap"
         localizer={localizer}
         events={calendarEvents}
         eventPropGetter={eventPropGetter}

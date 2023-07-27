@@ -67,7 +67,7 @@ describe('Use Calendar Events', () => {
      * Check if end date of endless event is far enough
      */
     expect(calendarEvent1?.end).toBeInstanceOf(Date);
-    expect(calendarEvent1?.end?.toISOString()).toEqual(event1.start.toISOString());
+    expect(calendarEvent1?.end?.toISOString()).toEqual(event1.start.add(1, 'hours').toISOString());
 
     const calendarEvent2 = calendarEvents[1];
     expect(calendarEvent2).toEqual(

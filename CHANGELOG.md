@@ -13,6 +13,9 @@
 - Update ESLint configuration (#106)
 - Remove Grafana 8.5 support (#110)
 - Update to Grafana 10.0 (#110)
+- Update events overlap when the start date equals the end date in Big Calendar (#112)
+- Add quick links for BigCalendar (#113)
+- Update back/next button for weekly and daily views in Big Calendar (#114)
 
 ## 1.4.0 (2023-06-10)
 

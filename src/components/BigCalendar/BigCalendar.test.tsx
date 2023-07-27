@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import React from 'react';
 import { Calendar, CalendarProps, Event } from 'react-big-calendar';
-import { dateTime } from '@grafana/data';
+import { dateTime, LinkTarget } from '@grafana/data';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
@@ -63,7 +63,7 @@ describe('Big Calendar', () => {
         to: dateTime(getSafeDate()),
       },
     };
-    return <BigCalendar events={events} timeRange={timeRange} {...(props as any)} />;
+    return <BigCalendar events={events} timeRange={timeRange} options={{}} {...(props as any)} />;
   };
 
   it('Should find component', () => {
@@ -111,6 +111,122 @@ describe('Big Calendar', () => {
      * Check if event details closed
      */
     expect(screen.queryByLabelText(TestIds.bigCalendar.drawerClose)).not.toBeInTheDocument();
+  });
+
+  it('Should open link if quickLinks enabled', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    jest.spyOn(window, 'open').mockImplementationOnce(() => ({} as any));
+
+    const link = {
+      href: 'http://123.com',
+      target: '_blank' as LinkTarget,
+      title: '',
+      origin: {} as any,
+    };
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: dayjs(getSafeDate()),
+      labels: [],
+      color: '',
+      links: [link],
+    };
+    render(getComponent({ events: [event], options: { quickLinks: true, autoScroll: false } }));
+
+    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(() => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Check if event link opened
+     */
+    expect(window.open).toHaveBeenCalledWith(link.href, link.target);
+  });
+
+  it('Should open link with self by default', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    jest.spyOn(window, 'open').mockImplementationOnce(() => ({} as any));
+
+    const link = {
+      href: 'http://123.com',
+      target: undefined,
+      title: '',
+      origin: {} as any,
+    };
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: dayjs(getSafeDate()),
+      labels: [],
+      color: '',
+      links: [link],
+    };
+    render(getComponent({ events: [event], options: { quickLinks: true, autoScroll: false } }));
+
+    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(() => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Check if event link opened
+     */
+    expect(window.open).toHaveBeenCalledWith(link.href, '_self');
+  });
+
+  it('Should show event details if link is not specified', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    jest.spyOn(window, 'open').mockImplementationOnce(() => ({} as any));
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: dayjs(getSafeDate()),
+      labels: [],
+      color: '',
+      links: [],
+    };
+    render(getComponent({ events: [event], options: { quickLinks: true, autoScroll: false } }));
+
+    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(() => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Check if event details shown
+     */
+    expect(screen.getByLabelText(TestIds.bigCalendar.drawerClose)).toBeInTheDocument();
   });
 
   it('Should pass all event info to event details', async () => {

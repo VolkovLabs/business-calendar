@@ -97,6 +97,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       )}
       <Global styles={styles.global} />
       <Calendar
+        key={height}
         localizer={localizer}
         events={calendarEvents}
         eventPropGetter={eventPropGetter}

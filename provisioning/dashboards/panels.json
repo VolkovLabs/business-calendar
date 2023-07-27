@@ -74,6 +74,90 @@
       "options": {
         "annotations": false,
         "autoScroll": true,
+        "calendarType": "legacy",
+        "colors": "event",
+        "descriptionField": "description",
+        "displayTime": true,
+        "labelFields": ["slug", "version"],
+        "quickLinks": false,
+        "textField": "name",
+        "timeField": "updatedAt"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 15,
+          "refId": "A"
+        }
+      ],
+      "title": "Calendar",
+      "transformations": [
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "id (count)"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "marcusolsson-calendar-panel"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Grafana Catalog",
+              "url": "${__data.fields.url}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1000
+              },
+              {
+                "color": "green",
+                "value": 5000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 16,
+      "options": {
+        "annotations": false,
+        "autoScroll": true,
+        "calendarType": "bigCalendar",
         "colors": "event",
         "descriptionField": "description",
         "displayTime": true,
@@ -119,7 +203,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 36
       },
       "id": 14,
       "panels": [],
@@ -304,7 +388,7 @@
         "h": 30,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 37
       },
       "id": 15,
       "options": {
@@ -323,7 +407,7 @@
           }
         ]
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.0.3",
       "targets": [
         {
           "cacheDurationSeconds": 300,

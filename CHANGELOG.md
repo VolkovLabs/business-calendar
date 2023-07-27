@@ -14,6 +14,7 @@
 - Remove Grafana 8.5 support (#110)
 - Update to Grafana 10.0 (#110)
 - Fix events overlap when the start date equals the end date in Big Calendar (#112)
+- Add quick-links for BigCalendar (#113)
 
 ## 1.4.0 (2023-06-10)
 

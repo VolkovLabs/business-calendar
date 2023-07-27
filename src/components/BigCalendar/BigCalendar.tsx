@@ -7,7 +7,7 @@ import { PanelProps } from '@grafana/data';
 import { Drawer, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
-import { CalendarEvent } from '../../types';
+import { CalendarEvent, CalendarOptions } from '../../types';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
 import { Styles } from './styles';
@@ -15,7 +15,7 @@ import { Styles } from './styles';
 /**
  * Properties
  */
-interface Props extends Pick<PanelProps, 'height' | 'timeRange' | 'onChangeTimeRange'> {
+interface Props extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange' | 'onChangeTimeRange' | 'options'> {
   /**
    * Events
    *
@@ -28,7 +28,7 @@ interface Props extends Pick<PanelProps, 'height' | 'timeRange' | 'onChangeTimeR
  * Big Calendar
  * @param props
  */
-export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChangeTimeRange }) => {
+export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChangeTimeRange, options }) => {
   /**
    * Theme
    */
@@ -79,14 +79,31 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Select event to show details
    */
-  const onSelectEvent = useCallback((event: Event) => {
-    setActiveEvent({
-      text: event.title as string,
-      start: dayjs(event.start),
-      end: event.end && !event.resource?.isEndless ? dayjs(event.end) : undefined,
-      ...(event.resource || {}),
-    });
-  }, []);
+  const onSelectEvent = useCallback(
+    (event: Event) => {
+      if (options.quickLinks) {
+        /**
+         * Open first link
+         */
+        const link = event.resource.links?.[0];
+        if (link) {
+          window.open(link.href, link.target);
+          return;
+        }
+      }
+
+      /**
+       * Show event details
+       */
+      setActiveEvent({
+        text: event.title as string,
+        start: dayjs(event.start),
+        end: event.end && !event.resource?.isEndless ? dayjs(event.end) : undefined,
+        ...(event.resource || {}),
+      });
+    },
+    [options.quickLinks]
+  );
 
   return (
     <div data-testid={TestIds.bigCalendar.root}>

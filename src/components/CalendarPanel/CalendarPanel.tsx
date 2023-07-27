@@ -55,7 +55,13 @@ export const CalendarPanel: React.FC<Props> = ({
    */
   if (options.calendarType === CalendarType.BIG_CALENDAR) {
     return (
-      <BigCalendar events={allEvents} timeRange={timeRange} onChangeTimeRange={onChangeTimeRange} height={height} />
+      <BigCalendar
+        events={allEvents}
+        timeRange={timeRange}
+        onChangeTimeRange={onChangeTimeRange}
+        height={height}
+        options={options}
+      />
     );
   }
 

@@ -28,6 +28,15 @@ describe('Use Localizer', () => {
     expect(dayjs.locale()).toEqual('fr');
   });
 
+  it('Should set dayjs locale', () => {
+    config.bootData = {
+      user: {},
+    } as any;
+    renderHook(() => useLocalizer());
+
+    expect(dayjs.locale()).toEqual('en');
+  });
+
   it('Should set default dayjs locale', () => {
     config.bootData = {
       user: {

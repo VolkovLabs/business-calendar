@@ -16,7 +16,7 @@ The Calendar visualization panel is a Grafana plugin created to display calendar
 
 ## Requirements
 
-- **Grafana 9** and **Grafana 10** are required for major version 2.
+- **Grafana 9.2** and **Grafana 10** are required for major version 2.
 - **Grafana 8.5** and **Grafana 9** are required for major version 1.
 
 ## Getting Started

@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
 import { getLocaleData } from '@grafana/data';
 import { config } from '@grafana/runtime';
+import { DefaultLanguage } from '../constants';
 
 /**
  * Dayjs locales per each grafana language
@@ -27,7 +28,7 @@ const dayjsLocales = {
  */
 export const useLocalizer = () => {
   const localeDate = getLocaleData();
-  const { language } = config.bootData.user;
+  const language = config.bootData.user.language || DefaultLanguage;
   const localeName = language.split('-')[0];
   const [dayjsLocale, setDayjsLocale] = useState(dayjsLocales.en);
 

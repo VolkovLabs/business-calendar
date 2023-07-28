@@ -9,6 +9,11 @@ export const enum Colors {
 }
 
 /**
+ * Language
+ */
+export const DefaultLanguage = 'en-US';
+
+/**
  * Default Options
  */
 export const DefaultOptions: CalendarOptions = {

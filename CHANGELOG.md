@@ -1,10 +1,10 @@
 # Changelog
 
-## 2.0.0 (2023-07-27)
+## 2.0.0 (2023-07-28)
 
 ### Breaking changes
 
-- Requires Grafana 9 and Grafana 10
+- Requires Grafana 9.2 and Grafana 10
 
 ### Features / Enhancements
 

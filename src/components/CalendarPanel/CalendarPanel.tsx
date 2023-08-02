@@ -47,8 +47,8 @@ export const CalendarPanel: React.FC<Props> = ({
    * All Events
    */
   const allEvents = useMemo(() => {
-    return dataFrameEvents.concat(annotationsEvents);
-  }, [dataFrameEvents, annotationsEvents]);
+    return dataFrameEvents.concat(options.annotations ? annotationsEvents : []);
+  }, [dataFrameEvents, annotationsEvents, options.annotations]);
 
   /**
    * Big Calendar

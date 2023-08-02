@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1 (2023-08-03)
+
+### Bugfixes
+
+- Fix display annotations options (#119)
+
 ## 2.0.0 (2023-07-28)
 
 ### Breaking changes

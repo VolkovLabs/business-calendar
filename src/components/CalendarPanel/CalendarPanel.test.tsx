@@ -6,6 +6,7 @@ import { CalendarType } from '../../types';
 import { BigCalendar } from '../BigCalendar';
 import { LegacyCalendar } from '../LegacyCalendar';
 import { CalendarPanel } from './CalendarPanel';
+import { useAnnotationEvents } from '../../utils';
 
 /**
  * Mock @grafana/runtime
@@ -21,7 +22,7 @@ jest.mock('@grafana/runtime', () => ({
  */
 jest.mock('../../utils', () => ({
   ...jest.requireActual('../../utils'),
-  useAnnotations: jest.fn(() => [{ id: '123' }]),
+  useAnnotationEvents: jest.fn(() => [{ id: '123' }]),
 }));
 
 /**
@@ -163,6 +164,31 @@ describe('Panel', () => {
             links: null,
             start: dayjs(getSafeDate()),
             text: 'event1',
+          }),
+        ]),
+      }),
+      expect.anything()
+    );
+  });
+
+  it('Should add annotation events', async () => {
+    jest.mocked(useAnnotationEvents).mockImplementationOnce(
+      () =>
+        [
+          {
+            text: 'annotation',
+          },
+        ] as any
+    );
+    await renderWithoutWarning(
+      getComponent({ options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true, annotations: true } })
+    );
+
+    expect(BigCalendar).toHaveBeenCalledWith(
+      expect.objectContaining({
+        events: expect.arrayContaining([
+          expect.objectContaining({
+            text: 'annotation',
           }),
         ]),
       }),

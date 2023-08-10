@@ -3,10 +3,10 @@ import React from 'react';
 import { dateTime, FieldType, LoadingState, PanelData, toDataFrame } from '@grafana/data';
 import { act, render } from '@testing-library/react';
 import { CalendarType } from '../../types';
+import { useAnnotationEvents } from '../../utils';
 import { BigCalendar } from '../BigCalendar';
 import { LegacyCalendar } from '../LegacyCalendar';
 import { CalendarPanel } from './CalendarPanel';
-import { useAnnotationEvents } from '../../utils';
 
 /**
  * Mock @grafana/runtime

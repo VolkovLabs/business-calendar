@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { getBackendSrv } from '@grafana/runtime';
 import { renderHook, waitFor } from '@testing-library/react';
+import { DefaultOptions } from '../constants';
 import { useAnnotationEvents } from './annotations';
 
 /**
@@ -36,10 +37,10 @@ describe('Annotations', () => {
       () =>
         ({
           get: jest.fn(() => promise),
-        } as any)
+        }) as any
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
-    const { result } = renderHook(() => useAnnotationEvents(timeRange as any));
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DefaultOptions as any));
 
     await waitFor(() =>
       expect(result.current).toEqual(
@@ -65,10 +66,10 @@ describe('Annotations', () => {
       () =>
         ({
           get: jest.fn(() => promise),
-        } as any)
+        }) as any
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
-    const { result } = renderHook(() => useAnnotationEvents(timeRange as any));
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DefaultOptions as any));
 
     await waitFor(() => expect(result.current).toEqual([]));
   });

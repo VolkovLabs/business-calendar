@@ -1,12 +1,5 @@
 import { CalendarOptions, CalendarType } from '../types';
-
-/**
- * Colors
- */
-export const enum Colors {
-  FRAME = 'frame',
-  EVENT = 'event',
-}
+import { AnnotationsType, Colors } from './options';
 
 /**
  * Language
@@ -17,58 +10,12 @@ export const DefaultLanguage = 'en-US';
  * Default Options
  */
 export const DefaultOptions: CalendarOptions = {
-  calendarType: CalendarType.LEGACY,
-  quickLinks: false,
-  autoScroll: false,
   annotations: false,
-  displayTime: false,
+  annotationsLimit: 100,
+  annotationsType: AnnotationsType.ALL,
+  autoScroll: false,
+  calendarType: CalendarType.LEGACY,
   colors: Colors.FRAME,
+  displayTime: false,
+  quickLinks: false,
 };
-
-/**
- * Links Options
- */
-export const LinksOptions = [
-  { value: true, label: 'Open Link' },
-  { value: false, label: 'Show Details' },
-];
-
-/**
- * Scroll Options
- */
-export const ScrollOptions = [
-  { value: true, label: 'Auto' },
-  { value: false, label: 'Disabled' },
-];
-
-/**
- * Annotations Options
- */
-export const AnnotationsOptions = [
-  { value: true, label: 'Enabled' },
-  { value: false, label: 'Disabled' },
-];
-
-/**
- * Display Time Options
- */
-export const DisplayTimeOptions = [
-  { value: true, label: 'Enabled' },
-  { value: false, label: 'Disabled' },
-];
-
-/**
- * Color Options
- */
-export const ColorsOptions = [
-  { value: Colors.FRAME, label: 'Frame' },
-  { value: Colors.EVENT, label: 'Event' },
-];
-
-/**
- * Calendar Type Options
- */
-export const CalendarTypeOptions = [
-  { value: CalendarType.LEGACY, label: 'Legacy' },
-  { value: CalendarType.BIG_CALENDAR, label: 'Big Calendar' },
-];

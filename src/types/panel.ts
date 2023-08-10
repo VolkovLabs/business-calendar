@@ -1,4 +1,4 @@
-import { Colors } from '../constants';
+import { AnnotationsType, Colors } from '../constants';
 
 export enum CalendarType {
   LEGACY = 'legacy',
@@ -69,6 +69,20 @@ export interface CalendarOptions {
    * @type {boolean}
    */
   annotations?: boolean;
+
+  /**
+   * Annotations Type
+   *
+   * @type {AnnotationsType}
+   */
+  annotationsType?: AnnotationsType;
+
+  /**
+   * Annotations Limit
+   *
+   * @type {number}
+   */
+  annotationsLimit?: number;
 
   /**
    * Colors

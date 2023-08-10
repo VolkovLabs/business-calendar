@@ -17,6 +17,7 @@ describe('plugin', () => {
     addCustomEditor: jest.fn().mockImplementation(() => builder),
     addRadio: jest.fn().mockImplementation(() => builder),
     addFieldNamePicker: jest.fn().mockImplementation(() => builder),
+    addSliderInput: jest.fn().mockImplementation(() => builder),
   };
 
   it('Should be instance of PanelPlugin', () => {
@@ -35,6 +36,7 @@ describe('plugin', () => {
     expect(builder.addCustomEditor).toHaveBeenCalled();
     expect(builder.addRadio).toHaveBeenCalled();
     expect(builder.addFieldNamePicker).toHaveBeenCalled();
+    expect(builder.addSliderInput).toHaveBeenCalled();
   });
 
   describe('Settings', () => {

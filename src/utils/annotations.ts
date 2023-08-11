@@ -8,6 +8,7 @@ import { CalendarEvent, CalendarOptions } from '../types';
 /**
  * Get Annotations
  * @param timeRange
+ * @param options
  */
 const useAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
   const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);

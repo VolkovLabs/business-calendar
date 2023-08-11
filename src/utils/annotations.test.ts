@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { getBackendSrv } from '@grafana/runtime';
 import { renderHook, waitFor } from '@testing-library/react';
-import { DefaultOptions } from '../constants';
+import {AnnotationsType, DefaultOptions} from '../constants';
 import { useAnnotationEvents } from './annotations';
 
 /**
@@ -58,6 +58,38 @@ describe('Annotations', () => {
         ])
       )
     );
+  });
+
+  it('Should request alerts', async () => {
+    const getMock = jest.fn(() => Promise.resolve([]))
+    jest.mocked(getBackendSrv).mockImplementationOnce(
+        () =>
+            ({
+              get: getMock,
+            }) as any
+    );
+    const timeRange = { from: getSafeDate(), to: getSafeDate() };
+    renderHook(() => useAnnotationEvents(timeRange as any, { ...DefaultOptions, annotationsType: AnnotationsType.ALERT } as any));
+
+    await waitFor(() => expect(getMock).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({
+      type: AnnotationsType.ALERT,
+    })))
+  });
+
+  it('Should request annotation', async () => {
+    const getMock = jest.fn(() => Promise.resolve([]))
+    jest.mocked(getBackendSrv).mockImplementationOnce(
+        () =>
+            ({
+              get: getMock,
+            }) as any
+    );
+    const timeRange = { from: getSafeDate(), to: getSafeDate() };
+    renderHook(() => useAnnotationEvents(timeRange as any, { ...DefaultOptions, annotationsType: AnnotationsType.ANNOTATION } as any));
+
+    await waitFor(() => expect(getMock).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({
+      type: AnnotationsType.ANNOTATION,
+    })))
   });
 
   it('Should return empty array', async () => {

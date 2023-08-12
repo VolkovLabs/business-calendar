@@ -2,6 +2,7 @@ import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/dat
 import { CalendarPanel, MultiFieldEditor } from './components';
 import {
   AnnotationsOptions,
+  AnnotationsTypeOptions,
   CalendarTypeOptions,
   ColorsOptions,
   DefaultOptions,
@@ -34,7 +35,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
     builder
       .addRadio({
         path: 'calendarType',
-        name: 'Calendar Type',
+        name: 'Calendar type',
         settings: {
           options: CalendarTypeOptions,
         },
@@ -52,7 +53,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       })
       .addRadio({
         path: 'displayTime',
-        name: 'Display Time',
+        name: 'Display time',
         description: 'Display Time for each entry.',
         settings: {
           options: DisplayTimeOptions,
@@ -62,21 +63,12 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       })
       .addRadio({
         path: 'quickLinks',
-        name: 'On Click',
+        name: 'On click',
         description: 'Open data link or display drawer when clicking an event.',
         settings: {
           options: LinksOptions,
         },
         defaultValue: DefaultOptions.quickLinks,
-      })
-      .addRadio({
-        path: 'annotations',
-        name: 'Annotations',
-        description: 'Display annotations.',
-        settings: {
-          options: AnnotationsOptions,
-        },
-        defaultValue: DefaultOptions.annotations,
       })
       .addRadio({
         path: 'colors',
@@ -149,5 +141,39 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           filter: (f: Field) => [FieldType.string, FieldType.number].includes(f.type),
         },
+      });
+
+    /**
+     * Annotations
+     */
+    builder
+      .addRadio({
+        path: 'annotations',
+        name: 'Annotations',
+        description: 'Display annotations.',
+        settings: {
+          options: AnnotationsOptions,
+        },
+        category: ['Annotations'],
+        defaultValue: DefaultOptions.annotations,
+      })
+      .addRadio({
+        path: 'annotationsType',
+        name: 'Type',
+        settings: {
+          options: AnnotationsTypeOptions,
+        },
+        category: ['Annotations'],
+        defaultValue: DefaultOptions.annotationsType,
+      })
+      .addSliderInput({
+        path: 'annotationsLimit',
+        name: 'Max limit',
+        defaultValue: DefaultOptions.annotationsLimit,
+        settings: {
+          min: 100,
+          max: 2000,
+        },
+        category: ['Annotations'],
       });
   });

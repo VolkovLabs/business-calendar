@@ -13,7 +13,7 @@ import { BigCalendar } from './BigCalendar';
  */
 jest.mock('../../hooks', () => ({
   ...jest.requireActual('../../hooks'),
-  useLocalizer: jest.fn(),
+  useLocalizer: jest.fn().mockImplementation(() => ({ localizer: jest.fn(), messages: {} }) as any),
 }));
 
 /**
@@ -120,7 +120,7 @@ describe('Big Calendar', () => {
       return null;
     });
 
-    jest.spyOn(window, 'open').mockImplementationOnce(() => ({} as any));
+    jest.spyOn(window, 'open').mockImplementationOnce(() => ({}) as any);
 
     const link = {
       href: 'http://123.com',
@@ -161,7 +161,7 @@ describe('Big Calendar', () => {
       return null;
     });
 
-    jest.spyOn(window, 'open').mockImplementationOnce(() => ({} as any));
+    jest.spyOn(window, 'open').mockImplementationOnce(() => ({}) as any);
 
     const link = {
       href: 'http://123.com',
@@ -202,7 +202,7 @@ describe('Big Calendar', () => {
       return null;
     });
 
-    jest.spyOn(window, 'open').mockImplementationOnce(() => ({} as any));
+    jest.spyOn(window, 'open').mockImplementationOnce(() => ({}) as any);
 
     const event: CalendarEvent = {
       text: 'hello',

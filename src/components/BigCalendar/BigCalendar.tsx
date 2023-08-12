@@ -37,7 +37,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Localizer
    */
-  const localizer = useLocalizer();
+  const { localizer, messages } = useLocalizer();
 
   /**
    * Adopted Events for BigCalendar
@@ -117,6 +117,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         key={height}
         dayLayoutAlgorithm="no-overlap"
         localizer={localizer}
+        messages={messages}
         events={calendarEvents}
         eventPropGetter={eventPropGetter}
         startAccessor="start"

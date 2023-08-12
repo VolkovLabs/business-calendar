@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
 import { getLocaleData } from '@grafana/data';
 import { config } from '@grafana/runtime';
-import { DefaultLanguage } from '../constants';
+import { DefaultLanguage, LanguageMessages } from '../constants';
 
 /**
  * Dayjs locales per each grafana language
@@ -45,6 +45,7 @@ export const useLocalizer = () => {
       ...dayjsLocale,
       weekStart: localeDate.firstDayOfWeek(),
     });
-    return dayjsLocalizer(dayjs);
-  }, [dayjsLocale, localeDate]);
+
+    return { localizer: dayjsLocalizer(dayjs), messages: LanguageMessages[localeName] };
+  }, [dayjsLocale, localeDate, localeName]);
 };

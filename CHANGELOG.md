@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Add Annotations type and limit (#121)
+- Update to Grafana 10.0.3 (#122)
+
 ## 2.0.1 (2023-08-03)
 
 ### Bugfixes

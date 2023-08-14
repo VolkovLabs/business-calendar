@@ -43,6 +43,7 @@ grafana-cli plugins install marcusolsson-calendar-panel
 | Section                  | Description                                             |
 | ------------------------ | ------------------------------------------------------- |
 | [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display your data. |
+| [Features](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/features/)     | Demonstrates panel features.                            |
 | [Release Notes](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/release/) | Stay up to date with the latest features and updates.   |
 
 ## Tutorial

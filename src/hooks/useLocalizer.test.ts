@@ -49,17 +49,17 @@ describe('Use Localizer', () => {
     expect(dayjs.locale()).toEqual('en');
   });
 
-  ['es-SP', 'fr-EN', 'de-GE', 'zh-CH'].forEach((lang) => {
-    it(`Should set messages for ${lang}`, () => {
+  ['es-SP', 'fr-EN', 'de-GE', 'zh-CH'].forEach((locale) => {
+    it(`Should set messages for ${locale}`, () => {
       config.bootData = {
         user: {
-          language: lang,
+          language: locale,
         },
       } as any;
       const { result } = renderHook(() => useLocalizer());
 
-      const locale = lang.split('-')[0]
-      const expectedMessages = LanguageMessages[locale];
+      const lang = locale.split('-')[0]
+      const expectedMessages = LanguageMessages[lang];
       expect(result.current.messages).toEqual(expectedMessages)
       if (result.current.messages.showMore && expectedMessages.showMore) {
         expect(result.current.messages.showMore(10)).toEqual(expectedMessages.showMore(10))

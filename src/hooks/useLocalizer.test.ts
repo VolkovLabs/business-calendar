@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { config } from '@grafana/runtime';
 import { renderHook } from '@testing-library/react';
+import { LanguageMessages } from '../constants';
 import { useLocalizer } from './useLocalizer';
 
 /**
@@ -47,4 +48,23 @@ describe('Use Localizer', () => {
 
     expect(dayjs.locale()).toEqual('en');
   });
+
+  ['es-SP', 'fr-EN', 'de-GE', 'zh-CH'].forEach((locale) => {
+    it(`Should set messages for ${locale}`, () => {
+      config.bootData = {
+        user: {
+          language: locale,
+        },
+      } as any;
+      const { result } = renderHook(() => useLocalizer());
+
+      const lang = locale.split('-')[0]
+      const expectedMessages = LanguageMessages[lang];
+      expect(result.current.messages).toEqual(expectedMessages)
+      if (result.current.messages.showMore && expectedMessages.showMore) {
+        expect(result.current.messages.showMore(10)).toEqual(expectedMessages.showMore(10))
+      }
+    });
+  })
+
 });

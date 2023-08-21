@@ -1,0 +1,123 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 3,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "marcusolsson-static-datasource",
+        "uid": "U0HP2Rv4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "annotations": false,
+        "annotationsLimit": 100,
+        "annotationsType": "",
+        "autoScroll": false,
+        "calendarType": "bigCalendar",
+        "colors": "frame",
+        "displayTime": false,
+        "quickLinks": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "marcusolsson-static-datasource",
+            "uid": "U0HP2Rv4z"
+          },
+          "frame": {
+            "fields": [
+              {
+                "config": {},
+                "name": "name",
+                "type": "string",
+                "values": ["w11t3", "w10t1", "w11t2", "w11t1"]
+              },
+              {
+                "config": {},
+                "name": "start",
+                "type": "time",
+                "values": [1692643800348, 1692643800069, 1692643800231, 1692643800654]
+              },
+              {
+                "config": {},
+                "name": "end",
+                "type": "time",
+                "values": [1692644331348, 1692644338069, 1692644344231, 1692644353654]
+              }
+            ],
+            "meta": {},
+            "name": "Test"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Panel Title",
+      "type": "marcusolsson-calendar-panel"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2023-08-20T04:00:00.000Z",
+    "to": "2023-08-27T03:59:59.999Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Order Events",
+  "uid": "b9dc59cf-b99e-42f3-a16b-6fea3db7ef05",
+  "version": 3,
+  "weekStart": ""
+}

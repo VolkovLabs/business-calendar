@@ -104,4 +104,11 @@ export interface CalendarOptions {
    * @type {boolean}
    */
   displayTime?: boolean;
+
+  /**
+   * Location Field
+   *
+   * @type {string}
+   */
+  locationField?: string;
 }

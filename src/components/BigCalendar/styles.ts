@@ -1,4 +1,5 @@
 import { GrafanaTheme2 } from '@grafana/data';
+import { css } from '@emotion/css';
 
 /**
  * Styles
@@ -45,5 +46,8 @@ export const Styles = (theme: GrafanaTheme2) => {
         color: theme.colors.text.link,
       },
     },
+    location: css`
+      font-size: ${theme.typography.bodySmall.fontSize};
+    `,
   };
 };

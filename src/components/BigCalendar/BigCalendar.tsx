@@ -62,8 +62,14 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   const components = useMemo(
     () => ({
       toolbar: BigToolbar,
+      event: ({ event }: { event: Event }) => (
+        <>
+          {event.title}
+          {!!event.resource?.location && <span className={styles.location}>{`: ${event.resource.location}`}</span>}
+        </>
+      ),
     }),
-    []
+    [styles.location]
   );
 
   /**

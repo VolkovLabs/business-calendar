@@ -1,10 +1,9 @@
 import { GrafanaTheme2 } from '@grafana/data';
-import { css } from '@emotion/css';
 
 /**
  * Styles
  */
-export const Styles = (theme: GrafanaTheme2) => {
+export const BigCalendarStyles = (theme: GrafanaTheme2) => {
   const borderColorOverrideSelectors = `
     .rbc-header,
     .rbc-header + .rbc-header,
@@ -46,8 +45,5 @@ export const Styles = (theme: GrafanaTheme2) => {
         color: theme.colors.text.link,
       },
     },
-    location: css`
-      font-size: ${theme.typography.bodySmall.fontSize};
-    `,
   };
 };

@@ -10,7 +10,8 @@ import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions } from '../../types';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
-import { Styles } from './styles';
+import { BigEventContent } from '../BigEventContent';
+import { BigCalendarStyles } from './BigCalendar.styles';
 
 /**
  * Properties
@@ -32,7 +33,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Theme
    */
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(BigCalendarStyles);
 
   /**
    * Localizer
@@ -62,14 +63,9 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   const components = useMemo(
     () => ({
       toolbar: BigToolbar,
-      event: ({ event }: { event: Event }) => (
-        <>
-          {event.title}
-          {!!event.resource?.location && <span className={styles.location}>{`: ${event.resource.location}`}</span>}
-        </>
-      ),
+      event: BigEventContent,
     }),
-    [styles.location]
+    []
   );
 
   /**

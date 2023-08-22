@@ -126,5 +126,21 @@ describe('plugin', () => {
 
       expect(shownFields).toEqual([fields[0], fields[1]]);
     });
+
+    it('Should return correct fields for locationField', () => {
+      const fields: TestField[] = [
+        { name: 'string', type: FieldType.string },
+        { name: 'number', type: FieldType.number },
+        { name: 'time', type: FieldType.time },
+        { name: 'frame', type: FieldType.frame },
+      ];
+      const shownFields: TestField[] = [];
+
+      builder.addFieldNamePicker.mockImplementation(addFieldNameImplementation('locationField', fields, shownFields));
+
+      plugin['optionsSupplier'](builder);
+
+      expect(shownFields).toEqual([fields[0]]);
+    });
   });
 });

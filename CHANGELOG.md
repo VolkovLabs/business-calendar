@@ -4,7 +4,7 @@
 
 ### Features / Enhancements
 
-- Add Event Location (#127)
+- Add Event Location for Big Calendar (#127)
 
 ## 2.1.0 (2023-08-14)
 

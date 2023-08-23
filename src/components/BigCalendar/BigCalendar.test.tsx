@@ -241,7 +241,6 @@ describe('Big Calendar', () => {
       end: dayjs(getSafeDate()),
       labels: ['111', '222'],
       color: '#99999',
-      description: '<span>description</span>',
       location: 'Room',
     };
     render(getComponent({ events: [event] }));
@@ -263,7 +262,6 @@ describe('Big Calendar', () => {
     expect(eventDetailsSelectors.root()).toHaveTextContent(`Location: ${event.location}`);
     expect(eventDetailsSelectors.root()).toHaveTextContent(event.labels[0]);
     expect(eventDetailsSelectors.root()).toHaveTextContent(event.labels[1]);
-    expect(eventDetailsSelectors.root()).toHaveTextContent('description');
   });
 
   it('Should show event info with empty resource', async () => {
@@ -279,7 +277,6 @@ describe('Big Calendar', () => {
       end: dayjs(getSafeDate()),
       labels: [],
       color: '#99999',
-      description: '123',
     };
     render(getComponent({ events: [event] }));
 
@@ -316,7 +313,6 @@ describe('Big Calendar', () => {
       start: dayjs(getSafeDate()),
       labels: [],
       color: '#99999',
-      description: '123',
     };
     render(getComponent({ events: [event] }));
 
@@ -352,7 +348,6 @@ describe('Big Calendar', () => {
       start: dayjs(getSafeDate()),
       labels: [],
       color: '#99999',
-      description: '123',
     };
     render(getComponent({ events: [event] }));
 

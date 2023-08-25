@@ -8,9 +8,10 @@ import { Drawer, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions } from '../../types';
+import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
-import { Styles } from './styles';
+import { BigCalendarStyles } from './BigCalendar.styles';
 
 /**
  * Properties
@@ -32,7 +33,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Theme
    */
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(BigCalendarStyles);
 
   /**
    * Localizer
@@ -62,6 +63,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   const components = useMemo(
     () => ({
       toolbar: BigToolbar,
+      event: BigEventContent,
     }),
     []
   );
@@ -99,6 +101,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         text: event.title as string,
         start: dayjs(event.start),
         end: event.end && !event.resource?.isEndless ? dayjs(event.end) : undefined,
+        labels: [],
         ...(event.resource || {}),
       });
     },

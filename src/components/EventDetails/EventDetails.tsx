@@ -31,14 +31,21 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
    * Meta
    */
   const meta = useMemo(() => {
+    const location = event.location ? `Location: ${event.location}` : '';
+
     if (event.end) {
-      return `${event.start.format('LLL')} - ${
-        event.start.startOf('day').isSame(event.end?.startOf('day')) ? event.end.format('LT') : event.end.format('LLL')
-      }`;
+      return [
+        `${event.start.format('LLL')} - ${
+          event.start.startOf('day').isSame(event.end?.startOf('day'))
+            ? event.end.format('LT')
+            : event.end.format('LLL')
+        }`,
+        location,
+      ];
     }
 
-    return `${event.start.format('LLL')}`;
-  }, [event.end, event.start]);
+    return [`${event.start.format('LLL')}`, location];
+  }, [event.end, event.location, event.start]);
 
   /**
    * Tags

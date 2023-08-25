@@ -3,9 +3,9 @@ import React from 'react';
 import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 import { dateTime, LinkTarget } from '@grafana/data';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { getJestSelectors } from '@volkovlabs/jest-selectors';
 import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
-import { EventDetails } from '../EventDetails';
 import { BigCalendar } from './BigCalendar';
 
 /**
@@ -25,13 +25,6 @@ jest.mock('react-big-calendar', () => ({
 }));
 
 /**
- * Mock Event Details
- */
-jest.mock('../EventDetails', () => ({
-  EventDetails: jest.fn(() => null),
-}));
-
-/**
  * Component Props
  */
 type Props = React.ComponentProps<typeof BigCalendar>;
@@ -40,9 +33,16 @@ type Props = React.ComponentProps<typeof BigCalendar>;
  * Big Calendar
  */
 describe('Big Calendar', () => {
-  beforeEach(() => {
-    jest.mocked(EventDetails).mockClear();
-  });
+  /**
+   * Selectors
+   */
+  const getSelectors = getJestSelectors(TestIds.bigCalendar);
+  const selectors = getSelectors(screen);
+
+  /**
+   * Event Details Selectors
+   */
+  const eventDetailsSelectors = getJestSelectors(TestIds.eventDetails)(screen);
 
   /**
    * Return particular day to prevent unexpected behaviors with dates
@@ -54,7 +54,6 @@ describe('Big Calendar', () => {
    * @param props
    */
   const getComponent = (props: Partial<Props>) => {
-    const events: CalendarEvent[] = [];
     const timeRange = {
       from: dateTime(getSafeDate()),
       to: dateTime(getSafeDate()),
@@ -63,13 +62,13 @@ describe('Big Calendar', () => {
         to: dateTime(getSafeDate()),
       },
     };
-    return <BigCalendar events={events} timeRange={timeRange} options={{}} {...(props as any)} />;
+    return <BigCalendar events={[]} timeRange={timeRange} options={{}} {...(props as any)} />;
   };
 
   it('Should find component', () => {
     render(getComponent({}));
 
-    expect(screen.getByTestId(TestIds.bigCalendar.root)).toBeInTheDocument();
+    expect(selectors.root()).toBeInTheDocument();
   });
 
   it('Should show and close event details', async () => {
@@ -88,7 +87,7 @@ describe('Big Calendar', () => {
     };
     render(getComponent({ events: [event] }));
 
-    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
     /**
      * Event selecting
@@ -100,17 +99,17 @@ describe('Big Calendar', () => {
     /**
      * Check if event details shown
      */
-    expect(screen.getByLabelText(TestIds.bigCalendar.drawerClose)).toBeInTheDocument();
+    expect(selectors.drawerClose()).toBeInTheDocument();
 
     /**
      * Close event details drawer
      */
-    await act(() => fireEvent.click(screen.getByLabelText(TestIds.bigCalendar.drawerClose)));
+    await act(() => fireEvent.click(selectors.drawerClose()));
 
     /**
      * Check if event details closed
      */
-    expect(screen.queryByLabelText(TestIds.bigCalendar.drawerClose)).not.toBeInTheDocument();
+    expect(selectors.drawerClose(true)).not.toBeInTheDocument();
   });
 
   it('Should open link if quickLinks enabled', async () => {
@@ -139,7 +138,7 @@ describe('Big Calendar', () => {
     };
     render(getComponent({ events: [event], options: { quickLinks: true, autoScroll: false } }));
 
-    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
     /**
      * Event selecting
@@ -180,7 +179,7 @@ describe('Big Calendar', () => {
     };
     render(getComponent({ events: [event], options: { quickLinks: true, autoScroll: false } }));
 
-    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
     /**
      * Event selecting
@@ -214,7 +213,7 @@ describe('Big Calendar', () => {
     };
     render(getComponent({ events: [event], options: { quickLinks: true, autoScroll: false } }));
 
-    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
     /**
      * Event selecting
@@ -226,7 +225,7 @@ describe('Big Calendar', () => {
     /**
      * Check if event details shown
      */
-    expect(screen.getByLabelText(TestIds.bigCalendar.drawerClose)).toBeInTheDocument();
+    expect(selectors.drawerClose()).toBeInTheDocument();
   });
 
   it('Should pass all event info to event details', async () => {
@@ -240,13 +239,13 @@ describe('Big Calendar', () => {
       text: 'hello',
       start: dayjs(getSafeDate()),
       end: dayjs(getSafeDate()),
-      labels: [],
+      labels: ['111', '222'],
       color: '#99999',
-      description: '123',
+      location: 'Room',
     };
     render(getComponent({ events: [event] }));
 
-    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
     /**
      * Event selecting
@@ -255,19 +254,17 @@ describe('Big Calendar', () => {
     expect(selectedEvent).toBeDefined();
     await act(() => calendarProps.onSelectEvent(selectedEvent, {} as any));
 
-    expect(EventDetails).toHaveBeenCalledWith(
-      expect.objectContaining({
-        event: expect.objectContaining({
-          description: event.description,
-          labels: event.labels,
-          color: event.color,
-        }),
-      }),
-      expect.anything()
-    );
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.titleText()).toHaveTextContent(event.text);
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`Location: ${event.location}`);
+    expect(eventDetailsSelectors.root()).toHaveTextContent(event.labels[0]);
+    expect(eventDetailsSelectors.root()).toHaveTextContent(event.labels[1]);
   });
 
-  it('Should pass all event info with empty resource', async () => {
+  it('Should show event info with empty resource', async () => {
     let calendarProps: Required<CalendarProps> = {} as any;
     jest.mocked(Calendar).mockImplementation((props: any): any => {
       calendarProps = props;
@@ -280,17 +277,17 @@ describe('Big Calendar', () => {
       end: dayjs(getSafeDate()),
       labels: [],
       color: '#99999',
-      description: '123',
     };
     render(getComponent({ events: [event] }));
 
-    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
     /**
      * Event selecting
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
+
     await act(() =>
       calendarProps.onSelectEvent(
         {
@@ -301,14 +298,7 @@ describe('Big Calendar', () => {
       )
     );
 
-    expect(EventDetails).toHaveBeenCalledWith(
-      expect.objectContaining({
-        event: expect.objectContaining({
-          text: event.text,
-        }),
-      }),
-      expect.anything()
-    );
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
   });
 
   it('Should not pass end time to event details', async () => {
@@ -323,11 +313,10 @@ describe('Big Calendar', () => {
       start: dayjs(getSafeDate()),
       labels: [],
       color: '#99999',
-      description: '123',
     };
     render(getComponent({ events: [event] }));
 
-    expect(screen.queryByTestId(TestIds.eventDetails.root)).not.toBeInTheDocument();
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
     /**
      * Event selecting
@@ -336,14 +325,7 @@ describe('Big Calendar', () => {
     expect(selectedEvent).toBeDefined();
     await act(() => calendarProps.onSelectEvent(selectedEvent, {} as any));
 
-    expect(EventDetails).toHaveBeenCalledWith(
-      expect.objectContaining({
-        event: expect.objectContaining({
-          end: undefined,
-        }),
-      }),
-      expect.anything()
-    );
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
   });
 
   it('Should apply event color', () => {
@@ -358,7 +340,6 @@ describe('Big Calendar', () => {
       start: dayjs(getSafeDate()),
       labels: [],
       color: '#99999',
-      description: '123',
     };
     render(getComponent({ events: [event] }));
 

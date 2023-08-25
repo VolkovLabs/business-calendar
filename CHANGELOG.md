@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Add Event Location for Big Calendar (#127)
+
 ## 2.1.0 (2023-08-14)
 
 ### Features / Enhancements

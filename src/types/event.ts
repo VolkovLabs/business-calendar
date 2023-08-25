@@ -58,4 +58,11 @@ export interface CalendarEvent {
    * @type {Array<LinkModel<Field>>}
    */
   links?: Array<LinkModel<Field>>;
+
+  /**
+   * Location
+   *
+   * @type {string}
+   */
+  location?: string;
 }

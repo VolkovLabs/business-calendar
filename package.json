@@ -31,6 +31,7 @@
     "@types/react-big-calendar": "^1.6.4",
     "@types/webpack-env": "^1.18.1",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@volkovlabs/jest-selectors": "^1.2.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "eslint-plugin-deprecation": "^1.5.0",
@@ -74,5 +75,5 @@
     "test:ci": "jest --maxWorkers 4 --coverage",
     "upgrade": "npm upgrade --force --save"
   },
-  "version": "2.1.0"
+  "version": "2.2.0"
 }

@@ -47,6 +47,7 @@ export const useEventFrames = (dataFrames: DataFrame[], options: CalendarOptions
         ),
         labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
         color: frame.fields.find((f) => f.name === options.colorField),
+        location: frame.fields.find((f) => f.name === options.locationField),
       })),
     [
       dataFrames,
@@ -56,6 +57,7 @@ export const useEventFrames = (dataFrames: DataFrame[], options: CalendarOptions
       options.labelFields,
       options.textField,
       options.timeField,
+      options.locationField,
       theme,
       timeZone,
     ]
@@ -123,8 +125,9 @@ export const useCalendarEvents = (
           labels: frame.labels?.map((field) => field.values.get(i)).filter((label) => label),
           links: frame.text?.getLinks!({ valueRowIndex: i }),
           color: frame.color?.values.get(i),
+          location: frame.location?.values.get(i),
         }))
-        .map<CalendarEvent>(({ text, description, labels, links, start, end, color }, i) => {
+        .map<CalendarEvent>(({ text, description, labels, links, start, end, color, location }, i) => {
           const idx = options.colors === Colors.FRAME ? frameIdx : i;
           return {
             text,
@@ -134,6 +137,7 @@ export const useCalendarEvents = (
             color: colorFn?.(color).color ?? colors[Math.floor(idx % colors.length)],
             links,
             end: frame.end ? (end ? dayjs(end) : endOfRangeWeek) : undefined,
+            location,
           };
         });
     });

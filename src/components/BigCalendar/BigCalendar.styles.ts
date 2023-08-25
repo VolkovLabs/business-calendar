@@ -3,7 +3,7 @@ import { GrafanaTheme2 } from '@grafana/data';
 /**
  * Styles
  */
-export const Styles = (theme: GrafanaTheme2) => {
+export const BigCalendarStyles = (theme: GrafanaTheme2) => {
   const borderColorOverrideSelectors = `
     .rbc-header,
     .rbc-header + .rbc-header,
@@ -19,6 +19,7 @@ export const Styles = (theme: GrafanaTheme2) => {
     .rbc-time-content > * + * > *,
     .rbc-day-slot .rbc-time-slot
     `;
+
   return {
     global: {
       '.rbc-off-range-bg': {

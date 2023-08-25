@@ -8,9 +8,9 @@ import { Drawer, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions } from '../../types';
+import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
-import { BigEventContent } from '../BigEventContent';
 import { BigCalendarStyles } from './BigCalendar.styles';
 
 /**

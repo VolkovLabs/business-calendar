@@ -19,6 +19,7 @@ export const BigCalendarStyles = (theme: GrafanaTheme2) => {
     .rbc-time-content > * + * > *,
     .rbc-day-slot .rbc-time-slot
     `;
+
   return {
     global: {
       '.rbc-off-range-bg': {

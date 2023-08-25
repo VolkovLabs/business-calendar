@@ -1,5 +1,5 @@
-import { Event } from 'react-big-calendar';
 import React from 'react';
+import { Event } from 'react-big-calendar';
 import { useStyles2 } from '@grafana/ui';
 import { Styles } from './BigEventContent.styles';
 

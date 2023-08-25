@@ -326,14 +326,6 @@ describe('Big Calendar', () => {
     await act(() => calendarProps.onSelectEvent(selectedEvent, {} as any));
 
     expect(eventDetailsSelectors.root()).toBeInTheDocument();
-    // expect(EventDetails).toHaveBeenCalledWith(
-    //   expect.objectContaining({
-    //     event: expect.objectContaining({
-    //       end: undefined,
-    //     }),
-    //   }),
-    //   expect.anything()
-    // );
   });
 
   it('Should apply event color', () => {

@@ -105,6 +105,16 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         },
       })
       .addFieldNamePicker({
+        path: 'locationField',
+        name: 'Location',
+        description: 'Field to use for the event location.',
+        category: ['Events'],
+        settings: {
+          filter: (f: Field) => f.type === FieldType.string,
+          noFieldsMessage: 'No string fields found',
+        },
+      })
+      .addFieldNamePicker({
         path: 'timeField',
         name: 'Start time',
         description: 'Field to use for the event start time. Defaults to the first time field.',
@@ -141,17 +151,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           filter: (f: Field) => [FieldType.string, FieldType.number].includes(f.type),
         },
-      })
-        .addFieldNamePicker({
-          path: 'locationField',
-          name: 'Location',
-          description: 'Field to use for the event location.',
-          category: ['Events'],
-          settings: {
-            filter: (f: Field) => f.type === FieldType.string,
-            noFieldsMessage: 'No string fields found',
-          },
-        })
+      });
 
     /**
      * Annotations

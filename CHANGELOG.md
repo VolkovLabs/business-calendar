@@ -5,6 +5,7 @@
 ### Features / Enhancements
 
 - Add Event Location for Big Calendar (#127)
+- Add contrast text color for events (#129)
 
 ## 2.1.0 (2023-08-14)
 

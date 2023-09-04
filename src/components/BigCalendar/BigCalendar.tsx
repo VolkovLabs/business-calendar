@@ -4,7 +4,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
 import { Global } from '@emotion/react';
 import { PanelProps } from '@grafana/data';
-import { Drawer, useStyles2 } from '@grafana/ui';
+import { Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions } from '../../types';
@@ -31,8 +31,9 @@ interface Props extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange'
  */
 export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChangeTimeRange, options }) => {
   /**
-   * Theme
+   * Styles and Theme
    */
+  const theme = useTheme2();
   const styles = useStyles2(BigCalendarStyles);
 
   /**
@@ -52,9 +53,10 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     (event: Event) => ({
       style: {
         backgroundColor: event.resource.color,
+        color: theme.colors.emphasize(event.resource.color, 1),
       },
     }),
-    []
+    [theme.colors]
   );
 
   /**

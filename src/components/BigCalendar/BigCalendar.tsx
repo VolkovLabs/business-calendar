@@ -4,7 +4,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
 import { Global } from '@emotion/react';
 import { PanelProps } from '@grafana/data';
-import { Drawer, useStyles2, useTheme2 } from '@grafana/ui';
+import { Drawer, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions } from '../../types';
@@ -34,7 +34,6 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
    * Theme
    */
   const styles = useStyles2(BigCalendarStyles);
-  const theme = useTheme2();
 
   /**
    * Localizer
@@ -53,10 +52,9 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     (event: Event) => ({
       style: {
         backgroundColor: event.resource.color,
-        color: theme.colors.getContrastText(event.resource.color, 0.6),
       },
     }),
-    [theme.colors]
+    []
   );
 
   /**

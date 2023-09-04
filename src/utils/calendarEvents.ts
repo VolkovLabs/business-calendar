@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import { useMemo } from 'react';
 import {
   classicColors,
@@ -16,6 +18,9 @@ import { useTheme2 } from '@grafana/ui';
 import { Colors } from '../constants';
 import { CalendarEvent, CalendarOptions } from '../types';
 import { toTimeField } from './time';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 /**
  * Get Event Frames
@@ -91,20 +96,41 @@ export const useColors = (fieldConfig?: FieldConfigSource) => {
  * @param options
  * @param colors
  * @param timeRange
+ * @param timeZone
  */
 export const useCalendarEvents = (
   frames: ReturnType<typeof useEventFrames>,
   options: CalendarOptions,
   colors: string[],
-  timeRange: TimeRange
+  timeRange: TimeRange,
+  timeZone: TimeZone
 ): CalendarEvent[] => {
+  /**
+   * Browser offset from UTC
+   */
+  const browserTimeZoneMinutesOffset = new Date().getTimezoneOffset();
+
+  /**
+   * Add Minutes offset to show current time for user browser locale
+   */
+  let minutesOffset = timeZone === 'browser' ? 0 : browserTimeZoneMinutesOffset;
+
+  /**
+   * Calculate offset between browser and dashboard time zones
+   */
+  if (timeZone !== 'browser' && timeZone !== 'utc') {
+    const utcDate = dayjs.utc();
+    const minutesOffsetFromUTC = utcDate.diff(utcDate.tz(timeZone, true), 'minutes');
+    minutesOffset += minutesOffsetFromUTC;
+  }
+
   /**
    * Week Start
    */
   const firstDay = getLocaleData().firstDayOfWeek() === 0 ? 'week' : 'isoWeek';
 
   return useMemo(() => {
-    const to = dayjs(timeRange.to.valueOf());
+    const to = dayjs(timeRange.to.valueOf()).minute(minutesOffset);
     const endOfRangeWeek = to.endOf(firstDay);
 
     return frames.flatMap((frame, frameIdx) => {
@@ -133,13 +159,13 @@ export const useCalendarEvents = (
             text,
             description,
             labels,
-            start: dayjs(start),
+            start: dayjs(start).minute(minutesOffset),
             color: colorFn?.(color).color ?? colors[Math.floor(idx % colors.length)],
             links,
-            end: frame.end ? (end ? dayjs(end) : endOfRangeWeek) : undefined,
+            end: frame.end ? (end ? dayjs(end).minute(minutesOffset) : endOfRangeWeek) : undefined,
             location,
           };
         });
     });
-  }, [colors, firstDay, frames, options.colors, timeRange.to]);
+  }, [colors, minutesOffset, firstDay, frames, options.colors, timeRange.to]);
 };

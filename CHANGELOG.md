@@ -6,6 +6,7 @@
 
 - Add Event Location for Big Calendar (#127)
 - Add contrast text color for events (#129)
+- Add support of dashboard timezone in Start and End time (#128)
 
 ## 2.1.0 (2023-08-14)
 

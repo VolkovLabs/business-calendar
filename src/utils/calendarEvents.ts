@@ -91,7 +91,6 @@ export const useColors = (fieldConfig?: FieldConfigSource) => {
  * @param timeZone
  */
 export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
-  console.log(timeZone);
   if (timeZone === InternalTimeZones.localBrowserTime) {
     /**
      * Offset is not needed, dates are in browser time zone

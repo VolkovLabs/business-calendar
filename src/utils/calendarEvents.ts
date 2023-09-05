@@ -1,6 +1,4 @@
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 import { useMemo } from 'react';
 import {
   classicColors,
@@ -18,9 +16,6 @@ import { useTheme2 } from '@grafana/ui';
 import { Colors } from '../constants';
 import { CalendarEvent, CalendarOptions } from '../types';
 import { toTimeField } from './time';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 /**
  * Get Event Frames
@@ -91,6 +86,47 @@ export const useColors = (fieldConfig?: FieldConfigSource) => {
 };
 
 /**
+ * Get Minutes Offset From Time Zone
+ * @param timeZone
+ */
+export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
+  if (timeZone === 'browser') {
+    /**
+     * Offset is not needed, dates are in browser time zone
+     */
+    return 0;
+  }
+
+  /**
+   * Calculate offset to show date in dashboard time zone for user
+   */
+  if (timeZone === 'utc') {
+    /**
+     * UTC offset from browser date
+     */
+    return new Date().getTimezoneOffset();
+  }
+
+  const date = new Date();
+
+  /**
+   * Browser Date
+   * Reset milliseconds to prevent losing 1 minute in difference
+   */
+  const browserDate = dayjs(date).set('milliseconds', 0);
+
+  /**
+   * Time Zone Date
+   */
+  const timeZoneDate = dayjs(date.toLocaleString('en-US', { timeZone }));
+
+  /**
+   * Set Time Zone offset from browser date
+   */
+  return timeZoneDate.diff(browserDate, 'minute');
+};
+
+/**
  * Get Calendar Events
  * @param frames
  * @param options
@@ -106,28 +142,14 @@ export const useCalendarEvents = (
   timeZone: TimeZone
 ): CalendarEvent[] => {
   /**
-   * Browser offset from UTC
-   */
-  const browserTimeZoneMinutesOffset = new Date().getTimezoneOffset();
-
-  /**
-   * Add Minutes offset to show current time for user browser locale
-   */
-  let minutesOffset = timeZone === 'browser' ? 0 : browserTimeZoneMinutesOffset;
-
-  /**
-   * Calculate offset between browser and dashboard time zones
-   */
-  if (timeZone !== 'browser' && timeZone !== 'utc') {
-    const utcDate = dayjs.utc();
-    const minutesOffsetFromUTC = utcDate.diff(utcDate.tz(timeZone, true), 'minutes');
-    minutesOffset += minutesOffsetFromUTC;
-  }
-
-  /**
    * Week Start
    */
   const firstDay = getLocaleData().firstDayOfWeek() === 0 ? 'week' : 'isoWeek';
+
+  /**
+   * Minutes Offset from Browser Time Zone
+   */
+  const minutesOffset = getMinutesOffsetFromTimeZone(timeZone);
 
   return useMemo(() => {
     const to = dayjs(timeRange.to.valueOf()).minute(minutesOffset);

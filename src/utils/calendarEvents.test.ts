@@ -271,15 +271,37 @@ describe('Calendar Events Utils', () => {
           },
         },
       ];
-      const { result } = renderHook(() =>
+
+      /**
+       * Negative Time Zone Offset
+       * UTC:-4:00
+       */
+      const { result: result1 } = renderHook(() =>
         useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'America/Toronto')
       );
 
-      expect(result.current).toEqual(
+      expect(result1.current).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             start: dayjs(getSafeDate()).minute(-240),
             end: dayjs(getSafeDate()).minute(-240),
+          }),
+        ])
+      );
+
+      /**
+       * Positive Time Zone Offset
+       * UTC+10:00
+       */
+      const { result: result2 } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'Australia/Brisbane')
+      );
+
+      expect(result2.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            start: dayjs(getSafeDate()).minute(600),
+            end: dayjs(getSafeDate()).minute(600),
           }),
         ])
       );

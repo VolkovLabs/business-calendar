@@ -121,7 +121,7 @@ export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
   const timeZoneDate = dayjs(date.toLocaleString('en-US', { timeZone }));
 
   /**
-   * Set Time Zone offset from browser date
+   * Time Zone offset from browser date
    */
   return timeZoneDate.diff(browserDate, 'minute');
 };

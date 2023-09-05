@@ -274,7 +274,7 @@ describe('Calendar Events Utils', () => {
 
       /**
        * Negative Time Zone Offset
-       * UTC:-4:00
+       * UTC-4:00
        */
       const { result: result1 } = renderHook(() =>
         useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'America/Toronto')

@@ -9,6 +9,7 @@ import {
   formattedValueToString,
   getFieldColorMode,
   getLocaleData,
+  InternalTimeZones,
   TimeRange,
 } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
@@ -90,7 +91,8 @@ export const useColors = (fieldConfig?: FieldConfigSource) => {
  * @param timeZone
  */
 export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
-  if (timeZone === 'browser') {
+  console.log(timeZone);
+  if (timeZone === InternalTimeZones.localBrowserTime) {
     /**
      * Offset is not needed, dates are in browser time zone
      */
@@ -100,7 +102,7 @@ export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
   /**
    * Calculate offset to show date in dashboard time zone for user
    */
-  if (timeZone === 'utc') {
+  if (timeZone === InternalTimeZones.utc) {
     /**
      * UTC offset from browser date
      */

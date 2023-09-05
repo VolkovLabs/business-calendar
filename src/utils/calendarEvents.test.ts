@@ -305,6 +305,23 @@ describe('Calendar Events Utils', () => {
           }),
         ])
       );
+
+      /**
+       * Zero Time Zone Offset
+       * UTC
+       */
+      const { result: result3 } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'utc')
+      );
+
+      expect(result3.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            start: dayjs(getSafeDate()),
+            end: dayjs(getSafeDate()),
+          }),
+        ])
+      );
     });
 
     it('Should return event with displayed text', () => {

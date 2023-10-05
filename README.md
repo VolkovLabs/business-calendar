@@ -10,20 +10,18 @@
 
 ## Introduction
 
-The Calendar visualization panel is a Grafana plugin created to display calendar events from data sources.
+Calendar Panel is a Grafana plugin that displays events from various data sources.
 
 [![Calendar plugin for Grafana tutorial | Step by step | JSON API plugin example](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/video.png)](https://youtu.be/iPJ122x0oos)
 
 ## Requirements
 
-- **Grafana 9.2** and **Grafana 10** are required for major version 2.
-- **Grafana 8.5** and **Grafana 9** are required for major version 1.
+- Calendar Panel 2.X requires **Grafana 9.2** or **Grafana 10**.
+- Calendar Panel 1.X requires **Grafana 8.5** or **Grafana 9**.
 
-## Getting Started
+You can install the Calendar Panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or using the Grafana command line tool.
 
-The calendar panel can be installed from the [Grafana Catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or utilizing the Grafana command line tool.
-
-For the latter, use the following command.
+For the latter, please use the following command:
 
 ```bash
 grafana-cli plugins install marcusolsson-calendar-panel
@@ -31,19 +29,19 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 ## Highlights
 
-- Displays events in a Monthly, Weekly and Daily layout.
+- Displays events in a monthly, weekly, or daily view.
 - Query calendar events from any data source.
-- Allows changing Time Range.
-- Supports event colors based on Thresholds.
-- Allows opening data link instead of a sidebar when clicking an event.
-- Allows displaying Annotations across all dashboards for the selected Time Range.
+- Supports the filtration of events by a time range.
+- Supports the event coloring based on thresholds.
+- Enables the opening of a data link instead of a sidebar when clicking an event.
+- Enables the display of annotations across all dashboards for the specified time period.
 
 ## Documentation
 
 | Section                  | Description                                             |
 | ------------------------ | ------------------------------------------------------- |
-| [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display your data. |
-| [Features](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/features/)     | Demonstrates panel features.                            |
+| [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display events. |
+| [Features](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/features/)     | Explains the plugin's features.                            |
 | [Release Notes](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/release/) | Stay up to date with the latest features and updates.   |
 
 ## Tutorial
@@ -54,12 +52,12 @@ This video outlines all the new features we implemented and explains how to conf
 
 ## Feedback
 
-We love to hear from you. There are various ways to get in touch with us.
+We're looking forward to hearing from you. You can use different ways to get in touch with us.
 
-- Ask a question, request a new feature, and file a bug with [GitHub issues](https://github.com/volkovlabs/volkovlabs-calendar-panel/issues/new/choose).
-- Subscribe to our [YouTube Channel](https://www.youtube.com/@volkovlabs) and add a comment.
-- Sponsor our open-source plugins for Grafana with [GitHub Sponsor](https://github.com/sponsors/VolkovLabs).
-- Star the repository to show your support.
+- Ask a question, request a new feature, or report an issue at [GitHub issues](https://github.com/volkovlabs/volkovlabs-calendar-panel/issues/new/choose).
+- Subscribe to our [YouTube Channel](https://www.youtube.com/@volkovlabs) and leave your comments.
+- Sponsor our open-source plugins for Grafana at [GitHub Sponsor](https://github.com/sponsors/VolkovLabs).
+- Support our project by starring the repository.
 
 ## License
 

@@ -1,4 +1,4 @@
-import { CalendarOptions, CalendarType } from '../types';
+import { CalendarOptions, CalendarType, View } from '../types';
 import { AnnotationsType, Colors } from './options';
 
 /**
@@ -19,3 +19,8 @@ export const DefaultOptions: CalendarOptions = {
   displayTime: false,
   quickLinks: false,
 };
+
+/**
+ * Default Views
+ */
+export const DefaultViews = [View.DAY, View.WEEK, View.MONTH];

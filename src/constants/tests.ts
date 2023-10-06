@@ -37,6 +37,7 @@ export const TestIds = {
      * https://github.com/grafana/grafana/blob/186cd96447fdd3a9ae26907a48023998c825c6d6/packages/grafana-ui/src/components/Drawer/Drawer.tsx#L106
      */
     drawerClose: selectors.components.Drawer.General.close,
+    noViewsMessage: 'data-testid lib-calendar no-views-message',
   },
   bigCalendarToolbar: {
     buttonToday: 'data-testid big-calendar-toolbar button-today',

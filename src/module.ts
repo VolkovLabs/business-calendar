@@ -4,8 +4,10 @@ import {
   AnnotationsOptions,
   AnnotationsTypeOptions,
   CalendarTypeOptions,
+  CalendarViewOptions,
   ColorsOptions,
   DefaultOptions,
+  DefaultViews,
   DisplayTimeOptions,
   LinksOptions,
   ScrollOptions,
@@ -31,6 +33,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
      * Visibility
      */
     const showForLegacy = (config: CalendarOptions) => config.calendarType === CalendarType.LEGACY;
+    const showForBigCalendar = (config: CalendarOptions) => config.calendarType === CalendarType.BIG_CALENDAR;
 
     builder
       .addRadio({
@@ -40,6 +43,15 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: CalendarTypeOptions,
         },
         defaultValue: CalendarType.LEGACY,
+      })
+      .addMultiSelect({
+        path: 'views',
+        name: 'Views',
+        settings: {
+          options: CalendarViewOptions,
+        },
+        defaultValue: DefaultViews as any,
+        showIf: showForBigCalendar,
       })
       .addRadio({
         path: 'autoScroll',

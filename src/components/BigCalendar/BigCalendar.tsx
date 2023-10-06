@@ -1,10 +1,10 @@
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import dayjs from 'dayjs';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
 import { Global } from '@emotion/react';
 import { PanelProps } from '@grafana/data';
-import { Drawer, useStyles2, useTheme2 } from '@grafana/ui';
+import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions } from '../../types';
@@ -76,6 +76,23 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   const { date, view, onChangeView, onNavigate } = useCalendarRange(timeRange, onChangeTimeRange);
 
   /**
+   * Is Selected View Exist
+   */
+  const isViewExist = options.views?.some((item) => item === view);
+
+  /**
+   * Deselect unavailable view
+   */
+  useEffect(() => {
+    if (!isViewExist) {
+      const firstAvailableView = options?.views?.[0];
+      if (firstAvailableView) {
+        onChangeView(firstAvailableView);
+      }
+    }
+  }, [isViewExist, onChangeView, options?.views]);
+
+  /**
    * Event to show details
    */
   const [activeEvent, setActiveEvent] = useState<CalendarEvent | null>(null);
@@ -110,6 +127,29 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     [options.quickLinks]
   );
 
+  /**
+   * Views
+   */
+  const views = useMemo(() => {
+    return (
+      options.views?.reduce(
+        (acc, view) => ({
+          ...acc,
+          [view]: true,
+        }),
+        {}
+      ) || {}
+    );
+  }, [options.views]);
+
+  if (!isViewExist) {
+    return (
+      <Alert title="No Views" severity="info" data-testid={TestIds.bigCalendar.noViewsMessage}>
+        Please enable at least one view.
+      </Alert>
+    );
+  }
+
   return (
     <div data-testid={TestIds.bigCalendar.root}>
       {activeEvent && (
@@ -128,14 +168,10 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         startAccessor="start"
         endAccessor="end"
         style={{ height }}
-        views={{
-          month: true,
-          week: true,
-          day: true,
-        }}
+        views={views}
         components={components}
-        onNavigate={onNavigate}
-        onView={onChangeView}
+        onNavigate={onNavigate as any}
+        onView={onChangeView as any}
         date={date}
         view={view}
         onSelectEvent={onSelectEvent}

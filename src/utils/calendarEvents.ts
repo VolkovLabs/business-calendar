@@ -14,7 +14,7 @@ import {
 } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
 import { useTheme2 } from '@grafana/ui';
-import { Colors } from '../constants';
+import { Colors, DefaultLanguage } from '../constants';
 import { CalendarEvent, CalendarOptions } from '../types';
 import { toTimeField } from './time';
 
@@ -119,7 +119,7 @@ export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
   /**
    * Time Zone Date
    */
-  const timeZoneDate = dayjs(date.toLocaleString('en-US', { timeZone }));
+  const timeZoneDate = dayjs(date.toLocaleString(DefaultLanguage, { timeZone }));
 
   /**
    * Time Zone offset from browser date

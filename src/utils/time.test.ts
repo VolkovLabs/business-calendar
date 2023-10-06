@@ -1,4 +1,5 @@
-import { ArrayVector, FieldType } from '@grafana/data';
+import { ArrayVector, FieldType, GrafanaTheme2 } from '@grafana/data';
+import { getTheme } from '@grafana/ui';
 import { toTimeField } from './time';
 
 /**
@@ -10,12 +11,21 @@ describe('To Time Field', () => {
    */
   const getSafeDate = () => new Date('2023-02-02');
 
+  /**
+   * Theme
+   */
+  const theme = getTheme() as any as GrafanaTheme2;
+
   it('Should return time field for number', () => {
     const result = toTimeField({
-      config: {},
-      type: FieldType.number,
-      name: 'number',
-      values: new ArrayVector([]),
+      field: {
+        config: {},
+        type: FieldType.number,
+        name: 'number',
+        values: new ArrayVector([]),
+      },
+      theme,
+      timeZone: 'abc',
     });
 
     expect(result?.type).toEqual(FieldType.time);
@@ -23,10 +33,14 @@ describe('To Time Field', () => {
 
   it('Should return time field for string', () => {
     const result = toTimeField({
-      config: {},
-      type: FieldType.string,
-      name: 'string',
-      values: new ArrayVector([getSafeDate().toISOString()]),
+      field: {
+        config: {},
+        type: FieldType.string,
+        name: 'string',
+        values: new ArrayVector([getSafeDate().toISOString()]),
+      },
+      theme,
+      timeZone: 'abc',
     });
 
     expect(result?.type).toEqual(FieldType.time);
@@ -39,7 +53,7 @@ describe('To Time Field', () => {
       name: 'string',
       values: new ArrayVector([]),
     };
-    const result = toTimeField(field);
+    const result = toTimeField({ field, theme, timeZone: 'abc' });
 
     expect(result).toEqual(field);
   });

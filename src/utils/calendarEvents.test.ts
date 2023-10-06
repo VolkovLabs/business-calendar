@@ -30,7 +30,7 @@ describe('Calendar Events Utils', () => {
   /**
    * Return particular day to prevent unexpected behaviors with dates
    */
-  const getSafeDate = () => new Date('2023-02-02');
+  const getSafeDate = () => new Date('2023-02-02 12:30');
 
   const defaultTimeRange = {
     from: dateTime(getSafeDate()),
@@ -283,8 +283,8 @@ describe('Calendar Events Utils', () => {
       expect(result1.current).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            start: dayjs(getSafeDate()).minute(-240),
-            end: dayjs(getSafeDate()).minute(-240),
+            start: dayjs(getSafeDate()).add(-240, 'minutes'),
+            end: dayjs(getSafeDate()).add(-240, 'minutes'),
           }),
         ])
       );
@@ -300,8 +300,8 @@ describe('Calendar Events Utils', () => {
       expect(result2.current).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            start: dayjs(getSafeDate()).minute(600),
-            end: dayjs(getSafeDate()).minute(600),
+            start: dayjs(getSafeDate()).add(600, 'minutes'),
+            end: dayjs(getSafeDate()).add(600, 'minutes'),
           }),
         ])
       );

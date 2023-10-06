@@ -153,7 +153,7 @@ export const useCalendarEvents = (
   const minutesOffset = getMinutesOffsetFromTimeZone(timeZone);
 
   return useMemo(() => {
-    const to = dayjs(timeRange.to.valueOf()).minute(minutesOffset);
+    const to = dayjs(timeRange.to.valueOf()).add(minutesOffset, 'minutes');
     const endOfRangeWeek = to.endOf(firstDay);
 
     return frames.flatMap((frame, frameIdx) => {
@@ -182,10 +182,10 @@ export const useCalendarEvents = (
             text,
             description,
             labels,
-            start: dayjs(start).minute(minutesOffset),
+            start: dayjs(start).add(minutesOffset, 'minutes'),
             color: colorFn?.(color).color ?? colors[Math.floor(idx % colors.length)],
             links,
-            end: frame.end ? (end ? dayjs(end).minute(minutesOffset) : endOfRangeWeek) : undefined,
+            end: frame.end ? (end ? dayjs(end).add(minutesOffset, 'minutes') : endOfRangeWeek) : undefined,
             location,
           };
         });

@@ -1,7 +1,21 @@
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { NavigateAction, View, Views } from 'react-big-calendar';
+import { NavigateAction } from 'react-big-calendar';
 import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
+import { View } from '../types';
+
+/**
+ * Get Unit Type
+ */
+export const getUnitType = (view: View) => {
+  switch (view) {
+    case View.WORK_WEEK: {
+      return 'week';
+    }
+  }
+
+  return view;
+};
 
 /**
  * Use Calendar Range
@@ -9,8 +23,8 @@ import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
  * @param onChangeTimeRange
  */
 export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeRange: AbsoluteTimeRange) => void) => {
-  const [view, setView] = useState<'month' | 'week' | 'day'>(Views.MONTH);
-  const [calendarFrom, setCalendarFrom] = useState(dayjs(timeRange.to.toDate()).startOf(view).toDate());
+  const [view, setView] = useState<View>(View.MONTH);
+  const [calendarFrom, setCalendarFrom] = useState(dayjs(timeRange.to.toDate()).startOf(getUnitType(view)).toDate());
   const [calendarTo, setCalendarTo] = useState(timeRange.to.toDate());
 
   /**
@@ -23,8 +37,8 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
     /**
      * Show last month
      */
-    if (view === Views.MONTH) {
-      from = dayjs(calendarTo).startOf(Views.MONTH).toDate();
+    if (view === View.MONTH) {
+      from = dayjs(calendarTo).startOf('month').toDate();
     }
 
     return new Date((from.valueOf() + to.valueOf()) / 2);
@@ -36,12 +50,14 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
   const onChangeView = useCallback(
     (newView: View) => {
       switch (newView) {
-        case Views.MONTH:
-        case Views.WEEK:
-        case Views.DAY: {
+        case View.MONTH:
+        case View.WEEK:
+        case View.WORK_WEEK:
+        case View.DAY: {
+          const unitType = getUnitType(newView);
           const { from, to } = timeRange;
-          const newFrom = dayjs(middleDate).startOf(newView);
-          const newTo = dayjs(middleDate).endOf(newView);
+          const newFrom = dayjs(middleDate).startOf(unitType);
+          const newTo = dayjs(middleDate).endOf(unitType);
 
           /**
            * Change time range if one of dates are out of the current range
@@ -68,14 +84,16 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    */
   const onNavigate = useCallback(
     (newDate: Date, currentView: View, action: NavigateAction) => {
-      const view: View = action === 'DATE' ? Views.DAY : currentView;
+      const view: View = action === 'DATE' ? View.DAY : currentView;
       switch (view) {
-        case Views.MONTH:
-        case Views.WEEK:
-        case Views.DAY: {
+        case View.MONTH:
+        case View.WEEK:
+        case View.WORK_WEEK:
+        case View.DAY: {
+          const unitType = getUnitType(view);
           const { from, to } = timeRange;
-          const newFrom = dayjs(newDate).startOf(view);
-          const newTo = dayjs(newDate).endOf(view);
+          const newFrom = dayjs(newDate).startOf(unitType);
+          const newTo = dayjs(newDate).endOf(unitType);
 
           /**
            * Change time range if one of dates are out of the current range

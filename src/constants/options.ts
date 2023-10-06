@@ -1,4 +1,5 @@
-import { CalendarType } from '../types';
+import { SelectableValue } from '@grafana/data';
+import { CalendarType, View } from '../types';
 
 /**
  * Colors
@@ -72,4 +73,14 @@ export const AnnotationsTypeOptions = [
   { value: AnnotationsType.ALL, label: 'Any' },
   { value: AnnotationsType.ALERT, label: 'Alerts' },
   { value: AnnotationsType.ANNOTATION, label: 'Annotations' },
+];
+
+/**
+ * Calendar View Options
+ */
+export const CalendarViewOptions: Array<SelectableValue<View>> = [
+  { value: View.DAY, label: 'Day' },
+  { value: View.WEEK, label: 'Week' },
+  { value: View.WORK_WEEK, label: 'Work Week' },
+  { value: View.MONTH, label: 'Month' },
 ];

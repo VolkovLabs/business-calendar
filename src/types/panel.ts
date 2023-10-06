@@ -1,9 +1,5 @@
 import { AnnotationsType, Colors } from '../constants';
-
-export enum CalendarType {
-  LEGACY = 'legacy',
-  BIG_CALENDAR = 'bigCalendar',
-}
+import { CalendarType, View } from './calendar';
 
 /**
  * Calendar Options
@@ -111,4 +107,11 @@ export interface CalendarOptions {
    * @type {string}
    */
   locationField?: string;
+
+  /**
+   * Views
+   *
+   * @type {View[]}
+   */
+  views?: View[];
 }

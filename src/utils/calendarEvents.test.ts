@@ -30,7 +30,7 @@ describe('Calendar Events Utils', () => {
   /**
    * Return particular day to prevent unexpected behaviors with dates
    */
-  const getSafeDate = () => new Date('2023-02-02');
+  const getSafeDate = () => new Date('2023-02-02 12:30');
 
   const defaultTimeRange = {
     from: dateTime(getSafeDate()),
@@ -203,7 +203,7 @@ describe('Calendar Events Utils', () => {
         },
       ];
       const { result } = renderHook(() =>
-        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
       );
 
       expect(result.current).toEqual(
@@ -238,12 +238,86 @@ describe('Calendar Events Utils', () => {
         },
       ];
       const { result } = renderHook(() =>
-        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
       );
 
       expect(result.current).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
+            end: dayjs(getSafeDate()),
+          }),
+        ])
+      );
+    });
+
+    it('Should return events with local offset', () => {
+      const frames = [
+        {
+          text: {
+            type: FieldType.string,
+            name: 'text',
+            values: new ArrayVector(['111']),
+            getLinks: () => null,
+          },
+          start: {
+            type: FieldType.string,
+            name: 'start',
+            values: new ArrayVector([getSafeDate()]),
+          },
+          end: {
+            type: FieldType.string,
+            name: 'end',
+            values: new ArrayVector([getSafeDate()]),
+          },
+        },
+      ];
+
+      /**
+       * Negative Time Zone Offset
+       * UTC-4:00
+       */
+      const { result: result1 } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'America/Toronto')
+      );
+
+      expect(result1.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            start: dayjs(getSafeDate()).add(-240, 'minutes'),
+            end: dayjs(getSafeDate()).add(-240, 'minutes'),
+          }),
+        ])
+      );
+
+      /**
+       * Positive Time Zone Offset
+       * UTC+10:00
+       */
+      const { result: result2 } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'Australia/Brisbane')
+      );
+
+      expect(result2.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            start: dayjs(getSafeDate()).add(600, 'minutes'),
+            end: dayjs(getSafeDate()).add(600, 'minutes'),
+          }),
+        ])
+      );
+
+      /**
+       * Zero Time Zone Offset
+       * UTC
+       */
+      const { result: result3 } = renderHook(() =>
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'utc')
+      );
+
+      expect(result3.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            start: dayjs(getSafeDate()),
             end: dayjs(getSafeDate()),
           }),
         ])
@@ -273,7 +347,7 @@ describe('Calendar Events Utils', () => {
         },
       ];
       const { result } = renderHook(() =>
-        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
       );
 
       expect(result.current).toEqual(
@@ -298,7 +372,7 @@ describe('Calendar Events Utils', () => {
         },
       ];
       const { result } = renderHook(() =>
-        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
       );
 
       expect(result.current).toHaveLength(0);
@@ -329,7 +403,7 @@ describe('Calendar Events Utils', () => {
         },
       ];
       const { result } = renderHook(() =>
-        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange)
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
       );
 
       expect(result.current).toEqual(

@@ -9,11 +9,12 @@ import {
   formattedValueToString,
   getFieldColorMode,
   getLocaleData,
+  InternalTimeZones,
   TimeRange,
 } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
 import { useTheme2 } from '@grafana/ui';
-import { Colors } from '../constants';
+import { Colors, DefaultLanguage } from '../constants';
 import { CalendarEvent, CalendarOptions } from '../types';
 import { toTimeField } from './time';
 
@@ -33,18 +34,18 @@ export const useEventFrames = (dataFrames: DataFrame[], options: CalendarOptions
           ? frame.fields.find((f) => f.name === options.textField)
           : frame.fields.find((f) => f.type === FieldType.string),
         description: frame.fields.find((f) => f.name === options.descriptionField),
-        start: toTimeField(
-          options.timeField
+        start: toTimeField({
+          field: options.timeField
             ? frame.fields.find((f) => f.name === options.timeField)
             : frame.fields.find((f) => f.type === FieldType.time),
           timeZone,
-          theme
-        ),
-        end: toTimeField(
-          frame.fields.find((f) => f.name === options.endTimeField),
+          theme,
+        }),
+        end: toTimeField({
+          field: frame.fields.find((f) => f.name === options.endTimeField),
           timeZone,
-          theme
-        ),
+          theme,
+        }),
         labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
         color: frame.fields.find((f) => f.name === options.colorField),
         location: frame.fields.find((f) => f.name === options.locationField),
@@ -86,25 +87,73 @@ export const useColors = (fieldConfig?: FieldConfigSource) => {
 };
 
 /**
+ * Get Minutes Offset From Time Zone
+ * @param timeZone
+ */
+export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
+  if (timeZone === InternalTimeZones.localBrowserTime) {
+    /**
+     * Offset is not needed, dates are in browser time zone
+     */
+    return 0;
+  }
+
+  /**
+   * Calculate offset to show date in dashboard time zone for user
+   */
+  if (timeZone === InternalTimeZones.utc) {
+    /**
+     * UTC offset from browser date
+     */
+    return new Date().getTimezoneOffset();
+  }
+
+  const date = new Date();
+
+  /**
+   * Browser Date
+   * Reset milliseconds to prevent losing 1 minute in difference
+   */
+  const browserDate = dayjs(date).set('milliseconds', 0);
+
+  /**
+   * Time Zone Date
+   */
+  const timeZoneDate = dayjs(date.toLocaleString(DefaultLanguage, { timeZone }));
+
+  /**
+   * Time Zone offset from browser date
+   */
+  return timeZoneDate.diff(browserDate, 'minute');
+};
+
+/**
  * Get Calendar Events
  * @param frames
  * @param options
  * @param colors
  * @param timeRange
+ * @param timeZone
  */
 export const useCalendarEvents = (
   frames: ReturnType<typeof useEventFrames>,
   options: CalendarOptions,
   colors: string[],
-  timeRange: TimeRange
+  timeRange: TimeRange,
+  timeZone: TimeZone
 ): CalendarEvent[] => {
   /**
    * Week Start
    */
   const firstDay = getLocaleData().firstDayOfWeek() === 0 ? 'week' : 'isoWeek';
 
+  /**
+   * Minutes Offset from Browser Time Zone
+   */
+  const minutesOffset = getMinutesOffsetFromTimeZone(timeZone);
+
   return useMemo(() => {
-    const to = dayjs(timeRange.to.valueOf());
+    const to = dayjs(timeRange.to.valueOf()).add(minutesOffset, 'minutes');
     const endOfRangeWeek = to.endOf(firstDay);
 
     return frames.flatMap((frame, frameIdx) => {
@@ -133,13 +182,13 @@ export const useCalendarEvents = (
             text,
             description,
             labels,
-            start: dayjs(start),
+            start: dayjs(start).add(minutesOffset, 'minutes'),
             color: colorFn?.(color).color ?? colors[Math.floor(idx % colors.length)],
             links,
-            end: frame.end ? (end ? dayjs(end) : endOfRangeWeek) : undefined,
+            end: frame.end ? (end ? dayjs(end).add(minutesOffset, 'minutes') : endOfRangeWeek) : undefined,
             location,
           };
         });
     });
-  }, [colors, firstDay, frames, options.colors, timeRange.to]);
+  }, [colors, minutesOffset, firstDay, frames, options.colors, timeRange.to]);
 };

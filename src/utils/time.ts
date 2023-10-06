@@ -1,10 +1,18 @@
-import { ArrayVector, dateTimeParse, Field, FieldType, getDisplayProcessor } from '@grafana/data';
+import { ArrayVector, dateTimeParse, Field, FieldType, getDisplayProcessor, GrafanaTheme2 } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
 
 /**
  * Time Field
  */
-export const toTimeField = (field?: Field, timeZone?: TimeZone, theme?: any): Field | undefined => {
+export const toTimeField = ({
+  field,
+  timeZone,
+  theme,
+}: {
+  field?: Field;
+  timeZone: TimeZone;
+  theme: GrafanaTheme2;
+}): Field | undefined => {
   /**
    * Number
    */

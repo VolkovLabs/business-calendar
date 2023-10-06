@@ -34,18 +34,18 @@ export const useEventFrames = (dataFrames: DataFrame[], options: CalendarOptions
           ? frame.fields.find((f) => f.name === options.textField)
           : frame.fields.find((f) => f.type === FieldType.string),
         description: frame.fields.find((f) => f.name === options.descriptionField),
-        start: toTimeField(
-          options.timeField
+        start: toTimeField({
+          field: options.timeField
             ? frame.fields.find((f) => f.name === options.timeField)
             : frame.fields.find((f) => f.type === FieldType.time),
           timeZone,
-          theme
-        ),
-        end: toTimeField(
-          frame.fields.find((f) => f.name === options.endTimeField),
+          theme,
+        }),
+        end: toTimeField({
+          field: frame.fields.find((f) => f.name === options.endTimeField),
           timeZone,
-          theme
-        ),
+          theme,
+        }),
         labels: frame.fields.filter((f) => options.labelFields?.includes(f.name)),
         color: frame.fields.find((f) => f.name === options.colorField),
         location: frame.fields.find((f) => f.name === options.locationField),

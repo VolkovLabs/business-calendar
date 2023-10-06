@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.2.0 (IN PROGRESS)
+## 2.2.0 (2023-10-06)
 
 ### Features / Enhancements
 
@@ -10,6 +10,7 @@
 - Update to Plugin Tools 2.0.2 (#132)
 - Use Grafana Access Policy to sign plugin (#132)
 - Add support of dashboard timezone in Start and End time (#128)
+- Add ability to select views: day, week, work week and month (#133)
 
 ## 2.1.0 (2023-08-14)
 

@@ -49,32 +49,24 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    */
   const onChangeView = useCallback(
     (newView: View) => {
-      switch (newView) {
-        case View.MONTH:
-        case View.WEEK:
-        case View.WORK_WEEK:
-        case View.DAY: {
-          const unitType = getUnitType(newView);
-          const { from, to } = timeRange;
-          const newFrom = dayjs(middleDate).startOf(unitType);
-          const newTo = dayjs(middleDate).endOf(unitType);
+      const unitType = getUnitType(newView);
+      const { from, to } = timeRange;
+      const newFrom = dayjs(middleDate).startOf(unitType);
+      const newTo = dayjs(middleDate).endOf(unitType);
 
-          /**
-           * Change time range if one of dates are out of the current range
-           */
-          if (newFrom.valueOf() < from.valueOf() || newTo.valueOf() > to.valueOf()) {
-            onChangeTimeRange({
-              from: newFrom.valueOf(),
-              to: newTo.valueOf(),
-            });
-          }
-
-          setCalendarFrom(newFrom.toDate());
-          setCalendarTo(newTo.toDate());
-          setView(newView);
-          break;
-        }
+      /**
+       * Change time range if one of dates are out of the current range
+       */
+      if (newFrom.valueOf() < from.valueOf() || newTo.valueOf() > to.valueOf()) {
+        onChangeTimeRange({
+          from: newFrom.valueOf(),
+          to: newTo.valueOf(),
+        });
       }
+
+      setCalendarFrom(newFrom.toDate());
+      setCalendarTo(newTo.toDate());
+      setView(newView);
     },
     [onChangeTimeRange, middleDate, timeRange]
   );
@@ -85,42 +77,29 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
   const onNavigate = useCallback(
     (newDate: Date, currentView: View, action: NavigateAction) => {
       const view: View = action === 'DATE' ? View.DAY : currentView;
-      switch (view) {
-        case View.MONTH:
-        case View.WEEK:
-        case View.WORK_WEEK:
-        case View.DAY: {
-          const unitType = getUnitType(view);
-          const { from, to } = timeRange;
-          const newFrom = dayjs(newDate).startOf(unitType);
-          const newTo = dayjs(newDate).endOf(unitType);
+      const unitType = getUnitType(view);
+      const { from, to } = timeRange;
+      const newFrom = dayjs(newDate).startOf(unitType);
+      const newTo = dayjs(newDate).endOf(unitType);
 
-          /**
-           * Change time range if one of dates are out of the current range
-           */
-          if (newFrom.valueOf() < from.valueOf() || newTo.valueOf() > to.valueOf()) {
-            onChangeTimeRange({
-              from: newFrom.valueOf(),
-              to: newTo.valueOf(),
-            });
-          }
-
-          setCalendarFrom(newFrom.toDate());
-          setCalendarTo(newTo.toDate());
-          setView(view);
-
-          return {
-            from: newFrom.toDate(),
-            to: newTo.toDate(),
-          };
-        }
-        default: {
-          return {
-            from: newDate,
-            to: newDate,
-          };
-        }
+      /**
+       * Change time range if one of dates are out of the current range
+       */
+      if (newFrom.valueOf() < from.valueOf() || newTo.valueOf() > to.valueOf()) {
+        onChangeTimeRange({
+          from: newFrom.valueOf(),
+          to: newTo.valueOf(),
+        });
       }
+
+      setCalendarFrom(newFrom.toDate());
+      setCalendarTo(newTo.toDate());
+      setView(view);
+
+      return {
+        from: newFrom.toDate(),
+        to: newTo.toDate(),
+      };
     },
     [onChangeTimeRange, timeRange]
   );

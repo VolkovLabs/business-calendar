@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
 import { dateTime, TimeRange } from '@grafana/data';
 import { act, renderHook } from '@testing-library/react';
-import { useCalendarRange } from './useCalendarRange';
+import { View } from '../types';
+import { getUnitType, useCalendarRange } from './useCalendarRange';
 
 /**
  * Use Calendar Range
@@ -53,9 +54,9 @@ describe('Use Calendar Range', () => {
       /**
        * Month
        */
-      await act(() => {
-        const toDate = timeRange.to.subtract(1, 'month').toDate();
-        const newTimeRange = result.current.onNavigate(toDate, 'month', 'PREV');
+      await act(async () => {
+        const toDate = dayjs(timeRange.to.toDate()).subtract(1, 'month').toDate();
+        const newTimeRange = result.current.onNavigate(toDate, View.MONTH, 'PREV');
         expect(newTimeRange.from.toISOString()).toEqual(dayjs(toDate).startOf('month').toISOString());
         expect(newTimeRange.to.toISOString()).toEqual(dayjs(toDate).endOf('month').toISOString());
       });
@@ -63,9 +64,9 @@ describe('Use Calendar Range', () => {
       /**
        * Week
        */
-      await act(() => {
-        const toDate = timeRange.to.subtract(1, 'week').toDate();
-        const newTimeRange = result.current.onNavigate(toDate, 'week', 'PREV');
+      await act(async () => {
+        const toDate = dayjs(timeRange.to.toDate()).subtract(1, 'week').toDate();
+        const newTimeRange = result.current.onNavigate(toDate, View.WEEK, 'PREV');
         expect(newTimeRange.from.toISOString()).toEqual(dayjs(toDate).startOf('week').toISOString());
         expect(newTimeRange.to.toISOString()).toEqual(dayjs(toDate).endOf('week').toISOString());
       });
@@ -73,9 +74,9 @@ describe('Use Calendar Range', () => {
       /**
        * Day
        */
-      await act(() => {
-        const toDate = timeRange.to.subtract(1, 'day').toDate();
-        const newTimeRange = result.current.onNavigate(toDate, 'day', 'PREV');
+      await act(async () => {
+        const toDate = dayjs(timeRange.to.toDate()).subtract(1, 'day').toDate();
+        const newTimeRange = result.current.onNavigate(toDate, View.DAY, 'PREV');
         expect(newTimeRange.from.toISOString()).toEqual(dayjs(toDate).startOf('day').toISOString());
         expect(newTimeRange.to.toISOString()).toEqual(dayjs(toDate).endOf('day').toISOString());
       });
@@ -86,7 +87,7 @@ describe('Use Calendar Range', () => {
 
       const previousMonth = dayjs(getSafeDate()).subtract(1, 'month');
 
-      await act(() => result.current.onNavigate(previousMonth.toDate(), 'month', 'PREV'));
+      await act(() => result.current.onNavigate(previousMonth.toDate(), View.MONTH, 'PREV'));
 
       expect(onChangeTimeRange).toHaveBeenCalledWith({
         from: previousMonth.startOf('month').valueOf(),
@@ -99,7 +100,7 @@ describe('Use Calendar Range', () => {
 
       const nextMonth = dayjs(getSafeDate()).add(1, 'month');
 
-      await act(() => result.current.onNavigate(nextMonth.toDate(), 'month', 'PREV'));
+      await act(() => result.current.onNavigate(nextMonth.toDate(), View.MONTH, 'PREV'));
 
       expect(onChangeTimeRange).toHaveBeenCalledWith({
         from: nextMonth.startOf('month').valueOf(),
@@ -112,7 +113,7 @@ describe('Use Calendar Range', () => {
 
       const nextMonth = dayjs(getSafeDate()).add(1, 'month');
 
-      await act(() => result.current.onNavigate(nextMonth.toDate(), 'month', 'DATE'));
+      await act(() => result.current.onNavigate(nextMonth.toDate(), View.MONTH, 'DATE'));
 
       expect(onChangeTimeRange).toHaveBeenCalledWith({
         from: nextMonth.startOf('day').valueOf(),
@@ -127,7 +128,7 @@ describe('Use Calendar Range', () => {
 
       expect(result.current.view).toEqual('month');
 
-      await act(() => result.current.onChangeView('day'));
+      await act(async () => result.current.onChangeView(View.DAY));
 
       expect(result.current.view).toEqual('day');
     });
@@ -135,29 +136,31 @@ describe('Use Calendar Range', () => {
     it('Should set date according to view', async () => {
       const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
 
-      const runChangeViewTest = async (view: 'month' | 'week' | 'day') => {
+      const runChangeViewTest = async (view: View) => {
         const previousDate = new Date(result.current.date.valueOf());
 
-        await act(() => result.current.onChangeView(view));
+        await act(async () => result.current.onChangeView(view));
 
-        const firstDayInPeriod = dayjs(previousDate).startOf(view);
-        const lastDayInPeriod = dayjs(previousDate).endOf(view);
+        const firstDayInPeriod = dayjs(previousDate).startOf(getUnitType(view));
+        const lastDayInPeriod = dayjs(previousDate).endOf(getUnitType(view));
         const expectedDate = new Date((firstDayInPeriod.valueOf() + lastDayInPeriod.valueOf()) / 2);
 
         expect(result.current.date.toISOString()).toEqual(expectedDate.toISOString());
       };
 
-      await runChangeViewTest('week');
-      await runChangeViewTest('day');
-      await runChangeViewTest('month');
+      await runChangeViewTest(View.WEEK);
+      await runChangeViewTest(View.DAY);
+      await runChangeViewTest(View.MONTH);
+      await runChangeViewTest(View.WORK_WEEK);
     });
 
     it('Should update time range if start is out of range', async () => {
       const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
 
-      await act(() => result.current.onChangeView('week'));
+      await act(async () => result.current.onChangeView(View.WEEK));
 
-      const middleDate = new Date('2022-12-13');
+      const middleDate = new Date('2023-02-01');
+
       expect(onChangeTimeRange).toHaveBeenCalledWith({
         from: dayjs(middleDate).startOf('week').valueOf(),
         to: dayjs(middleDate).endOf('week').valueOf(),
@@ -172,11 +175,11 @@ describe('Use Calendar Range', () => {
       };
       const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange));
 
-      await act(() => result.current.onChangeView('day'));
+      await act(async () => result.current.onChangeView(View.DAY));
 
       onChangeTimeRange.mockClear();
 
-      await act(() => result.current.onChangeView('week'));
+      await act(async () => result.current.onChangeView(View.WEEK));
 
       const middleDate = new Date('2023-02-01');
       expect(onChangeTimeRange).toHaveBeenCalledWith({

@@ -9,6 +9,7 @@
 - Update to Grafana 10.1.4 (#132)
 - Update to Plugin Tools 2.0.2 (#132)
 - Use Grafana Access Policy to sign plugin (#132)
+- Add support of dashboard timezone in Start and End time (#128)
 
 ## 2.1.0 (2023-08-14)
 

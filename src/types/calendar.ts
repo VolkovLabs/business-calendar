@@ -14,4 +14,5 @@ export enum View {
   WEEK = 'week',
   WORK_WEEK = 'work_week',
   MONTH = 'month',
+  YEAR = 'year',
 }

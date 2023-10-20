@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CalendarProps } from 'react-big-calendar';
 import { useStyles2 } from '@grafana/ui';
+import { View } from '../../types';
 import { getMonth } from './utils';
 import { YearViewDate } from './YearViewDate';
 import { Styles } from './YearView.styles';
@@ -55,7 +56,7 @@ export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, g
               dateOfMonth={month.currentDate}
               onClick={(date: Date) => {
                 if (onDrillDown) {
-                  onDrillDown(date, 'day');
+                  onDrillDown(date, View.YEAR as any);
                 }
               }}
               localizer={localizer}

@@ -76,7 +76,15 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    */
   const onNavigate = useCallback(
     (newDate: Date, currentView: View, action: NavigateAction) => {
-      const view: View = action === 'DATE' ? View.DAY : currentView;
+      let view: View = action === 'DATE' ? View.DAY : currentView;
+
+      /**
+       * Open Week by clicking on day in Year View
+       */
+      if (currentView === View.YEAR) {
+        view = View.WEEK;
+      }
+
       const unitType = getUnitType(view);
       const { from, to } = timeRange;
       const newFrom = dayjs(newDate).startOf(unitType);

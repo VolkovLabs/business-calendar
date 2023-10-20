@@ -12,7 +12,7 @@ import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
 import { BigCalendarStyles } from './BigCalendar.styles';
-import { Year } from '../YearView';
+import { YearView } from '../YearView';
 
 /**
  * Properties
@@ -136,7 +136,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       options.views?.reduce(
         (acc, view) => ({
           ...acc,
-          [view]: view === View.YEAR ? Year : true,
+          [view]: view === View.YEAR ? YearView : true,
         }),
         {}
       ) || {}

@@ -76,6 +76,7 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    */
   const onNavigate = useCallback(
     (newDate: Date, currentView: View, action: NavigateAction) => {
+      console.log('onNavigate', newDate, currentView, action);
       const view: View = action === 'DATE' ? View.DAY : currentView;
       const unitType = getUnitType(view);
       const { from, to } = timeRange;

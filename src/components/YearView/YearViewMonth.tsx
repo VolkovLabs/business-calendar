@@ -16,7 +16,7 @@ interface Props extends Omit<CalendarProps, 'date'> {
 /**
  * Month
  */
-export const YearViewMonth: React.FC<Props> = ({ date, localizer, onNavigate, view, getNow, weekNames }) => {
+export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, getNow, weekNames }) => {
   /**
    * Styles
    */
@@ -54,8 +54,8 @@ export const YearViewMonth: React.FC<Props> = ({ date, localizer, onNavigate, vi
               dateToRender={date}
               dateOfMonth={month.currentDate}
               onClick={(date: Date) => {
-                if (onNavigate) {
-                  onNavigate(date, view!, 'DATE');
+                if (onDrillDown) {
+                  onDrillDown(date, 'day');
                 }
               }}
               localizer={localizer}

@@ -43,6 +43,9 @@ export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, local
    */
   const text = localizer.format(dateToRender, 'yearDateFormat');
 
+  /**
+   * Previous Month Date
+   */
   if (localizer.lt(dateToRender, dateOfMonth, 'month')) {
     return (
       <button disabled={true} className={cx(styles.date, styles.prevMonthDate)}>
@@ -51,6 +54,9 @@ export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, local
     );
   }
 
+  /**
+   * Next Month Date
+   */
   if (localizer.gt(dateToRender, dateOfMonth, 'month')) {
     return (
       <button disabled={true} className={cx(styles.date, styles.nextMonthDate)}>

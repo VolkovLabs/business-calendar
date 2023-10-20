@@ -1,35 +1,60 @@
 import React from 'react';
 import { useStyles2 } from '@grafana/ui';
 import { cx } from '@emotion/css';
-import dayjs from 'dayjs';
+import { CalendarProps } from 'react-big-calendar';
 import { Styles } from './YearView.styles';
 
 /**
- * Calendar Date
- * @param props
- * @constructor
+ * Properties
  */
-export const YearViewDate = (props: any) => {
+interface Props extends Required<Pick<CalendarProps, 'getNow' | 'localizer'>> {
+  /**
+   * Date Of Month
+   */
+  dateOfMonth: Date;
+
+  /**
+   * Date To Render
+   */
+  dateToRender: Date;
+
+  /**
+   * On Click
+   */
+  onClick: (date: Date) => void;
+}
+
+/**
+ * Year View Date
+ */
+export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, localizer, getNow, onClick }) => {
   /**
    * Styles
    */
   const styles = useStyles2(Styles);
 
-  const { dateToRender, dateOfMonth } = props;
-  const today = dateToRender.format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD') ? 'today' : '';
+  /**
+   * Is Today
+   */
+  const isToday = localizer.isSameDate(dateToRender, getNow() as Date);
 
-  if (dateToRender.month() < dateOfMonth.month()) {
+  /**
+   * Formatted Date
+   */
+  const text = localizer.format(dateToRender, 'yearDateFormat');
+
+  if (localizer.lt(dateToRender, dateOfMonth, 'month')) {
     return (
       <button disabled={true} className={cx(styles.date, styles.prevMonthDate)}>
-        {dateToRender.date()}
+        {text}
       </button>
     );
   }
 
-  if (dateToRender.month() > dateOfMonth.month()) {
+  if (localizer.gt(dateToRender, dateOfMonth, 'month')) {
     return (
       <button disabled={true} className={cx(styles.date, styles.nextMonthDate)}>
-        {dateToRender.date()}
+        {text}
       </button>
     );
   }
@@ -37,11 +62,11 @@ export const YearViewDate = (props: any) => {
   return (
     <button
       className={cx(styles.date, styles.inMonth, {
-        [styles.today]: !!today,
+        [styles.today]: isToday,
       })}
-      onClick={() => props.onClick(dateToRender)}
+      onClick={() => onClick(dateToRender)}
     >
-      {dateToRender.date()}
+      {text}
     </button>
   );
 };

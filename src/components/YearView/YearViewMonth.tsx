@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { CalendarProps, Week } from 'react-big-calendar';
-import dayjs from 'dayjs';
+import { CalendarProps } from 'react-big-calendar';
 import { useStyles2 } from '@grafana/ui';
-import { createMonthDate } from './utils';
+import { getMonth } from './utils';
 import { YearViewDate } from './YearViewDate';
 import { Styles } from './YearView.styles';
 
 /**
+ * Properties
+ */
+interface Props extends Omit<CalendarProps, 'date'> {
+  date: Date;
+  weekNames: string[];
+}
+
+/**
  * Month
  */
-export const YearViewMonth: React.FC<CalendarProps> = ({ date, localizer, onNavigate, view }) => {
+export const YearViewMonth: React.FC<Props> = ({ date, localizer, onNavigate, view, getNow, weekNames }) => {
   /**
    * Styles
    */
@@ -18,36 +25,41 @@ export const YearViewMonth: React.FC<CalendarProps> = ({ date, localizer, onNavi
   /**
    * Month state
    */
-  const [month, setMonth] = useState(createMonthDate(date));
+  const [month, setMonth] = useState(getMonth(date, localizer));
 
+  /**
+   * Update Months
+   */
   useEffect(() => {
-    setMonth(createMonthDate(date));
-  }, [date]);
+    setMonth(getMonth(date, localizer));
+  }, [date, localizer]);
 
-  if (!month) {
+  if (!month.weeks) {
     return null;
   }
 
   return (
     <div className={styles.month}>
-      <div className={styles.monthName}>{month.currentDate.format('MMMM').toUpperCase()}</div>
-      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+      <div className={styles.monthName}>{localizer.format(month.currentDate, 'yearMonthFormat').toUpperCase()}</div>
+      {weekNames.map((weekName, index) => (
         <span key={index} className={styles.week}>
-          {day}
+          {weekName}
         </span>
       ))}
-      {month.map((week: Week[], index: number) => (
+      {month.weeks.map(({ week }, index: number) => (
         <div key={index}>
-          {week.map((date: any) => (
+          {week.map((date, index) => (
             <YearViewDate
-              key={date.date()}
+              key={index}
               dateToRender={date}
               dateOfMonth={month.currentDate}
-              onClick={(date: dayjs.Dayjs) => {
+              onClick={(date: Date) => {
                 if (onNavigate) {
-                  onNavigate(date.toDate(), view!, 'DATE');
+                  onNavigate(date, view!, 'DATE');
                 }
               }}
+              localizer={localizer}
+              getNow={getNow!}
             />
           ))}
         </div>

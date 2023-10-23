@@ -1,70 +1,48 @@
 import dayjs from 'dayjs';
-import { config } from '@grafana/runtime';
 import { renderHook } from '@testing-library/react';
-import { LanguageMessages } from '../constants';
+import { t } from 'i18next';
+import { getUserLanguage } from '../utils';
 import { useLocalizer } from './useLocalizer';
 
 /**
- * Mock @grafana/runtime
+ * Mock utils
  */
-jest.mock('@grafana/runtime', () => ({
-  config: {
-    bootData: {
-      user: {
-        language: 'en-US',
-      },
-    },
-  },
+jest.mock('../utils', () => ({
+  ...jest.requireActual('../utils'),
+  getUserLanguage: jest.fn(() => 'en'),
 }));
 
 describe('Use Localizer', () => {
   it('Should set dayjs locale', () => {
-    config.bootData = {
-      user: {
-        language: 'fr-EN',
-      },
-    } as any;
+    jest.mocked(getUserLanguage).mockReturnValue('fr');
     renderHook(() => useLocalizer());
 
     expect(dayjs.locale()).toEqual('fr');
   });
 
   it('Should set dayjs locale', () => {
-    config.bootData = {
-      user: {},
-    } as any;
+    jest.mocked(getUserLanguage).mockReturnValue('en');
     renderHook(() => useLocalizer());
 
     expect(dayjs.locale()).toEqual('en');
   });
 
   it('Should set default dayjs locale', () => {
-    config.bootData = {
-      user: {
-        language: '123',
-      },
-    } as any;
+    jest.mocked(getUserLanguage).mockReturnValue('123' as any);
     renderHook(() => useLocalizer());
 
     expect(dayjs.locale()).toEqual('en');
   });
 
-  ['es-SP', 'fr-EN', 'de-GE', 'zh-CH'].forEach((locale) => {
-    it(`Should set messages for ${locale}`, () => {
-      config.bootData = {
-        user: {
-          language: locale,
-        },
-      } as any;
+  ['es', 'fr', 'de', 'zh'].forEach((lang) => {
+    it(`Should set messages for ${lang}`, () => {
+      jest.mocked(getUserLanguage).mockReturnValue(lang as any);
       const { result } = renderHook(() => useLocalizer());
 
-      const lang = locale.split('-')[0]
-      const expectedMessages = LanguageMessages[lang];
-      expect(result.current.messages).toEqual(expectedMessages)
-      if (result.current.messages.showMore && expectedMessages.showMore) {
-        expect(result.current.messages.showMore(10)).toEqual(expectedMessages.showMore(10))
+      expect(result.current.messages.noEventsInRange).toEqual(t('localizerMessages.noEventsInRange'));
+      if (result.current.messages.showMore) {
+        expect(result.current.messages.showMore(10)).toEqual(t('localizerMessages.showMore', { total: 10 }));
       }
     });
-  })
-
+  });
 });

@@ -5,6 +5,7 @@ import { Calendar, Event } from 'react-big-calendar';
 import { Global } from '@emotion/react';
 import { PanelProps } from '@grafana/data';
 import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
+import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
@@ -36,6 +37,11 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
    */
   const theme = useTheme2();
   const styles = useStyles2(BigCalendarStyles);
+
+  /**
+   * Translation
+   */
+  const { t } = useTranslation();
 
   /**
    * Localizer
@@ -145,8 +151,8 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
 
   if (!isViewExist) {
     return (
-      <Alert title="No Views" severity="info" data-testid={TestIds.bigCalendar.noViewsMessage}>
-        Please enable at least one view.
+      <Alert title={t('panel.noViewsTitle')} severity="info" data-testid={TestIds.bigCalendar.noViewsMessage}>
+        {t('panel.noViewsMessage')}
       </Alert>
     );
   }
@@ -154,7 +160,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   return (
     <div data-testid={TestIds.bigCalendar.root}>
       {activeEvent && (
-        <Drawer title="Event Details" onClose={() => setActiveEvent(null)}>
+        <Drawer title={t('eventDetailsDrawer.title')} onClose={() => setActiveEvent(null)}>
           <EventDetails event={activeEvent} />
         </Drawer>
       )}

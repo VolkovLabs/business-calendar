@@ -1,5 +1,6 @@
-import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
 import './i18n';
+import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
+import { t } from 'i18next';
 import { CalendarPanel, MultiFieldEditor } from './components';
 import {
   AnnotationsOptions,
@@ -41,54 +42,54 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         path: 'calendarType',
         name: 'Calendar type',
         settings: {
-          options: CalendarTypeOptions,
+          options: CalendarTypeOptions(t),
         },
         defaultValue: CalendarType.LEGACY,
       })
       .addMultiSelect({
         path: 'views',
-        name: 'Views',
+        name: t('panelOptions.views.label'),
         settings: {
-          options: CalendarViewOptions,
+          options: CalendarViewOptions(t),
         },
         defaultValue: DefaultViews as any,
         showIf: showForBigCalendar,
       })
       .addRadio({
         path: 'autoScroll',
-        name: 'Scroll to bottom',
-        description: 'Automatically scroll to the end of the time interval.',
+        name: t('panelOptions.autoScroll.label'),
+        description: t('panelOptions.autoScroll.description'),
         settings: {
-          options: ScrollOptions,
+          options: ScrollOptions(t),
         },
         defaultValue: DefaultOptions.autoScroll,
         showIf: showForLegacy,
       })
       .addRadio({
         path: 'displayTime',
-        name: 'Display time',
-        description: 'Display Time for each entry.',
+        name: t('panelOptions.displayTime.label'),
+        description: t('panelOptions.displayTime.description'),
         settings: {
-          options: DisplayTimeOptions,
+          options: DisplayTimeOptions(t),
         },
         defaultValue: DefaultOptions.annotations,
         showIf: showForLegacy,
       })
       .addRadio({
         path: 'quickLinks',
-        name: 'On click',
-        description: 'Open data link or display drawer when clicking an event.',
+        name: t('panelOptions.quickLinks.label'),
+        description: t('panelOptions.quickLinks.description'),
         settings: {
-          options: LinksOptions,
+          options: LinksOptions(t),
         },
         defaultValue: DefaultOptions.quickLinks,
       })
       .addRadio({
         path: 'colors',
-        name: 'Colors',
-        description: 'Display colors based on Frame or Event id if Color field is not specified.',
+        name: t('panelOptions.colors.label'),
+        description: t('panelOptions.quickLinks.description'),
         settings: {
-          options: ColorsOptions,
+          options: ColorsOptions(t),
         },
         defaultValue: DefaultOptions.colors,
       });
@@ -99,48 +100,48 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
     builder
       .addFieldNamePicker({
         path: 'textField',
-        name: 'Text',
-        description: 'Field to use for the event text. Defaults to the first textual field.',
-        category: ['Events'],
+        name: t('panelOptions.events.textField.label'),
+        description: t('panelOptions.events.textField.description'),
+        category: [t('panelOptions.events.label')],
         settings: {
           filter: (f: Field) => f.type === FieldType.string,
-          noFieldsMessage: 'No string fields found',
+          noFieldsMessage: t('panelOptions.events.textField.noFieldsMessage'),
         },
       })
       .addFieldNamePicker({
         path: 'descriptionField',
-        name: 'Description',
-        description: 'Field to use for the event description.',
-        category: ['Events'],
+        name: t('panelOptions.events.descriptionField.label'),
+        description: t('panelOptions.events.descriptionField.description'),
+        category: [t('panelOptions.events.label')],
         settings: {
           filter: (f: Field) => f.type === FieldType.string,
-          noFieldsMessage: 'No string fields found',
+          noFieldsMessage: t('panelOptions.events.descriptionField.noFieldsMessage'),
         },
       })
       .addFieldNamePicker({
         path: 'locationField',
-        name: 'Location',
-        description: 'Field to use for the event location.',
-        category: ['Events'],
+        name: t('panelOptions.events.locationField.label'),
+        description: t('panelOptions.events.locationField.description'),
+        category: [t('panelOptions.events.label')],
         settings: {
           filter: (f: Field) => f.type === FieldType.string,
-          noFieldsMessage: 'No string fields found',
+          noFieldsMessage: t('panelOptions.events.locationField.noFieldsMessage'),
         },
       })
       .addFieldNamePicker({
         path: 'timeField',
-        name: 'Start time',
-        description: 'Field to use for the event start time. Defaults to the first time field.',
-        category: ['Events'],
+        name: t('panelOptions.events.timeField.label'),
+        description: t('panelOptions.events.timeField.description'),
+        category: [t('panelOptions.events.label')],
         settings: {
           filter: (f: Field) => [FieldType.time, FieldType.string, FieldType.number].includes(f.type),
         },
       })
       .addFieldNamePicker({
         path: 'endTimeField',
-        name: 'End time',
-        description: 'Field to use for the event end time. If not set, event is instant.',
-        category: ['Events'],
+        name: t('panelOptions.events.endTimeField.label'),
+        description: t('panelOptions.events.endTimeField.description'),
+        category: [t('panelOptions.events.label')],
         settings: {
           filter: (f: Field) => [FieldType.time, FieldType.string, FieldType.number].includes(f.type),
         },
@@ -148,19 +149,19 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       .addCustomEditor({
         id: 'labelFields',
         path: 'labelFields',
-        name: 'Labels',
-        description: 'Fields to use as event labels.',
+        name: t('panelOptions.events.labelFields.label'),
+        description: t('panelOptions.events.labelFields.description'),
         editor: MultiFieldEditor,
-        category: ['Events'],
+        category: [t('panelOptions.events.label')],
         settings: {
           filterByType: [FieldType.string],
         },
       })
       .addFieldNamePicker({
         path: 'colorField',
-        name: 'Color',
-        description: 'Field to use as event color.',
-        category: ['Events'],
+        name: t('panelOptions.events.colorField.label'),
+        description: t('panelOptions.events.colorField.description'),
+        category: [t('panelOptions.events.label')],
         settings: {
           filter: (f: Field) => [FieldType.string, FieldType.number].includes(f.type),
         },
@@ -172,31 +173,31 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
     builder
       .addRadio({
         path: 'annotations',
-        name: 'Annotations',
-        description: 'Display annotations.',
+        name: t('panelOptions.annotations.annotations.label'),
+        description: t('panelOptions.annotations.annotations.description'),
         settings: {
-          options: AnnotationsOptions,
+          options: AnnotationsOptions(t),
         },
-        category: ['Annotations'],
+        category: [t('panelOptions.annotations.label')],
         defaultValue: DefaultOptions.annotations,
       })
       .addRadio({
         path: 'annotationsType',
-        name: 'Type',
+        name: t('panelOptions.annotations.annotationsType.label'),
         settings: {
-          options: AnnotationsTypeOptions,
+          options: AnnotationsTypeOptions(t),
         },
-        category: ['Annotations'],
+        category: [t('panelOptions.annotations.label')],
         defaultValue: DefaultOptions.annotationsType,
       })
       .addSliderInput({
         path: 'annotationsLimit',
-        name: 'Max limit',
+        name: t('panelOptions.annotations.annotationsLimit.label'),
         defaultValue: DefaultOptions.annotationsLimit,
         settings: {
           min: 100,
           max: 2000,
         },
-        category: ['Annotations'],
+        category: [t('panelOptions.annotations.label')],
       });
   });

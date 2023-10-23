@@ -13,7 +13,7 @@ export const defaultNS = 'translation';
  */
 i18next.use(initReactI18next).init({
   lng: getUserLanguage(),
-  debug: true,
+  debug: false,
   resources,
   defaultNS,
 });

@@ -81,7 +81,7 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
       /**
        * Open Week by clicking on day in Year View
        */
-      if (currentView === View.YEAR) {
+      if (currentView === View.YEAR && action === 'DATE') {
         view = View.WEEK;
       }
 

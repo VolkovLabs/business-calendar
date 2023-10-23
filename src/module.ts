@@ -1,4 +1,5 @@
 import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
+import './i18n';
 import { CalendarPanel, MultiFieldEditor } from './components';
 import {
   AnnotationsOptions,

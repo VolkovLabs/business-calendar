@@ -7,9 +7,8 @@ import zhLocale from 'dayjs/locale/zh';
 import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
 import { getLocaleData } from '@grafana/data';
-import { config } from '@grafana/runtime';
-import { DefaultLanguage, LanguageMessages } from '../constants';
-
+import { LanguageMessages } from '../constants';
+import { getUserLanguage } from '../utils';
 /**
  * Dayjs locales per each grafana language
  * Dynamic import is not needed until there is too many locales
@@ -28,13 +27,12 @@ const dayjsLocales = {
  */
 export const useLocalizer = () => {
   const localeDate = getLocaleData();
-  const language = config.bootData.user.language || DefaultLanguage;
-  const localeName = language.split('-')[0];
+  const language = getUserLanguage();
   const [dayjsLocale, setDayjsLocale] = useState(dayjsLocales.en);
 
   useEffect(() => {
-    setDayjsLocale(dayjsLocales[localeName as keyof typeof dayjsLocales] || dayjsLocales.en);
-  }, [localeName]);
+    setDayjsLocale(dayjsLocales[language as keyof typeof dayjsLocales] || dayjsLocales.en);
+  }, [language]);
 
   return useMemo(() => {
     /**
@@ -56,6 +54,6 @@ export const useLocalizer = () => {
     (localizer.formats as any).yearWeekFormat = 'dd';
     (localizer.formats as any).yearDateFormat = 'D';
 
-    return { localizer, messages: LanguageMessages[localeName] };
-  }, [dayjsLocale, localeDate, localeName]);
+    return { localizer, messages: LanguageMessages[language] };
+  }, [dayjsLocale, localeDate, language]);
 };

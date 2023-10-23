@@ -2,6 +2,11 @@ import { AnnotationsType, Colors } from '../constants';
 import { CalendarType, View } from './calendar';
 
 /**
+ * Supported Language
+ */
+export type SupportedLanguage = 'en' | 'es' | 'fr' | 'de' | 'zh';
+
+/**
  * Calendar Options
  */
 export interface CalendarOptions {

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useStyles2 } from '@grafana/ui';
 import { CalendarProps, DateLocalizer, Navigate, NavigateAction } from 'react-big-calendar';
+import { TestIds } from '../../constants';
 import { YearViewMonth } from './YearViewMonth';
 import { Styles } from './YearView.styles';
 
@@ -45,7 +46,11 @@ const YearView: React.FC<CalendarProps> = ({ date, localizer, ...restProps }) =>
     );
   }
 
-  return <div className={styles.year}>{months.map((month) => month)}</div>;
+  return (
+    <div className={styles.year} data-testid={TestIds.yearView.root}>
+      {months.map((month) => month)}
+    </div>
+  );
 };
 
 /**

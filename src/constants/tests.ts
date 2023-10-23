@@ -55,4 +55,12 @@ export const TestIds = {
     select: 'multi-field-editor select',
     multiSelect: 'multi-field-editor multi-select',
   },
+  yearView: {
+    root: 'data-testid year-view',
+    month: (name: unknown) => `data-testid year-view month-${name}`,
+    prevDate: (monthIndex: number, day: number) => `data-testid year-view prev-date-${monthIndex}-${day}`,
+    nextDate: (monthIndex: number, day: number) => `data-testid year-view next-date-${monthIndex}-${day}`,
+    date: (day: number) => `data-testid year-view date-${day}`,
+    currentDate: 'data-testid year-view current-date',
+  },
 };

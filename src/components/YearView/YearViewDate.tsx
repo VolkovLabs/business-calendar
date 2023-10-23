@@ -2,6 +2,7 @@ import React from 'react';
 import { useStyles2 } from '@grafana/ui';
 import { cx } from '@emotion/css';
 import { CalendarProps } from 'react-big-calendar';
+import { TestIds } from '../../constants';
 import { Styles } from './YearView.styles';
 
 /**
@@ -48,7 +49,11 @@ export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, local
    */
   if (localizer.lt(dateToRender, dateOfMonth, 'month')) {
     return (
-      <button disabled={true} className={cx(styles.date, styles.prevMonthDate)}>
+      <button
+        disabled={true}
+        className={cx(styles.date, styles.prevMonthDate)}
+        data-testid={TestIds.yearView.prevDate(dateToRender.getMonth(), dateToRender.getDate())}
+      >
         {text}
       </button>
     );
@@ -59,7 +64,11 @@ export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, local
    */
   if (localizer.gt(dateToRender, dateOfMonth, 'month')) {
     return (
-      <button disabled={true} className={cx(styles.date, styles.nextMonthDate)}>
+      <button
+        disabled={true}
+        className={cx(styles.date, styles.nextMonthDate)}
+        data-testid={TestIds.yearView.nextDate(dateToRender.getMonth(), dateToRender.getDate())}
+      >
         {text}
       </button>
     );
@@ -71,6 +80,7 @@ export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, local
         [styles.today]: isToday,
       })}
       onClick={() => onClick(dateToRender)}
+      data-testid={isToday ? TestIds.yearView.currentDate : TestIds.yearView.date(dateToRender.getDate())}
     >
       {text}
     </button>

@@ -23,4 +23,4 @@ export const DefaultOptions: CalendarOptions = {
 /**
  * Default Views
  */
-export const DefaultViews = [View.YEAR, View.DAY, View.WEEK, View.MONTH];
+export const DefaultViews = [View.DAY, View.WEEK, View.MONTH];

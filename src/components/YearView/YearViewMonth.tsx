@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CalendarProps } from 'react-big-calendar';
 import { useStyles2 } from '@grafana/ui';
+import { TestIds } from '../../constants';
 import { View } from '../../types';
 import { getMonth } from './utils';
 import { YearViewDate } from './YearViewDate';
@@ -35,12 +36,8 @@ export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, g
     setMonth(getMonth(date, localizer));
   }, [date, localizer]);
 
-  if (!month.weeks) {
-    return null;
-  }
-
   return (
-    <div className={styles.month}>
+    <div className={styles.month} data-testid={TestIds.yearView.month(month.currentDate.getMonth())}>
       <div className={styles.monthName}>{localizer.format(month.currentDate, 'yearMonthFormat').toUpperCase()}</div>
       {weekNames.map((weekName, index) => (
         <span key={index} className={styles.week}>

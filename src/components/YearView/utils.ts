@@ -19,11 +19,10 @@ export const getMonth = (
     currentDate = dayjs(date);
   }
 
-  const first = currentDate.startOf('month');
-
   /**
    * First day
    */
+  const first = currentDate.startOf('month');
   const weekStartDay = localizer.startOfWeek('');
   const firstDayInPeriod =
     weekStartDay === 1 ? (first.day() - 1 >= 0 ? first.day() - 1 : 6 - first.day()) : first.day();

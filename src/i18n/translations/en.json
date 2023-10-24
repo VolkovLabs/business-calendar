@@ -44,6 +44,9 @@
         "year": "Year"
       }
     },
+    "defaultView": {
+      "label": "Default View"
+    },
     "autoScroll": {
       "label": "Scroll to bottom",
       "description": "Automatically scroll to the end of the time interval.",

@@ -63,4 +63,7 @@ export const TestIds = {
     date: (day: number) => `data-testid year-view date-${day}`,
     currentDate: 'data-testid year-view current-date',
   },
+  defaultViewEditor: {
+    field: 'default-view-editor field',
+  },
 };

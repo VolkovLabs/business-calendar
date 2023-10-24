@@ -1,4 +1,3 @@
-import { SelectableValue } from '@grafana/data';
 import { TFunction } from 'i18next';
 import { CalendarType, View } from '../types';
 
@@ -79,7 +78,7 @@ export const AnnotationsTypeOptions = (t: TFunction) => [
 /**
  * Calendar View Options
  */
-export const CalendarViewOptions = (t: TFunction): Array<SelectableValue<View>> => [
+export const CalendarViewOptions = (t: TFunction) => [
   { value: View.DAY, label: t('panelOptions.views.options.day') },
   { value: View.WEEK, label: t('panelOptions.views.options.week') },
   { value: View.WORK_WEEK, label: t('panelOptions.views.options.workWeek') },

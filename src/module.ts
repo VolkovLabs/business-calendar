@@ -1,7 +1,7 @@
 import './i18n';
 import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
 import { t } from 'i18next';
-import { CalendarPanel, MultiFieldEditor } from './components';
+import { CalendarPanel, DefaultViewEditor, MultiFieldEditor } from './components';
 import {
   AnnotationsOptions,
   AnnotationsTypeOptions,
@@ -9,6 +9,7 @@ import {
   CalendarViewOptions,
   ColorsOptions,
   DefaultOptions,
+  DefaultView,
   DefaultViews,
   DisplayTimeOptions,
   LinksOptions,
@@ -53,6 +54,14 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: CalendarViewOptions(t),
         },
         defaultValue: DefaultViews as any,
+        showIf: showForBigCalendar,
+      })
+      .addCustomEditor({
+        id: 'defaultViewEditor',
+        path: 'defaultView',
+        name: t('panelOptions.defaultView.label'),
+        editor: DefaultViewEditor,
+        defaultValue: DefaultView,
         showIf: showForBigCalendar,
       })
       .addRadio({

@@ -1,6 +1,6 @@
-import dayjs from 'dayjs';
 import { dateTime, TimeRange } from '@grafana/data';
 import { act, renderHook } from '@testing-library/react';
+import dayjs from 'dayjs';
 import { View } from '../types';
 import { getUnitType, useCalendarRange } from './useCalendarRange';
 
@@ -31,15 +31,37 @@ describe('Use Calendar Range', () => {
     onChangeTimeRange.mockClear();
   });
 
-  it('Should set last month for initial date', () => {
+  it('Should set last month for initial date if month by default', () => {
     const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
     const timeRange = {
       ...defaultTimeRange,
       from: dateTime(last3Months.toDate()),
     };
-    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange));
+    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.MONTH));
 
     expect(result.current.date.toISOString()).toEqual(new Date('2023-02-01 12:00').toISOString());
+  });
+
+  it('Should set last week for initial date if week by default', () => {
+    const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
+    const timeRange = {
+      ...defaultTimeRange,
+      from: dateTime(last3Months.toDate()),
+    };
+    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.WEEK));
+
+    expect(result.current.date.toISOString()).toEqual(new Date('2023-01-31 00:00').toISOString());
+  });
+
+  it('Should set last day for initial date if day by default', () => {
+    const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
+    const timeRange = {
+      ...defaultTimeRange,
+      from: dateTime(last3Months.toDate()),
+    };
+    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.DAY));
+
+    expect(result.current.date.toISOString()).toEqual(new Date('2023-02-02 00:00').toISOString());
   });
 
   describe('Navigate', () => {
@@ -49,7 +71,7 @@ describe('Use Calendar Range', () => {
         ...defaultTimeRange,
         from: dateTime(last3Months.toDate()),
       };
-      const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.MONTH));
 
       /**
        * Month

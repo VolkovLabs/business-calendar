@@ -4,13 +4,13 @@
     "title": "Detalles del evento"
   },
   "legacyCalendar": {
-    "applyTimeRangeButton": "Apply time range",
+    "applyTimeRangeButton": "Aplicar rango de tiempo",
     "dayDrawer": {
-      "allTab": "All Events",
-      "noEventsMessage": "Events not found.",
-      "title": "Day"
+      "allTab": "Todos los eventos",
+      "noEventsMessage": "Eventos no encontrados.",
+      "title": "Día"
     },
-    "showMore": "{{count}} more"
+    "showMore": "{{count}} más"
   },
   "localizerMessages": {
     "agenda": "El Diario",
@@ -38,31 +38,31 @@
   "panelOptions": {
     "annotations": {
       "annotations": {
-        "description": "Display annotations.",
-        "label": "Annotations",
+        "description": "Mostrar anotaciones.",
+        "label": "Anotaciones",
         "options": {
-          "disabled": "Disabled",
-          "enabled": "Enabled"
+          "disabled": "Desactivado",
+          "enabled": "Activado"
         }
       },
       "annotationsLimit": {
-        "label": "Max limit"
+        "label": "Límite máximo"
       },
       "annotationsType": {
-        "label": "Type",
+        "label": "Tipo",
         "options": {
-          "alert": "Alerts",
-          "all": "Any",
-          "annotation": "Annotations"
+          "alert": "Alertas",
+          "all": "Cualquier",
+          "annotation": "Anotaciones"
         }
       },
-      "label": "Annotations"
+      "label": "Anotaciones"
     },
     "autoScroll": {
-      "description": "Automatically scroll to the end of the time interval.",
-      "label": "Scroll to bottom",
+      "description": "Desplácese automáticamente hasta el final del intervalo de tiempo.",
+      "label": "Desplazarse hacia abajo",
       "options": {
-        "disabled": "Disabled",
+        "disabled": "Desactivado",
         "enabled": "Auto"
       }
     },
@@ -74,71 +74,71 @@
       }
     },
     "colors": {
-      "description": "Display colors based on Frame or Event id if Color field is not specified.",
-      "label": "Colors",
+      "description": "Muestra colores según el marco o la identificación del evento si no se especifica el campo Color.",
+      "label": "Colores",
       "options": {
-        "event": "Event",
-        "frame": "Frame"
+        "event": "Evento",
+        "frame": "Marco"
       }
     },
     "displayTime": {
-      "description": "Display Time for each entry.",
-      "label": "Display time",
+      "description": "Mostrar hora para cada entrada.",
+      "label": "Tiempo de visualización",
       "options": {
-        "disabled": "Disabled",
-        "enabled": "Enabled"
+        "disabled": "Desactivado",
+        "enabled": "Activado"
       }
     },
     "events": {
       "colorField": {
-        "description": "Field to use as event color.",
+        "description": "Campo a utilizar como color del evento.",
         "label": "Color"
       },
       "descriptionField": {
-        "description": "Field to use for the event description.",
-        "label": "Description",
-        "noFieldsMessage": "No string fields found"
+        "description": "Campo a utilizar para la descripción del evento.",
+        "label": "Descripción",
+        "noFieldsMessage": "No se encontraron campos de cadena"
       },
       "endTimeField": {
-        "description": "Field to use for the event end time. If not set, event is instant.",
-        "label": "End time"
+        "description": "Campo a utilizar para la hora de finalización del evento. Si no se establece, el evento es instantáneo.",
+        "label": "Hora de finalización"
       },
-      "label": "Events",
+      "label": "Eventos",
       "labelFields": {
-        "description": "Fields to use as event labels.",
-        "label": "Labels"
+        "description": "Campos para usar como etiquetas de eventos.",
+        "label": "Etiquetas"
       },
       "locationField": {
-        "description": "Field to use for the event location.",
-        "label": "Location",
-        "noFieldsMessage": "No string fields found"
+        "description": "Campo a utilizar para la ubicación del evento.",
+        "label": "Ubicación",
+        "noFieldsMessage": "No se encontraron campos de cadena"
       },
       "textField": {
-        "description": "Field to use for the event text. Defaults to the first textual field.",
-        "label": "Text",
-        "noFieldsMessage": "No string fields found"
+        "description": "Campo a utilizar para el texto del evento. El valor predeterminado es el primer campo de texto.",
+        "label": "Texto",
+        "noFieldsMessage": "No se encontraron campos de cadena"
       },
       "timeField": {
-        "description": "Field to use for the event start time. Defaults to the first time field.",
-        "label": "Start time"
+        "description": "Campo a utilizar para la hora de inicio del evento. El valor predeterminado es el primer campo de tiempo.",
+        "label": "Hora de inicio"
       }
     },
     "quickLinks": {
-      "description": "Open data link or display drawer when clicking an event.",
-      "label": "On click",
+      "description": "Abra el enlace de datos o muestre el cajón al hacer clic en un evento.",
+      "label": "Al hacer clic",
       "options": {
-        "disabled": "Show Details",
-        "enabled": "Open Link"
+        "disabled": "Mostrar detalles",
+        "enabled": "Enlace abierto"
       }
     },
     "views": {
-      "label": "Views",
+      "label": "Puntos de vista",
       "options": {
-        "day": "Day",
-        "month": "Month",
-        "week": "Week",
-        "workWeek": "Work Week",
-        "year": "Year"
+        "day": "Día",
+        "month": "Mes",
+        "week": "Semana",
+        "workWeek": "Semana de trabajo",
+        "year": "Año"
       }
     }
   }

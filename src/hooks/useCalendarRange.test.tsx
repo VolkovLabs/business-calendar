@@ -84,6 +84,8 @@ describe('Use Calendar Range', () => {
 
     const { rerender } = render(<Component timeRange={timeRange} />);
 
+    expect(screen.getByTestId('date')).toHaveTextContent('2023-02-02T00:00:00.000Z');
+
     /**
      * Re-render with updated timeRange
      */

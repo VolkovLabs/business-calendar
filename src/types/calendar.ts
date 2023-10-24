@@ -1,3 +1,5 @@
+import { Messages } from 'react-big-calendar';
+
 /**
  * Calendar Type
  */
@@ -15,4 +17,16 @@ export enum View {
   WORK_WEEK = 'work_week',
   MONTH = 'month',
   YEAR = 'year',
+}
+
+/**
+ * Big Messages
+ */
+export interface BigMessages extends Messages {
+  /**
+   * Year
+   *
+   * @type {string}
+   */
+  year: string;
 }

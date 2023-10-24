@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { textUtil } from '@grafana/data';
 import { Card, LinkButton, TagList, useStyles2 } from '@grafana/ui';
+import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
@@ -9,8 +10,19 @@ import { CalendarEvent } from '../../types';
  * Properties
  */
 interface Props {
+  /**
+   * Event
+   */
   event: CalendarEvent;
+
+  /**
+   * Show Full Info
+   */
   showFullInfo?: boolean;
+
+  /**
+   * On Click
+   */
   onClick?: (event: unknown) => void;
 }
 
@@ -28,10 +40,15 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
   const styles = useStyles2(Styles);
 
   /**
+   * Translation
+   */
+  const { t } = useTranslation();
+
+  /**
    * Meta
    */
   const meta = useMemo(() => {
-    const location = event.location ? `Location: ${event.location}` : '';
+    const location = event.location ? t('eventDetailsDrawer.location', { location: event.location }) : '';
 
     if (event.end) {
       return [
@@ -45,7 +62,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
     }
 
     return [`${event.start.format('LLL')}`, location];
-  }, [event.end, event.location, event.start]);
+  }, [event.end, event.location, event.start, t]);
 
   /**
    * Tags

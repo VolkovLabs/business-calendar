@@ -1,4 +1,5 @@
 import { SelectableValue } from '@grafana/data';
+import { TFunction } from 'i18next';
 import { CalendarType, View } from '../types';
 
 /**
@@ -21,67 +22,67 @@ export enum AnnotationsType {
 /**
  * Links Options
  */
-export const LinksOptions = [
-  { value: true, label: 'Open Link' },
-  { value: false, label: 'Show Details' },
+export const LinksOptions = (t: TFunction) => [
+  { value: true, label: t('panelOptions.quickLinks.options.enabled') },
+  { value: false, label: t('panelOptions.quickLinks.options.disabled') },
 ];
 
 /**
  * Scroll Options
  */
-export const ScrollOptions = [
-  { value: true, label: 'Auto' },
-  { value: false, label: 'Disabled' },
+export const ScrollOptions = (t: TFunction) => [
+  { value: true, label: t('panelOptions.autoScroll.options.enabled') },
+  { value: false, label: t('panelOptions.autoScroll.options.disabled') },
 ];
 
 /**
  * Display Time Options
  */
-export const DisplayTimeOptions = [
-  { value: true, label: 'Enabled' },
-  { value: false, label: 'Disabled' },
+export const DisplayTimeOptions = (t: TFunction) => [
+  { value: true, label: t('panelOptions.displayTime.options.enabled') },
+  { value: false, label: t('panelOptions.displayTime.options.disabled') },
 ];
 
 /**
  * Color Options
  */
-export const ColorsOptions = [
-  { value: Colors.FRAME, label: 'Frame' },
-  { value: Colors.EVENT, label: 'Event' },
+export const ColorsOptions = (t: TFunction) => [
+  { value: Colors.FRAME, label: t('panelOptions.colors.options.frame') },
+  { value: Colors.EVENT, label: t('panelOptions.colors.options.event') },
 ];
 
 /**
  * Calendar Type Options
  */
-export const CalendarTypeOptions = [
-  { value: CalendarType.LEGACY, label: 'Legacy' },
-  { value: CalendarType.BIG_CALENDAR, label: 'Big Calendar' },
+export const CalendarTypeOptions = (t: TFunction) => [
+  { value: CalendarType.LEGACY, label: t('panelOptions.calendarType.options.legacy') },
+  { value: CalendarType.BIG_CALENDAR, label: t('panelOptions.calendarType.options.bigCalendar') },
 ];
 
 /**
  * Annotations Options
  */
-export const AnnotationsOptions = [
-  { value: true, label: 'Enabled' },
-  { value: false, label: 'Disabled' },
+export const AnnotationsOptions = (t: TFunction) => [
+  { value: true, label: t('panelOptions.annotations.annotations.options.enabled') },
+  { value: false, label: t('panelOptions.annotations.annotations.options.disabled') },
 ];
 
 /**
  * Annotations Type Options
  */
-export const AnnotationsTypeOptions = [
-  { value: AnnotationsType.ALL, label: 'Any' },
-  { value: AnnotationsType.ALERT, label: 'Alerts' },
-  { value: AnnotationsType.ANNOTATION, label: 'Annotations' },
+export const AnnotationsTypeOptions = (t: TFunction) => [
+  { value: AnnotationsType.ALL, label: t('panelOptions.annotations.annotationsType.options.all') },
+  { value: AnnotationsType.ALERT, label: t('panelOptions.annotations.annotationsType.options.alert') },
+  { value: AnnotationsType.ANNOTATION, label: t('panelOptions.annotations.annotationsType.options.annotation') },
 ];
 
 /**
  * Calendar View Options
  */
-export const CalendarViewOptions: Array<SelectableValue<View>> = [
-  { value: View.DAY, label: 'Day' },
-  { value: View.WEEK, label: 'Week' },
-  { value: View.WORK_WEEK, label: 'Work Week' },
-  { value: View.MONTH, label: 'Month' },
-  { value: View.YEAR, label: 'Year' },
+export const CalendarViewOptions = (t: TFunction): Array<SelectableValue<View>> => [
+  { value: View.DAY, label: t('panelOptions.views.options.day') },
+  { value: View.WEEK, label: t('panelOptions.views.options.week') },
+  { value: View.WORK_WEEK, label: t('panelOptions.views.options.workWeek') },
+  { value: View.MONTH, label: t('panelOptions.views.options.month') },
+  { value: View.YEAR, label: t('panelOptions.views.options.year') },
 ];

@@ -35,6 +35,7 @@ grafana-cli plugins install marcusolsson-calendar-panel
 - Supports the event coloring based on thresholds.
 - Enables the opening of a data link instead of a sidebar when clicking an event.
 - Enables the display of annotations across all dashboards for the specified time period.
+- Supports Internationalization: Spanish, French, German, and Chinese
 
 ## Documentation
 

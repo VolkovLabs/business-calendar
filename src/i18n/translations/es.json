@@ -1,0 +1,145 @@
+{
+  "eventDetailsDrawer": {
+    "location": "Ubicación: {{location}}",
+    "title": "Detalles del evento"
+  },
+  "legacyCalendar": {
+    "applyTimeRangeButton": "Aplicar rango de tiempo",
+    "dayDrawer": {
+      "allTab": "Todos los eventos",
+      "noEventsMessage": "Eventos no encontrados.",
+      "title": "Día"
+    },
+    "showMore": "{{count}} más"
+  },
+  "localizerMessages": {
+    "agenda": "El Diario",
+    "allDay": "Todo el dia",
+    "date": "Fecha",
+    "day": "Día",
+    "event": "Evento",
+    "month": "Mes",
+    "next": "Después",
+    "noEventsInRange": "No hay eventos en este rango.",
+    "previous": "Atrás",
+    "showMore": "+{{total}} más",
+    "time": "Tiempo",
+    "today": "Hoy",
+    "tomorrow": "Mañana",
+    "week": "Semana",
+    "workWeek": "Semana de trabajo",
+    "year": "Año",
+    "yesterday": "Ayer"
+  },
+  "panel": {
+    "noViewsMessage": "Habilite al menos una vista.",
+    "noViewsTitle": "Sin vistas"
+  },
+  "panelOptions": {
+    "annotations": {
+      "annotations": {
+        "description": "Mostrar anotaciones.",
+        "label": "Anotaciones",
+        "options": {
+          "disabled": "Desactivado",
+          "enabled": "Activado"
+        }
+      },
+      "annotationsLimit": {
+        "label": "Límite máximo"
+      },
+      "annotationsType": {
+        "label": "Tipo",
+        "options": {
+          "alert": "Alertas",
+          "all": "Cualquier",
+          "annotation": "Anotaciones"
+        }
+      },
+      "label": "Anotaciones"
+    },
+    "autoScroll": {
+      "description": "Desplácese automáticamente hasta el final del intervalo de tiempo.",
+      "label": "Desplazarse hacia abajo",
+      "options": {
+        "disabled": "Desactivado",
+        "enabled": "Auto"
+      }
+    },
+    "calendarType": {
+      "label": "Tipo de calendario",
+      "options": {
+        "bigCalendar": "Gran Calendario",
+        "legacy": "Legado"
+      }
+    },
+    "colors": {
+      "description": "Muestra colores según el marco o la identificación del evento si no se especifica el campo Color.",
+      "label": "Colores",
+      "options": {
+        "event": "Evento",
+        "frame": "Marco"
+      }
+    },
+    "displayTime": {
+      "description": "Mostrar hora para cada entrada.",
+      "label": "Tiempo de visualización",
+      "options": {
+        "disabled": "Desactivado",
+        "enabled": "Activado"
+      }
+    },
+    "events": {
+      "colorField": {
+        "description": "Campo a utilizar como color del evento.",
+        "label": "Color"
+      },
+      "descriptionField": {
+        "description": "Campo a utilizar para la descripción del evento.",
+        "label": "Descripción",
+        "noFieldsMessage": "No se encontraron campos de cadena"
+      },
+      "endTimeField": {
+        "description": "Campo a utilizar para la hora de finalización del evento. Si no se establece, el evento es instantáneo.",
+        "label": "Hora de finalización"
+      },
+      "label": "Eventos",
+      "labelFields": {
+        "description": "Campos para usar como etiquetas de eventos.",
+        "label": "Etiquetas"
+      },
+      "locationField": {
+        "description": "Campo a utilizar para la ubicación del evento.",
+        "label": "Ubicación",
+        "noFieldsMessage": "No se encontraron campos de cadena"
+      },
+      "textField": {
+        "description": "Campo a utilizar para el texto del evento. El valor predeterminado es el primer campo de texto.",
+        "label": "Texto",
+        "noFieldsMessage": "No se encontraron campos de cadena"
+      },
+      "timeField": {
+        "description": "Campo a utilizar para la hora de inicio del evento. El valor predeterminado es el primer campo de tiempo.",
+        "label": "Hora de inicio"
+      }
+    },
+    "quickLinks": {
+      "description": "Abra el enlace de datos o muestre el cajón al hacer clic en un evento.",
+      "label": "Al hacer clic",
+      "options": {
+        "disabled": "Mostrar detalles",
+        "enabled": "Enlace abierto"
+      }
+    },
+    "views": {
+      "label": "Puntos de vista",
+      "options": {
+        "day": "Día",
+        "month": "Mes",
+        "week": "Semana",
+        "workWeek": "Semana de trabajo",
+        "year": "Año"
+      }
+    }
+  }
+}

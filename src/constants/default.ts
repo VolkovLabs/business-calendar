@@ -1,10 +1,21 @@
-import { CalendarOptions, CalendarType, View } from '../types';
+import { CalendarOptions, CalendarType, SupportedLanguage, View } from '../types';
 import { AnnotationsType, Colors } from './options';
 
 /**
- * Language
+ * Languages
  */
-export const DefaultLanguage = 'en-US';
+export const enum Languages {
+  DE = 'de',
+  EN = 'en',
+  ES = 'es',
+  FR = 'fr',
+  ZH = 'zh',
+}
+
+/**
+ * Default Language
+ */
+export const DefaultLanguage: SupportedLanguage = Languages.EN;
 
 /**
  * Default Options

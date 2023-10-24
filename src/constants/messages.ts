@@ -29,7 +29,7 @@ export const LanguageMessages: { [id: string]: BigMessages } = {
     today: 'Hoy',
     week: 'Semana',
     work_week: 'Semana de trabajo',
-    year: '',
+    year: 'Año',
   },
   fr: {
     agenda: 'Ordre du jour',
@@ -41,7 +41,7 @@ export const LanguageMessages: { [id: string]: BigMessages } = {
     today: `Aujourd'hui`,
     week: 'La semaine',
     work_week: 'Semaine de travail',
-    year: '',
+    year: 'Année',
   },
   de: {
     agenda: 'Agenda',
@@ -53,7 +53,7 @@ export const LanguageMessages: { [id: string]: BigMessages } = {
     today: `Heute`,
     week: 'Woche',
     work_week: 'Arbeitswoche',
-    year: '',
+    year: 'Jahr',
   },
   zh: {
     agenda: '议程',
@@ -65,6 +65,6 @@ export const LanguageMessages: { [id: string]: BigMessages } = {
     today: `今天`,
     week: '星期',
     work_week: '工作周',
-    year: '',
+    year: '年',
   },
 };

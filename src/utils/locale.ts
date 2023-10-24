@@ -1,5 +1,5 @@
 import { config } from '@grafana/runtime';
-import { DefaultLanguage } from '../constants';
+import { DefaultLanguage, Languages } from '../constants';
 import { SupportedLanguage } from '../types';
 
 /**
@@ -14,11 +14,11 @@ export const getUserLanguage = (fallback = DefaultLanguage): SupportedLanguage =
    * Validate supported languages
    */
   switch (lang) {
-    case 'en':
-    case 'es':
-    case 'fr':
-    case 'de':
-    case 'zh': {
+    case Languages.EN:
+    case Languages.ES:
+    case Languages.FR:
+    case Languages.DE:
+    case Languages.ZH: {
       return lang;
     }
 

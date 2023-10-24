@@ -1,10 +1,10 @@
-import { AnnotationsType, Colors } from '../constants';
+import { AnnotationsType, Colors, Languages } from '../constants';
 import { CalendarType, View } from './calendar';
 
 /**
  * Supported Language
  */
-export type SupportedLanguage = 'en' | 'es' | 'fr' | 'de' | 'zh';
+export type SupportedLanguage = Languages.EN | Languages.ES | Languages.FR | Languages.DE | Languages.ZH;
 
 /**
  * Calendar Options

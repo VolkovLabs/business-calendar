@@ -3,38 +3,39 @@ import { renderHook } from '@testing-library/react';
 import { t } from 'i18next';
 import { getUserLanguage } from '../utils';
 import { useLocalizer } from './useLocalizer';
+import { Languages } from '../constants';
 
 /**
  * Mock utils
  */
 jest.mock('../utils', () => ({
   ...jest.requireActual('../utils'),
-  getUserLanguage: jest.fn(() => 'en'),
+  getUserLanguage: jest.fn(() => Languages.EN),
 }));
 
 describe('Use Localizer', () => {
   it('Should set dayjs locale', () => {
-    jest.mocked(getUserLanguage).mockReturnValue('fr');
+    jest.mocked(getUserLanguage).mockReturnValue(Languages.FR);
     renderHook(() => useLocalizer());
 
-    expect(dayjs.locale()).toEqual('fr');
+    expect(dayjs.locale()).toEqual(Languages.FR);
   });
 
   it('Should set dayjs locale', () => {
-    jest.mocked(getUserLanguage).mockReturnValue('en');
+    jest.mocked(getUserLanguage).mockReturnValue(Languages.EN);
     renderHook(() => useLocalizer());
 
-    expect(dayjs.locale()).toEqual('en');
+    expect(dayjs.locale()).toEqual(Languages.EN);
   });
 
   it('Should set default dayjs locale', () => {
     jest.mocked(getUserLanguage).mockReturnValue('123' as any);
     renderHook(() => useLocalizer());
 
-    expect(dayjs.locale()).toEqual('en');
+    expect(dayjs.locale()).toEqual(Languages.EN);
   });
 
-  ['es', 'fr', 'de', 'zh'].forEach((lang) => {
+  [Languages.ES, Languages.FR, Languages.DE, Languages.ZH].forEach((lang) => {
     it(`Should set messages for ${lang}`, () => {
       jest.mocked(getUserLanguage).mockReturnValue(lang as any);
       const { result } = renderHook(() => useLocalizer());

@@ -117,7 +117,7 @@ describe('Legacy Calendar', () => {
       () =>
         ({
           get: getMock,
-        } as any)
+        }) as any
     );
   });
 

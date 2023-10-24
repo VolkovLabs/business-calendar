@@ -34,7 +34,7 @@ export const CalendarPanel: React.FC<Props> = ({
   const colors = useColors(fieldConfig);
 
   /**
-   * DataFrame events
+   * Data Frame events
    */
   const dataFrameEvents = useCalendarEvents(frames, options, colors, timeRange, timeZone);
 

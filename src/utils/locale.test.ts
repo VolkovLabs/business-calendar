@@ -3,7 +3,7 @@ import { DefaultLanguage, Languages } from '../constants';
 import { getUserLanguage } from './locale';
 
 /**
- * Mock User Lang
+ * Mock User Languages
  */
 jest.mock('@grafana/runtime', () => ({
   config: {

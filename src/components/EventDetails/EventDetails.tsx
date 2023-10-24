@@ -10,8 +10,19 @@ import { CalendarEvent } from '../../types';
  * Properties
  */
 interface Props {
+  /**
+   * Event
+   */
   event: CalendarEvent;
+
+  /**
+   * Show Full Info
+   */
   showFullInfo?: boolean;
+
+  /**
+   * On Click
+   */
   onClick?: (event: unknown) => void;
 }
 

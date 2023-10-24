@@ -7,7 +7,7 @@ import { SupportedLanguage } from '../types';
  * @param fallback
  */
 export const getUserLanguage = (fallback = DefaultLanguage): SupportedLanguage => {
-  const locale = config.bootData.user.language;
+  const locale = config?.bootData?.user?.language;
   const lang = locale?.split('-')?.[0];
 
   /**

@@ -1,7 +1,4 @@
 {
-  "defaultView": {
-    "label": "Default View"
-  },
   "eventDetailsDrawer": {
     "location": "Location: {{location}}",
     "title": "Event Details"
@@ -83,6 +80,9 @@
         "event": "Event",
         "frame": "Frame"
       }
+    },
+    "defaultView": {
+      "label": "Default View"
     },
     "displayTime": {
       "description": "Display Time for each entry.",

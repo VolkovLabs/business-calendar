@@ -1,7 +1,4 @@
 {
-  "defaultView": {
-    "label": "Vista predeterminada"
-  },
   "eventDetailsDrawer": {
     "location": "Ubicación: {{location}}",
     "title": "Detalles del evento"
@@ -83,6 +80,9 @@
         "event": "Evento",
         "frame": "Marco"
       }
+    },
+    "defaultView": {
+      "label": "Vista predeterminada"
     },
     "displayTime": {
       "description": "Mostrar hora para cada entrada.",

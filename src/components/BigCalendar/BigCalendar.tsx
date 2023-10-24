@@ -7,11 +7,12 @@ import { PanelProps } from '@grafana/data';
 import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
-import { CalendarEvent, CalendarOptions } from '../../types';
+import { CalendarEvent, CalendarOptions, View } from '../../types';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
 import { BigCalendarStyles } from './BigCalendar.styles';
+import { YearView } from '../YearView';
 
 /**
  * Properties
@@ -135,7 +136,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       options.views?.reduce(
         (acc, view) => ({
           ...acc,
-          [view]: true,
+          [view]: view === View.YEAR ? YearView : true,
         }),
         {}
       ) || {}
@@ -173,7 +174,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         onNavigate={onNavigate as any}
         onView={onChangeView as any}
         date={date}
-        view={view}
+        view={view as any}
         onSelectEvent={onSelectEvent}
       />
     </div>

@@ -83,4 +83,5 @@ export const CalendarViewOptions: Array<SelectableValue<View>> = [
   { value: View.WEEK, label: 'Week' },
   { value: View.WORK_WEEK, label: 'Work Week' },
   { value: View.MONTH, label: 'Month' },
+  { value: View.YEAR, label: 'Year' },
 ];

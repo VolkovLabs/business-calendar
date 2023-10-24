@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Add yearly view (#134)
+
 ## 2.2.0 (2023-10-06)
 
 ### Features / Enhancements

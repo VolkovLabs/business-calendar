@@ -46,6 +46,16 @@ export const useLocalizer = () => {
       weekStart: localeDate.firstDayOfWeek(),
     });
 
-    return { localizer: dayjsLocalizer(dayjs), messages: LanguageMessages[localeName] };
+    const localizer = dayjsLocalizer(dayjs);
+
+    /**
+     * Set Year View Formats
+     */
+    (localizer.formats as any).yearHeaderFormat = 'YYYY';
+    (localizer.formats as any).yearMonthFormat = 'MMMM';
+    (localizer.formats as any).yearWeekFormat = 'dd';
+    (localizer.formats as any).yearDateFormat = 'D';
+
+    return { localizer, messages: LanguageMessages[localeName] };
   }, [dayjsLocale, localeDate, localeName]);
 };

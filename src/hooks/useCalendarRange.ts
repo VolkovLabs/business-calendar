@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { NavigateAction } from 'react-big-calendar';
+import { Navigate, NavigateAction } from 'react-big-calendar';
 import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
 import { View } from '../types';
 
@@ -76,7 +76,15 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    */
   const onNavigate = useCallback(
     (newDate: Date, currentView: View, action: NavigateAction) => {
-      const view: View = action === 'DATE' ? View.DAY : currentView;
+      let view: View = action === Navigate.DATE ? View.DAY : currentView;
+
+      /**
+       * Open Week by clicking on day in Year View
+       */
+      if (currentView === View.YEAR && action === Navigate.DATE) {
+        view = View.WEEK;
+      }
+
       const unitType = getUnitType(view);
       const { from, to } = timeRange;
       const newFrom = dayjs(newDate).startOf(unitType);

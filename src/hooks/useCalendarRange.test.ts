@@ -120,6 +120,19 @@ describe('Use Calendar Range', () => {
         to: nextMonth.endOf('day').valueOf(),
       });
     });
+
+    it('Should use week view if action is date from year view', async () => {
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+
+      const nextMonth = dayjs(getSafeDate()).add(1, 'month');
+
+      await act(() => result.current.onNavigate(nextMonth.toDate(), View.YEAR, 'DATE'));
+
+      expect(onChangeTimeRange).toHaveBeenCalledWith({
+        from: nextMonth.startOf('week').valueOf(),
+        to: nextMonth.endOf('week').valueOf(),
+      });
+    });
   });
 
   describe('Change View', () => {
@@ -148,6 +161,7 @@ describe('Use Calendar Range', () => {
         expect(result.current.date.toISOString()).toEqual(expectedDate.toISOString());
       };
 
+      await runChangeViewTest(View.YEAR);
       await runChangeViewTest(View.WEEK);
       await runChangeViewTest(View.DAY);
       await runChangeViewTest(View.MONTH);

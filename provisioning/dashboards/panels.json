@@ -73,6 +73,8 @@
       "id": 10,
       "options": {
         "annotations": false,
+        "annotationsLimit": 100,
+        "annotationsType": "",
         "autoScroll": true,
         "calendarType": "legacy",
         "colors": "event",
@@ -81,7 +83,8 @@
         "labelFields": ["slug", "version"],
         "quickLinks": false,
         "textField": "name",
-        "timeField": "updatedAt"
+        "timeField": "updatedAt",
+        "views": ["day", "week", "month"]
       },
       "targets": [
         {
@@ -156,6 +159,8 @@
       "id": 16,
       "options": {
         "annotations": false,
+        "annotationsLimit": 100,
+        "annotationsType": "",
         "autoScroll": true,
         "calendarType": "bigCalendar",
         "colors": "event",
@@ -164,7 +169,8 @@
         "labelFields": ["slug", "version"],
         "quickLinks": false,
         "textField": "name",
-        "timeField": "updatedAt"
+        "timeField": "updatedAt",
+        "views": ["day", "week", "month", "work_week", "year"]
       },
       "targets": [
         {
@@ -407,7 +413,7 @@
           }
         ]
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "cacheDurationSeconds": 300,

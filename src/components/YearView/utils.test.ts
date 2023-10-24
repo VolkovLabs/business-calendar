@@ -4,7 +4,6 @@ describe('Year View Utils', () => {
   /**
    * October 1st is Monday
    */
-
   const safeDate = new Date('10-18-2023');
 
   describe('getMonth', () => {

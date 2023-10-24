@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { Drawer, Tab, TabsBar } from '@grafana/ui';
+import { useTranslation } from 'react-i18next';
 import { CalendarEvent } from '../../types';
 import { EventDetails } from '../EventDetails';
 
@@ -45,10 +46,15 @@ interface Props {
  * Day Drawer
  */
 export const LegacyDayDrawer: React.FC<Props> = ({ day, events, event, setEvent, onClose }) => {
+  /**
+   * Translation
+   */
+  const { t } = useTranslation();
+
   if (!day) {
     return (
-      <Drawer title="Day" scrollableContent onClose={onClose}>
-        Events not found.
+      <Drawer title={t('legacyCalendar.dayDrawer.title')} scrollableContent onClose={onClose}>
+        {t('legacyCalendar.dayDrawer.noEventsMessage')}
       </Drawer>
     );
   }
@@ -67,7 +73,7 @@ export const LegacyDayDrawer: React.FC<Props> = ({ day, events, event, setEvent,
       tabs={
         <TabsBar>
           <Tab
-            label={'All Events'}
+            label={t('legacyCalendar.dayDrawer.allTab')}
             active={!event}
             onChangeTab={() => setEvent(undefined)}
             counter={dayEvents.length}

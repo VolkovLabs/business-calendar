@@ -132,5 +132,14 @@
         "label": "Max limit"
       }
     }
+  },
+  "legacyCalendar": {
+    "applyTimeRangeButton": "Apply time range",
+    "showMore": "{{count}} more",
+    "dayDrawer": {
+      "title": "Day",
+      "noEventsMessage": "Events not found.",
+      "allTab": "All Events"
+    }
   }
 }

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
 import { getLocaleData, PanelProps } from '@grafana/data';
 import { Button, useStyles2 } from '@grafana/ui';
+import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
@@ -29,6 +30,11 @@ interface Props
  * Legacy Calendar
  */
 export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, height, onChangeTimeRange, events }) => {
+  /**
+   * Translation
+   */
+  const { t } = useTranslation();
+
   /**
    * States
    */
@@ -116,7 +122,7 @@ export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, hei
             }}
             data-testid={TestIds.panel.buttonApplyInterval}
           >
-            Apply time range
+            {t('legacyCalendar.applyTimeRangeButton')}
           </Button>
         </div>
       )}

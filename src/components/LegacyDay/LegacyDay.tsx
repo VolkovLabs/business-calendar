@@ -3,6 +3,7 @@ import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { cx } from '@emotion/css';
 import { useStyles2, useTheme2 } from '@grafana/ui';
+import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
@@ -91,6 +92,11 @@ export const LegacyDay: React.FC<Props> = ({
   const styles = useStyles2(Styles);
 
   /**
+   * Translation
+   */
+  const { t } = useTranslation();
+
+  /**
    * Day
    */
   const isToday = day.isSame(dayjs().startOf('day'));
@@ -155,7 +161,9 @@ export const LegacyDay: React.FC<Props> = ({
                   onClick={() => setDay(day)}
                   className={styles.day.moreLabel}
                   data-testid={TestIds.day.buttonShowMore}
-                >{`${moreEvents} more`}</div>
+                >
+                  {t('legacyCalendar.showMore', { count: moreEvents })}
+                </div>
               )}
             </>
           );

@@ -16,6 +16,7 @@ describe('Year View', () => {
    * Localizer
    */
   const localizer = dayjsLocalizer(dayjs);
+
   /**
    * Set Year View Formats
    */

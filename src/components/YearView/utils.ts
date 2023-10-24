@@ -1,6 +1,6 @@
 import { DateLocalizer } from 'react-big-calendar';
 import dayjs from 'dayjs';
-import { MonthDate } from './types';
+import { MonthDate } from '../../types';
 
 /**
  * Get Month

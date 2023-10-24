@@ -6,6 +6,7 @@
 
 - Add yearly view (#134)
 - Add internationalization(Spanish, French, German, and Chinese) i18n (#135)
+- Add default view option (#137)
 
 ## 2.2.0 (2023-10-06)
 

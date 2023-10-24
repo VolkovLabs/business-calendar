@@ -1,7 +1,7 @@
-import dayjs from 'dayjs';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Navigate, NavigateAction } from 'react-big-calendar';
 import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
+import dayjs from 'dayjs';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Navigate, NavigateAction } from 'react-big-calendar';
 import { View } from '../types';
 
 /**
@@ -21,28 +21,24 @@ export const getUnitType = (view: View) => {
  * Use Calendar Range
  * @param timeRange
  * @param onChangeTimeRange
+ * @param defaultView
  */
-export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeRange: AbsoluteTimeRange) => void) => {
-  const [view, setView] = useState<View>(View.MONTH);
+export const useCalendarRange = (
+  timeRange: TimeRange,
+  onChangeTimeRange: (timeRange: AbsoluteTimeRange) => void,
+  defaultView = View.MONTH
+) => {
+  const [view, setView] = useState(defaultView);
   const [calendarFrom, setCalendarFrom] = useState(dayjs(timeRange.to.toDate()).startOf(getUnitType(view)).toDate());
   const [calendarTo, setCalendarTo] = useState(timeRange.to.toDate());
+  const isExternalUpdate = useRef<boolean>(false);
 
   /**
    * Middle date within the range to show current date in Calendar
    */
   const middleDate = useMemo(() => {
-    let from = calendarFrom;
-    let to = calendarTo;
-
-    /**
-     * Show last month
-     */
-    if (view === View.MONTH) {
-      from = dayjs(calendarTo).startOf('month').toDate();
-    }
-
-    return new Date((from.valueOf() + to.valueOf()) / 2);
-  }, [calendarFrom, calendarTo, view]);
+    return new Date((calendarFrom.valueOf() + calendarTo.valueOf()) / 2);
+  }, [calendarFrom, calendarTo]);
 
   /**
    * Change Calendar View
@@ -64,6 +60,7 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
         });
       }
 
+      isExternalUpdate.current = true;
       setCalendarFrom(newFrom.toDate());
       setCalendarTo(newTo.toDate());
       setView(newView);
@@ -100,6 +97,7 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
         });
       }
 
+      isExternalUpdate.current = false;
       setCalendarFrom(newFrom.toDate());
       setCalendarTo(newTo.toDate());
       setView(view);
@@ -116,8 +114,12 @@ export const useCalendarRange = (timeRange: TimeRange, onChangeTimeRange: (timeR
    * Update calendar range if time range updated
    */
   useEffect(() => {
-    setCalendarFrom(timeRange.from.toDate());
-    setCalendarTo(timeRange.to.toDate());
+    if (isExternalUpdate.current) {
+      setCalendarFrom(timeRange.from.toDate());
+      setCalendarTo(timeRange.to.toDate());
+    } else {
+      isExternalUpdate.current = true;
+    }
   }, [timeRange.from, timeRange.to]);
 
   return {

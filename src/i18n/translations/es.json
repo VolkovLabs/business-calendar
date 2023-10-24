@@ -81,6 +81,9 @@
         "frame": "Marco"
       }
     },
+    "defaultView": {
+      "label": "Vista predeterminada"
+    },
     "displayTime": {
       "description": "Mostrar hora para cada entrada.",
       "label": "Tiempo de visualización",

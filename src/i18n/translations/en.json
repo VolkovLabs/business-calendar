@@ -81,6 +81,9 @@
         "frame": "Frame"
       }
     },
+    "defaultView": {
+      "label": "Default View"
+    },
     "displayTime": {
       "description": "Display Time for each entry.",
       "label": "Display time",

@@ -119,4 +119,11 @@ export interface CalendarOptions {
    * @type {View[]}
    */
   views?: View[];
+
+  /**
+   * Default View
+   *
+   * @type {View}
+   */
+  defaultView?: View;
 }

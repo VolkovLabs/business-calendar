@@ -80,7 +80,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Manage calendar time range and view
    */
-  const { date, view, onChangeView, onNavigate } = useCalendarRange(timeRange, onChangeTimeRange);
+  const { date, view, onChangeView, onNavigate } = useCalendarRange(timeRange, onChangeTimeRange, options.defaultView);
 
   /**
    * Is Selected View Exist

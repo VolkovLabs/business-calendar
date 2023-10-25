@@ -1,0 +1,148 @@
+{
+  "eventDetailsDrawer": {
+    "location": "Standort: {{location}}",
+    "title": "Veranstaltungsdetails"
+  },
+  "legacyCalendar": {
+    "applyTimeRangeButton": "Zeitbereich anwenden",
+    "dayDrawer": {
+      "allTab": "Alle Veranstaltungen",
+      "noEventsMessage": "Veranstaltungen nicht gefunden.",
+      "title": "Tag"
+    },
+    "showMore": "{{count}} mehr"
+  },
+  "localizerMessages": {
+    "agenda": "Agenda",
+    "allDay": "Den ganzen Tag",
+    "date": "Datum",
+    "day": "Tag",
+    "event": "Ereignis",
+    "month": "Monat",
+    "next": "Nächste",
+    "noEventsInRange": "In diesem Bereich gibt es keine Veranstaltungen.",
+    "previous": "Zurück",
+    "showMore": "+{{total}} mehr",
+    "time": "Zeit",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "week": "Woche",
+    "workWeek": "Arbeitswoche",
+    "year": "Jahr",
+    "yesterday": "Gestern"
+  },
+  "panel": {
+    "noViewsMessage": "Bitte aktivieren Sie mindestens eine Ansicht.",
+    "noViewsTitle": "Keine Ansichten"
+  },
+  "panelOptions": {
+    "annotations": {
+      "annotations": {
+        "description": "Anmerkungen anzeigen.",
+        "label": "Anmerkungen",
+        "options": {
+          "disabled": "Deaktiviert",
+          "enabled": "Ermöglicht"
+        }
+      },
+      "annotationsLimit": {
+        "label": "Maximales Limit"
+      },
+      "annotationsType": {
+        "label": "Typ",
+        "options": {
+          "alert": "Warnungen",
+          "all": "Beliebig",
+          "annotation": "Anmerkungen"
+        }
+      },
+      "label": "Anmerkungen"
+    },
+    "autoScroll": {
+      "description": "Scrollen Sie automatisch zum Ende des Zeitintervalls.",
+      "label": "Scrollen Sie nach unten",
+      "options": {
+        "disabled": "Deaktiviert",
+        "enabled": "Auto"
+      }
+    },
+    "calendarType": {
+      "label": "Kalendertyp",
+      "options": {
+        "bigCalendar": "Großer Kalender",
+        "legacy": "Vermächtnis"
+      }
+    },
+    "colors": {
+      "description": "Zeigt Farben basierend auf der Frame- oder Ereignis-ID an, wenn das Feld „Farbe“ nicht angegeben ist.",
+      "label": "Farben",
+      "options": {
+        "event": "Ereignis",
+        "frame": "Rahmen"
+      }
+    },
+    "defaultView": {
+      "label": "Standardansicht"
+    },
+    "displayTime": {
+      "description": "Anzeigezeit für jeden Eintrag.",
+      "label": "Anzeigezeit",
+      "options": {
+        "disabled": "Deaktiviert",
+        "enabled": "Ermöglicht"
+      }
+    },
+    "events": {
+      "colorField": {
+        "description": "Feld, das als Ereignisfarbe verwendet werden soll.",
+        "label": "Farbe"
+      },
+      "descriptionField": {
+        "description": "Feld zur Verwendung für die Ereignisbeschreibung.",
+        "label": "Beschreibung",
+        "noFieldsMessage": "Keine Zeichenfolgenfelder gefunden"
+      },
+      "endTimeField": {
+        "description": "Feld, das für die Endzeit des Ereignisses verwendet werden soll. Wenn nicht festgelegt, erfolgt das Ereignis sofort.",
+        "label": "Endzeit"
+      },
+      "label": "Veranstaltungen",
+      "labelFields": {
+        "description": "Felder, die als Ereignisbezeichnungen verwendet werden sollen.",
+        "label": "Etiketten"
+      },
+      "locationField": {
+        "description": "Feld, das für den Veranstaltungsort verwendet werden soll.",
+        "label": "Standort",
+        "noFieldsMessage": "Keine Zeichenfolgenfelder gefunden"
+      },
+      "textField": {
+        "description": "Feld, das für den Ereignistext verwendet werden soll. Standardmäßig wird das erste Textfeld verwendet.",
+        "label": "Text",
+        "noFieldsMessage": "Keine Zeichenfolgenfelder gefunden"
+      },
+      "timeField": {
+        "description": "Feld, das für die Startzeit des Ereignisses verwendet werden soll. Standardmäßig wird das erste Zeitfeld verwendet.",
+        "label": "Startzeit"
+      }
+    },
+    "quickLinks": {
+      "description": "Öffnen Sie den Datenlink oder zeigen Sie die Schublade an, wenn Sie auf ein Ereignis klicken.",
+      "label": "Auf Klick",
+      "options": {
+        "disabled": "Zeige Details",
+        "enabled": "Verbindung öffnen"
+      }
+    },
+    "views": {
+      "label": "Ansichten",
+      "options": {
+        "day": "Tag",
+        "month": "Monat",
+        "week": "Woche",
+        "workWeek": "Arbeitswoche",
+        "year": "Jahr"
+      }
+    }
+  }
+}

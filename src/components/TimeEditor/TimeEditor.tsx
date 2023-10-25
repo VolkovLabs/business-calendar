@@ -1,5 +1,5 @@
 import React from 'react';
-import { dateTime, StandardEditorProps } from '@grafana/data';
+import { dateTime, InternalTimeZones, StandardEditorProps } from '@grafana/data';
 import { TimeOfDayPicker } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { CalendarOptions } from '../../types';
@@ -14,7 +14,7 @@ interface Props extends StandardEditorProps<string, null, CalendarOptions> {}
  * Time Editor
  */
 export const TimeEditor: React.FC<Props> = ({ value, onChange }) => {
-  const minutesOffset = getMinutesOffsetFromTimeZone('utc');
+  const minutesOffset = getMinutesOffsetFromTimeZone(InternalTimeZones.utc);
   const utcDate = getDateWithMinutesOffset(new Date(value), minutesOffset);
 
   return (

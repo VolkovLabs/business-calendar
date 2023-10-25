@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
 import { Global } from '@emotion/react';
-import { PanelProps } from '@grafana/data';
+import { InternalTimeZones, PanelProps } from '@grafana/data';
 import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
@@ -19,8 +19,7 @@ import { YearView } from '../YearView';
 /**
  * Properties
  */
-interface Props
-  extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange' | 'onChangeTimeRange' | 'options' | 'timeZone'> {
+interface Props extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange' | 'onChangeTimeRange' | 'options'> {
   /**
    * Events
    *
@@ -159,7 +158,10 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       return;
     }
 
-    return getDateWithMinutesOffset(new Date(options.scrollToTime), getMinutesOffsetFromTimeZone('utc'));
+    return getDateWithMinutesOffset(
+      new Date(options.scrollToTime),
+      getMinutesOffsetFromTimeZone(InternalTimeZones.utc)
+    );
   }, [options.scrollToTime]);
 
   if (!isViewExist) {

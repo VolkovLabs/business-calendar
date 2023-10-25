@@ -62,7 +62,14 @@ describe('Big Calendar', () => {
         to: dateTime(getSafeDate()),
       },
     };
-    return <BigCalendar events={[]} timeRange={timeRange} options={{ views: DefaultViews }} {...(props as any)} />;
+    return (
+      <BigCalendar
+        events={[]}
+        timeRange={timeRange}
+        options={{ views: DefaultViews, scrollToTime: '2023-01-01T00:00:00.000Z' }}
+        {...(props as any)}
+      />
+    );
   };
 
   it('Should find component', () => {

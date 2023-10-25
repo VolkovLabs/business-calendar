@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
+import { getDateWithMinutesOffset, getMinutesOffsetFromTimeZone } from '../../utils';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
@@ -18,7 +19,8 @@ import { YearView } from '../YearView';
 /**
  * Properties
  */
-interface Props extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange' | 'onChangeTimeRange' | 'options'> {
+interface Props
+  extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange' | 'onChangeTimeRange' | 'options' | 'timeZone'> {
   /**
    * Events
    *
@@ -149,6 +151,17 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     );
   }, [options.views]);
 
+  /**
+   * UTC Scroll To Time
+   */
+  const scrollToTime = useMemo(() => {
+    if (!options.scrollToTime) {
+      return;
+    }
+
+    return getDateWithMinutesOffset(new Date(options.scrollToTime), getMinutesOffsetFromTimeZone('utc'));
+  }, [options.scrollToTime]);
+
   if (!isViewExist) {
     return (
       <Alert title={t('panel.noViewsTitle')} severity="info" data-testid={TestIds.bigCalendar.noViewsMessage}>
@@ -182,6 +195,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         date={date}
         view={view as any}
         onSelectEvent={onSelectEvent}
+        scrollToTime={scrollToTime}
       />
     </div>
   );

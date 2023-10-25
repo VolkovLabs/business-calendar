@@ -128,6 +128,15 @@ export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
 };
 
 /**
+ * Get Date With Minutes Offset
+ * @param date
+ * @param minutesOffset
+ */
+export const getDateWithMinutesOffset = (date: Date, minutesOffset: number): Date => {
+  return dayjs(date).add(minutesOffset, 'minutes').toDate();
+};
+
+/**
  * Get Calendar Events
  * @param frames
  * @param options

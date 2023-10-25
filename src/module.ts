@@ -1,7 +1,7 @@
 import './i18n';
 import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
 import { t } from 'i18next';
-import { CalendarPanel, DefaultViewEditor, MultiFieldEditor } from './components';
+import { CalendarPanel, DefaultViewEditor, MultiFieldEditor, TimeEditor } from './components';
 import {
   AnnotationsOptions,
   AnnotationsTypeOptions,
@@ -62,6 +62,15 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.defaultView.label'),
         editor: DefaultViewEditor,
         defaultValue: DefaultView,
+        showIf: showForBigCalendar,
+      })
+      .addCustomEditor({
+        id: 'scrollToTime',
+        path: 'scrollToTime',
+        name: t('panelOptions.scrollToTime.label'),
+        description: t('panelOptions.scrollToTime.description'),
+        editor: TimeEditor,
+        defaultValue: '2023-01-01T00:00:00.000Z',
         showIf: showForBigCalendar,
       })
       .addRadio({

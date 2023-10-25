@@ -143,6 +143,10 @@
         "workWeek": "Work Week",
         "year": "Year"
       }
+    },
+    "scrollToTime": {
+      "label": "Scroll To Time",
+      "description": "Set initial scroll of calendar to selected time."
     }
   }
 }

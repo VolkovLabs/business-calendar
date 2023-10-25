@@ -58,6 +58,7 @@ export const CalendarPanel: React.FC<Props> = ({
       <BigCalendar
         events={allEvents}
         timeRange={timeRange}
+        timeZone={timeZone}
         onChangeTimeRange={onChangeTimeRange}
         height={height}
         options={options}

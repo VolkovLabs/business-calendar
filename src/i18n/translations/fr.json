@@ -1,0 +1,148 @@
+{
+  "eventDetailsDrawer": {
+    "location": "Emplacement: {{emplacement}}",
+    "title": "Détails de l'évènement"
+  },
+  "legacyCalendar": {
+    "applyTimeRangeButton": "Appliquer la plage horaire",
+    "dayDrawer": {
+      "allTab": "Tous les évènements",
+      "noEventsMessage": "Événements introuvables.",
+      "title": "Jour"
+    },
+    "showMore": "{{count}} plus"
+  },
+  "localizerMessages": {
+    "agenda": "Ordre du jour",
+    "allDay": "Toute la journée",
+    "date": "Date",
+    "day": "Jour",
+    "event": "Événement",
+    "month": "Mois",
+    "next": "Suivant",
+    "noEventsInRange": "Il n'y a aucun événement dans cette plage.",
+    "previous": "Dos",
+    "showMore": "+{{total}} plus",
+    "time": "Temps",
+    "today": "Aujourd'hui",
+    "tomorrow": "Demain",
+    "week": "Semaine",
+    "workWeek": "Semaine de travail",
+    "year": "Année",
+    "yesterday": "Hier"
+  },
+  "panel": {
+    "noViewsMessage": "Veuillez activer au moins une vue.",
+    "noViewsTitle": "Aucune vue"
+  },
+  "panelOptions": {
+    "annotations": {
+      "annotations": {
+        "description": "Afficher les annotations.",
+        "label": "Annotations",
+        "options": {
+          "disabled": "Désactivé",
+          "enabled": "Activé"
+        }
+      },
+      "annotationsLimit": {
+        "label": "Limite maximale"
+      },
+      "annotationsType": {
+        "label": "Taper",
+        "options": {
+          "alert": "Alertes",
+          "all": "N'importe lequel",
+          "annotation": "Annotations"
+        }
+      },
+      "label": "Annotations"
+    },
+    "autoScroll": {
+      "description": "Faites défiler automatiquement jusqu'à la fin de l'intervalle de temps.",
+      "label": "Faire défiler vers le bas",
+      "options": {
+        "disabled": "Désactivé",
+        "enabled": "Auto"
+      }
+    },
+    "calendarType": {
+      "label": "Type de calendrier",
+      "options": {
+        "bigCalendar": "Grand calendrier",
+        "legacy": "Héritage"
+      }
+    },
+    "colors": {
+      "description": "Afficher les couleurs en fonction de l'ID de l'image ou de l'événement si le champ Couleur n'est pas spécifié.",
+      "label": "Couleurs",
+      "options": {
+        "event": "Événement",
+        "frame": "Cadre"
+      }
+    },
+    "defaultView": {
+      "label": "Vue par défaut"
+    },
+    "displayTime": {
+      "description": "Afficher l'heure pour chaque entrée.",
+      "label": "Temps d'affichage",
+      "options": {
+        "disabled": "Désactivé",
+        "enabled": "Activé"
+      }
+    },
+    "events": {
+      "colorField": {
+        "description": "Champ à utiliser comme couleur d'événement.",
+        "label": "Couleur"
+      },
+      "descriptionField": {
+        "description": "Champ à utiliser pour la description de l'événement.",
+        "label": "Description",
+        "noFieldsMessage": "Aucun champ de chaîne trouvé"
+      },
+      "endTimeField": {
+        "description": "Champ à utiliser pour l'heure de fin de l'événement. S'il n'est pas défini, l'événement est instantané.",
+        "label": "Heure de fin"
+      },
+      "label": "Événements",
+      "labelFields": {
+        "description": "Champs à utiliser comme étiquettes d'événement.",
+        "label": "Étiquettes"
+      },
+      "locationField": {
+        "description": "Champ à utiliser pour le lieu de l'événement.",
+        "label": "Emplacement",
+        "noFieldsMessage": "Aucun champ de chaîne trouvé"
+      },
+      "textField": {
+        "description": "Champ à utiliser pour le texte de l'événement. La valeur par défaut est le premier champ de texte.",
+        "label": "Texte",
+        "noFieldsMessage": "Aucun champ de chaîne trouvé"
+      },
+      "timeField": {
+        "description": "Champ à utiliser pour l'heure de début de l'événement. La valeur par défaut est le premier champ de temps.",
+        "label": "Heure de début"
+      }
+    },
+    "quickLinks": {
+      "description": "Ouvrez le lien de données ou affichez le tiroir lorsque vous cliquez sur un événement.",
+      "label": "Sur clic",
+      "options": {
+        "disabled": "Afficher les détails",
+        "enabled": "Ouvrir le lien"
+      }
+    },
+    "views": {
+      "label": "Vues",
+      "options": {
+        "day": "Jour",
+        "month": "Mois",
+        "week": "Semaine",
+        "workWeek": "Semaine de travail",
+        "year": "Année"
+      }
+    }
+  }
+}

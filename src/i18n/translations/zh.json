@@ -1,0 +1,148 @@
+{
+  "eventDetailsDrawer": {
+    "location": "地点: {{location}}",
+    "title": "活动详情"
+  },
+  "legacyCalendar": {
+    "applyTimeRangeButton": "申请时间范围",
+    "dayDrawer": {
+      "allTab": "所有活动",
+      "noEventsMessage": "未找到活动。",
+      "title": "天"
+    },
+    "showMore": "{{count}} 更多的"
+  },
+  "localizerMessages": {
+    "agenda": "议程",
+    "allDay": "一整天",
+    "date": "日期",
+    "day": "天",
+    "event": "事件",
+    "month": "月",
+    "next": "下一个",
+    "noEventsInRange": "此范围内没有事件。",
+    "previous": "后退",
+    "showMore": "+{{total}} 更多的",
+    "time": "时间",
+    "today": "今天",
+    "tomorrow": "明天",
+    "week": "星期",
+    "workWeek": "工作周",
+    "year": "年",
+    "yesterday": "昨天"
+  },
+  "panel": {
+    "noViewsMessage": "请至少启用一种视图。",
+    "noViewsTitle": "没有浏览次数"
+  },
+  "panelOptions": {
+    "annotations": {
+      "annotations": {
+        "description": "显示注释。",
+        "label": "注释",
+        "options": {
+          "disabled": "残疾人",
+          "enabled": "启用"
+        }
+      },
+      "annotationsLimit": {
+        "label": "最大限制"
+      },
+      "annotationsType": {
+        "label": "类型",
+        "options": {
+          "alert": "警报",
+          "all": "任何",
+          "annotation": "注释"
+        }
+      },
+      "label": "注释"
+    },
+    "autoScroll": {
+      "description": "自动滚动到时间间隔的末尾。",
+      "label": "滚动到底部",
+      "options": {
+        "disabled": "残疾人",
+        "enabled": "汽车"
+      }
+    },
+    "calendarType": {
+      "label": "日历型",
+      "options": {
+        "bigCalendar": "大日历",
+        "legacy": "遗产"
+      }
+    },
+    "colors": {
+      "description": "如果未指定颜色字段，则根据帧或事件 ID 显示颜色。",
+      "label": "颜色",
+      "options": {
+        "event": "事件",
+        "frame": "框架"
+      }
+    },
+    "defaultView": {
+      "label": "默认视图"
+    },
+    "displayTime": {
+      "description": "显示每个条目的时间。",
+      "label": "显示时间",
+      "options": {
+        "disabled": "残疾人",
+        "enabled": "启用"
+      }
+    },
+    "events": {
+      "colorField": {
+        "description": "用作事件颜色的字段。",
+        "label": "颜色"
+      },
+      "descriptionField": {
+        "description": "用于事件描述的字段。",
+        "label": "描述",
+        "noFieldsMessage": "未找到字符串字段"
+      },
+      "endTimeField": {
+        "description": "用于事件结束时间的字段。 如果未设置，事件是即时的。",
+        "label": "时间结束"
+      },
+      "label": "活动",
+      "labelFields": {
+        "description": "用作事件标签的字段。",
+        "label": "标签"
+      },
+      "locationField": {
+        "description": "用于事件位置的字段。",
+        "label": "地点",
+        "noFieldsMessage": "未找到字符串字段"
+      },
+      "textField": {
+        "description": "用于事件文本的字段。 默认为第一个文本字段。",
+        "label": "文本",
+        "noFieldsMessage": "未找到字符串字段"
+      },
+      "timeField": {
+        "description": "用于事件开始时间的字段。 默认为第一个时间字段。",
+        "label": "开始时间"
+      }
+    },
+    "quickLinks": {
+      "description": "单击事件时打开数据链接或显示抽屉。",
+      "label": "单击时",
+      "options": {
+        "disabled": "显示详细资料",
+        "enabled": "打开链接"
+      }
+    },
+    "views": {
+      "label": "意见",
+      "options": {
+        "day": "天",
+        "month": "月",
+        "week": "星期",
+        "workWeek": "工作周",
+        "year": "年"
+      }
+    }
+  }
+}

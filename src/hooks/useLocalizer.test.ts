@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
-import { renderHook } from '@testing-library/react';
 import { t } from 'i18next';
+import { renderHook } from '@testing-library/react';
+import { Languages } from '../constants';
 import { getUserLanguage } from '../utils';
 import { useLocalizer } from './useLocalizer';
-import { Languages } from '../constants';
 
 /**
  * Mock utils

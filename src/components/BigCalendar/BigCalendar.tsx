@@ -2,10 +2,10 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
+import { useTranslation } from 'react-i18next';
 import { Global } from '@emotion/react';
 import { InternalTimeZones, PanelProps } from '@grafana/data';
 import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
-import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
@@ -13,8 +13,8 @@ import { getDateWithMinutesOffset, getMinutesOffsetFromTimeZone } from '../../ut
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
-import { BigCalendarStyles } from './BigCalendar.styles';
 import { YearView } from '../YearView';
+import { BigCalendarStyles } from './BigCalendar.styles';
 
 /**
  * Properties

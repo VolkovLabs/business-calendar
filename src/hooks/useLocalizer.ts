@@ -6,8 +6,8 @@ import frLocale from 'dayjs/locale/fr';
 import zhLocale from 'dayjs/locale/zh';
 import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
-import { getLocaleData } from '@grafana/data';
 import { useTranslation } from 'react-i18next';
+import { getLocaleData } from '@grafana/data';
 import { BigMessages } from '../types';
 import { getUserLanguage } from '../utils';
 

@@ -1,7 +1,7 @@
-import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Navigate, NavigateAction } from 'react-big-calendar';
+import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
 import { View } from '../types';
 
 /**

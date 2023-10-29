@@ -1,6 +1,6 @@
 import './i18n';
-import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
 import { t } from 'i18next';
+import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
 import { CalendarPanel, DefaultViewEditor, MultiFieldEditor, TimeEditor } from './components';
 import {
   AnnotationsOptions,

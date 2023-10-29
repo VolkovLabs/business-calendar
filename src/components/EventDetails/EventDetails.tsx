@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { textUtil } from '@grafana/data';
 import { Card, LinkButton, TagList, useStyles2 } from '@grafana/ui';
-import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';

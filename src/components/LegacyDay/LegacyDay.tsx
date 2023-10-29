@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { cx } from '@emotion/css';
 import { useStyles2, useTheme2 } from '@grafana/ui';
-import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
 import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';

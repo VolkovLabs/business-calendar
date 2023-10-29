@@ -1,7 +1,7 @@
 import React from 'react';
-import { useStyles2 } from '@grafana/ui';
-import { cx } from '@emotion/css';
 import { CalendarProps } from 'react-big-calendar';
+import { cx } from '@emotion/css';
+import { useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { Styles } from './YearView.styles';
 

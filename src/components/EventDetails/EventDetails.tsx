@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { textUtil } from '@grafana/data';
 import { Card, LinkButton, TagList, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
-import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
+import { Styles } from './EventDetails.styles';
 
 /**
  * Properties
@@ -73,7 +73,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
     <Card onClick={onClick} data-testid={TestIds.eventDetails.root}>
       <Card.Heading aria-label={TestIds.eventDetails.titleButton}>
         <div data-testid={TestIds.eventDetails.titleText}>
-          <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.event.svg}>
+          <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.svg}>
             <circle cx={5} cy={5} r={5} />
           </svg>
           {event.text}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Messages, Navigate, ToolbarProps } from 'react-big-calendar';
 import { Button, ButtonGroup, useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
-import { Styles } from './styles';
+import { Styles } from './BigToolbar.styles';
 
 /**
  * Properties

@@ -5,9 +5,9 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { cx } from '@emotion/css';
 import { useStyles2, useTheme2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
-import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
 import { LegacyCalendarEntry } from '../LegacyCalendarEntry';
+import { Styles } from './LegacyDay.styles';
 
 /**
  * Properties
@@ -123,19 +123,19 @@ export const LegacyDay: React.FC<Props> = ({
 
   return (
     <div
-      className={cx(styles.day.background, isOutsideInterval && styles.day.backgroundOutside)}
+      className={cx(styles.background, isOutsideInterval && styles.backgroundOutside)}
       onClick={(e) => {
         onSelectionChange(!selected);
       }}
       data-testid={TestIds.day.root}
     >
-      <div className={cx(styles.day.header)}>
+      <div className={cx(styles.header)}>
         <div
           className={cx(
-            styles.day.text,
-            isOutsideInterval && styles.day.outside,
-            isToday && styles.day.today,
-            selected && styles.day.selected
+            styles.text,
+            isOutsideInterval && styles.outside,
+            isToday && styles.today,
+            selected && styles.selected
           )}
           data-testid={TestIds.day.dayDate}
         >
@@ -157,11 +157,7 @@ export const LegacyDay: React.FC<Props> = ({
             <>
               {entries.slice(0, maxNumEvents)}
               {moreEvents > 0 && (
-                <div
-                  onClick={() => setDay(day)}
-                  className={styles.day.moreLabel}
-                  data-testid={TestIds.day.buttonShowMore}
-                >
+                <div onClick={() => setDay(day)} className={styles.moreLabel} data-testid={TestIds.day.buttonShowMore}>
                   {t('legacyCalendar.showMore', { count: moreEvents })}
                 </div>
               )}

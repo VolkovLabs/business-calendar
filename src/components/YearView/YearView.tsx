@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { useStyles2 } from '@grafana/ui';
 import { CalendarProps, DateLocalizer, Navigate, NavigateAction } from 'react-big-calendar';
+import { useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
-import { YearViewMonth } from './YearViewMonth';
 import { Styles } from './YearView.styles';
+import { YearViewMonth } from './YearViewMonth';
 
 /**
  * Year View

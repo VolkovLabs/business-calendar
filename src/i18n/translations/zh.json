@@ -134,6 +134,10 @@
         "enabled": "打开链接"
       }
     },
+    "scrollToTime": {
+      "description": "将初始滚动设置为所选时间。",
+      "label": "滚动到时间"
+    },
     "views": {
       "label": "意见",
       "options": {

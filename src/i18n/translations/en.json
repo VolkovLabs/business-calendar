@@ -134,6 +134,10 @@
         "enabled": "Open Link"
       }
     },
+    "scrollToTime": {
+      "description": "Set the initial scroll to the selected time.",
+      "label": "Scroll To Time"
+    },
     "views": {
       "label": "Views",
       "options": {

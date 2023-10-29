@@ -126,4 +126,11 @@ export interface CalendarOptions {
    * @type {View}
    */
   defaultView?: View;
+
+  /**
+   * Scroll To Time
+   *
+   * @type {string}
+   */
+  scrollToTime?: string;
 }

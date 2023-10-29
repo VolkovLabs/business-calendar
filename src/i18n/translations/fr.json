@@ -134,6 +134,10 @@
         "enabled": "Ouvrir le lien"
       }
     },
+    "scrollToTime": {
+      "description": "Réglez le défilement initial sur l'heure sélectionnée.",
+      "label": "Faire défiler jusqu'à l'heure"
+    },
     "views": {
       "label": "Vues",
       "options": {

@@ -134,6 +134,10 @@
         "enabled": "Verbindung öffnen"
       }
     },
+    "scrollToTime": {
+      "description": "Stellen Sie den anfänglichen Bildlauf auf die ausgewählte Zeit ein.",
+      "label": "Scrollen Sie zu „Zeit“."
+    },
     "views": {
       "label": "Ansichten",
       "options": {

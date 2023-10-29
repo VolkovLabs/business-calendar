@@ -66,4 +66,7 @@ export const TestIds = {
   defaultViewEditor: {
     field: 'default-view-editor field',
   },
+  timeEditor: {
+    field: 'data-testid time-editor field',
+  },
 };

@@ -3,8 +3,8 @@ import React from 'react';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
-import { Styles } from '../../styles';
 import { CalendarEvent } from '../../types';
+import { Styles } from './LegacyEventEntry.styles';
 
 /**
  * Properties
@@ -68,10 +68,7 @@ export const LegacyCalendarEntry = ({
    */
   if (!event) {
     return (
-      <div
-        className={cx(styles.event.text, styles.event.multiDay, styles.event.filler)}
-        data-testid={TestIds.calendarEntry.filler}
-      />
+      <div className={cx(styles.text, styles.multiDay, styles.filler)} data-testid={TestIds.calendarEntry.filler} />
     );
   }
 
@@ -115,18 +112,13 @@ export const LegacyCalendarEntry = ({
    */
   if (startsToday && endsToday(event)) {
     return (
-      <Link
-        title={event.text}
-        className={styles.event.text}
-        {...linkProps}
-        data-testid={TestIds.calendarEntry.eventOneDay}
-      >
-        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.event.svg}>
+      <Link title={event.text} className={styles.text} {...linkProps} data-testid={TestIds.calendarEntry.eventOneDay}>
+        <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.svg}>
           <circle cx={5} cy={5} r={5} />
         </svg>
         {!displayTime && (
           <div
-            className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}
+            className={cx(styles.label, outsideInterval && styles.labelOutside)}
             data-testid={TestIds.calendarEntry.eventOneDayWithoutTime}
           >
             {event.text}
@@ -135,7 +127,7 @@ export const LegacyCalendarEntry = ({
 
         {displayTime && (
           <div
-            className={cx(styles.event.label, outsideInterval && styles.event.labelOutside)}
+            className={cx(styles.label, outsideInterval && styles.labelOutside)}
             data-testid={TestIds.calendarEntry.eventOneDayWithTime}
           >
             {event.start.format('h:mma')} <b>{event.text}</b>
@@ -153,33 +145,33 @@ export const LegacyCalendarEntry = ({
     <Link
       title={event.text}
       className={cx(
-        styles.event.text,
-        styles.event.multiDay,
+        styles.text,
+        styles.multiDay,
         css`
           background: ${event.color};
           &:hover {
             background: ${event.color};
           }
         `,
-        startsToday && styles.event.startDay,
-        endsToday(event) && styles.event.endDay
+        startsToday && styles.startDay,
+        endsToday(event) && styles.endDay
       )}
       {...linkProps}
       data-testid={TestIds.calendarEntry.eventFewDays}
     >
       {startsToday && displayTime && (
-        <div className={cx(styles.event.label)} data-testid={TestIds.calendarEntry.eventFewDaysWithTime}>
+        <div className={cx(styles.label)} data-testid={TestIds.calendarEntry.eventFewDaysWithTime}>
           {event.start.format('h:mma')} <b>{event.text}</b>
         </div>
       )}
 
       {startsToday && !displayTime && (
-        <div className={cx(styles.event.label)} data-testid={TestIds.calendarEntry.eventFewDaysWithoutTime}>
+        <div className={cx(styles.label)} data-testid={TestIds.calendarEntry.eventFewDaysWithoutTime}>
           {event.text}
         </div>
       )}
       {startOfWeek && !startsToday && (
-        <div className={cx(styles.event.label)} data-testid={TestIds.calendarEntry.eventFewDaysNotStartedToday}>
+        <div className={cx(styles.label)} data-testid={TestIds.calendarEntry.eventFewDaysNotStartedToday}>
           {event.text}
         </div>
       )}

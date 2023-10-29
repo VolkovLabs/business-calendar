@@ -1,16 +1,16 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { css, cx } from '@emotion/css';
 import { getLocaleData, PanelProps } from '@grafana/data';
 import { Button, useStyles2 } from '@grafana/ui';
-import { useTranslation } from 'react-i18next';
 import { TestIds } from '../../constants';
-import { Styles } from '../../styles';
 import { CalendarEvent, CalendarOptions } from '../../types';
 import { alignEvents, useIntervalSelection } from '../../utils';
 import { LegacyDay } from '../LegacyDay';
 import { LegacyDayDrawer } from '../LegacyDayDrawer';
+import { Styles } from './LegacyCalendar.styles';
 
 /**
  * Day.js Plugins
@@ -130,9 +130,9 @@ export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, hei
       {/*
        * Header displaying the weekdays
        */}
-      <div className={styles.calendar.weekday}>
+      <div className={styles.weekday}>
         {Array.from({ length: 7 }).map((_, i) => (
-          <div key={i} className={styles.calendar.weekdayLabel}>
+          <div key={i} className={styles.weekdayLabel}>
             {dayjs().startOf(firstDay).add(i, 'days').format('ddd')}
           </div>
         ))}
@@ -145,7 +145,7 @@ export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, hei
       <div
         ref={dayGridRef}
         className={cx(
-          styles.calendar.grid,
+          styles.grid,
           css`
             grid-auto-rows: ${Math.max(100 / Math.ceil(numDays / 7), 20)}%;
           `

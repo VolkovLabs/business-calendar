@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
-import { Drawer, Tab, TabsBar } from '@grafana/ui';
 import { useTranslation } from 'react-i18next';
+import { Drawer, Tab, TabsBar } from '@grafana/ui';
 import { CalendarEvent } from '../../types';
 import { EventDetails } from '../EventDetails';
 

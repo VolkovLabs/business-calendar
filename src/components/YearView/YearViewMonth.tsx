@@ -4,8 +4,8 @@ import { useStyles2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { View } from '../../types';
 import { getMonth } from './utils';
-import { YearViewDate } from './YearViewDate';
 import { Styles } from './YearView.styles';
+import { YearViewDate } from './YearViewDate';
 
 /**
  * Properties

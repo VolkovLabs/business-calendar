@@ -134,6 +134,10 @@
         "enabled": "Enlace abierto"
       }
     },
+    "scrollToTime": {
+      "description": "Establezca el desplazamiento inicial en la hora seleccionada.",
+      "label": "Desplazarse hasta el tiempo"
+    },
     "views": {
       "label": "Puntos de vista",
       "options": {

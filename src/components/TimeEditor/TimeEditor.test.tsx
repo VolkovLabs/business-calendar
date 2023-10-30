@@ -45,7 +45,7 @@ describe('Time Editor', () => {
    * @param props
    */
   const getComponent = (props: Partial<Props>) => {
-    return <TimeEditor {...(props as any)} />;
+    return <TimeEditor value={{ hours: 0, minutes: 0 }} {...(props as any)} />;
   };
 
   it('Should convert to utc date', () => {
@@ -54,6 +54,9 @@ describe('Time Editor', () => {
 
     fireEvent.change(selectors.field(), { target: { value: 'Wed Oct 05 2011 16:48:00 GMT+0200 (CEST)' } });
 
-    expect(onChange).toHaveBeenCalledWith('2011-10-05T14:48:00.000Z');
+    expect(onChange).toHaveBeenCalledWith({
+      hours: 14,
+      minutes: 48,
+    });
   });
 });

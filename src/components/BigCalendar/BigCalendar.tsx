@@ -4,12 +4,11 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 import { Global } from '@emotion/react';
-import { InternalTimeZones, PanelProps } from '@grafana/data';
+import { PanelProps } from '@grafana/data';
 import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
-import { getDateWithMinutesOffset, getMinutesOffsetFromTimeZone } from '../../utils';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
@@ -151,17 +150,18 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   }, [options.views]);
 
   /**
-   * UTC Scroll To Time
+   * Scroll To Time Date
    */
   const scrollToTime = useMemo(() => {
     if (!options.scrollToTime) {
       return;
     }
 
-    return getDateWithMinutesOffset(
-      new Date(options.scrollToTime),
-      getMinutesOffsetFromTimeZone(InternalTimeZones.utc)
-    );
+    const date = new Date();
+    date.setHours(options.scrollToTime.hours);
+    date.setMinutes(options.scrollToTime.minutes);
+
+    return date;
   }, [options.scrollToTime]);
 
   if (!isViewExist) {

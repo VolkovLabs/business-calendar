@@ -1,4 +1,4 @@
-import { CalendarOptions, CalendarType, SupportedLanguage, View } from '../types';
+import { CalendarOptions, CalendarType, SupportedLanguage, TimeOptions, View } from '../types';
 import { AnnotationsType, Colors } from './options';
 
 /**
@@ -40,3 +40,11 @@ export const DefaultViews = [View.DAY, View.WEEK, View.MONTH];
  * Default View
  */
 export const DefaultView = View.MONTH;
+
+/**
+ * Default Scroll To Time
+ */
+export const DefaultScrollToTime: TimeOptions = {
+  hours: 0,
+  minutes: 0,
+};

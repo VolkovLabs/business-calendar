@@ -7,6 +7,25 @@ import { CalendarType, View } from './calendar';
 export type SupportedLanguage = Languages.EN | Languages.ES | Languages.FR | Languages.DE | Languages.ZH;
 
 /**
+ * Time Options
+ */
+export interface TimeOptions {
+  /**
+   * Hours
+   *
+   * @type {number}
+   */
+  hours: number;
+
+  /**
+   * Minutes
+   *
+   * @type {number}
+   */
+  minutes: number;
+}
+
+/**
  * Calendar Options
  */
 export interface CalendarOptions {
@@ -130,7 +149,7 @@ export interface CalendarOptions {
   /**
    * Scroll To Time
    *
-   * @type {string}
+   * @type {TimeOptions}
    */
-  scrollToTime?: string;
+  scrollToTime?: TimeOptions;
 }

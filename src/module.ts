@@ -9,6 +9,7 @@ import {
   CalendarViewOptions,
   ColorsOptions,
   DefaultOptions,
+  DefaultScrollToTime,
   DefaultView,
   DefaultViews,
   DisplayTimeOptions,
@@ -70,7 +71,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.scrollToTime.label'),
         description: t('panelOptions.scrollToTime.description'),
         editor: TimeEditor,
-        defaultValue: '2023-01-01T00:00:00.000Z',
+        defaultValue: DefaultScrollToTime,
         showIf: showForBigCalendar,
       })
       .addRadio({

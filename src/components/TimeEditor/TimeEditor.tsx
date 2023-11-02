@@ -2,26 +2,41 @@ import React from 'react';
 import { dateTime, InternalTimeZones, StandardEditorProps } from '@grafana/data';
 import { TimeOfDayPicker } from '@grafana/ui';
 import { TestIds } from '../../constants';
-import { CalendarOptions } from '../../types';
+import { CalendarOptions, TimeOptions } from '../../types';
 import { getDateWithMinutesOffset, getMinutesOffsetFromTimeZone } from '../../utils';
 
 /**
  * Properties
  */
-interface Props extends StandardEditorProps<string, null, CalendarOptions> {}
+interface Props extends StandardEditorProps<TimeOptions, null, CalendarOptions> {}
 
 /**
  * Time Editor
  */
 export const TimeEditor: React.FC<Props> = ({ value, onChange }) => {
   const minutesOffset = getMinutesOffsetFromTimeZone(InternalTimeZones.utc);
-  const utcDate = getDateWithMinutesOffset(new Date(value), minutesOffset);
+
+  /**
+   * Set only minutes and hours to prevent Daylight Saving Time shifting issue
+   */
+  const todayDate = new Date();
+  todayDate.setUTCHours(value.hours);
+  todayDate.setUTCMinutes(value.minutes);
+
+  const utcDate = getDateWithMinutesOffset(todayDate, minutesOffset);
 
   return (
     <TimeOfDayPicker
       value={dateTime(utcDate)}
-      onChange={(date) => {
-        onChange(getDateWithMinutesOffset(date.toDate(), -minutesOffset).toISOString());
+      onChange={(dateTime) => {
+        const utcDate = getDateWithMinutesOffset(dateTime.toDate(), -minutesOffset);
+        const hours = utcDate.getUTCHours();
+        const minutes = utcDate.getUTCMinutes();
+
+        onChange({
+          hours,
+          minutes,
+        });
       }}
       data-testid={TestIds.timeEditor.field}
     />

@@ -69,6 +69,7 @@ describe('Calendar Events Utils', () => {
       ],
     };
   };
+
   describe('Use Event Frames', () => {
     it('Should use field names from options', () => {
       const options = {
@@ -273,24 +274,24 @@ describe('Calendar Events Utils', () => {
       ];
 
       /**
-       * Negative Time Zone Offset
-       * UTC-4:00
+       * Negative Time Zone Offset without DST
+       * UTC-7:00
        */
       const { result: result1 } = renderHook(() =>
-        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'America/Toronto')
+        useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'America/Phoenix')
       );
 
       expect(result1.current).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            start: dayjs(getSafeDate()).add(-240, 'minutes'),
-            end: dayjs(getSafeDate()).add(-240, 'minutes'),
+            start: dayjs(getSafeDate()).add(-420, 'minutes'),
+            end: dayjs(getSafeDate()).add(-420, 'minutes'),
           }),
         ])
       );
 
       /**
-       * Positive Time Zone Offset
+       * Positive Time Zone Offset without DST
        * UTC+10:00
        */
       const { result: result2 } = renderHook(() =>

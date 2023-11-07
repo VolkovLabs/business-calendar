@@ -1,5 +1,5 @@
-import { GrafanaTheme2 } from '@grafana/data';
 import { css } from '@emotion/react';
+import { GrafanaTheme2 } from '@grafana/data';
 
 /**
  * Styles

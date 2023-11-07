@@ -1,4 +1,3 @@
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
@@ -13,7 +12,7 @@ import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
 import { YearView } from '../YearView';
-import { BigCalendarStyles } from './BigCalendar.styles';
+import { BigCalendarStyles, LibStyles } from './BigCalendar.styles';
 
 /**
  * Properties
@@ -37,6 +36,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
    */
   const theme = useTheme2();
   const styles = useStyles2(BigCalendarStyles);
+  const libStyles = LibStyles();
 
   /**
    * Translation
@@ -179,6 +179,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
           <EventDetails event={activeEvent} />
         </Drawer>
       )}
+      <Global styles={libStyles.global} />
       <Global styles={styles.global} />
       <Calendar
         key={height}

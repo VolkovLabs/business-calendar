@@ -25,6 +25,16 @@ jest.mock('react-big-calendar', () => ({
 }));
 
 /**
+ * Mock styles
+ */
+jest.mock('./BigCalendar.styles', () => ({
+  ...jest.requireActual('./BigCalendar.styles'),
+  LibStyles: () => ({
+    global: '',
+  }),
+}));
+
+/**
  * Component Props
  */
 type Props = React.ComponentProps<typeof BigCalendar>;

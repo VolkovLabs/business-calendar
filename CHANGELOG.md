@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.1 (2023-11-06)
+
+### Bugfixes
+
+- Fix import order for default big-calendar styles and their overrides (#143)
+
 ## 2.3.0 (2023-11-01)
 
 ### Features / Enhancements

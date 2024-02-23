@@ -86,7 +86,7 @@
       "options": {
         "de": "German",
         "en": "English",
-        "en24": "English 24h",
+        "en24": "English 24H",
         "es": "Spanish",
         "fr": "French",
         "inherit": "By user locale",

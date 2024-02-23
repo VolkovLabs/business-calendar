@@ -1,4 +1,4 @@
-import { CalendarOptions, CalendarType, HoursFormat, SupportedLanguage, TimeOptions, View } from '../types';
+import { CalendarOptions, CalendarType, DateFormat, SupportedLanguage, TimeOptions, View } from '../types';
 import { AnnotationsType, Colors } from './options';
 
 /**
@@ -29,7 +29,7 @@ export const DefaultOptions: CalendarOptions = {
   colors: Colors.FRAME,
   displayTime: false,
   quickLinks: false,
-  hoursFormat: HoursFormat.HALF,
+  dateFormat: DateFormat.INHERIT,
 };
 
 /**

@@ -1,5 +1,5 @@
 import { AnnotationsType, Colors, Languages } from '../constants';
-import { CalendarType, HoursFormat, View } from './calendar';
+import { CalendarType, DateFormat, View } from './calendar';
 
 /**
  * Supported Language
@@ -156,7 +156,7 @@ export interface CalendarOptions {
   /**
    * Hours Format
    *
-   * @type {HoursFormat}
+   * @type {DateFormat}
    */
-  hoursFormat: HoursFormat;
+  dateFormat: DateFormat;
 }

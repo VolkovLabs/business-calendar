@@ -36,13 +36,6 @@
     "noViewsTitle": "No Views"
   },
   "panelOptions": {
-    "hoursFormat": {
-      "label": "Hours Format",
-      "options": {
-        "half": "12",
-        "full2": "24"
-      }
-    },
     "annotations": {
       "annotations": {
         "description": "Display annotations.",
@@ -86,6 +79,19 @@
       "options": {
         "event": "Event",
         "frame": "Frame"
+      }
+    },
+    "dateFormat": {
+      "label": "Date and time format",
+      "options": {
+        "de": "German",
+        "en": "English",
+        "en24": "English 24h",
+        "es": "Spanish",
+        "fr": "French",
+        "inherit": "By user locale",
+        "iso": "ISO 8601",
+        "zh": "Chinese"
       }
     },
     "defaultView": {

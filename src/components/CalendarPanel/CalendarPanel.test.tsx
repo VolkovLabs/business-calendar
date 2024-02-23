@@ -2,7 +2,7 @@ import { dateTime, FieldType, LoadingState, PanelData, toDataFrame } from '@graf
 import { act, render } from '@testing-library/react';
 import dayjs from 'dayjs';
 import React from 'react';
-import { CalendarType, HoursFormat } from '../../types';
+import { CalendarType, DateFormat } from '../../types';
 import { useAnnotationEvents } from '../../utils';
 import { BigCalendar } from '../BigCalendar';
 import { LegacyCalendar } from '../LegacyCalendar';
@@ -58,7 +58,7 @@ describe('Panel', () => {
    * @param props
    */
   const getComponent = ({
-    options = { autoScroll: true, hoursFormat: HoursFormat.HALF },
+    options = { autoScroll: true, dateFormat: DateFormat.INHERIT },
     ...restProps
   }: Partial<Props>) => {
     const allOptions = {
@@ -130,7 +130,7 @@ describe('Panel', () => {
 
   it('Should render legacy calendar', async () => {
     await renderWithoutWarning(
-      getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true, hoursFormat: HoursFormat.HALF } })
+      getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true, dateFormat: DateFormat.INHERIT } })
     );
 
     expect(BigCalendar).not.toHaveBeenCalled();
@@ -155,7 +155,7 @@ describe('Panel', () => {
   it('Should render lib calendar', async () => {
     await renderWithoutWarning(
       getComponent({
-        options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true, hoursFormat: HoursFormat.HALF },
+        options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true, dateFormat: DateFormat.INHERIT },
       })
     );
 
@@ -193,7 +193,7 @@ describe('Panel', () => {
           calendarType: CalendarType.BIG_CALENDAR,
           autoScroll: true,
           annotations: true,
-          hoursFormat: HoursFormat.HALF,
+          dateFormat: DateFormat.INHERIT,
         },
       })
     );

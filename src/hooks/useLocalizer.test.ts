@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { t } from 'i18next';
 import { Languages } from '../constants';
-import { HoursFormat } from '../types';
+import { DateFormat } from '../types';
 import { getUserLanguage } from '../utils';
 import { useLocalizer } from './useLocalizer';
 
@@ -16,7 +16,7 @@ jest.mock('../utils', () => ({
 
 describe('Use Localizer', () => {
   const options: any = {
-    hoursFormat: HoursFormat.HALF,
+    dateFormat: DateFormat.INHERIT,
   };
 
   it('Should set dayjs locale', () => {
@@ -57,7 +57,7 @@ describe('Use Localizer', () => {
     const { result } = renderHook(() =>
       useLocalizer({
         ...options,
-        hoursFormat: HoursFormat.HALF,
+        dateFormat: DateFormat.INHERIT,
       })
     );
 
@@ -70,7 +70,7 @@ describe('Use Localizer', () => {
     const { result } = renderHook(() =>
       useLocalizer({
         ...options,
-        hoursFormat: HoursFormat.FULL_2,
+        dateFormat: DateFormat.EN_24H,
       })
     );
 

@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next';
-import { CalendarType, HoursFormat, View } from '../types';
+import { CalendarType, DateFormat, View } from '../types';
 
 /**
  * Colors
@@ -87,9 +87,10 @@ export const CalendarViewOptions = (t: TFunction) => [
 ];
 
 /**
- * Hours Format Options
+ * Date Format Options
  */
-export const HoursFormatOptions = (t: TFunction) => [
-  { value: HoursFormat.HALF, label: t('panelOptions.hoursFormat.options.half') },
-  { value: HoursFormat.FULL_2, label: t('panelOptions.hoursFormat.options.full2') },
-];
+export const DateFormatOptions = (t: TFunction) =>
+  Object.values(DateFormat).map((format) => ({
+    value: format,
+    label: t(`panelOptions.dateFormat.options.${format}`),
+  }));

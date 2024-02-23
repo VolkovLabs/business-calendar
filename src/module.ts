@@ -8,12 +8,12 @@ import {
   CalendarTypeOptions,
   CalendarViewOptions,
   ColorsOptions,
+  DateFormatOptions,
   DefaultOptions,
   DefaultScrollToTime,
   DefaultView,
   DefaultViews,
   DisplayTimeOptions,
-  HoursFormatOptions,
   LinksOptions,
   ScrollOptions,
 } from './constants';
@@ -75,13 +75,13 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         defaultValue: DefaultScrollToTime,
         showIf: showForBigCalendar,
       })
-      .addRadio({
-        path: 'hoursFormat',
-        name: t('panelOptions.hoursFormat.label'),
+      .addSelect({
+        path: 'dateFormat',
+        name: t('panelOptions.dateFormat.label'),
         settings: {
-          options: HoursFormatOptions(t),
+          options: DateFormatOptions(t),
         },
-        defaultValue: DefaultOptions.hoursFormat,
+        defaultValue: DefaultOptions.dateFormat,
         showIf: showForBigCalendar,
       })
       .addRadio({

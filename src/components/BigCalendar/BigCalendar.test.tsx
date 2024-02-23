@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import React from 'react';
 import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 import { DefaultViews, TestIds } from '../../constants';
-import { CalendarEvent, HoursFormat } from '../../types';
+import { CalendarEvent, DateFormat } from '../../types';
 import { BigCalendar } from './BigCalendar';
 
 /**
@@ -162,7 +162,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DefaultViews, quickLinks: true, autoScroll: false, hoursFormat: HoursFormat.HALF },
+        options: { views: DefaultViews, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
       })
     );
 
@@ -208,7 +208,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DefaultViews, quickLinks: true, autoScroll: false, hoursFormat: HoursFormat.HALF },
+        options: { views: DefaultViews, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
       })
     );
 
@@ -247,7 +247,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DefaultViews, quickLinks: true, autoScroll: false, hoursFormat: HoursFormat.HALF },
+        options: { views: DefaultViews, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
       })
     );
 

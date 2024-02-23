@@ -32,9 +32,15 @@ export interface BigMessages extends Messages {
 }
 
 /**
- * Hours Format
+ * Date Format
  */
-export enum HoursFormat {
-  HALF = 'half',
-  FULL_2 = 'full2',
+export enum DateFormat {
+  INHERIT = 'inherit',
+  EN = 'en',
+  EN_24H = 'en24',
+  DE = 'de',
+  ES = 'es',
+  FR = 'fr',
+  ZH = 'zh',
+  ISO = 'iso',
 }

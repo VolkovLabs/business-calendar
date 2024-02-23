@@ -1,11 +1,11 @@
-import dayjs from 'dayjs';
-import React from 'react';
-import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 import { dateTime, LinkTarget } from '@grafana/data';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { getJestSelectors } from '@volkovlabs/jest-selectors';
+import dayjs from 'dayjs';
+import React from 'react';
+import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 import { DefaultViews, TestIds } from '../../constants';
-import { CalendarEvent } from '../../types';
+import { CalendarEvent, HoursFormat } from '../../types';
 import { BigCalendar } from './BigCalendar';
 
 /**
@@ -159,7 +159,12 @@ describe('Big Calendar', () => {
       color: '',
       links: [link],
     };
-    render(getComponent({ events: [event], options: { views: DefaultViews, quickLinks: true, autoScroll: false } }));
+    render(
+      getComponent({
+        events: [event],
+        options: { views: DefaultViews, quickLinks: true, autoScroll: false, hoursFormat: HoursFormat.HALF },
+      })
+    );
 
     expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
@@ -200,7 +205,12 @@ describe('Big Calendar', () => {
       color: '',
       links: [link],
     };
-    render(getComponent({ events: [event], options: { views: DefaultViews, quickLinks: true, autoScroll: false } }));
+    render(
+      getComponent({
+        events: [event],
+        options: { views: DefaultViews, quickLinks: true, autoScroll: false, hoursFormat: HoursFormat.HALF },
+      })
+    );
 
     expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
@@ -234,7 +244,12 @@ describe('Big Calendar', () => {
       color: '',
       links: [],
     };
-    render(getComponent({ events: [event], options: { views: DefaultViews, quickLinks: true, autoScroll: false } }));
+    render(
+      getComponent({
+        events: [event],
+        options: { views: DefaultViews, quickLinks: true, autoScroll: false, hoursFormat: HoursFormat.HALF },
+      })
+    );
 
     expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 

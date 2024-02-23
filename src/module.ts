@@ -17,7 +17,7 @@ import {
   LinksOptions,
   ScrollOptions,
 } from './constants';
-import { CalendarOptions, CalendarType, HoursFormat } from './types';
+import { CalendarOptions, CalendarType } from './types';
 
 /**
  * Panel Plugin
@@ -81,7 +81,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           options: HoursFormatOptions(t),
         },
-        defaultValue: HoursFormat.HALF,
+        defaultValue: DefaultOptions.hoursFormat,
         showIf: showForBigCalendar,
       })
       .addRadio({

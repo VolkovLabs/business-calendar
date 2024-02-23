@@ -1,8 +1,8 @@
-import dayjs from 'dayjs';
-import React from 'react';
 import { dateTime, FieldType, LoadingState, PanelData, toDataFrame } from '@grafana/data';
 import { act, render } from '@testing-library/react';
-import { CalendarType } from '../../types';
+import dayjs from 'dayjs';
+import React from 'react';
+import { CalendarType, HoursFormat } from '../../types';
 import { useAnnotationEvents } from '../../utils';
 import { BigCalendar } from '../BigCalendar';
 import { LegacyCalendar } from '../LegacyCalendar';
@@ -57,7 +57,10 @@ describe('Panel', () => {
    * Get Tested Component
    * @param props
    */
-  const getComponent = ({ options = { autoScroll: true }, ...restProps }: Partial<Props>) => {
+  const getComponent = ({
+    options = { autoScroll: true, hoursFormat: HoursFormat.HALF },
+    ...restProps
+  }: Partial<Props>) => {
     const allOptions = {
       textField: 'Event Name',
       timeField: 'Event Start',
@@ -126,7 +129,9 @@ describe('Panel', () => {
   });
 
   it('Should render legacy calendar', async () => {
-    await renderWithoutWarning(getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true } }));
+    await renderWithoutWarning(
+      getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true, hoursFormat: HoursFormat.HALF } })
+    );
 
     expect(BigCalendar).not.toHaveBeenCalled();
     expect(LegacyCalendar).toHaveBeenCalledWith(
@@ -149,7 +154,9 @@ describe('Panel', () => {
 
   it('Should render lib calendar', async () => {
     await renderWithoutWarning(
-      getComponent({ options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true } })
+      getComponent({
+        options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true, hoursFormat: HoursFormat.HALF },
+      })
     );
 
     expect(LegacyCalendar).not.toHaveBeenCalled();
@@ -181,7 +188,14 @@ describe('Panel', () => {
         ] as any
     );
     await renderWithoutWarning(
-      getComponent({ options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true, annotations: true } })
+      getComponent({
+        options: {
+          calendarType: CalendarType.BIG_CALENDAR,
+          autoScroll: true,
+          annotations: true,
+          hoursFormat: HoursFormat.HALF,
+        },
+      })
     );
 
     expect(BigCalendar).toHaveBeenCalledWith(

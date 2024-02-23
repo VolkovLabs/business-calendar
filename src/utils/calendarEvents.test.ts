@@ -11,6 +11,7 @@ import {
   toDataFrame,
 } from '@grafana/data';
 import { renderHook } from '@testing-library/react';
+import { HoursFormat } from '../types';
 import { useCalendarEvents, useColors, useEventFrames } from './calendarEvents';
 
 /**
@@ -78,6 +79,7 @@ describe('Calendar Events Utils', () => {
         timeField: 'Event Start',
         endTimeField: 'Event End',
         labelFields: ['Event Name'],
+        hoursFormat: HoursFormat.HALF,
       };
       const data = getDataFrame(options);
 
@@ -105,6 +107,7 @@ describe('Calendar Events Utils', () => {
     it('Should use field names by type if no names specified', () => {
       const options = {
         autoScroll: false,
+        hoursFormat: HoursFormat.HALF,
       };
       const data: PanelData = {
         state: LoadingState.Done,

@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -128,7 +127,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "E2E",
-  "uid": "e2e",
+  "uid": "d290eb4b",
   "version": 1,
   "weekStart": ""
 }

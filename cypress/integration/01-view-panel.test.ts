@@ -27,9 +27,9 @@ describe('Viewing a panel with Calendar', () => {
     currentPanel.should('be.visible');
 
     /**
-     * Chart
+     * Panel
      */
-    const chart = currentPanel.find(getTestIdSelector(TestIds.panel.root));
-    chart.should('be.visible');
+    const panel = currentPanel.find(getTestIdSelector(TestIds.bigCalendar.root));
+    panel.should('be.visible');
   });
 });

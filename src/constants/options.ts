@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next';
-import { CalendarType, View } from '../types';
+import { CalendarType, HoursFormat, View } from '../types';
 
 /**
  * Colors
@@ -84,4 +84,12 @@ export const CalendarViewOptions = (t: TFunction) => [
   { value: View.WORK_WEEK, label: t('panelOptions.views.options.workWeek') },
   { value: View.MONTH, label: t('panelOptions.views.options.month') },
   { value: View.YEAR, label: t('panelOptions.views.options.year') },
+];
+
+/**
+ * Hours Format Options
+ */
+export const HoursFormatOptions = (t: TFunction) => [
+  { value: HoursFormat.HALF, label: t('panelOptions.hoursFormat.options.half') },
+  { value: HoursFormat.FULL_2, label: t('panelOptions.hoursFormat.options.full2') },
 ];

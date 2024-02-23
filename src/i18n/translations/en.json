@@ -36,6 +36,13 @@
     "noViewsTitle": "No Views"
   },
   "panelOptions": {
+    "hoursFormat": {
+      "label": "Hours Format",
+      "options": {
+        "half": "12",
+        "full2": "24"
+      }
+    },
     "annotations": {
       "annotations": {
         "description": "Display annotations.",

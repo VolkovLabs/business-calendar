@@ -13,10 +13,11 @@ import {
   DefaultView,
   DefaultViews,
   DisplayTimeOptions,
+  HoursFormatOptions,
   LinksOptions,
   ScrollOptions,
 } from './constants';
-import { CalendarOptions, CalendarType } from './types';
+import { CalendarOptions, CalendarType, HoursFormat } from './types';
 
 /**
  * Panel Plugin
@@ -72,6 +73,15 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         description: t('panelOptions.scrollToTime.description'),
         editor: TimeEditor,
         defaultValue: DefaultScrollToTime,
+        showIf: showForBigCalendar,
+      })
+      .addRadio({
+        path: 'hoursFormat',
+        name: t('panelOptions.hoursFormat.label'),
+        settings: {
+          options: HoursFormatOptions(t),
+        },
+        defaultValue: HoursFormat.HALF,
         showIf: showForBigCalendar,
       })
       .addRadio({

@@ -30,3 +30,11 @@ export interface BigMessages extends Messages {
    */
   year: string;
 }
+
+/**
+ * Hours Format
+ */
+export enum HoursFormat {
+  HALF = 'half',
+  FULL_2 = 'full2',
+}

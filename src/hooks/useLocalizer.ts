@@ -1,3 +1,4 @@
+import { getLocaleData } from '@grafana/data';
 import dayjs from 'dayjs';
 import deLocale from 'dayjs/locale/de';
 import enLocale from 'dayjs/locale/en';
@@ -7,8 +8,7 @@ import zhLocale from 'dayjs/locale/zh';
 import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
-import { getLocaleData } from '@grafana/data';
-import { BigMessages } from '../types';
+import { BigMessages, CalendarOptions, HoursFormat } from '../types';
 import { getUserLanguage } from '../utils';
 
 /**
@@ -18,6 +18,17 @@ import { getUserLanguage } from '../utils';
  */
 const dayjsLocales = {
   en: enLocale,
+  en24: {
+    ...enLocale,
+    formats: {
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      LLL: 'MMMM D, YYYY HH:mm',
+      LLLL: 'dddd, MMMM D, YYYY HH:mm',
+      lll: 'MMM D, YYYY HH:mm',
+      llll: 'ddd, MMM D, YYYY HH:mm',
+    },
+  },
   es: esLocale,
   fr: frLocale,
   de: deLocale,
@@ -27,7 +38,7 @@ const dayjsLocales = {
 /**
  * Get Localizer
  */
-export const useLocalizer = () => {
+export const useLocalizer = (options: CalendarOptions) => {
   /**
    * Translation
    */
@@ -41,8 +52,17 @@ export const useLocalizer = () => {
    * Update Dayjs locale on language change
    */
   useEffect(() => {
-    setDayjsLocale(dayjsLocales[language as keyof typeof dayjsLocales] || dayjsLocales.en);
-  }, [language]);
+    let locale = dayjsLocales[language as keyof typeof dayjsLocales] || dayjsLocales.en;
+
+    /**
+     * Use 24h format
+     */
+    if (locale === dayjsLocales.en && options.hoursFormat === HoursFormat.FULL_2) {
+      locale = dayjsLocales.en24;
+    }
+
+    setDayjsLocale(locale);
+  }, [language, options.hoursFormat]);
 
   /**
    * Localizer Messages

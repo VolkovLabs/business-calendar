@@ -30,7 +30,7 @@ jest.mock('react-big-calendar', () => ({
  */
 jest.mock('./BigCalendar.styles', () => ({
   ...jest.requireActual('./BigCalendar.styles'),
-  LibStyles: () => ({
+  getLibStyles: () => ({
     global: '',
   }),
 }));

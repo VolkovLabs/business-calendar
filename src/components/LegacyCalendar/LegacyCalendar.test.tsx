@@ -4,6 +4,7 @@ import { dateTime } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { TestIds } from '../../constants';
+import { DateFormat } from '../../types';
 import { LegacyDayDrawer } from '../LegacyDayDrawer';
 import { LegacyCalendar } from './LegacyCalendar';
 
@@ -91,7 +92,10 @@ describe('Legacy Calendar', () => {
    * @param options
    * @param restProps
    */
-  const getComponent = ({ options = { autoScroll: true }, ...restProps }: Partial<Props>) => {
+  const getComponent = ({
+    options = { autoScroll: true, dateFormat: DateFormat.INHERIT },
+    ...restProps
+  }: Partial<Props>) => {
     const allOptions = {
       ...options,
     };

@@ -46,7 +46,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Localizer
    */
-  const { localizer, messages } = useLocalizer();
+  const { localizer, messages } = useLocalizer(options);
 
   /**
    * Adopted Events for BigCalendar

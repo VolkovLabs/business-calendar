@@ -81,6 +81,19 @@
         "frame": "Rahmen"
       }
     },
+    "dateFormat": {
+      "label": "Datums- und Uhrzeitformat",
+      "options": {
+        "de": "Deutsch",
+        "en": "Englisch",
+        "en24": "Englisch 24H",
+        "es": "Spanisch",
+        "fr": "Französisch",
+        "inherit": "Benutzerauswahl",
+        "iso": "ISO 8601",
+        "zh": "Chinesisch"
+      }
+    },
     "defaultView": {
       "label": "Standardansicht"
     },

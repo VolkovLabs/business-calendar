@@ -8,6 +8,7 @@ import {
   CalendarTypeOptions,
   CalendarViewOptions,
   ColorsOptions,
+  DateFormatOptions,
   DefaultOptions,
   DefaultScrollToTime,
   DefaultView,
@@ -72,6 +73,15 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         description: t('panelOptions.scrollToTime.description'),
         editor: TimeEditor,
         defaultValue: DefaultScrollToTime,
+        showIf: showForBigCalendar,
+      })
+      .addSelect({
+        path: 'dateFormat',
+        name: t('panelOptions.dateFormat.label'),
+        settings: {
+          options: DateFormatOptions(t),
+        },
+        defaultValue: DefaultOptions.dateFormat,
         showIf: showForBigCalendar,
       })
       .addRadio({

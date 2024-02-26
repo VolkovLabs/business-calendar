@@ -81,6 +81,19 @@
         "frame": "Marco"
       }
     },
+    "dateFormat": {
+      "label": "Formato de fecha y hora",
+      "options": {
+        "de": "Alemana",
+        "en": "Inglés",
+        "en24": "Inglesa 24H",
+        "es": "Español",
+        "fr": "Francés",
+        "inherit": "Selección de usuario",
+        "iso": "ISO 8601",
+        "zh": "Chino"
+      }
+    },
     "defaultView": {
       "label": "Vista predeterminada"
     },

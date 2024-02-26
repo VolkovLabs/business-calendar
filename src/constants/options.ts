@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next';
-import { CalendarType, View } from '../types';
+import { CalendarType, DateFormat, View } from '../types';
 
 /**
  * Colors
@@ -85,3 +85,12 @@ export const CalendarViewOptions = (t: TFunction) => [
   { value: View.MONTH, label: t('panelOptions.views.options.month') },
   { value: View.YEAR, label: t('panelOptions.views.options.year') },
 ];
+
+/**
+ * Date Format Options
+ */
+export const DateFormatOptions = (t: TFunction) =>
+  Object.values(DateFormat).map((format) => ({
+    value: format,
+    label: t(`panelOptions.dateFormat.options.${format}`),
+  }));

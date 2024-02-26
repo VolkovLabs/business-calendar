@@ -11,6 +11,7 @@ import {
   toDataFrame,
 } from '@grafana/data';
 import { renderHook } from '@testing-library/react';
+import { CalendarOptions, DateFormat } from '../types';
 import { useCalendarEvents, useColors, useEventFrames } from './calendarEvents';
 
 /**
@@ -72,12 +73,13 @@ describe('Calendar Events Utils', () => {
 
   describe('Use Event Frames', () => {
     it('Should use field names from options', () => {
-      const options = {
+      const options: CalendarOptions = {
         autoScroll: false,
         textField: 'Event Name',
         timeField: 'Event Start',
         endTimeField: 'Event End',
         labelFields: ['Event Name'],
+        dateFormat: DateFormat.INHERIT,
       };
       const data = getDataFrame(options);
 
@@ -103,8 +105,9 @@ describe('Calendar Events Utils', () => {
     });
 
     it('Should use field names by type if no names specified', () => {
-      const options = {
+      const options: CalendarOptions = {
         autoScroll: false,
+        dateFormat: DateFormat.INHERIT,
       };
       const data: PanelData = {
         state: LoadingState.Done,

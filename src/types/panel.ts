@@ -1,5 +1,5 @@
 import { AnnotationsType, Colors, Languages } from '../constants';
-import { CalendarType, View } from './calendar';
+import { CalendarType, DateFormat, View } from './calendar';
 
 /**
  * Supported Language
@@ -152,4 +152,11 @@ export interface CalendarOptions {
    * @type {TimeOptions}
    */
   scrollToTime?: TimeOptions;
+
+  /**
+   * Hours Format
+   *
+   * @type {DateFormat}
+   */
+  dateFormat: DateFormat;
 }

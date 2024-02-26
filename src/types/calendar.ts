@@ -30,3 +30,17 @@ export interface BigMessages extends Messages {
    */
   year: string;
 }
+
+/**
+ * Date Format
+ */
+export enum DateFormat {
+  INHERIT = 'inherit',
+  EN = 'en',
+  EN_24H = 'en24',
+  DE = 'de',
+  ES = 'es',
+  FR = 'fr',
+  ZH = 'zh',
+  ISO = 'iso',
+}

@@ -2,7 +2,8 @@ import { getBackendSrv } from '@grafana/runtime';
 import { renderHook, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 
-import { AnnotationsType, DEFAULT_OPTIONS } from '../constants';
+import { DEFAULT_OPTIONS } from '../constants';
+import { AnnotationsType } from '../types';
 import { useAnnotationEvents } from './useAnnotationEvents';
 
 /**

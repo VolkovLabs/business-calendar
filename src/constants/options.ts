@@ -1,23 +1,6 @@
 import { TFunction } from 'i18next';
 
-import { CalendarType, DateFormat, View } from '../types';
-
-/**
- * Colors
- */
-export const enum Colors {
-  FRAME = 'frame',
-  EVENT = 'event',
-}
-
-/**
- * Annotation Types
- */
-export enum AnnotationsType {
-  ALL = '',
-  ANNOTATION = 'annotation',
-  ALERT = 'alert',
-}
+import { AnnotationsType, CalendarType, ColorMode, DateFormat, View } from '../types';
 
 /**
  * Links Options
@@ -47,8 +30,8 @@ export const DISPLAY_TIME_OPTIONS = (t: TFunction) => [
  * Color Options
  */
 export const COLOR_OPTIONS = (t: TFunction) => [
-  { value: Colors.FRAME, label: t('panelOptions.colors.options.frame') },
-  { value: Colors.EVENT, label: t('panelOptions.colors.options.event') },
+  { value: ColorMode.FRAME, label: t('panelOptions.colors.options.frame') },
+  { value: ColorMode.EVENT, label: t('panelOptions.colors.options.event') },
 ];
 
 /**

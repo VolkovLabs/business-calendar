@@ -1,10 +1,37 @@
-import { AnnotationsType, Colors, Languages } from '../constants';
 import { CalendarType, DateFormat, View } from './calendar';
+
+/**
+ * Language
+ */
+export const enum Language {
+  DE = 'de',
+  EN = 'en',
+  ES = 'es',
+  FR = 'fr',
+  ZH = 'zh',
+}
 
 /**
  * Supported Language
  */
-export type SupportedLanguage = Languages.EN | Languages.ES | Languages.FR | Languages.DE | Languages.ZH;
+export type SupportedLanguage = Language.EN | Language.ES | Language.FR | Language.DE | Language.ZH;
+
+/**
+ * Color Mode
+ */
+export const enum ColorMode {
+  FRAME = 'frame',
+  EVENT = 'event',
+}
+
+/**
+ * Annotation Type
+ */
+export enum AnnotationsType {
+  ALL = '',
+  ANNOTATION = 'annotation',
+  ALERT = 'alert',
+}
 
 /**
  * Time Options
@@ -107,9 +134,9 @@ export interface CalendarOptions {
   /**
    * Colors
    *
-   * @type {Colors}
+   * @type {ColorMode}
    */
-  colors?: Colors;
+  colors?: ColorMode;
 
   /**
    * Color Field

@@ -3,8 +3,7 @@ import { TimeZone } from '@grafana/schema';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 
-import { Colors } from '../constants';
-import { CalendarEvent, CalendarOptions } from '../types';
+import { CalendarEvent, CalendarOptions, ColorMode } from '../types';
 import { getMinutesOffsetFromTimeZone } from '../utils';
 import { useEventFrames } from './useEventFrames';
 
@@ -58,7 +57,7 @@ export const useCalendarEvents = (
           location: frame.location?.values.get(i),
         }))
         .map<CalendarEvent>(({ text, description, labels, links, start, end, color, location }, i) => {
-          const idx = options.colors === Colors.FRAME ? frameIdx : i;
+          const idx = options.colors === ColorMode.FRAME ? frameIdx : i;
           return {
             text,
             description,

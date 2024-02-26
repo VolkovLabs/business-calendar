@@ -1,12 +1,12 @@
 import { act, fireEvent, renderHook } from '@testing-library/react';
 import days from 'dayjs';
 
-import { useIntervalSelection } from './hooks';
+import { useIntervalSelection } from './useIntervalSelection';
 
 /**
  * Hooks
  */
-describe('Hooks', () => {
+describe('useIntervalSelection', () => {
   it('Should set interval', () => {
     const { result } = renderHook(() => useIntervalSelection());
     const [, , onTimeSelection] = result.current;

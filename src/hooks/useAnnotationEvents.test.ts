@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 
 import { AnnotationsType, DEFAULT_OPTIONS } from '../constants';
-import { useAnnotationEvents } from './annotations';
+import { useAnnotationEvents } from './useAnnotationEvents';
 
 /**
  * Mock @grafana/runtime
@@ -17,7 +17,7 @@ jest.mock('@grafana/runtime', () => ({
 /**
  * Annotations
  */
-describe('Annotations', () => {
+describe('useAnnotationEvents', () => {
   /**
    * Return particular day to prevent unexpected behaviors with dates
    */

@@ -7,8 +7,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TEST_IDS } from '../../constants';
+import { useIntervalSelection } from '../../hooks';
 import { CalendarEvent, CalendarOptions } from '../../types';
-import { alignEvents, useIntervalSelection } from '../../utils';
+import { alignEvents } from '../../utils';
 import { LegacyDay } from '../LegacyDay';
 import { LegacyDayDrawer } from '../LegacyDayDrawer';
 import { getStyles } from './LegacyCalendar.styles';

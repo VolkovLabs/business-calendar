@@ -3,8 +3,8 @@ import { act, render } from '@testing-library/react';
 import dayjs from 'dayjs';
 import React from 'react';
 
+import { useAnnotationEvents } from '../../hooks';
 import { CalendarType, DateFormat } from '../../types';
-import { useAnnotationEvents } from '../../utils';
 import { BigCalendar } from '../BigCalendar';
 import { LegacyCalendar } from '../LegacyCalendar';
 import { CalendarPanel } from './CalendarPanel';
@@ -21,8 +21,8 @@ jest.mock('@grafana/runtime', () => ({
 /**
  * Mock utils
  */
-jest.mock('../../utils', () => ({
-  ...jest.requireActual('../../utils'),
+jest.mock('../../hooks', () => ({
+  ...jest.requireActual('../../hooks'),
   useAnnotationEvents: jest.fn(() => [{ id: '123' }]),
 }));
 

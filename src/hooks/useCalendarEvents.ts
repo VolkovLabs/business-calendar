@@ -1,21 +1,75 @@
+import { formattedValueToString, getLocaleData, TimeRange } from '@grafana/data';
+import { TimeZone } from '@grafana/schema';
+import dayjs from 'dayjs';
 import { useMemo } from 'react';
-import { Event } from 'react-big-calendar';
 
-import { CalendarEvent } from '../types';
+import { Colors } from '../constants';
+import { CalendarEvent, CalendarOptions } from '../types';
+import { getMinutesOffsetFromTimeZone } from '../utils';
+import { useEventFrames } from './useEventFrames';
 
 /**
- * Calendar Events for Big Calendar
+ * Get Calendar Events
+ * @param frames
+ * @param options
+ * @param colors
+ * @param timeRange
+ * @param timeZone
  */
-export const useCalendarEvents = (events: CalendarEvent[]): Event[] => {
+export const useCalendarEvents = (
+  frames: ReturnType<typeof useEventFrames>,
+  options: CalendarOptions,
+  colors: string[],
+  timeRange: TimeRange,
+  timeZone: TimeZone
+): CalendarEvent[] => {
+  /**
+   * Week Start
+   */
+  const firstDay = getLocaleData().firstDayOfWeek() === 0 ? 'week' : 'isoWeek';
+
+  /**
+   * Minutes Offset from Browser Time Zone
+   */
+  const minutesOffset = getMinutesOffsetFromTimeZone(timeZone);
+
   return useMemo(() => {
-    return events.map<Event>(({ text, start, end, ...restEvent }) => ({
-      title: text,
-      start: start.toDate(),
-      end: end ? end.toDate() : end === null ? start.add(100, 'years').toDate() : start.add(1, 'hours').toDate(),
-      resource: {
-        isEndless: !end,
-        ...restEvent,
-      },
-    }));
-  }, [events]);
+    const to = dayjs(timeRange.to.valueOf()).add(minutesOffset, 'minutes');
+    const endOfRangeWeek = to.endOf(firstDay);
+
+    return frames.flatMap((frame, frameIdx) => {
+      const colorFn = frame.color?.display;
+
+      if (!frame.text || !frame.start) {
+        return [];
+      }
+
+      return Array.from({ length: frame.text.values.length })
+        .map((item, i) => ({
+          text: frame.text?.display
+            ? (formattedValueToString(frame.text.display(frame.text?.values.get(i))) as string)
+            : frame.text?.values.get(i),
+          description: frame.description?.values.get(i),
+          start: frame.start?.values.get(i),
+          end: frame.end?.values.get(i),
+          labels: frame.labels?.map((field) => field.values.get(i)).filter((label) => label),
+          links: frame.text?.getLinks!({ valueRowIndex: i }),
+          color: frame.color?.values.get(i),
+          location: frame.location?.values.get(i),
+        }))
+        .map<CalendarEvent>(({ text, description, labels, links, start, end, color, location }, i) => {
+          const idx = options.colors === Colors.FRAME ? frameIdx : i;
+          return {
+            text,
+            description,
+            labels,
+            start: dayjs(start).add(minutesOffset, 'minutes'),
+            color: colorFn?.(color).color ?? colors[Math.floor(idx % colors.length)],
+            links,
+            end: frame.end ? (end ? dayjs(end).add(minutesOffset, 'minutes') : endOfRangeWeek) : undefined,
+            location,
+          };
+        });
+    });
+  }, [colors, minutesOffset, firstDay, frames, options.colors, timeRange.to]);
 };

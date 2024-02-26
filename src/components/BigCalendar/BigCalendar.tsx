@@ -7,7 +7,7 @@ import { Calendar, Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 
 import { TEST_IDS } from '../../constants';
-import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
+import { useBigCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
@@ -52,7 +52,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Adopted Events for BigCalendar
    */
-  const calendarEvents = useCalendarEvents(events);
+  const calendarEvents = useBigCalendarEvents(events);
 
   /**
    * Get props for event div element

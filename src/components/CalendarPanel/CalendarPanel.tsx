@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
 import { PanelProps } from '@grafana/data';
+import React, { useMemo } from 'react';
+
 import { CalendarOptions, CalendarType } from '../../types';
 import { useAnnotationEvents, useCalendarEvents, useColors, useEventFrames } from '../../utils';
 import { BigCalendar } from '../BigCalendar';

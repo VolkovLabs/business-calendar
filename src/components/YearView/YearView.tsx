@@ -1,6 +1,7 @@
+import { useStyles2 } from '@grafana/ui';
 import React, { useMemo } from 'react';
 import { CalendarProps, DateLocalizer, Navigate, NavigateAction } from 'react-big-calendar';
-import { useStyles2 } from '@grafana/ui';
+
 import { TestIds } from '../../constants';
 import { Styles } from './YearView.styles';
 import { YearViewMonth } from './YearViewMonth';
@@ -18,10 +19,10 @@ const YearView: React.FC<CalendarProps> = ({ date, localizer, ...restProps }) =>
    * Week Names
    */
   const weekNames = useMemo(() => {
-    let firstOfWeek = localizer.startOfWeek('');
+    const firstOfWeek = localizer.startOfWeek('');
     const date = new Date();
-    let start = localizer.startOf(date, 'week', firstOfWeek);
-    let end = localizer.endOf(date, 'week', firstOfWeek);
+    const start = localizer.startOf(date, 'week', firstOfWeek);
+    const end = localizer.endOf(date, 'week', firstOfWeek);
 
     const weekRange = localizer.range(start, end);
 

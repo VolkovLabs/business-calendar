@@ -1,4 +1,5 @@
 import { config } from '@grafana/runtime';
+
 import { DefaultLanguage, Languages } from '../constants';
 import { getUserLanguage } from './locale';
 

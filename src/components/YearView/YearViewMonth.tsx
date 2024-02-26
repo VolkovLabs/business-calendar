@@ -1,6 +1,7 @@
+import { useStyles2 } from '@grafana/ui';
 import React, { useEffect, useState } from 'react';
 import { CalendarProps } from 'react-big-calendar';
-import { useStyles2 } from '@grafana/ui';
+
 import { TestIds } from '../../constants';
 import { View } from '../../types';
 import { getMonth } from './utils';

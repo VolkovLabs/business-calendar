@@ -1,10 +1,11 @@
+import { Global } from '@emotion/react';
+import { PanelProps } from '@grafana/data';
+import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
-import { Global } from '@emotion/react';
-import { PanelProps } from '@grafana/data';
-import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
+
 import { TestIds } from '../../constants';
 import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';

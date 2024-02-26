@@ -1,6 +1,7 @@
-import React from 'react';
 import { dateTime, InternalTimeZones, StandardEditorProps } from '@grafana/data';
 import { TimeOfDayPicker } from '@grafana/ui';
+import React from 'react';
+
 import { TestIds } from '../../constants';
 import { CalendarOptions, TimeOptions } from '../../types';
 import { getDateWithMinutesOffset, getMinutesOffsetFromTimeZone } from '../../utils';

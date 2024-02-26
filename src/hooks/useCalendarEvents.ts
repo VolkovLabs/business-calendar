@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Event } from 'react-big-calendar';
+
 import { CalendarEvent } from '../types';
 
 /**

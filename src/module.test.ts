@@ -1,4 +1,5 @@
 import { Field, FieldType, PanelPlugin } from '@grafana/data';
+
 import { plugin } from './module';
 
 /**

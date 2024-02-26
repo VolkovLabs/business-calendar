@@ -1,3 +1,3 @@
-export * from './useCalendarRange';
 export * from './useCalendarEvents';
+export * from './useCalendarRange';
 export * from './useLocalizer';

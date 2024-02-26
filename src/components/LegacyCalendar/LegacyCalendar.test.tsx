@@ -1,8 +1,9 @@
-import dayjs from 'dayjs';
-import React from 'react';
 import { dateTime } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import dayjs from 'dayjs';
+import React from 'react';
+
 import { TestIds } from '../../constants';
 import { DateFormat } from '../../types';
 import { LegacyDayDrawer } from '../LegacyDayDrawer';

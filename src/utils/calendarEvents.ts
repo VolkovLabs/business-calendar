@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-import { useMemo } from 'react';
 import {
   classicColors,
   DataFrame,
@@ -14,6 +12,9 @@ import {
 } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
 import { useTheme2 } from '@grafana/ui';
+import dayjs from 'dayjs';
+import { useMemo } from 'react';
+
 import { Colors, DefaultLanguage } from '../constants';
 import { CalendarEvent, CalendarOptions } from '../types';
 import { toTimeField } from './time';

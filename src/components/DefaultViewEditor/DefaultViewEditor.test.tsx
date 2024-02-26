@@ -1,6 +1,7 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { getJestSelectors } from '@volkovlabs/jest-selectors';
+import React from 'react';
+
 import { DefaultView, TestIds } from '../../constants';
 import { View } from '../../types';
 import { DefaultViewEditor } from './DefaultViewEditor';

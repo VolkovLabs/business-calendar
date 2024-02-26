@@ -1,7 +1,8 @@
-import dayjs from 'dayjs';
-import { useEffect, useMemo, useState } from 'react';
 import { AnnotationEvent, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
+import dayjs from 'dayjs';
+import { useEffect, useMemo, useState } from 'react';
+
 import { AnnotationsType } from '../constants';
 import { CalendarEvent, CalendarOptions } from '../types';
 

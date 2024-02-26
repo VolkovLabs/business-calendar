@@ -1,7 +1,8 @@
-import React from 'react';
 import { dateTime } from '@grafana/data';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { getJestSelectors } from '@volkovlabs/jest-selectors';
+import React from 'react';
+
 import { TestIds } from '../../constants';
 import { TimeEditor } from './TimeEditor';
 

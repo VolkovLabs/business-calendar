@@ -1,8 +1,9 @@
+import { fireEvent, render, screen, within } from '@testing-library/react';
+import { getJestSelectors } from '@volkovlabs/jest-selectors';
 import dayjs from 'dayjs';
 import React from 'react';
 import { dayjsLocalizer, Navigate } from 'react-big-calendar';
-import { fireEvent, render, screen, within } from '@testing-library/react';
-import { getJestSelectors } from '@volkovlabs/jest-selectors';
+
 import { TestIds } from '../../constants';
 import { YearView } from './YearView';
 

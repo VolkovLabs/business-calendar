@@ -1,10 +1,11 @@
+import { css, cx } from '@emotion/css';
+import { getLocaleData, PanelProps } from '@grafana/data';
+import { Button, useStyles2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { css, cx } from '@emotion/css';
-import { getLocaleData, PanelProps } from '@grafana/data';
-import { Button, useStyles2 } from '@grafana/ui';
+
 import { TestIds } from '../../constants';
 import { CalendarEvent, CalendarOptions } from '../../types';
 import { alignEvents, useIntervalSelection } from '../../utils';

@@ -1,7 +1,8 @@
-import dayjs, { OpUnitType } from 'dayjs';
-import React from 'react';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
+import dayjs, { OpUnitType } from 'dayjs';
+import React from 'react';
+
 import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
 import { Styles } from './LegacyEventEntry.styles';

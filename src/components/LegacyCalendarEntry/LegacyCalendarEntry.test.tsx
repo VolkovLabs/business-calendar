@@ -1,6 +1,7 @@
+import { render, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+
 import { TestIds } from '../../constants';
 import { CalendarEvent } from '../../types';
 import { LegacyCalendarEntry } from './LegacyCalendarEntry';

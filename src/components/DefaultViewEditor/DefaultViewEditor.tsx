@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { StandardEditorProps } from '@grafana/data';
 import { Select } from '@grafana/ui';
+import React, { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { CalendarViewOptions, DefaultView, TestIds } from '../../constants';
 import { CalendarOptions, View } from '../../types';
 

@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import {
   ArrayVector,
   dateTime,
@@ -11,6 +10,8 @@ import {
   toDataFrame,
 } from '@grafana/data';
 import { renderHook } from '@testing-library/react';
+import dayjs from 'dayjs';
+
 import { CalendarOptions, DateFormat } from '../types';
 import { useCalendarEvents, useColors, useEventFrames } from './calendarEvents';
 

@@ -1,6 +1,7 @@
-import React from 'react';
 import { FieldType, StandardEditorProps } from '@grafana/data';
 import { MultiSelect, Select } from '@grafana/ui';
+import React from 'react';
+
 import { TestIds } from '../../constants';
 
 /**

@@ -9,7 +9,7 @@ import { useIntervalSelection } from './hooks';
 describe('Hooks', () => {
   it('Should set interval', () => {
     const { result } = renderHook(() => useIntervalSelection());
-    const [_, __, onTimeSelection] = result.current;
+    const [, , onTimeSelection] = result.current;
 
     const day = days(new Date('2023-02-02'));
     act(() => onTimeSelection(day));
@@ -53,7 +53,7 @@ describe('Hooks', () => {
 
   it('Should clean interval', () => {
     const { result } = renderHook(() => useIntervalSelection());
-    const [_, __, onTimeSelection] = result.current;
+    const [, , onTimeSelection] = result.current;
 
     const day = days(new Date('2023-02-02'));
     act(() => onTimeSelection(day));

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
 import React from 'react';
 
-import { TestIds } from '../../constants';
+import { TEST_IDS } from '../../constants';
 import { CalendarEvent } from '../../types';
 import { LegacyCalendarEntry } from './LegacyCalendarEntry';
 
@@ -35,13 +35,13 @@ describe('Calendar Entry', () => {
 
     render(getComponent({ day: startFromDay, event }));
 
-    expect(screen.getByTestId(TestIds.calendarEntry.eventOneDay)).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.calendarEntry.eventOneDay)).toBeInTheDocument();
   });
 
   it('Should show filler if no event', () => {
     render(getComponent({ day: dayjs(Date.now()), event: null }));
 
-    expect(screen.getByTestId(TestIds.calendarEntry.filler)).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.calendarEntry.filler)).toBeInTheDocument();
   });
 
   describe('One day event', () => {
@@ -57,7 +57,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: startFromDay, event, displayTime: false, firstDay: startFromDay }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventOneDayWithoutTime)).toBeInTheDocument();
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventOneDayWithoutTime)).toBeInTheDocument();
     });
 
     it('Should show event with time if specified', () => {
@@ -72,7 +72,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: startFromDay, event, displayTime: true, firstDay: startFromDay }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventOneDayWithTime)).toBeInTheDocument();
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventOneDayWithTime)).toBeInTheDocument();
     });
 
     it('Should show event if end is not speficied', () => {
@@ -86,7 +86,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: startFromDay, event, displayTime: true, firstDay: startFromDay }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventOneDayWithTime)).toBeInTheDocument();
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventOneDayWithTime)).toBeInTheDocument();
     });
 
     it('Should render link', () => {
@@ -110,7 +110,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: startFromDay, event, firstDay: startFromDay, quickLinks: true }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventOneDay)).toHaveAttribute('href', linkUrl);
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventOneDay)).toHaveAttribute('href', linkUrl);
     });
   });
 
@@ -128,7 +128,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: startFromDay, event, displayTime: false, firstDay: startFromDay }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventFewDaysWithoutTime)).toBeInTheDocument();
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventFewDaysWithoutTime)).toBeInTheDocument();
     });
 
     it('Should show event with time if specified', () => {
@@ -144,7 +144,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: startFromDay, event, displayTime: true, firstDay: startFromDay }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventFewDaysWithTime)).toBeInTheDocument();
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventFewDaysWithTime)).toBeInTheDocument();
     });
 
     it('Should show event that is not started today', () => {
@@ -160,7 +160,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: dayjs(getSafeDate()), event, displayTime: true, firstDay: startFromDay }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventFewDaysNotStartedToday)).toBeInTheDocument();
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventFewDaysNotStartedToday)).toBeInTheDocument();
     });
 
     it('Should show event if end is falsy', () => {
@@ -175,7 +175,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: startFromDay, event, displayTime: true, firstDay: startFromDay }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventFewDaysWithTime)).toBeInTheDocument();
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventFewDaysWithTime)).toBeInTheDocument();
     });
 
     it('Should render link', () => {
@@ -200,7 +200,7 @@ describe('Calendar Entry', () => {
 
       render(getComponent({ day: dayjs(getSafeDate()), event, firstDay: startFromDay, quickLinks: true }));
 
-      expect(screen.getByTestId(TestIds.calendarEntry.eventFewDays)).toHaveAttribute('href', linkUrl);
+      expect(screen.getByTestId(TEST_IDS.calendarEntry.eventFewDays)).toHaveAttribute('href', linkUrl);
     });
   });
 });

@@ -2,10 +2,10 @@ import { useStyles2 } from '@grafana/ui';
 import React, { useEffect, useState } from 'react';
 import { CalendarProps } from 'react-big-calendar';
 
-import { TestIds } from '../../constants';
+import { TEST_IDS } from '../../constants';
 import { View } from '../../types';
 import { getMonth } from './utils';
-import { Styles } from './YearView.styles';
+import { getStyles } from './YearView.styles';
 import { YearViewDate } from './YearViewDate';
 
 /**
@@ -23,7 +23,7 @@ export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, g
   /**
    * Styles
    */
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(getStyles);
 
   /**
    * Month state
@@ -38,7 +38,7 @@ export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, g
   }, [date, localizer]);
 
   return (
-    <div className={styles.month} data-testid={TestIds.yearView.month(month.currentDate.getMonth())}>
+    <div className={styles.month} data-testid={TEST_IDS.yearView.month(month.currentDate.getMonth())}>
       <div className={styles.monthName}>{localizer.format(month.currentDate, 'yearMonthFormat').toUpperCase()}</div>
       {weekNames.map((weekName, index) => (
         <span key={index} className={styles.week}>
@@ -54,7 +54,7 @@ export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, g
               dateOfMonth={month.currentDate}
               onClick={(date: Date) => {
                 if (onDrillDown) {
-                  onDrillDown(date, View.YEAR as any);
+                  onDrillDown(date, View.YEAR as never);
                 }
               }}
               localizer={localizer}

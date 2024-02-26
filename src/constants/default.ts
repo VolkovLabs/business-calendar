@@ -15,12 +15,12 @@ export const enum Languages {
 /**
  * Default Language
  */
-export const DefaultLanguage: SupportedLanguage = Languages.EN;
+export const DEFAULT_LANGUAGE: SupportedLanguage = Languages.EN;
 
 /**
  * Default Options
  */
-export const DefaultOptions: CalendarOptions = {
+export const DEFAULT_OPTIONS: CalendarOptions = {
   annotations: false,
   annotationsLimit: 100,
   annotationsType: AnnotationsType.ALL,
@@ -35,17 +35,17 @@ export const DefaultOptions: CalendarOptions = {
 /**
  * Default Views
  */
-export const DefaultViews = [View.DAY, View.WEEK, View.MONTH];
+export const DEFAULT_VIEWS = [View.DAY, View.WEEK, View.MONTH];
 
 /**
  * Default View
  */
-export const DefaultView = View.MONTH;
+export const DEFAULT_VIEW = View.MONTH;
 
 /**
  * Default Scroll To Time
  */
-export const DefaultScrollToTime: TimeOptions = {
+export const DEFAULT_SCROLL_TO_TIME: TimeOptions = {
   hours: 0,
   minutes: 0,
 };

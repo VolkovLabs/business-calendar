@@ -4,7 +4,7 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import dayjs from 'dayjs';
 import React from 'react';
 
-import { TestIds } from '../../constants';
+import { TEST_IDS } from '../../constants';
 import { DateFormat } from '../../types';
 import { LegacyDayDrawer } from '../LegacyDayDrawer';
 import { LegacyCalendar } from './LegacyCalendar';
@@ -129,7 +129,7 @@ describe('Legacy Calendar', () => {
   it('Should find component', async () => {
     await render(getComponent({}));
 
-    await waitFor(() => expect(screen.getByTestId(TestIds.panel.root)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(TEST_IDS.panel.root)).toBeInTheDocument());
   });
 
   it('Should open DayDrawer', async () => {
@@ -178,7 +178,7 @@ describe('Legacy Calendar', () => {
       })
     );
 
-    expect(screen.queryByTestId(TestIds.panel.buttonApplyInterval)).not.toBeInTheDocument();
+    expect(screen.queryByTestId(TEST_IDS.panel.buttonApplyInterval)).not.toBeInTheDocument();
 
     /**
      * Select interval
@@ -189,12 +189,12 @@ describe('Legacy Calendar', () => {
     /**
      * Check apply interval button presence
      */
-    expect(screen.getByTestId(TestIds.panel.buttonApplyInterval)).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.panel.buttonApplyInterval)).toBeInTheDocument();
 
     /**
      * Apply interval
      */
-    fireEvent.click(screen.getByTestId(TestIds.panel.buttonApplyInterval));
+    fireEvent.click(screen.getByTestId(TEST_IDS.panel.buttonApplyInterval));
 
     expect(onChangeTimeRange).toHaveBeenCalled();
   });

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { getJestSelectors } from '@volkovlabs/jest-selectors';
 import React from 'react';
 
-import { DefaultView, TestIds } from '../../constants';
+import { DEFAULT_VIEW, TEST_IDS } from '../../constants';
 import { View } from '../../types';
 import { DefaultViewEditor } from './DefaultViewEditor';
 
@@ -55,7 +55,7 @@ describe('Default View Editor', () => {
   /**
    * Selectors
    */
-  const getSelectors = getJestSelectors(TestIds.defaultViewEditor);
+  const getSelectors = getJestSelectors(TEST_IDS.defaultViewEditor);
   const selectors = getSelectors(screen);
 
   /**
@@ -173,6 +173,6 @@ describe('Default View Editor', () => {
       })
     );
 
-    expect(onChange).toHaveBeenCalledWith(DefaultView);
+    expect(onChange).toHaveBeenCalledWith(DEFAULT_VIEW);
   });
 });

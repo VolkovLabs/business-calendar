@@ -11,7 +11,7 @@ export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => voi
    * Key down
    */
   const keydownListener = useCallback(
-    (e: any) => {
+    (e: KeyboardEvent) => {
       if (e.key === 'Shift') {
         onKeyPressed(true);
       }
@@ -23,7 +23,7 @@ export const useKeyPress = (key: string, onKeyPressed: (pressed: boolean) => voi
    * Key up
    */
   const keyupListener = useCallback(
-    (e: any) => {
+    (e: KeyboardEvent) => {
       if (e.key === 'Shift') {
         onKeyPressed(false);
       }

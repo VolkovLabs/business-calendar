@@ -1,6 +1,6 @@
 import { config } from '@grafana/runtime';
 
-import { DefaultLanguage, Languages } from '../constants';
+import { DEFAULT_LANGUAGE, Languages } from '../constants';
 import { getUserLanguage } from './locale';
 
 /**
@@ -46,7 +46,7 @@ describe('Locale Utils', () => {
 
     it('Should return fallback lang', () => {
       config.bootData.user.language = '';
-      expect(getUserLanguage()).toEqual(DefaultLanguage);
+      expect(getUserLanguage()).toEqual(DEFAULT_LANGUAGE);
     });
   });
 });

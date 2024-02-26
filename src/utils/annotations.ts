@@ -18,7 +18,7 @@ const useAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
     /**
      * Parameters
      */
-    const params: { [name: string]: any } = { from: timeRange.from.valueOf(), to: timeRange.to.valueOf() };
+    const params: Record<string, unknown> = { from: timeRange.from.valueOf(), to: timeRange.to.valueOf() };
 
     /**
      * Type

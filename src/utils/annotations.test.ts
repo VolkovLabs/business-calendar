@@ -2,7 +2,7 @@ import { getBackendSrv } from '@grafana/runtime';
 import { renderHook, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 
-import { AnnotationsType, DefaultOptions } from '../constants';
+import { AnnotationsType, DEFAULT_OPTIONS } from '../constants';
 import { useAnnotationEvents } from './annotations';
 
 /**
@@ -41,7 +41,7 @@ describe('Annotations', () => {
         }) as any
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
-    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DefaultOptions as any));
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any));
 
     await waitFor(() =>
       expect(result.current).toEqual(
@@ -71,7 +71,7 @@ describe('Annotations', () => {
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
     renderHook(() =>
-      useAnnotationEvents(timeRange as any, { ...DefaultOptions, annotationsType: AnnotationsType.ALERT } as any)
+      useAnnotationEvents(timeRange as any, { ...DEFAULT_OPTIONS, annotationsType: AnnotationsType.ALERT } as any)
     );
 
     await waitFor(() =>
@@ -94,7 +94,7 @@ describe('Annotations', () => {
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
     renderHook(() =>
-      useAnnotationEvents(timeRange as any, { ...DefaultOptions, annotationsType: AnnotationsType.ANNOTATION } as any)
+      useAnnotationEvents(timeRange as any, { ...DEFAULT_OPTIONS, annotationsType: AnnotationsType.ANNOTATION } as any)
     );
 
     await waitFor(() =>
@@ -116,7 +116,7 @@ describe('Annotations', () => {
         }) as any
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
-    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DefaultOptions as any));
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any));
 
     await waitFor(() => expect(result.current).toEqual([]));
   });

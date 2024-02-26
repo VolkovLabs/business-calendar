@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import React from 'react';
 import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 
-import { DefaultViews, TestIds } from '../../constants';
+import { DEFAULT_VIEWS, TEST_IDS } from '../../constants';
 import { CalendarEvent, DateFormat } from '../../types';
 import { BigCalendar } from './BigCalendar';
 
@@ -47,13 +47,13 @@ describe('Big Calendar', () => {
   /**
    * Selectors
    */
-  const getSelectors = getJestSelectors(TestIds.bigCalendar);
+  const getSelectors = getJestSelectors(TEST_IDS.bigCalendar);
   const selectors = getSelectors(screen);
 
   /**
    * Event Details Selectors
    */
-  const eventDetailsSelectors = getJestSelectors(TestIds.eventDetails)(screen);
+  const eventDetailsSelectors = getJestSelectors(TEST_IDS.eventDetails)(screen);
 
   /**
    * Return particular day to prevent unexpected behaviors with dates
@@ -77,7 +77,7 @@ describe('Big Calendar', () => {
       <BigCalendar
         events={[]}
         timeRange={timeRange}
-        options={{ views: DefaultViews, scrollToTime: '2023-01-01T00:00:00.000Z' }}
+        options={{ views: DEFAULT_VIEWS, scrollToTime: '2023-01-01T00:00:00.000Z' }}
         {...(props as any)}
       />
     );
@@ -163,7 +163,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DefaultViews, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
       })
     );
 
@@ -209,7 +209,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DefaultViews, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
       })
     );
 
@@ -248,7 +248,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DefaultViews, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
       })
     );
 

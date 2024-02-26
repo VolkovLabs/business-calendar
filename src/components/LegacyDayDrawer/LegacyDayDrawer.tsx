@@ -35,12 +35,12 @@ interface Props {
   /**
    * Set Event handler
    */
-  setEvent: any;
+  setEvent: (event?: CalendarEvent) => void;
 
   /**
    * OnClose Event handler
    */
-  onClose: any;
+  onClose: () => void;
 }
 
 /**

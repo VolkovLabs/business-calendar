@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import React from 'react';
 import { dayjsLocalizer, Navigate } from 'react-big-calendar';
 
-import { TestIds } from '../../constants';
+import { TEST_IDS } from '../../constants';
 import { YearView } from './YearView';
 
 /**
@@ -49,7 +49,7 @@ describe('Year View', () => {
   /**
    * Selectors
    */
-  const getSelectors = getJestSelectors(TestIds.yearView);
+  const getSelectors = getJestSelectors(TEST_IDS.yearView);
   const selectors = getSelectors(screen);
 
   it('Should render year view with all months', () => {

@@ -5,10 +5,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { TestIds } from '../../constants';
+import { TEST_IDS } from '../../constants';
 import { CalendarEvent } from '../../types';
 import { LegacyCalendarEntry } from '../LegacyCalendarEntry';
-import { Styles } from './LegacyDay.styles';
+import { getStyles } from './LegacyDay.styles';
 
 /**
  * Properties
@@ -47,12 +47,12 @@ interface Props {
   /**
    * Set Day
    */
-  setDay: any;
+  setDay: (day: dayjs.Dayjs) => void;
 
   /**
    * Set Event
    */
-  setEvent: any;
+  setEvent: (event: CalendarEvent) => void;
 
   /**
    * Quick Links
@@ -90,7 +90,7 @@ export const LegacyDay: React.FC<Props> = ({
    * Styles
    */
   const theme = useTheme2();
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(getStyles);
 
   /**
    * Translation
@@ -125,10 +125,10 @@ export const LegacyDay: React.FC<Props> = ({
   return (
     <div
       className={cx(styles.background, isOutsideInterval && styles.backgroundOutside)}
-      onClick={(e) => {
+      onClick={() => {
         onSelectionChange(!selected);
       }}
-      data-testid={TestIds.day.root}
+      data-testid={TEST_IDS.day.root}
     >
       <div className={cx(styles.header)}>
         <div
@@ -138,14 +138,14 @@ export const LegacyDay: React.FC<Props> = ({
             isToday && styles.today,
             selected && styles.selected
           )}
-          data-testid={TestIds.day.dayDate}
+          data-testid={TEST_IDS.day.dayDate}
         >
           {day.format('D') === '1' ? day.format('MMM D') : day.format('D')}
         </div>
       </div>
 
       <AutoSizer disableWidth>
-        {({ height }: { height: any }) => {
+        {({ height }) => {
           const heightPerEntry = theme.typography.fontSize + 6;
           if (!height) {
             height = 0;
@@ -158,7 +158,7 @@ export const LegacyDay: React.FC<Props> = ({
             <>
               {entries.slice(0, maxNumEvents)}
               {moreEvents > 0 && (
-                <div onClick={() => setDay(day)} className={styles.moreLabel} data-testid={TestIds.day.buttonShowMore}>
+                <div onClick={() => setDay(day)} className={styles.moreLabel} data-testid={TEST_IDS.day.buttonShowMore}>
                   {t('legacyCalendar.showMore', { count: moreEvents })}
                 </div>
               )}

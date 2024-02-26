@@ -1,5 +1,5 @@
 import { e2e } from '@grafana/e2e';
-import { TestIds } from '../../src/constants';
+import { TEST_IDS } from '../../src/constants';
 
 /**
  * Dashboard
@@ -29,7 +29,7 @@ describe('Viewing a panel with Calendar', () => {
     /**
      * Panel
      */
-    const panel = currentPanel.find(getTestIdSelector(TestIds.bigCalendar.root));
+    const panel = currentPanel.find(getTestIdSelector(TEST_IDS.bigCalendar.root));
     panel.should('be.visible');
   });
 });

@@ -15,7 +15,7 @@ import { useTheme2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 
-import { Colors, DefaultLanguage } from '../constants';
+import { Colors, DEFAULT_LANGUAGE } from '../constants';
 import { CalendarEvent, CalendarOptions } from '../types';
 import { toTimeField } from './time';
 
@@ -120,7 +120,7 @@ export const getMinutesOffsetFromTimeZone = (timeZone: TimeZone) => {
   /**
    * Time Zone Date
    */
-  const timeZoneDate = dayjs(date.toLocaleString(DefaultLanguage, { timeZone }));
+  const timeZoneDate = dayjs(date.toLocaleString(DEFAULT_LANGUAGE, { timeZone }));
 
   /**
    * Time Zone offset from browser date
@@ -174,9 +174,9 @@ export const useCalendarEvents = (
       }
 
       return Array.from({ length: frame.text.values.length })
-        .map((_, i) => ({
+        .map((item, i) => ({
           text: frame.text?.display
-            ? (formattedValueToString(frame.text.display(frame.text?.values.get(i))) as any)
+            ? (formattedValueToString(frame.text.display(frame.text?.values.get(i))) as string)
             : frame.text?.values.get(i),
           description: frame.description?.values.get(i),
           start: frame.start?.values.get(i),

@@ -1,13 +1,13 @@
 import { config } from '@grafana/runtime';
 
-import { DefaultLanguage, Languages } from '../constants';
+import { DEFAULT_LANGUAGE, Languages } from '../constants';
 import { SupportedLanguage } from '../types';
 
 /**
  * Get User Language
  * @param fallback
  */
-export const getUserLanguage = (fallback = DefaultLanguage): SupportedLanguage => {
+export const getUserLanguage = (fallback = DEFAULT_LANGUAGE): SupportedLanguage => {
   const locale = config?.bootData?.user?.language;
   const lang = locale?.split('-')?.[0];
 

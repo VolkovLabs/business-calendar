@@ -89,7 +89,7 @@
         "en24": "English 24H",
         "es": "Spanish",
         "fr": "French",
-        "inherit": "By user locale",
+        "inherit": "User selection",
         "iso": "ISO 8601",
         "zh": "Chinese"
       }

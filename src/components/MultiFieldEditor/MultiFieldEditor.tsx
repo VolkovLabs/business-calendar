@@ -1,7 +1,8 @@
-import React from 'react';
 import { FieldType, StandardEditorProps } from '@grafana/data';
 import { MultiSelect, Select } from '@grafana/ui';
-import { TestIds } from '../../constants';
+import React from 'react';
+
+import { TEST_IDS } from '../../constants';
 
 /**
  * Settings
@@ -20,7 +21,7 @@ interface Props extends StandardEditorProps<string | string[] | null, Settings> 
  */
 export const MultiFieldEditor: React.FC<Props> = ({ item, value, onChange, context }) => {
   if (!context.data || !context.data.length) {
-    return <Select onChange={() => {}} disabled={true} aria-label={TestIds.multiFieldEditor.select} />;
+    return <Select onChange={() => {}} disabled={true} aria-label={TEST_IDS.multiFieldEditor.select} />;
   }
 
   /**
@@ -41,7 +42,7 @@ export const MultiFieldEditor: React.FC<Props> = ({ item, value, onChange, conte
       value={value as string[]}
       onChange={(element) => onChange(element.map((s) => s.value!))}
       options={options}
-      aria-label={TestIds.multiFieldEditor.multiSelect}
+      aria-label={TEST_IDS.multiFieldEditor.multiSelect}
     />
   );
 };

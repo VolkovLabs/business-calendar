@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { t } from 'i18next';
-import { Languages } from '../constants';
-import { DateFormat } from '../types';
+
+import { DateFormat, Language } from '../types';
 import { getUserLanguage } from '../utils';
 import { useLocalizer } from './useLocalizer';
 
@@ -11,7 +11,7 @@ import { useLocalizer } from './useLocalizer';
  */
 jest.mock('../utils', () => ({
   ...jest.requireActual('../utils'),
-  getUserLanguage: jest.fn(() => Languages.EN),
+  getUserLanguage: jest.fn(() => Language.EN),
 }));
 
 describe('Use Localizer', () => {
@@ -20,27 +20,27 @@ describe('Use Localizer', () => {
   };
 
   it('Should set dayjs locale', () => {
-    jest.mocked(getUserLanguage).mockReturnValue(Languages.FR);
+    jest.mocked(getUserLanguage).mockReturnValue(Language.FR);
     renderHook(() => useLocalizer(options));
 
-    expect(dayjs.locale()).toEqual(Languages.FR);
+    expect(dayjs.locale()).toEqual(Language.FR);
   });
 
   it('Should set dayjs locale', () => {
-    jest.mocked(getUserLanguage).mockReturnValue(Languages.EN);
+    jest.mocked(getUserLanguage).mockReturnValue(Language.EN);
     renderHook(() => useLocalizer(options));
 
-    expect(dayjs.locale()).toEqual(Languages.EN);
+    expect(dayjs.locale()).toEqual(Language.EN);
   });
 
   it('Should set default dayjs locale', () => {
     jest.mocked(getUserLanguage).mockReturnValue('123' as any);
     renderHook(() => useLocalizer(options));
 
-    expect(dayjs.locale()).toEqual(Languages.EN);
+    expect(dayjs.locale()).toEqual(Language.EN);
   });
 
-  [Languages.ES, Languages.FR, Languages.DE, Languages.ZH].forEach((lang) => {
+  [Language.ES, Language.FR, Language.DE, Language.ZH].forEach((lang) => {
     it(`Should set messages for ${lang}`, () => {
       jest.mocked(getUserLanguage).mockReturnValue(lang as any);
       const { result } = renderHook(() => useLocalizer(options));
@@ -53,7 +53,7 @@ describe('Use Localizer', () => {
   });
 
   it('Should use 12h format', () => {
-    jest.mocked(getUserLanguage).mockReturnValue(Languages.EN);
+    jest.mocked(getUserLanguage).mockReturnValue(Language.EN);
     const { result } = renderHook(() =>
       useLocalizer({
         ...options,
@@ -66,7 +66,7 @@ describe('Use Localizer', () => {
   });
 
   it('Should use 24h format', () => {
-    jest.mocked(getUserLanguage).mockReturnValue(Languages.EN);
+    jest.mocked(getUserLanguage).mockReturnValue(Language.EN);
     const { result } = renderHook(() =>
       useLocalizer({
         ...options,

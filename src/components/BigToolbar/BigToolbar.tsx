@@ -1,8 +1,9 @@
+import { Button, ButtonGroup, useStyles2 } from '@grafana/ui';
 import React from 'react';
 import { Messages, Navigate, ToolbarProps } from 'react-big-calendar';
-import { Button, ButtonGroup, useStyles2 } from '@grafana/ui';
-import { TestIds } from '../../constants';
-import { Styles } from './BigToolbar.styles';
+
+import { TEST_IDS } from '../../constants';
+import { getStyles } from './BigToolbar.styles';
 
 /**
  * Properties
@@ -17,7 +18,7 @@ export const BigToolbar: React.FC<Props> = ({ localizer: { messages }, label, on
   /**
    * Theme
    */
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(getStyles);
 
   /**
    * Render Views
@@ -35,7 +36,7 @@ export const BigToolbar: React.FC<Props> = ({ localizer: { messages }, label, on
         onClick={() => onView(name)}
         disabled={view === name}
         variant="secondary"
-        data-testid={TestIds.bigCalendarToolbar.buttonView(name)}
+        data-testid={TEST_IDS.bigCalendarToolbar.buttonView(name)}
       >
         {messages[name]}
       </Button>
@@ -49,7 +50,7 @@ export const BigToolbar: React.FC<Props> = ({ localizer: { messages }, label, on
           type="button"
           onClick={() => onNavigate(Navigate.TODAY)}
           variant="secondary"
-          data-testid={TestIds.bigCalendarToolbar.buttonToday}
+          data-testid={TEST_IDS.bigCalendarToolbar.buttonToday}
         >
           {messages.today}
         </Button>
@@ -60,14 +61,14 @@ export const BigToolbar: React.FC<Props> = ({ localizer: { messages }, label, on
             className={styles.prev}
             onClick={() => onNavigate(Navigate.PREVIOUS)}
             variant="secondary"
-            data-testid={TestIds.bigCalendarToolbar.buttonBack}
+            data-testid={TEST_IDS.bigCalendarToolbar.buttonBack}
             icon="angle-left"
           />
           <Button
             type="button"
             onClick={() => onNavigate(Navigate.NEXT)}
             variant="secondary"
-            data-testid={TestIds.bigCalendarToolbar.buttonNext}
+            data-testid={TEST_IDS.bigCalendarToolbar.buttonNext}
             icon="angle-right"
           />
         </ButtonGroup>

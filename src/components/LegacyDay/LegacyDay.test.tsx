@@ -1,7 +1,8 @@
+import { fireEvent, render, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { TestIds } from '../../constants';
+
+import { TEST_IDS } from '../../constants';
 import { LegacyDay } from './LegacyDay';
 
 /**
@@ -63,7 +64,7 @@ describe('Day', () => {
   it('Should find component', () => {
     render(getComponent({}));
 
-    expect(screen.getByTestId(TestIds.day.root)).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.day.root)).toBeInTheDocument();
   });
 
   it('Should apply time range', () => {
@@ -73,7 +74,7 @@ describe('Day', () => {
     /**
      * Select interval
      */
-    fireEvent.click(screen.getByTestId(TestIds.day.root));
+    fireEvent.click(screen.getByTestId(TEST_IDS.day.root));
 
     expect(onSelectionChange).toHaveBeenCalledWith(true);
   });
@@ -81,14 +82,14 @@ describe('Day', () => {
   it('Should show day if day > 1', () => {
     render(getComponent({}));
 
-    expect(screen.getByTestId(TestIds.day.dayDate)).toHaveTextContent(dayjs(getSafeDate()).format('D'));
+    expect(screen.getByTestId(TEST_IDS.day.dayDate)).toHaveTextContent(dayjs(getSafeDate()).format('D'));
   });
 
   it('Should show month with day if day = 1', () => {
     const firstDayDate = dayjs(new Date('2023-02-01'));
     render(getComponent({ day: firstDayDate }));
 
-    expect(screen.getByTestId(TestIds.day.dayDate)).toHaveTextContent(firstDayDate.format('MMM D'));
+    expect(screen.getByTestId(TEST_IDS.day.dayDate)).toHaveTextContent(firstDayDate.format('MMM D'));
   });
 
   it('Should show more events button', () => {
@@ -100,12 +101,12 @@ describe('Day', () => {
       })
     );
 
-    expect(screen.getByTestId(TestIds.day.buttonShowMore)).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.day.buttonShowMore)).toBeInTheDocument();
 
     /**
      * Click show more events button
      */
-    fireEvent.click(screen.getByTestId(TestIds.day.buttonShowMore));
+    fireEvent.click(screen.getByTestId(TEST_IDS.day.buttonShowMore));
 
     expect(setDay).toHaveBeenCalled();
   });

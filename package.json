@@ -33,6 +33,7 @@
     "@types/react-big-calendar": "^1.8.8",
     "@types/webpack-env": "^1.18.2",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@volkovlabs/eslint-config": "^1.3.0",
     "@volkovlabs/jest-selectors": "^1.2.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",

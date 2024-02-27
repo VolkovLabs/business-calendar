@@ -8,8 +8,14 @@ import zhLocale from 'dayjs/locale/zh';
 import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
-import { BigMessages, CalendarOptions, DateFormat } from '../types';
+
+import { BigMessages, CalendarOptions, DateFormat, DateLocalizer } from '../types';
 import { getUserLanguage } from '../utils';
+
+/**
+ * Due to dayjs types inconsistency we have to disable this rule
+ */
+/* eslint-disable @typescript-eslint/naming-convention */
 
 /**
  * ISO 8601 format
@@ -22,7 +28,7 @@ const isoFormat = 'YYYY-MM-DDTHH:mm:ssZ[Z]';
  * Dynamic import is not needed until there is too many locales
  * Each locale is about 1kb
  */
-const dayjsLocales = {
+const dayjsLocales: Record<string, ILocale> = {
   en: enLocale,
   en24: {
     ...enLocale,
@@ -34,7 +40,7 @@ const dayjsLocales = {
       LLLL: 'dddd, MMMM D, YYYY HH:mm',
       lll: 'MMM D, YYYY HH:mm',
       llll: 'ddd, MMM D, YYYY HH:mm',
-    },
+    } as never,
   },
   es: esLocale,
   fr: frLocale,
@@ -53,7 +59,7 @@ const dayjsLocales = {
       ll: isoFormat,
       lll: isoFormat,
       llll: isoFormat,
-    },
+    } as never,
   },
 };
 
@@ -122,15 +128,15 @@ export const useLocalizer = (options: CalendarOptions) => {
     /**
      * Localizer
      */
-    const localizer = dayjsLocalizer(dayjs);
+    const localizer = dayjsLocalizer(dayjs) as DateLocalizer;
 
     /**
      * Set Year View Formats
      */
-    (localizer.formats as any).yearHeaderFormat = 'YYYY';
-    (localizer.formats as any).yearMonthFormat = 'MMMM';
-    (localizer.formats as any).yearWeekFormat = 'dd';
-    (localizer.formats as any).yearDateFormat = 'D';
+    localizer.formats.yearHeaderFormat = 'YYYY';
+    localizer.formats.yearMonthFormat = 'MMMM';
+    localizer.formats.yearWeekFormat = 'dd';
+    localizer.formats.yearDateFormat = 'D';
 
     return { localizer, messages: messages };
   }, [dayjsLocale, localeDate, messages]);

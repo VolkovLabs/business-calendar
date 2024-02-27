@@ -1,7 +1,8 @@
+import { useStyles2 } from '@grafana/ui';
 import React from 'react';
 import { Event } from 'react-big-calendar';
-import { useStyles2 } from '@grafana/ui';
-import { Styles } from './BigEventContent.styles';
+
+import { getStyles } from './BigEventContent.styles';
 
 /**
  * Properties
@@ -22,7 +23,7 @@ export const BigEventContent: React.FC<Props> = ({ event }) => {
   /**
    * Styles
    */
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(getStyles);
 
   return (
     <>

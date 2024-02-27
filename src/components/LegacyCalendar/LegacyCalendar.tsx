@@ -1,16 +1,18 @@
+import { css, cx } from '@emotion/css';
+import { getLocaleData, PanelProps } from '@grafana/data';
+import { Button, useStyles2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { css, cx } from '@emotion/css';
-import { getLocaleData, PanelProps } from '@grafana/data';
-import { Button, useStyles2 } from '@grafana/ui';
-import { TestIds } from '../../constants';
+
+import { TEST_IDS } from '../../constants';
+import { useIntervalSelection } from '../../hooks';
 import { CalendarEvent, CalendarOptions } from '../../types';
-import { alignEvents, useIntervalSelection } from '../../utils';
+import { alignEvents } from '../../utils';
 import { LegacyDay } from '../LegacyDay';
 import { LegacyDayDrawer } from '../LegacyDayDrawer';
-import { Styles } from './LegacyCalendar.styles';
+import { getStyles } from './LegacyCalendar.styles';
 
 /**
  * Day.js Plugins
@@ -49,7 +51,7 @@ export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, hei
   /**
    * Theme
    */
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(getStyles);
 
   /**
    * Interval
@@ -93,7 +95,7 @@ export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, hei
         `,
         styles.panel
       )}
-      data-testid={TestIds.panel.root}
+      data-testid={TEST_IDS.panel.root}
     >
       {day && (
         <LegacyDayDrawer
@@ -120,7 +122,7 @@ export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, hei
               clearSelection();
               onChangeTimeRange({ from: from.valueOf(), to: to.valueOf() });
             }}
-            data-testid={TestIds.panel.buttonApplyInterval}
+            data-testid={TEST_IDS.panel.buttonApplyInterval}
           >
             {t('legacyCalendar.applyTimeRangeButton')}
           </Button>
@@ -131,7 +133,7 @@ export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, hei
        * Header displaying the weekdays
        */}
       <div className={styles.weekday}>
-        {Array.from({ length: 7 }).map((_, i) => (
+        {Array.from({ length: 7 }).map((item, i) => (
           <div key={i} className={styles.weekdayLabel}>
             {dayjs().startOf(firstDay).add(i, 'days').format('ddd')}
           </div>
@@ -151,7 +153,7 @@ export const LegacyCalendar: React.FC<Props> = ({ options, timeRange, width, hei
           `
         )}
       >
-        {Array.from({ length: numDays + 1 }).map((_, i) => {
+        {Array.from({ length: numDays + 1 }).map((item, i) => {
           const day = dayjs(startOfRangeWeek.valueOf()).startOf('day').add(i, 'days');
 
           const isSelected =

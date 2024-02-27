@@ -1,18 +1,19 @@
+import { Global } from '@emotion/react';
+import { PanelProps } from '@grafana/data';
+import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Calendar, Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
-import { Global } from '@emotion/react';
-import { PanelProps } from '@grafana/data';
-import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
-import { TestIds } from '../../constants';
-import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
+
+import { TEST_IDS } from '../../constants';
+import { useBigCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
 import { YearView } from '../YearView';
-import { BigCalendarStyles, LibStyles } from './BigCalendar.styles';
+import { getBigCalendarStyles, getLibStyles } from './BigCalendar.styles';
 
 /**
  * Properties
@@ -35,8 +36,8 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
    * Styles and Theme
    */
   const theme = useTheme2();
-  const styles = useStyles2(BigCalendarStyles);
-  const libStyles = LibStyles();
+  const styles = useStyles2(getBigCalendarStyles);
+  const libStyles = getLibStyles();
 
   /**
    * Translation
@@ -51,7 +52,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Adopted Events for BigCalendar
    */
-  const calendarEvents = useCalendarEvents(events);
+  const calendarEvents = useBigCalendarEvents(events);
 
   /**
    * Get props for event div element
@@ -166,14 +167,14 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
 
   if (!isViewExist) {
     return (
-      <Alert title={t('panel.noViewsTitle')} severity="info" data-testid={TestIds.bigCalendar.noViewsMessage}>
+      <Alert title={t('panel.noViewsTitle')} severity="info" data-testid={TEST_IDS.bigCalendar.noViewsMessage}>
         {t('panel.noViewsMessage')}
       </Alert>
     );
   }
 
   return (
-    <div data-testid={TestIds.bigCalendar.root}>
+    <div data-testid={TEST_IDS.bigCalendar.root}>
       {activeEvent && (
         <Drawer title={t('eventDetailsDrawer.title')} onClose={() => setActiveEvent(null)}>
           <EventDetails event={activeEvent} />
@@ -193,10 +194,10 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         style={{ height }}
         views={views}
         components={components}
-        onNavigate={onNavigate as any}
-        onView={onChangeView as any}
+        onNavigate={onNavigate as never}
+        onView={onChangeView as never}
         date={date}
-        view={view as any}
+        view={view as never}
         onSelectEvent={onSelectEvent}
         scrollToTime={scrollToTime}
       />

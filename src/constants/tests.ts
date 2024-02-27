@@ -3,7 +3,7 @@ import { selectors } from '@grafana/e2e-selectors';
 /**
  * Tests Identifiers
  */
-export const TestIds = {
+export const TEST_IDS = {
   calendarEntry: {
     filler: 'data-testid calendar-entry filler',
     eventOneDay: 'data-testid calendar-entry event-one-day',

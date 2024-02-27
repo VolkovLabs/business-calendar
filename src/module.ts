@@ -1,21 +1,23 @@
 import './i18n';
-import { t } from 'i18next';
+
 import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
+import { t } from 'i18next';
+
 import { CalendarPanel, DefaultViewEditor, MultiFieldEditor, TimeEditor } from './components';
 import {
-  AnnotationsOptions,
-  AnnotationsTypeOptions,
-  CalendarTypeOptions,
-  CalendarViewOptions,
-  ColorsOptions,
-  DateFormatOptions,
-  DefaultOptions,
-  DefaultScrollToTime,
-  DefaultView,
-  DefaultViews,
-  DisplayTimeOptions,
-  LinksOptions,
-  ScrollOptions,
+  ANNOTATIONS_OPTIONS,
+  ANNOTATIONS_TYPE_OPTIONS,
+  CALENDAR_TYPE_OPTIONS,
+  CALENDAR_VIEW_OPTIONS,
+  COLOR_OPTIONS,
+  DATE_FORMAT_OPTIONS,
+  DEFAULT_OPTIONS,
+  DEFAULT_SCROLL_TO_TIME,
+  DEFAULT_VIEW,
+  DEFAULT_VIEWS,
+  DISPLAY_TIME_OPTIONS,
+  LINK_OPTIONS,
+  SCROLL_OPTIONS,
 } from './constants';
 import { CalendarOptions, CalendarType } from './types';
 
@@ -45,7 +47,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         path: 'calendarType',
         name: t('panelOptions.calendarType.label'),
         settings: {
-          options: CalendarTypeOptions(t),
+          options: CALENDAR_TYPE_OPTIONS(t),
         },
         defaultValue: CalendarType.LEGACY,
       })
@@ -53,9 +55,9 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         path: 'views',
         name: t('panelOptions.views.label'),
         settings: {
-          options: CalendarViewOptions(t),
+          options: CALENDAR_VIEW_OPTIONS(t),
         },
-        defaultValue: DefaultViews as any,
+        defaultValue: DEFAULT_VIEWS as unknown,
         showIf: showForBigCalendar,
       })
       .addCustomEditor({
@@ -63,7 +65,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         path: 'defaultView',
         name: t('panelOptions.defaultView.label'),
         editor: DefaultViewEditor,
-        defaultValue: DefaultView,
+        defaultValue: DEFAULT_VIEW,
         showIf: showForBigCalendar,
       })
       .addCustomEditor({
@@ -72,16 +74,16 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.scrollToTime.label'),
         description: t('panelOptions.scrollToTime.description'),
         editor: TimeEditor,
-        defaultValue: DefaultScrollToTime,
+        defaultValue: DEFAULT_SCROLL_TO_TIME,
         showIf: showForBigCalendar,
       })
       .addSelect({
         path: 'dateFormat',
         name: t('panelOptions.dateFormat.label'),
         settings: {
-          options: DateFormatOptions(t),
+          options: DATE_FORMAT_OPTIONS(t),
         },
-        defaultValue: DefaultOptions.dateFormat,
+        defaultValue: DEFAULT_OPTIONS.dateFormat,
         showIf: showForBigCalendar,
       })
       .addRadio({
@@ -89,9 +91,9 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.autoScroll.label'),
         description: t('panelOptions.autoScroll.description'),
         settings: {
-          options: ScrollOptions(t),
+          options: SCROLL_OPTIONS(t),
         },
-        defaultValue: DefaultOptions.autoScroll,
+        defaultValue: DEFAULT_OPTIONS.autoScroll,
         showIf: showForLegacy,
       })
       .addRadio({
@@ -99,9 +101,9 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.displayTime.label'),
         description: t('panelOptions.displayTime.description'),
         settings: {
-          options: DisplayTimeOptions(t),
+          options: DISPLAY_TIME_OPTIONS(t),
         },
-        defaultValue: DefaultOptions.annotations,
+        defaultValue: DEFAULT_OPTIONS.annotations,
         showIf: showForLegacy,
       })
       .addRadio({
@@ -109,18 +111,18 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.quickLinks.label'),
         description: t('panelOptions.quickLinks.description'),
         settings: {
-          options: LinksOptions(t),
+          options: LINK_OPTIONS(t),
         },
-        defaultValue: DefaultOptions.quickLinks,
+        defaultValue: DEFAULT_OPTIONS.quickLinks,
       })
       .addRadio({
         path: 'colors',
         name: t('panelOptions.colors.label'),
         description: t('panelOptions.quickLinks.description'),
         settings: {
-          options: ColorsOptions(t),
+          options: COLOR_OPTIONS(t),
         },
-        defaultValue: DefaultOptions.colors,
+        defaultValue: DEFAULT_OPTIONS.colors,
       });
 
     /**
@@ -205,24 +207,24 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.annotations.annotations.label'),
         description: t('panelOptions.annotations.annotations.description'),
         settings: {
-          options: AnnotationsOptions(t),
+          options: ANNOTATIONS_OPTIONS(t),
         },
         category: [t('panelOptions.annotations.label')],
-        defaultValue: DefaultOptions.annotations,
+        defaultValue: DEFAULT_OPTIONS.annotations,
       })
       .addRadio({
         path: 'annotationsType',
         name: t('panelOptions.annotations.annotationsType.label'),
         settings: {
-          options: AnnotationsTypeOptions(t),
+          options: ANNOTATIONS_TYPE_OPTIONS(t),
         },
         category: [t('panelOptions.annotations.label')],
-        defaultValue: DefaultOptions.annotationsType,
+        defaultValue: DEFAULT_OPTIONS.annotationsType,
       })
       .addSliderInput({
         path: 'annotationsLimit',
         name: t('panelOptions.annotations.annotationsLimit.label'),
-        defaultValue: DefaultOptions.annotationsLimit,
+        defaultValue: DEFAULT_OPTIONS.annotationsLimit,
         settings: {
           min: 100,
           max: 2000,

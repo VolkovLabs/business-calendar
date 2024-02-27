@@ -1,6 +1,7 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { TestIds } from '../../constants';
+import React from 'react';
+
+import { TEST_IDS } from '../../constants';
 import { BigToolbar } from './BigToolbar';
 
 /**
@@ -27,25 +28,25 @@ describe('Toolbar', () => {
     /**
      * Today button
      */
-    expect(screen.getByTestId(TestIds.bigCalendarToolbar.buttonToday)).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.bigCalendarToolbar.buttonToday)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByTestId(TestIds.bigCalendarToolbar.buttonToday));
+    fireEvent.click(screen.getByTestId(TEST_IDS.bigCalendarToolbar.buttonToday));
     expect(onNavigate).toHaveBeenCalledWith('TODAY');
 
     /**
      * Back Button
      */
-    expect(screen.getByTestId(TestIds.bigCalendarToolbar.buttonBack)).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.bigCalendarToolbar.buttonBack)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByTestId(TestIds.bigCalendarToolbar.buttonBack));
+    fireEvent.click(screen.getByTestId(TEST_IDS.bigCalendarToolbar.buttonBack));
     expect(onNavigate).toHaveBeenCalledWith('PREV');
 
     /**
      * Next Button
      */
-    expect(screen.getByTestId(TestIds.bigCalendarToolbar.buttonNext)).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.bigCalendarToolbar.buttonNext)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByTestId(TestIds.bigCalendarToolbar.buttonNext));
+    fireEvent.click(screen.getByTestId(TEST_IDS.bigCalendarToolbar.buttonNext));
     expect(onNavigate).toHaveBeenCalledWith('NEXT');
   });
 
@@ -53,9 +54,9 @@ describe('Toolbar', () => {
     const onView = jest.fn();
     render(getComponent({ onView, views: ['month', 'week'] }));
 
-    expect(screen.getByTestId(TestIds.bigCalendarToolbar.buttonView('week'))).toBeInTheDocument();
+    expect(screen.getByTestId(TEST_IDS.bigCalendarToolbar.buttonView('week'))).toBeInTheDocument();
 
-    fireEvent.click(screen.getByTestId(TestIds.bigCalendarToolbar.buttonView('week')));
+    fireEvent.click(screen.getByTestId(TEST_IDS.bigCalendarToolbar.buttonView('week')));
     expect(onView).toHaveBeenCalledWith('week');
   });
 });

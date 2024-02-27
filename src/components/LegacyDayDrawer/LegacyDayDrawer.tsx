@@ -1,8 +1,9 @@
+import { Drawer, Tab, TabsBar } from '@grafana/ui';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Drawer, Tab, TabsBar } from '@grafana/ui';
+
 import { CalendarEvent } from '../../types';
 import { EventDetails } from '../EventDetails';
 
@@ -34,12 +35,12 @@ interface Props {
   /**
    * Set Event handler
    */
-  setEvent: any;
+  setEvent: (event?: CalendarEvent) => void;
 
   /**
    * OnClose Event handler
    */
-  onClose: any;
+  onClose: () => void;
 }
 
 /**

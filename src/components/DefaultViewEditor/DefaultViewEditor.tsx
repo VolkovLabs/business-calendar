@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { StandardEditorProps } from '@grafana/data';
 import { Select } from '@grafana/ui';
-import { CalendarViewOptions, DefaultView, TestIds } from '../../constants';
+import React, { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { CALENDAR_VIEW_OPTIONS, DEFAULT_VIEW, TEST_IDS } from '../../constants';
 import { CalendarOptions, View } from '../../types';
 
 /**
@@ -23,7 +24,7 @@ export const DefaultViewEditor: React.FC<Props> = ({ onChange, value, context })
    * Available options
    */
   const options = useMemo(() => {
-    const allOptions = CalendarViewOptions(t);
+    const allOptions = CALENDAR_VIEW_OPTIONS(t);
 
     return allOptions.filter((option) => context.options?.views?.includes(option.value));
   }, [context.options?.views, t]);
@@ -33,7 +34,7 @@ export const DefaultViewEditor: React.FC<Props> = ({ onChange, value, context })
    */
   useEffect(() => {
     if (!options.some((option) => option.value === value)) {
-      onChange(options[0]?.value || DefaultView);
+      onChange(options[0]?.value || DEFAULT_VIEW);
     }
   }, [onChange, options, value]);
 
@@ -44,7 +45,7 @@ export const DefaultViewEditor: React.FC<Props> = ({ onChange, value, context })
       }}
       options={options}
       value={value}
-      aria-label={TestIds.defaultViewEditor.field}
+      aria-label={TEST_IDS.defaultViewEditor.field}
     />
   );
 };

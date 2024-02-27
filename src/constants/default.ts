@@ -1,32 +1,30 @@
-import { CalendarOptions, CalendarType, DateFormat, SupportedLanguage, TimeOptions, View } from '../types';
-import { AnnotationsType, Colors } from './options';
-
-/**
- * Languages
- */
-export const enum Languages {
-  DE = 'de',
-  EN = 'en',
-  ES = 'es',
-  FR = 'fr',
-  ZH = 'zh',
-}
+import {
+  AnnotationsType,
+  CalendarOptions,
+  CalendarType,
+  ColorMode,
+  DateFormat,
+  Language,
+  SupportedLanguage,
+  TimeOptions,
+  View,
+} from '../types';
 
 /**
  * Default Language
  */
-export const DefaultLanguage: SupportedLanguage = Languages.EN;
+export const DEFAULT_LANGUAGE: SupportedLanguage = Language.EN;
 
 /**
  * Default Options
  */
-export const DefaultOptions: CalendarOptions = {
+export const DEFAULT_OPTIONS: CalendarOptions = {
   annotations: false,
   annotationsLimit: 100,
   annotationsType: AnnotationsType.ALL,
   autoScroll: false,
   calendarType: CalendarType.LEGACY,
-  colors: Colors.FRAME,
+  colors: ColorMode.FRAME,
   displayTime: false,
   quickLinks: false,
   dateFormat: DateFormat.INHERIT,
@@ -35,17 +33,17 @@ export const DefaultOptions: CalendarOptions = {
 /**
  * Default Views
  */
-export const DefaultViews = [View.DAY, View.WEEK, View.MONTH];
+export const DEFAULT_VIEWS = [View.DAY, View.WEEK, View.MONTH];
 
 /**
  * Default View
  */
-export const DefaultView = View.MONTH;
+export const DEFAULT_VIEW = View.MONTH;
 
 /**
  * Default Scroll To Time
  */
-export const DefaultScrollToTime: TimeOptions = {
+export const DEFAULT_SCROLL_TO_TIME: TimeOptions = {
   hours: 0,
   minutes: 0,
 };

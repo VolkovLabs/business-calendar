@@ -5,6 +5,8 @@
 ### Features / Enhancements
 
 - Update react-big-calendar to 1.10.3 (#150)
+- Add ability to select date format (#151)
+- Update ESLint configuration and refactoring (#152)
 
 ## 2.3.1 (2023-11-06)
 

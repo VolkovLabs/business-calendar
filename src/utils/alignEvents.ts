@@ -1,4 +1,5 @@
 import dayjs, { OpUnitType } from 'dayjs';
+
 import { CalendarEvent } from '../types';
 
 /**
@@ -39,7 +40,7 @@ export const alignEvents = (
       duration = start.endOf(firstDay).diff(start.startOf('day'), 'days') + 1;
 
       const interval = Array.from({ length: duration })
-        .map((_, i) => start.add(i, 'days'))
+        .map((item, i) => start.add(i, 'days'))
         .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
 
       addEvents(start, alignedEvents, interval);
@@ -48,7 +49,7 @@ export const alignEvents = (
     }
 
     const interval = Array.from({ length: duration })
-      .map((_, i) => start.add(i, 'days'))
+      .map((item, i) => start.add(i, 'days'))
       .map((d) => ({ day: d.format('YYYY-MM-DD'), event }));
 
     addEvents(start, alignedEvents, interval);
@@ -60,7 +61,11 @@ export const alignEvents = (
 /**
  * Add Events starting from the Start day
  */
-const addEvents = (start: dayjs.Dayjs, alignedEvents: Record<string, CalendarEvent[]>, interval: any) => {
+const addEvents = (
+  start: dayjs.Dayjs,
+  alignedEvents: Record<string, CalendarEvent[]>,
+  interval: Array<{ day: string; event: CalendarEvent }>
+) => {
   /**
    * Offset determines the vertical position of the event. It's used to make
    * sure the entries are vertically aligned.
@@ -78,13 +83,13 @@ const addEvents = (start: dayjs.Dayjs, alignedEvents: Record<string, CalendarEve
   /**
    * We expand each event to an entry for each day it spans.
    */
-  interval.forEach((entry: any) => {
+  interval.forEach((entry) => {
     if (!alignedEvents[entry.day]) {
       alignedEvents[entry.day] = [];
     }
 
     while (alignedEvents[entry.day].length < offset) {
-      alignedEvents[entry.day].push(undefined as any);
+      alignedEvents[entry.day].push(undefined as never);
     }
     alignedEvents[entry.day].splice(offset, 1, entry.event);
   });

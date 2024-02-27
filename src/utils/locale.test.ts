@@ -1,9 +1,11 @@
 import { config } from '@grafana/runtime';
-import { DefaultLanguage, Languages } from '../constants';
+
+import { DEFAULT_LANGUAGE } from '../constants';
+import { Language } from '../types';
 import { getUserLanguage } from './locale';
 
 /**
- * Mock User Languages
+ * Mock User Language
  */
 jest.mock('@grafana/runtime', () => ({
   config: {
@@ -20,23 +22,23 @@ describe('Locale Utils', () => {
     it.each([
       {
         locale: 'en-Any',
-        expectedLanguage: Languages.EN,
+        expectedLanguage: Language.EN,
       },
       {
         locale: 'es-Any',
-        expectedLanguage: Languages.ES,
+        expectedLanguage: Language.ES,
       },
       {
         locale: 'fr-Any',
-        expectedLanguage: Languages.FR,
+        expectedLanguage: Language.FR,
       },
       {
         locale: 'de-Any',
-        expectedLanguage: Languages.DE,
+        expectedLanguage: Language.DE,
       },
       {
         locale: 'zh-Any',
-        expectedLanguage: Languages.ZH,
+        expectedLanguage: Language.ZH,
       },
     ])('Should return user lang $expectedLanguage for $locale', ({ locale, expectedLanguage }) => {
       config.bootData.user.language = locale;
@@ -45,7 +47,7 @@ describe('Locale Utils', () => {
 
     it('Should return fallback lang', () => {
       config.bootData.user.language = '';
-      expect(getUserLanguage()).toEqual(DefaultLanguage);
+      expect(getUserLanguage()).toEqual(DEFAULT_LANGUAGE);
     });
   });
 });

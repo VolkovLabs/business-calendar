@@ -2,6 +2,7 @@ import { useStyles2 } from '@grafana/ui';
 import React from 'react';
 import { Event } from 'react-big-calendar';
 
+import { DateLocalizer } from '../../types';
 import { getStyles } from './BigEventContent.styles';
 
 /**
@@ -14,12 +15,17 @@ interface Props {
    * @type {Event}
    */
   event: Event;
+
+  /**
+   * Localizer
+   */
+  localizer: DateLocalizer;
 }
 
 /**
  * Big Event Content
  */
-export const BigEventContent: React.FC<Props> = ({ event }) => {
+export const BigEventContent: React.FC<Props> = ({ event, localizer }) => {
   /**
    * Styles
    */
@@ -27,6 +33,12 @@ export const BigEventContent: React.FC<Props> = ({ event }) => {
 
   return (
     <>
+      {!event.resource.allDay && (
+        <div className={styles.date}>
+          {localizer.format(event.start as Date, 'LT')}
+          {!event.resource.noEndTime && ` – ${localizer.format(event.end as Date, 'LT')}`}
+        </div>
+      )}
       {event.title}
       {!!event.resource?.location && <span className={styles.location}>{`: ${event.resource.location}`}</span>}
     </>

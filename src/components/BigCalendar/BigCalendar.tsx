@@ -3,7 +3,7 @@ import { PanelProps } from '@grafana/data';
 import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Calendar, Event } from 'react-big-calendar';
+import { Calendar, Components, Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 
 import { TEST_IDS } from '../../constants';
@@ -70,12 +70,18 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Calendar Components
    */
-  const components = useMemo(
+  const components: Components = useMemo(
     () => ({
       toolbar: BigToolbar,
-      event: BigEventContent,
+      day: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} />,
+        header: () => 'hello',
+      },
+      week: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} />,
+      },
     }),
-    []
+    [localizer]
   );
 
   /**
@@ -127,7 +133,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       setActiveEvent({
         text: event.title as string,
         start: dayjs(event.start),
-        end: event.end && !event.resource?.isEndless ? dayjs(event.end) : undefined,
+        end: event.end && !event.resource?.noEndTime ? dayjs(event.end) : undefined,
         labels: [],
         ...(event.resource || {}),
       });

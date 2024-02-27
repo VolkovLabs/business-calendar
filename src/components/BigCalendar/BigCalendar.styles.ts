@@ -46,6 +46,9 @@ export const getBigCalendarStyles = (theme: GrafanaTheme2) => {
         backgroundColor: 'transparent',
         color: theme.colors.text.link,
       },
+      '.rbc-event-label': {
+        display: 'none',
+      },
     },
   };
 };

@@ -63,6 +63,7 @@
         "autoScroll": false,
         "calendarType": "bigCalendar",
         "colors": "frame",
+        "dateFormat": "inherit",
         "defaultView": "day",
         "displayTime": false,
         "quickLinks": false,
@@ -92,6 +93,7 @@
                 "type": "time",
                 "values": [
                   1708608342000,
+                  1708608342000,
                   1708608342000
                 ]
               },
@@ -101,7 +103,18 @@
                 "type": "string",
                 "values": [
                   "event 1",
-                  "event 2"
+                  "event 2",
+                  "1 hour"
+                ]
+              },
+              {
+                "config": {},
+                "name": "end",
+                "type": "string",
+                "values": [
+                  "",
+                  "",
+                  "2024-02-22 17:25:42"
                 ]
               }
             ],
@@ -114,20 +127,20 @@
       "type": "marcusolsson-calendar-panel"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "2024-02-21T21:00:00.000Z",
+    "to": "2024-02-22T20:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "E2E",
   "uid": "d290eb4b",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

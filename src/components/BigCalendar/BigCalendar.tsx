@@ -75,7 +75,6 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       toolbar: BigToolbar,
       day: {
         event: (props) => <BigEventContent {...props} localizer={localizer} />,
-        header: () => 'hello',
       },
       week: {
         event: (props) => <BigEventContent {...props} localizer={localizer} />,

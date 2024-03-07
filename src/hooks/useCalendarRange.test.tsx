@@ -95,6 +95,35 @@ describe('Use Calendar Range', () => {
     expect(screen.getByTestId('date')).toHaveTextContent('2022-12-02T12:00:00.000Z');
   });
 
+  it('Should keep calendar dates if time range not updated', () => {
+    const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
+    const timeRange = {
+      ...defaultTimeRange,
+      from: dateTime(last3Months.toDate()),
+    };
+
+    /**
+     * Component to test re-render
+     * @param timeRange
+     * @constructor
+     */
+    const Component = ({ timeRange }: any) => {
+      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY);
+      return <div data-testid="date">{date.toISOString()}</div>;
+    };
+
+    const { rerender } = render(<Component timeRange={timeRange} />);
+
+    expect(screen.getByTestId('date')).toHaveTextContent('2023-02-02T00:00:00.000Z');
+
+    /**
+     * Re-render with same timeRange
+     */
+    rerender(<Component timeRange={timeRange} />);
+
+    expect(screen.getByTestId('date')).toHaveTextContent('2023-02-02T00:00:00.000Z');
+  });
+
   describe('Navigate', () => {
     it('Should apply new range based on view', async () => {
       const last3Months = dayjs(getSafeDate()).subtract(3, 'month');

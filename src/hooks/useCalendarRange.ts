@@ -30,6 +30,7 @@ export const useCalendarRange = (
   defaultView = View.MONTH
 ) => {
   const [view, setView] = useState(defaultView);
+  const previousTimeRange = useRef(timeRange);
   const [calendarFrom, setCalendarFrom] = useState(dayjs(timeRange.to.toDate()).startOf(getUnitType(view)).toDate());
   const [calendarTo, setCalendarTo] = useState(timeRange.to.toDate());
   const isExternalUpdate = useRef<boolean>(false);
@@ -115,13 +116,14 @@ export const useCalendarRange = (
    * Update calendar range if time range updated
    */
   useEffect(() => {
-    if (isExternalUpdate.current) {
+    if (isExternalUpdate.current && previousTimeRange.current !== timeRange) {
       setCalendarFrom(timeRange.from.toDate());
       setCalendarTo(timeRange.to.toDate());
+      previousTimeRange.current = timeRange;
     } else {
       isExternalUpdate.current = true;
     }
-  }, [timeRange.from, timeRange.to]);
+  }, [timeRange, timeRange.from, timeRange.to]);
 
   return {
     date: middleDate,

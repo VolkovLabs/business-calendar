@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.4.0 (IN PROGRESS)
+## 2.4.0 (2024-03-07)
 
 ### Features / Enhancements
 
@@ -8,6 +8,7 @@
 - Add ability to select date format (#151)
 - Update ESLint configuration and refactoring (#152)
 - Update dependencies and Actions (#154)
+- Add hiding end time (#155)
 
 ## 2.3.1 (2023-11-06)
 

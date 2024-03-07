@@ -2,7 +2,7 @@
 
 ![Calendar](https://github.com/VolkovLabs/volkovlabs-calendar-panel/raw/main/src/img/screenshot.png)
 
-![Grafana](https://img.shields.io/badge/Grafana-10.1-orange)
+![Grafana](https://img.shields.io/badge/Grafana-10.3-orange)
 ![CI](https://github.com/volkovlabs/volkovlabs-calendar-panel/workflows/CI/badge.svg)
 ![E2E](https://github.com/volkovlabs/volkovlabs-calendar-panel/workflows/E2E/badge.svg)
 [![codecov](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel/branch/main/graph/badge.svg?token=0m6f0ktUar)](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel)
@@ -39,11 +39,11 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 ## Documentation
 
-| Section                  | Description                                             |
-| ------------------------ | ------------------------------------------------------- |
-| [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display events. |
-| [Features](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/features/)     | Explains the plugin's features.                            |
-| [Release Notes](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/release/) | Stay up to date with the latest features and updates.   |
+| Section                                                                           | Description                                           |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display events.  |
+| [Features](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/features/)     | Explains the plugin's features.                       |
+| [Release Notes](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/release/) | Stay up to date with the latest features and updates. |
 
 ## Tutorial
 

@@ -53,7 +53,8 @@ describe('useBigCalendarEvents', () => {
         resource: {
           color: event1.color,
           labels: event1.labels,
-          isEndless: true,
+          noEndTime: true,
+          allDay: false,
         },
       })
     );
@@ -78,7 +79,8 @@ describe('useBigCalendarEvents', () => {
           color: event2.color,
           labels: event2.labels,
           description: event2.description,
-          isEndless: false,
+          noEndTime: false,
+          allDay: false,
         },
       })
     );
@@ -95,7 +97,8 @@ describe('useBigCalendarEvents', () => {
           color: event3.color,
           labels: event3.labels,
           description: event3.description,
-          isEndless: true,
+          allDay: true,
+          noEndTime: true,
         },
       })
     );

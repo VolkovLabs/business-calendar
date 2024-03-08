@@ -4,11 +4,15 @@
 
 ### Features / Enhancements
 
-- Update react-big-calendar to 1.10.3 (#150)
-- Add ability to select date format (#151)
-- Update ESLint configuration and refactoring (#152)
-- Update dependencies and Actions (#154)
-- Add hiding end time (#155)
+- Updated Big Calendar to 1.10.3 (#150)
+- Added ability to select date format (#151)
+- Updated ESLint configuration and refactoring (#152)
+- Updated dependencies and Actions (#154)
+- Added hiding end time (#155)
+
+### Bugfixes
+
+- Fixed keeping calendar dates if no time range change (#156)
 
 ## 2.3.1 (2023-11-06)
 

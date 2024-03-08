@@ -10,6 +10,10 @@
 - Update dependencies and Actions (#154)
 - Add hiding end time (#155)
 
+### Bugfixes
+
+- Fix keeping calendar dates if no time range change (#156)
+
 ## 2.3.1 (2023-11-06)
 
 ### Bugfixes

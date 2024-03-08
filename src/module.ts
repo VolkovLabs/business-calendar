@@ -33,6 +33,8 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       FieldConfigProperty.Decimals,
       FieldConfigProperty.DisplayName,
       FieldConfigProperty.NoValue,
+      'unitScale' as never,
+      'fieldMinMax' as never,
     ],
   })
   .setPanelOptions((builder) => {

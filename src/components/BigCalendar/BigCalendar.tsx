@@ -74,10 +74,17 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     () => ({
       toolbar: BigToolbar,
       day: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} />,
+        event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
       },
       week: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
+      },
+      month: {
         event: (props) => <BigEventContent {...props} localizer={localizer} />,
+      },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      work_week: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
       },
     }),
     [localizer]

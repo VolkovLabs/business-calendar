@@ -82,7 +82,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
       </Card.Heading>
       <Card.Meta>{meta}</Card.Meta>
       <Card.Tags>
-        <TagList tags={tags} />
+        <TagList tags={tags} className={styles.labels} />
       </Card.Tags>
       {showFullInfo && (
         <>

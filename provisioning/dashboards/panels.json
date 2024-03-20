@@ -175,6 +175,7 @@
         "descriptionField": "description",
         "displayTime": true,
         "labelFields": ["slug", "version"],
+        "locationField": "version",
         "quickLinks": false,
         "scrollToTime": {
           "hours": 0,
@@ -404,7 +405,7 @@
         ]
       },
       "gridPos": {
-        "h": 30,
+        "h": 11,
         "w": 24,
         "x": 0,
         "y": 21
@@ -595,6 +596,6 @@
   "timezone": "",
   "title": "Grafana Plugins",
   "uid": "hHK1qmpnk",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }

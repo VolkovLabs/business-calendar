@@ -20,12 +20,17 @@ interface Props {
    * Localizer
    */
   localizer: DateLocalizer;
+
+  /**
+   * Show Time
+   */
+  showTime?: boolean;
 }
 
 /**
  * Big Event Content
  */
-export const BigEventContent: React.FC<Props> = ({ event, localizer }) => {
+export const BigEventContent: React.FC<Props> = ({ event, localizer, showTime = false }) => {
   /**
    * Styles
    */
@@ -33,7 +38,7 @@ export const BigEventContent: React.FC<Props> = ({ event, localizer }) => {
 
   return (
     <>
-      {!event.resource.allDay && (
+      {showTime && !event.resource.allDay && (
         <div className={styles.date}>
           {localizer.format(event.start as Date, 'LT')}
           {!event.resource.noEndTime && ` – ${localizer.format(event.end as Date, 'LT')}`}

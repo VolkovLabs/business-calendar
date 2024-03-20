@@ -2,6 +2,10 @@
 
 ## 2.5.0 (IN PROGRESS)
 
+### Features / Enhancements
+
+- Update style for event details tags (#161)
+
 ### Bugfixes
 
 - Fix showing location on month and work week views #160

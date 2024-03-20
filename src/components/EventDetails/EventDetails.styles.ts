@@ -12,5 +12,16 @@ export const getStyles = (theme: GrafanaTheme2) => {
       min-width: ${theme.spacing(1)};
       height: ${theme.spacing(1)};
     `,
+    labels: css`
+      max-width: 300px;
+      li {
+        max-width: 100%;
+
+        span {
+          white-space: normal;
+          display: block;
+        }
+      }
+    `,
   };
 };

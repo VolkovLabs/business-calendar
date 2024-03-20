@@ -2,7 +2,7 @@
 
 ## 2.5.0 (IN PROGRESS)
 
-### Features / Enhancements
+### Bugfixes
 
 - Fix showing location on month and work week views #160
 

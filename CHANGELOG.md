@@ -1,10 +1,11 @@
 # Changelog
 
-## 2.5.0 (IN PROGRESS)
+## 2.5.0 (2024-03-20)
 
 ### Features / Enhancements
 
 - Update style for event details tags (#161)
+- Updated dependencies to Grafana 10.4 (#154)
 
 ### Bugfixes
 

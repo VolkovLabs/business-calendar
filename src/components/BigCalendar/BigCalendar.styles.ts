@@ -27,7 +27,7 @@ export const getBigCalendarStyles = (theme: GrafanaTheme2) => {
         backgroundColor: theme.colors.background.secondary,
       },
       '.rbc-today': {
-        backgroundColor: theme.colors.background.canvas,
+        backgroundColor: theme.colors.border.weak,
       },
       [borderColorOverrideSelectors]: {
         borderColor: theme.colors.border.weak,

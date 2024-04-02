@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Add keeping refresh dashboard on time range change (#167)
+
 ## 2.5.0 (2024-03-20)
 
 ### Features / Enhancements

@@ -1,5 +1,6 @@
 import { Global } from '@emotion/react';
-import { PanelProps } from '@grafana/data';
+import { AbsoluteTimeRange, PanelProps } from '@grafana/data';
+import { locationService } from '@grafana/runtime';
 import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -91,9 +92,42 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   );
 
   /**
+   * On Change Time Range
+   * Keep refresh with absolute time range
+   * https://github.com/grafana/grafana/issues/3192
+   */
+  const onChangeTimeRangeWithRefresh = useCallback(
+    (timeRange: AbsoluteTimeRange) => {
+      const search = locationService.getSearchObject();
+
+      onChangeTimeRange(timeRange);
+
+      /**
+       * Enable refresh with timeout
+       * To separate change time range and set refresh actions
+       */
+      if (search.refresh) {
+        setTimeout(() => {
+          locationService.partial(
+            {
+              refresh: search.refresh,
+            },
+            true
+          );
+        });
+      }
+    },
+    [onChangeTimeRange]
+  );
+
+  /**
    * Manage calendar time range and view
    */
-  const { date, view, onChangeView, onNavigate } = useCalendarRange(timeRange, onChangeTimeRange, options.defaultView);
+  const { date, view, onChangeView, onNavigate } = useCalendarRange(
+    timeRange,
+    onChangeTimeRangeWithRefresh,
+    options.defaultView
+  );
 
   /**
    * Is Selected View Exist

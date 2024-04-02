@@ -1,4 +1,5 @@
 import { dateTime, LinkTarget } from '@grafana/data';
+import { locationService } from '@grafana/runtime';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { getJestSelectors } from '@volkovlabs/jest-selectors';
 import dayjs from 'dayjs';
@@ -6,8 +7,19 @@ import React from 'react';
 import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 
 import { DEFAULT_VIEWS, TEST_IDS } from '../../constants';
-import { CalendarEvent, DateFormat } from '../../types';
+import { useCalendarRange } from '../../hooks';
+import { CalendarEvent, DateFormat, View } from '../../types';
 import { BigCalendar } from './BigCalendar';
+
+/**
+ * Mock @grafana/runtime
+ */
+jest.mock('@grafana/runtime', () => ({
+  locationService: {
+    getSearchObject: jest.fn(),
+    partial: jest.fn(),
+  },
+}));
 
 /**
  * Mock hooks
@@ -15,6 +27,7 @@ import { BigCalendar } from './BigCalendar';
 jest.mock('../../hooks', () => ({
   ...jest.requireActual('../../hooks'),
   useLocalizer: jest.fn().mockImplementation(() => ({ localizer: jest.fn(), messages: {} }) as any),
+  useCalendarRange: jest.fn(jest.requireActual('../../hooks').useCalendarRange),
 }));
 
 /**
@@ -34,6 +47,11 @@ jest.mock('./BigCalendar.styles', () => ({
     global: '',
   }),
 }));
+
+/**
+ * Mock timers
+ */
+jest.useFakeTimers();
 
 /**
  * Component Props
@@ -389,5 +407,66 @@ describe('Big Calendar', () => {
         backgroundColor: event.color,
       }),
     });
+  });
+
+  it('Should keep refresh on time range change', () => {
+    let changeTimeRange: any;
+
+    /**
+     * Mock calendar range
+     */
+    jest.mocked(useCalendarRange).mockImplementation((timeRange, onChangeTimeRange) => {
+      changeTimeRange = onChangeTimeRange;
+      return {
+        date: new Date(),
+        view: View.DAY,
+        onChangeView: jest.fn(),
+        onNavigate: jest.fn(),
+      };
+    });
+
+    /**
+     * Mock location service
+     */
+    jest.mocked(locationService.getSearchObject).mockReturnValueOnce({
+      refresh: '5s',
+    });
+
+    const onChangeTimeRange = jest.fn();
+
+    render(getComponent({ events: [], onChangeTimeRange }));
+
+    changeTimeRange({
+      from: '123',
+      to: '321',
+    });
+
+    /**
+     * Check if time range changed
+     */
+    expect(onChangeTimeRange).toHaveBeenCalledWith({
+      from: '123',
+      to: '321',
+    });
+
+    /**
+     * Check if update location wait until timeout
+     */
+    expect(locationService.partial).not.toHaveBeenCalled();
+
+    /**
+     * Run timer
+     */
+    jest.runOnlyPendingTimers();
+
+    /**
+     * Check if location updated
+     */
+    expect(locationService.partial).toHaveBeenCalledWith(
+      {
+        refresh: '5s',
+      },
+      true
+    );
   });
 });

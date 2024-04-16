@@ -4,7 +4,7 @@ import { GrafanaTheme2 } from '@grafana/data';
 /**
  * Styles
  */
-export const BigCalendarStyles = (theme: GrafanaTheme2) => {
+export const getBigCalendarStyles = (theme: GrafanaTheme2) => {
   const borderColorOverrideSelectors = `
     .rbc-header,
     .rbc-header + .rbc-header,
@@ -27,7 +27,7 @@ export const BigCalendarStyles = (theme: GrafanaTheme2) => {
         backgroundColor: theme.colors.background.secondary,
       },
       '.rbc-today': {
-        backgroundColor: theme.colors.background.canvas,
+        backgroundColor: theme.colors.border.weak,
       },
       [borderColorOverrideSelectors]: {
         borderColor: theme.colors.border.weak,
@@ -46,6 +46,9 @@ export const BigCalendarStyles = (theme: GrafanaTheme2) => {
         backgroundColor: 'transparent',
         color: theme.colors.text.link,
       },
+      '.rbc-event-label': {
+        display: 'none',
+      },
     },
   };
 };
@@ -55,7 +58,7 @@ export const BigCalendarStyles = (theme: GrafanaTheme2) => {
  * Duplication because we can't control the import order of webpack and emotion
  * react-big-calendar/lib/css/react-big-calendar.css
  */
-export const LibStyles = () => {
+export const getLibStyles = () => {
   return {
     global: css`
       .rbc-btn {

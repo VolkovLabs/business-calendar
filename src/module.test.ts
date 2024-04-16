@@ -1,4 +1,5 @@
 import { Field, FieldType, PanelPlugin } from '@grafana/data';
+
 import { plugin } from './module';
 
 /**
@@ -18,6 +19,7 @@ describe('plugin', () => {
     addRadio: jest.fn().mockImplementation(() => builder),
     addFieldNamePicker: jest.fn().mockImplementation(() => builder),
     addSliderInput: jest.fn().mockImplementation(() => builder),
+    addSelect: jest.fn().mockImplementation(() => builder),
     addMultiSelect: jest.fn().mockImplementation(() => builder),
   };
 

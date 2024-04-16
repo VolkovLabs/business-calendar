@@ -1,8 +1,10 @@
-import dayjs from 'dayjs';
 import { getBackendSrv } from '@grafana/runtime';
 import { renderHook, waitFor } from '@testing-library/react';
-import { AnnotationsType, DefaultOptions } from '../constants';
-import { useAnnotationEvents } from './annotations';
+import dayjs from 'dayjs';
+
+import { DEFAULT_OPTIONS } from '../constants';
+import { AnnotationsType } from '../types';
+import { useAnnotationEvents } from './useAnnotationEvents';
 
 /**
  * Mock @grafana/runtime
@@ -16,7 +18,7 @@ jest.mock('@grafana/runtime', () => ({
 /**
  * Annotations
  */
-describe('Annotations', () => {
+describe('useAnnotationEvents', () => {
   /**
    * Return particular day to prevent unexpected behaviors with dates
    */
@@ -40,7 +42,7 @@ describe('Annotations', () => {
         }) as any
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
-    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DefaultOptions as any));
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any));
 
     await waitFor(() =>
       expect(result.current).toEqual(
@@ -70,7 +72,7 @@ describe('Annotations', () => {
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
     renderHook(() =>
-      useAnnotationEvents(timeRange as any, { ...DefaultOptions, annotationsType: AnnotationsType.ALERT } as any)
+      useAnnotationEvents(timeRange as any, { ...DEFAULT_OPTIONS, annotationsType: AnnotationsType.ALERT } as any)
     );
 
     await waitFor(() =>
@@ -93,7 +95,7 @@ describe('Annotations', () => {
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
     renderHook(() =>
-      useAnnotationEvents(timeRange as any, { ...DefaultOptions, annotationsType: AnnotationsType.ANNOTATION } as any)
+      useAnnotationEvents(timeRange as any, { ...DEFAULT_OPTIONS, annotationsType: AnnotationsType.ANNOTATION } as any)
     );
 
     await waitFor(() =>
@@ -115,7 +117,7 @@ describe('Annotations', () => {
         }) as any
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
-    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DefaultOptions as any));
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any));
 
     await waitFor(() => expect(result.current).toEqual([]));
   });

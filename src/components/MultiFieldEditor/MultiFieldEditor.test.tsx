@@ -1,7 +1,8 @@
-import React from 'react';
 import { FieldType, toDataFrame } from '@grafana/data';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { TestIds } from '../../constants';
+import React from 'react';
+
+import { TEST_IDS } from '../../constants';
 import { MultiFieldEditor } from './MultiFieldEditor';
 
 /**
@@ -59,8 +60,8 @@ describe('Editor', () => {
   it('Should render select component', async () => {
     render(getComponent({}));
 
-    expect(screen.getByLabelText(TestIds.multiFieldEditor.select)).toBeInTheDocument();
-    expect(screen.getByLabelText(TestIds.multiFieldEditor.select)).toBeDisabled();
+    expect(screen.getByLabelText(TEST_IDS.multiFieldEditor.select)).toBeInTheDocument();
+    expect(screen.getByLabelText(TEST_IDS.multiFieldEditor.select)).toBeDisabled();
   });
 
   it('Should render multi select component', async () => {
@@ -80,12 +81,12 @@ describe('Editor', () => {
       getComponent({ context: { data }, item: { settings: { filterByType: [FieldType.string] } } as any, onChange })
     );
 
-    expect(screen.getByLabelText(TestIds.multiFieldEditor.multiSelect)).toBeInTheDocument();
+    expect(screen.getByLabelText(TEST_IDS.multiFieldEditor.multiSelect)).toBeInTheDocument();
 
     /**
      * Change multi select value
      */
-    fireEvent.change(screen.getByLabelText(TestIds.multiFieldEditor.multiSelect), { target: { value: 'text' } });
+    fireEvent.change(screen.getByLabelText(TEST_IDS.multiFieldEditor.multiSelect), { target: { value: 'text' } });
 
     expect(onChange).toHaveBeenCalledWith(['text']);
   });

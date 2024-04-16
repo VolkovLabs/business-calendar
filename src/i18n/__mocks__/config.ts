@@ -1,21 +1,23 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { Languages } from '../../constants';
+
+import { Language } from '../../types';
 import { resources } from '../translations';
 
 /**
  * Default Namespace
  */
-export const defaultNS = 'translation';
+export const defaultNamespace = 'translation';
 
 /**
  * Init i18next
  */
 i18next.use(initReactI18next).init({
-  lng: Languages.EN,
+  lng: Language.EN,
   debug: false,
   resources,
-  defaultNS,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  defaultNS: defaultNamespace,
 });
 
 /**

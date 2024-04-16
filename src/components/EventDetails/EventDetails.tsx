@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { textUtil } from '@grafana/data';
 import { Card, LinkButton, TagList, useStyles2 } from '@grafana/ui';
-import { TestIds } from '../../constants';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { TEST_IDS } from '../../constants';
 import { CalendarEvent } from '../../types';
-import { Styles } from './EventDetails.styles';
+import { getStyles } from './EventDetails.styles';
 
 /**
  * Properties
@@ -37,7 +38,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
   /**
    * Styles
    */
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(getStyles);
 
   /**
    * Translation
@@ -70,9 +71,9 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
   const tags = useMemo(() => event.labels.flatMap((label) => label.split(',')), [event.labels]);
 
   return (
-    <Card onClick={onClick} data-testid={TestIds.eventDetails.root}>
-      <Card.Heading aria-label={TestIds.eventDetails.titleButton}>
-        <div data-testid={TestIds.eventDetails.titleText}>
+    <Card onClick={onClick} data-testid={TEST_IDS.eventDetails.root}>
+      <Card.Heading aria-label={TEST_IDS.eventDetails.titleButton}>
+        <div data-testid={TEST_IDS.eventDetails.titleText}>
           <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.svg}>
             <circle cx={5} cy={5} r={5} />
           </svg>
@@ -81,7 +82,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
       </Card.Heading>
       <Card.Meta>{meta}</Card.Meta>
       <Card.Tags>
-        <TagList tags={tags} />
+        <TagList tags={tags} className={styles.labels} />
       </Card.Tags>
       {showFullInfo && (
         <>
@@ -99,7 +100,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
                   target={link.target}
                   variant={'secondary'}
                   onClick={link.onClick}
-                  aria-label={TestIds.eventDetails.link}
+                  aria-label={TEST_IDS.eventDetails.link}
                 >
                   {link.title}
                 </LinkButton>

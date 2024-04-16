@@ -1,5 +1,5 @@
-import dayjs from 'dayjs';
 import { Field, LinkModel } from '@grafana/data';
+import dayjs from 'dayjs';
 
 /**
  * Range

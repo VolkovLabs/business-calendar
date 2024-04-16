@@ -1,5 +1,6 @@
 import { ArrayVector, FieldType, GrafanaTheme2 } from '@grafana/data';
 import { getTheme } from '@grafana/ui';
+
 import { toTimeField } from './time';
 
 /**

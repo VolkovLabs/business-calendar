@@ -1,27 +1,28 @@
+import { useStyles2 } from '@grafana/ui';
 import React, { useMemo } from 'react';
 import { CalendarProps, DateLocalizer, Navigate, NavigateAction } from 'react-big-calendar';
-import { useStyles2 } from '@grafana/ui';
-import { TestIds } from '../../constants';
-import { Styles } from './YearView.styles';
+
+import { TEST_IDS } from '../../constants';
+import { getStyles } from './YearView.styles';
 import { YearViewMonth } from './YearViewMonth';
 
 /**
  * Year View
  */
-const YearView: React.FC<CalendarProps> = ({ date, localizer, ...restProps }) => {
+const YearView = ({ date, localizer, ...restProps }: CalendarProps) => {
   /**
    * Styles
    */
-  const styles = useStyles2(Styles);
+  const styles = useStyles2(getStyles);
 
   /**
    * Week Names
    */
   const weekNames = useMemo(() => {
-    let firstOfWeek = localizer.startOfWeek('');
+    const firstOfWeek = localizer.startOfWeek('');
     const date = new Date();
-    let start = localizer.startOf(date, 'week', firstOfWeek);
-    let end = localizer.endOf(date, 'week', firstOfWeek);
+    const start = localizer.startOf(date, 'week', firstOfWeek);
+    const end = localizer.endOf(date, 'week', firstOfWeek);
 
     const weekRange = localizer.range(start, end);
 
@@ -47,7 +48,7 @@ const YearView: React.FC<CalendarProps> = ({ date, localizer, ...restProps }) =>
   }
 
   return (
-    <div className={styles.year} data-testid={TestIds.yearView.root}>
+    <div className={styles.year} data-testid={TEST_IDS.yearView.root}>
       {months.map((month) => month)}
     </div>
   );
@@ -58,7 +59,7 @@ const YearView: React.FC<CalendarProps> = ({ date, localizer, ...restProps }) =>
  * @param date
  * @param localizer
  */
-(YearView as any).title = (date: Date, { localizer }: { localizer: DateLocalizer }) => {
+YearView.title = (date: Date, { localizer }: { localizer: DateLocalizer }) => {
   return localizer.format(date, 'yearHeaderFormat');
 };
 
@@ -67,7 +68,7 @@ const YearView: React.FC<CalendarProps> = ({ date, localizer, ...restProps }) =>
  * @param date
  * @param localizer
  */
-(YearView as any).range = (date: Date, { localizer }: { localizer: DateLocalizer }) => {
+YearView.range = (date: Date, { localizer }: { localizer: DateLocalizer }) => {
   return [localizer.startOf(date, 'year')];
 };
 
@@ -77,7 +78,7 @@ const YearView: React.FC<CalendarProps> = ({ date, localizer, ...restProps }) =>
  * @param action
  * @param localizer
  */
-(YearView as any).navigate = (date: Date, action: NavigateAction, { localizer }: { localizer: DateLocalizer }) => {
+YearView.navigate = (date: Date, action: NavigateAction, { localizer }: { localizer: DateLocalizer }) => {
   switch (action) {
     case Navigate.PREVIOUS:
       return localizer.add(date, -1, 'year');

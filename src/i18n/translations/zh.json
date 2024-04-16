@@ -81,6 +81,19 @@
         "frame": "框架"
       }
     },
+    "dateFormat": {
+      "label": "日期和时间格式",
+      "options": {
+        "de": "德语",
+        "en": "英语",
+        "en24": "英语 24H",
+        "es": "西班牙语",
+        "fr": "法语",
+        "inherit": "用户选择",
+        "iso": "ISO 8601",
+        "zh": "中国人"
+      }
+    },
     "defaultView": {
       "label": "默认视图"
     },

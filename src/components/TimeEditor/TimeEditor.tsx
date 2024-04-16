@@ -1,7 +1,8 @@
-import React from 'react';
 import { dateTime, InternalTimeZones, StandardEditorProps } from '@grafana/data';
 import { TimeOfDayPicker } from '@grafana/ui';
-import { TestIds } from '../../constants';
+import React from 'react';
+
+import { TEST_IDS } from '../../constants';
 import { CalendarOptions, TimeOptions } from '../../types';
 import { getDateWithMinutesOffset, getMinutesOffsetFromTimeZone } from '../../utils';
 
@@ -38,7 +39,7 @@ export const TimeEditor: React.FC<Props> = ({ value, onChange }) => {
           minutes,
         });
       }}
-      data-testid={TestIds.timeEditor.field}
+      data-testid={TEST_IDS.timeEditor.field}
     />
   );
 };

@@ -1,7 +1,8 @@
-import dayjs from 'dayjs';
-import React from 'react';
 import { dateTime, TimeRange } from '@grafana/data';
 import { act, render, renderHook, screen } from '@testing-library/react';
+import dayjs from 'dayjs';
+import React from 'react';
+
 import { View } from '../types';
 import { getUnitType, useCalendarRange } from './useCalendarRange';
 
@@ -92,6 +93,35 @@ describe('Use Calendar Range', () => {
     rerender(<Component timeRange={{ ...timeRange, from: dateTime(last3Months.subtract(1, 'month').toDate()) }} />);
 
     expect(screen.getByTestId('date')).toHaveTextContent('2022-12-02T12:00:00.000Z');
+  });
+
+  it('Should keep calendar dates if time range not updated', () => {
+    const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
+    const timeRange = {
+      ...defaultTimeRange,
+      from: dateTime(last3Months.toDate()),
+    };
+
+    /**
+     * Component to test re-render
+     * @param timeRange
+     * @constructor
+     */
+    const Component = ({ timeRange }: any) => {
+      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY);
+      return <div data-testid="date">{date.toISOString()}</div>;
+    };
+
+    const { rerender } = render(<Component timeRange={timeRange} />);
+
+    expect(screen.getByTestId('date')).toHaveTextContent('2023-02-02T00:00:00.000Z');
+
+    /**
+     * Re-render with same timeRange
+     */
+    rerender(<Component timeRange={timeRange} />);
+
+    expect(screen.getByTestId('date')).toHaveTextContent('2023-02-02T00:00:00.000Z');
   });
 
   describe('Navigate', () => {

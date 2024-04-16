@@ -65,8 +65,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 18,
-        "w": 24,
+        "h": 20,
+        "w": 12,
         "x": 0,
         "y": 0
       },
@@ -78,10 +78,16 @@
         "autoScroll": true,
         "calendarType": "legacy",
         "colors": "event",
+        "dateFormat": "inherit",
+        "defaultView": "month",
         "descriptionField": "description",
         "displayTime": true,
         "labelFields": ["slug", "version"],
         "quickLinks": false,
+        "scrollToTime": {
+          "hours": 0,
+          "minutes": 0
+        },
         "textField": "name",
         "timeField": "updatedAt",
         "views": ["day", "week", "month"]
@@ -151,10 +157,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 18,
-        "w": 24,
-        "x": 0,
-        "y": 18
+        "h": 20,
+        "w": 12,
+        "x": 12,
+        "y": 0
       },
       "id": 16,
       "options": {
@@ -164,10 +170,17 @@
         "autoScroll": true,
         "calendarType": "bigCalendar",
         "colors": "event",
+        "dateFormat": "inherit",
+        "defaultView": "month",
         "descriptionField": "description",
         "displayTime": true,
         "labelFields": ["slug", "version"],
+        "locationField": "version",
         "quickLinks": false,
+        "scrollToTime": {
+          "hours": 0,
+          "minutes": 0
+        },
         "textField": "name",
         "timeField": "updatedAt",
         "views": ["day", "week", "month", "work_week", "year"]
@@ -209,7 +222,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 20
       },
       "id": 14,
       "panels": [],
@@ -243,7 +256,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -391,10 +405,10 @@
         ]
       },
       "gridPos": {
-        "h": 30,
+        "h": 11,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 21
       },
       "id": 15,
       "options": {
@@ -413,7 +427,7 @@
           }
         ]
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "cacheDurationSeconds": 300,
@@ -567,8 +581,7 @@
   ],
   "refresh": "",
   "revision": 1,
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
@@ -583,6 +596,6 @@
   "timezone": "",
   "title": "Grafana Plugins",
   "uid": "hHK1qmpnk",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }

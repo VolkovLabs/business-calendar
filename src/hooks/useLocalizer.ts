@@ -1,3 +1,4 @@
+import { getLocaleData } from '@grafana/data';
 import dayjs from 'dayjs';
 import deLocale from 'dayjs/locale/de';
 import enLocale from 'dayjs/locale/en';
@@ -7,27 +8,65 @@ import zhLocale from 'dayjs/locale/zh';
 import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
-import { getLocaleData } from '@grafana/data';
-import { BigMessages } from '../types';
+
+import { BigMessages, CalendarOptions, DateFormat, DateLocalizer } from '../types';
 import { getUserLanguage } from '../utils';
+
+/**
+ * Due to dayjs types inconsistency we have to disable this rule
+ */
+/* eslint-disable @typescript-eslint/naming-convention */
+
+/**
+ * ISO 8601 format
+ * 2019-01-25T00:00:00-02:00Z
+ */
+const isoFormat = 'YYYY-MM-DDTHH:mm:ssZ[Z]';
 
 /**
  * Dayjs locales per each grafana language
  * Dynamic import is not needed until there is too many locales
  * Each locale is about 1kb
  */
-const dayjsLocales = {
+const dayjsLocales: Record<string, ILocale> = {
   en: enLocale,
+  en24: {
+    ...enLocale,
+    formats: {
+      ...enLocale.formats,
+      LT: 'HH:mm',
+      LTS: 'HH:mm:ss',
+      LLL: 'MMMM D, YYYY HH:mm',
+      LLLL: 'dddd, MMMM D, YYYY HH:mm',
+      lll: 'MMM D, YYYY HH:mm',
+      llll: 'ddd, MMM D, YYYY HH:mm',
+    } as never,
+  },
   es: esLocale,
   fr: frLocale,
   de: deLocale,
   zh: zhLocale,
+  iso: {
+    ...enLocale,
+    formats: {
+      LT: isoFormat,
+      LTS: isoFormat,
+      L: isoFormat,
+      LL: isoFormat,
+      LLL: isoFormat,
+      LLLL: isoFormat,
+      l: isoFormat,
+      ll: isoFormat,
+      lll: isoFormat,
+      llll: isoFormat,
+    } as never,
+  },
 };
 
 /**
  * Get Localizer
  */
-export const useLocalizer = () => {
+export const useLocalizer = (options: CalendarOptions) => {
   /**
    * Translation
    */
@@ -41,8 +80,14 @@ export const useLocalizer = () => {
    * Update Dayjs locale on language change
    */
   useEffect(() => {
-    setDayjsLocale(dayjsLocales[language as keyof typeof dayjsLocales] || dayjsLocales.en);
-  }, [language]);
+    let locale = dayjsLocales[language as keyof typeof dayjsLocales];
+
+    if (options.dateFormat !== DateFormat.INHERIT) {
+      locale = dayjsLocales[options.dateFormat];
+    }
+
+    setDayjsLocale(locale || dayjsLocales.en);
+  }, [language, options.dateFormat]);
 
   /**
    * Localizer Messages
@@ -83,15 +128,15 @@ export const useLocalizer = () => {
     /**
      * Localizer
      */
-    const localizer = dayjsLocalizer(dayjs);
+    const localizer = dayjsLocalizer(dayjs) as DateLocalizer;
 
     /**
      * Set Year View Formats
      */
-    (localizer.formats as any).yearHeaderFormat = 'YYYY';
-    (localizer.formats as any).yearMonthFormat = 'MMMM';
-    (localizer.formats as any).yearWeekFormat = 'dd';
-    (localizer.formats as any).yearDateFormat = 'D';
+    localizer.formats.yearHeaderFormat = 'YYYY';
+    localizer.formats.yearMonthFormat = 'MMMM';
+    localizer.formats.yearWeekFormat = 'dd';
+    localizer.formats.yearDateFormat = 'D';
 
     return { localizer, messages: messages };
   }, [dayjsLocale, localeDate, messages]);

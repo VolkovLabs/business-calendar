@@ -1,9 +1,9 @@
-import dayjs from 'dayjs';
-import { useEffect, useMemo, useState } from 'react';
 import { AnnotationEvent, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
-import { AnnotationsType } from '../constants';
-import { CalendarEvent, CalendarOptions } from '../types';
+import dayjs from 'dayjs';
+import { useEffect, useMemo, useState } from 'react';
+
+import { AnnotationsType, CalendarEvent, CalendarOptions } from '../types';
 
 /**
  * Get Annotations
@@ -17,7 +17,7 @@ const useAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
     /**
      * Parameters
      */
-    const params: { [name: string]: any } = { from: timeRange.from.valueOf(), to: timeRange.to.valueOf() };
+    const params: Record<string, unknown> = { from: timeRange.from.valueOf(), to: timeRange.to.valueOf() };
 
     /**
      * Type

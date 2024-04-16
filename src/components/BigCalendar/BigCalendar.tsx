@@ -1,18 +1,20 @@
+import { Global } from '@emotion/react';
+import { AbsoluteTimeRange, PanelProps } from '@grafana/data';
+import { locationService } from '@grafana/runtime';
+import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Calendar, Event } from 'react-big-calendar';
+import { Calendar, Components, Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
-import { Global } from '@emotion/react';
-import { PanelProps } from '@grafana/data';
-import { Alert, Drawer, useStyles2, useTheme2 } from '@grafana/ui';
-import { TestIds } from '../../constants';
-import { useCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
+
+import { TEST_IDS } from '../../constants';
+import { useBigCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
 import { YearView } from '../YearView';
-import { BigCalendarStyles, LibStyles } from './BigCalendar.styles';
+import { getBigCalendarStyles, getLibStyles } from './BigCalendar.styles';
 
 /**
  * Properties
@@ -35,8 +37,8 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
    * Styles and Theme
    */
   const theme = useTheme2();
-  const styles = useStyles2(BigCalendarStyles);
-  const libStyles = LibStyles();
+  const styles = useStyles2(getBigCalendarStyles);
+  const libStyles = getLibStyles();
 
   /**
    * Translation
@@ -46,12 +48,12 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Localizer
    */
-  const { localizer, messages } = useLocalizer();
+  const { localizer, messages } = useLocalizer(options);
 
   /**
    * Adopted Events for BigCalendar
    */
-  const calendarEvents = useCalendarEvents(events);
+  const calendarEvents = useBigCalendarEvents(events);
 
   /**
    * Get props for event div element
@@ -69,18 +71,63 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Calendar Components
    */
-  const components = useMemo(
+  const components: Components = useMemo(
     () => ({
       toolbar: BigToolbar,
-      event: BigEventContent,
+      day: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
+      },
+      week: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
+      },
+      month: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} />,
+      },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      work_week: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
+      },
     }),
-    []
+    [localizer]
+  );
+
+  /**
+   * On Change Time Range
+   * Keep refresh with absolute time range
+   * https://github.com/grafana/grafana/issues/3192
+   */
+  const onChangeTimeRangeWithRefresh = useCallback(
+    (timeRange: AbsoluteTimeRange) => {
+      const search = locationService.getSearchObject();
+
+      onChangeTimeRange(timeRange);
+
+      /**
+       * Enable refresh with timeout
+       * To separate change time range and set refresh actions
+       */
+      if (search.refresh) {
+        setTimeout(() => {
+          locationService.partial(
+            {
+              refresh: search.refresh,
+            },
+            true
+          );
+        });
+      }
+    },
+    [onChangeTimeRange]
   );
 
   /**
    * Manage calendar time range and view
    */
-  const { date, view, onChangeView, onNavigate } = useCalendarRange(timeRange, onChangeTimeRange, options.defaultView);
+  const { date, view, onChangeView, onNavigate } = useCalendarRange(
+    timeRange,
+    onChangeTimeRangeWithRefresh,
+    options.defaultView
+  );
 
   /**
    * Is Selected View Exist
@@ -126,7 +173,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       setActiveEvent({
         text: event.title as string,
         start: dayjs(event.start),
-        end: event.end && !event.resource?.isEndless ? dayjs(event.end) : undefined,
+        end: event.end && !event.resource?.noEndTime ? dayjs(event.end) : undefined,
         labels: [],
         ...(event.resource || {}),
       });
@@ -166,14 +213,14 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
 
   if (!isViewExist) {
     return (
-      <Alert title={t('panel.noViewsTitle')} severity="info" data-testid={TestIds.bigCalendar.noViewsMessage}>
+      <Alert title={t('panel.noViewsTitle')} severity="info" data-testid={TEST_IDS.bigCalendar.noViewsMessage}>
         {t('panel.noViewsMessage')}
       </Alert>
     );
   }
 
   return (
-    <div data-testid={TestIds.bigCalendar.root}>
+    <div data-testid={TEST_IDS.bigCalendar.root}>
       {activeEvent && (
         <Drawer title={t('eventDetailsDrawer.title')} onClose={() => setActiveEvent(null)}>
           <EventDetails event={activeEvent} />
@@ -193,10 +240,10 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         style={{ height }}
         views={views}
         components={components}
-        onNavigate={onNavigate as any}
-        onView={onChangeView as any}
+        onNavigate={onNavigate as never}
+        onView={onChangeView as never}
         date={date}
-        view={view as any}
+        view={view as never}
         onSelectEvent={onSelectEvent}
         scrollToTime={scrollToTime}
       />

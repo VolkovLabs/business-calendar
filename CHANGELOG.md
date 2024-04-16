@@ -1,5 +1,36 @@
 # Changelog
 
+## 3.0.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Add keeping refresh dashboard on time range change (#167)
+
+## 2.5.0 (2024-03-20)
+
+### Features / Enhancements
+
+- Update style for event details tags (#161)
+- Updated dependencies to Grafana 10.4 (#154)
+
+### Bugfixes
+
+- Fix showing location on month and work week views #160
+
+## 2.4.0 (2024-03-07)
+
+### Features / Enhancements
+
+- Updated Big Calendar to 1.10.3 (#150)
+- Added ability to select date format (#151)
+- Updated ESLint configuration and refactoring (#152)
+- Updated dependencies and Actions (#154)
+- Added hiding end time (#155)
+
+### Bugfixes
+
+- Fixed keeping calendar dates if no time range change (#156)
+
 ## 2.3.1 (2023-11-06)
 
 ### Bugfixes

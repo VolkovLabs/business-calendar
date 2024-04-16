@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+
 import { alignEvents } from './alignEvents';
 
 describe('alignEvents', () => {
@@ -136,7 +137,7 @@ describe('alignEvents', () => {
     const eventDuration = 2;
     const start = dayjs('2020-01-01T15:06:02Z');
 
-    const events = Array.from({ length: numEvents }).map((_, i) => {
+    const events = Array.from({ length: numEvents }).map((item, i) => {
       return {
         text: `Event ${i}`,
         start: start.add(i, 'day'),

@@ -1,4 +1,4 @@
-import { Messages } from 'react-big-calendar';
+import { DateLocalizer as BigDateLocalizer, Messages } from 'react-big-calendar';
 
 /**
  * Calendar Type
@@ -29,4 +29,30 @@ export interface BigMessages extends Messages {
    * @type {string}
    */
   year: string;
+}
+
+/**
+ * Date Format
+ */
+export enum DateFormat {
+  INHERIT = 'inherit',
+  EN = 'en',
+  EN_24H = 'en24',
+  DE = 'de',
+  ES = 'es',
+  FR = 'fr',
+  ZH = 'zh',
+  ISO = 'iso',
+}
+
+/**
+ * Date Localizer
+ */
+export interface DateLocalizer extends Omit<BigDateLocalizer, 'formats'> {
+  formats: BigDateLocalizer['formats'] & {
+    yearHeaderFormat: string;
+    yearMonthFormat: string;
+    yearWeekFormat: string;
+    yearDateFormat: string;
+  };
 }

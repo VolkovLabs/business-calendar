@@ -30,8 +30,8 @@ export const toTimeField = ({
       ...field,
       type: FieldType.time,
       values: new ArrayVector(
-        field.values.toArray().map((_: string) =>
-          dateTimeParse(_, {
+        field.values.toArray().map((value: string) =>
+          dateTimeParse(value, {
             timeZone,
             format: 'YYYY-MM-DDTHH:mm:ss.SSSSSSSZ',
           }).valueOf()

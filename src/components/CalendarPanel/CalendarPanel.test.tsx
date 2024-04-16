@@ -1,9 +1,10 @@
-import dayjs from 'dayjs';
-import React from 'react';
 import { dateTime, FieldType, LoadingState, PanelData, toDataFrame } from '@grafana/data';
 import { act, render } from '@testing-library/react';
-import { CalendarType } from '../../types';
-import { useAnnotationEvents } from '../../utils';
+import dayjs from 'dayjs';
+import React from 'react';
+
+import { useAnnotationEvents } from '../../hooks';
+import { CalendarType, DateFormat } from '../../types';
 import { BigCalendar } from '../BigCalendar';
 import { LegacyCalendar } from '../LegacyCalendar';
 import { CalendarPanel } from './CalendarPanel';
@@ -20,8 +21,8 @@ jest.mock('@grafana/runtime', () => ({
 /**
  * Mock utils
  */
-jest.mock('../../utils', () => ({
-  ...jest.requireActual('../../utils'),
+jest.mock('../../hooks', () => ({
+  ...jest.requireActual('../../hooks'),
   useAnnotationEvents: jest.fn(() => [{ id: '123' }]),
 }));
 
@@ -57,7 +58,10 @@ describe('Panel', () => {
    * Get Tested Component
    * @param props
    */
-  const getComponent = ({ options = { autoScroll: true }, ...restProps }: Partial<Props>) => {
+  const getComponent = ({
+    options = { autoScroll: true, dateFormat: DateFormat.INHERIT },
+    ...restProps
+  }: Partial<Props>) => {
     const allOptions = {
       textField: 'Event Name',
       timeField: 'Event Start',
@@ -126,7 +130,9 @@ describe('Panel', () => {
   });
 
   it('Should render legacy calendar', async () => {
-    await renderWithoutWarning(getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true } }));
+    await renderWithoutWarning(
+      getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true, dateFormat: DateFormat.INHERIT } })
+    );
 
     expect(BigCalendar).not.toHaveBeenCalled();
     expect(LegacyCalendar).toHaveBeenCalledWith(
@@ -149,7 +155,9 @@ describe('Panel', () => {
 
   it('Should render lib calendar', async () => {
     await renderWithoutWarning(
-      getComponent({ options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true } })
+      getComponent({
+        options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true, dateFormat: DateFormat.INHERIT },
+      })
     );
 
     expect(LegacyCalendar).not.toHaveBeenCalled();
@@ -181,7 +189,14 @@ describe('Panel', () => {
         ] as any
     );
     await renderWithoutWarning(
-      getComponent({ options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true, annotations: true } })
+      getComponent({
+        options: {
+          calendarType: CalendarType.BIG_CALENDAR,
+          autoScroll: true,
+          annotations: true,
+          dateFormat: DateFormat.INHERIT,
+        },
+      })
     );
 
     expect(BigCalendar).toHaveBeenCalledWith(

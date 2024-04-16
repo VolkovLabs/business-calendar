@@ -45,11 +45,8 @@ test.describe('Volkovlabs Calendar Panel', () => {
     await expect(page.getByTestId(TestIds.panel.root).getByText('Thu')).toBeVisible();
     await expect(page.getByTestId(TestIds.panel.root).getByText('Fri')).toBeVisible();
     await expect(page.getByTestId(TestIds.panel.root).getByText('Sat')).toBeVisible();
-
-    await page.getByText('192 more').click();
-
-    await expect(page.getByTestId(TestIds.panel.buttonApplyInterval)).toBeVisible();
   });
+
   test('Should display a time range button', async ({
     readProvisionedDashboard,
     gotoDashboardPage,

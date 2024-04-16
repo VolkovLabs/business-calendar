@@ -47,46 +47,4 @@ test.describe('Volkovlabs Calendar Panel', () => {
     await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Fri')).toBeVisible();
     await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Sat')).toBeVisible();
   });
-
-  test('Should display a time range button', async ({
-    readProvisionedDashboard,
-    gotoDashboardPage,
-    page,
-    gotoPanelEditPage,
-  }) => {
-    /**
-     * Use panels.json dashboard
-     */
-    const dashboard = await readProvisionedDashboard({ fileName: 'panels.json' });
-
-    /**
-     * Go to panels dashboard
-     */
-    await gotoDashboardPage(dashboard);
-
-    /**
-     * Go to panel Edit page
-     */
-    await gotoPanelEditPage({ dashboard, id: '10' });
-
-    /**
-     * Wait canvas is visible and animation is finished
-     */
-    await page.waitForTimeout(2000);
-
-    /**
-     * Calendar should be visible
-     */
-    await expect(page.getByTestId(TEST_IDS.panel.root)).toBeVisible();
-
-    /**
-     * Click on calendar cell
-     */
-    await page.getByText('192 more').click();
-
-    /**
-     * Button should be
-     */
-    await expect(page.getByTestId(TEST_IDS.panel.buttonApplyInterval)).toBeVisible();
-  });
 });

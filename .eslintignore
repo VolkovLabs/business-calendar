@@ -7,3 +7,7 @@ webpack.config.ts
 coverage/
 cypress/
 dist/
+
+# Playwright tests
+playwright.config.ts
+test/panel.spec.ts

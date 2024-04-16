@@ -1,5 +1,5 @@
 import { test, expect } from '@grafana/plugin-e2e';
-import { TestIds } from '../src/constants';
+import { TEST_IDS } from '../src/constants';
 
 test.describe('Volkovlabs Calendar Panel', () => {
   test('Should display a Calendar', async ({
@@ -18,7 +18,8 @@ test.describe('Volkovlabs Calendar Panel', () => {
      */
     await gotoDashboardPage(dashboard);
 
-    await expect(page.getByRole('heading', { name: 'Calendar' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Calendar' }).first()).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Calendar' }).nth(1)).toBeVisible();
 
     /**
      * Go to panel Edit page
@@ -33,18 +34,18 @@ test.describe('Volkovlabs Calendar Panel', () => {
     /**
      * Calendar should be visible
      */
-    await expect(page.getByTestId(TestIds.panel.root)).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root)).toBeVisible();
 
     /**
      * Days of the week should be
      */
-    await expect(page.getByTestId(TestIds.panel.root).getByText('Sun')).toBeVisible();
-    await expect(page.getByTestId(TestIds.panel.root).getByText('Mon')).toBeVisible();
-    await expect(page.getByTestId(TestIds.panel.root).getByText('Tue')).toBeVisible();
-    await expect(page.getByTestId(TestIds.panel.root).getByText('Wed')).toBeVisible();
-    await expect(page.getByTestId(TestIds.panel.root).getByText('Thu')).toBeVisible();
-    await expect(page.getByTestId(TestIds.panel.root).getByText('Fri')).toBeVisible();
-    await expect(page.getByTestId(TestIds.panel.root).getByText('Sat')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Sun')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Mon')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Tue')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Wed')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Thu')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Fri')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Sat')).toBeVisible();
   });
 
   test('Should display a time range button', async ({
@@ -76,7 +77,7 @@ test.describe('Volkovlabs Calendar Panel', () => {
     /**
      * Calendar should be visible
      */
-    await expect(page.getByTestId(TestIds.panel.root)).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.root)).toBeVisible();
 
     /**
      * Click on calendar cell
@@ -86,6 +87,6 @@ test.describe('Volkovlabs Calendar Panel', () => {
     /**
      * Button should be
      */
-    await expect(page.getByTestId(TestIds.panel.buttonApplyInterval)).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.panel.buttonApplyInterval)).toBeVisible();
   });
 });

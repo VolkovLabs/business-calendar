@@ -5,7 +5,7 @@
 ### Features / Enhancements
 
 - Add keeping refresh dashboard on time range change (#167)
-- Add plugin e2e tests and remove cypress (#168)
+- Add plugin e2e tests and remove cypress (#168, #170)
 
 ## 2.5.0 (2024-03-20)
 

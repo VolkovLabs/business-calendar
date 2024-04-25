@@ -4,9 +4,8 @@ import dayjs from 'dayjs';
 import React from 'react';
 
 import { useAnnotationEvents } from '../../hooks';
-import { CalendarType, DateFormat } from '../../types';
+import { DateFormat } from '../../types';
 import { BigCalendar } from '../BigCalendar';
-import { LegacyCalendar } from '../LegacyCalendar';
 import { CalendarPanel } from './CalendarPanel';
 
 /**
@@ -34,13 +33,6 @@ jest.mock('../BigCalendar', () => ({
 }));
 
 /**
- * Mock Legacy Calendar
- */
-jest.mock('../LegacyCalendar', () => ({
-  LegacyCalendar: jest.fn(() => null),
-}));
-
-/**
  * Component Props
  */
 type Props = React.ComponentProps<typeof CalendarPanel>;
@@ -58,10 +50,7 @@ describe('Panel', () => {
    * Get Tested Component
    * @param props
    */
-  const getComponent = ({
-    options = { autoScroll: true, dateFormat: DateFormat.INHERIT },
-    ...restProps
-  }: Partial<Props>) => {
+  const getComponent = ({ options = { dateFormat: DateFormat.INHERIT }, ...restProps }: Partial<Props>) => {
     const allOptions = {
       textField: 'Event Name',
       timeField: 'Event Start',
@@ -126,41 +115,15 @@ describe('Panel', () => {
 
   beforeEach(() => {
     jest.mocked(BigCalendar).mockClear();
-    jest.mocked(LegacyCalendar).mockClear();
-  });
-
-  it('Should render legacy calendar', async () => {
-    await renderWithoutWarning(
-      getComponent({ options: { calendarType: CalendarType.LEGACY, autoScroll: true, dateFormat: DateFormat.INHERIT } })
-    );
-
-    expect(BigCalendar).not.toHaveBeenCalled();
-    expect(LegacyCalendar).toHaveBeenCalledWith(
-      expect.objectContaining({
-        events: expect.arrayContaining([
-          expect.objectContaining({
-            color: '#7EB26D',
-            description: undefined,
-            end: dayjs(getSafeDate()),
-            labels: ['event1'],
-            links: null,
-            start: dayjs(getSafeDate()),
-            text: 'event1',
-          }),
-        ]),
-      }),
-      expect.anything()
-    );
   });
 
   it('Should render lib calendar', async () => {
     await renderWithoutWarning(
       getComponent({
-        options: { calendarType: CalendarType.BIG_CALENDAR, autoScroll: true, dateFormat: DateFormat.INHERIT },
+        options: { dateFormat: DateFormat.INHERIT },
       })
     );
 
-    expect(LegacyCalendar).not.toHaveBeenCalled();
     expect(BigCalendar).toHaveBeenCalledWith(
       expect.objectContaining({
         events: expect.arrayContaining([
@@ -191,8 +154,6 @@ describe('Panel', () => {
     await renderWithoutWarning(
       getComponent({
         options: {
-          calendarType: CalendarType.BIG_CALENDAR,
-          autoScroll: true,
           annotations: true,
           dateFormat: DateFormat.INHERIT,
         },

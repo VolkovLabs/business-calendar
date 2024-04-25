@@ -58,21 +58,6 @@
       },
       "label": "Annotations"
     },
-    "autoScroll": {
-      "description": "Faites défiler automatiquement jusqu'à la fin de l'intervalle de temps.",
-      "label": "Faire défiler vers le bas",
-      "options": {
-        "disabled": "Désactivé",
-        "enabled": "Auto"
-      }
-    },
-    "calendarType": {
-      "label": "Type de calendrier",
-      "options": {
-        "bigCalendar": "Grand calendrier",
-        "legacy": "Héritage"
-      }
-    },
     "colors": {
       "description": "Afficher les couleurs en fonction de l'ID de l'image ou de l'événement si le champ Couleur n'est pas spécifié.",
       "label": "Couleurs",
@@ -96,14 +81,6 @@
     },
     "defaultView": {
       "label": "Vue par défaut"
-    },
-    "displayTime": {
-      "description": "Afficher l'heure pour chaque entrée.",
-      "label": "Temps d'affichage",
-      "options": {
-        "disabled": "Désactivé",
-        "enabled": "Activé"
-      }
     },
     "events": {
       "colorField": {

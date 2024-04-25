@@ -2,21 +2,12 @@ import { test, expect } from '@grafana/plugin-e2e';
 import { TEST_IDS } from '../src/constants';
 
 test.describe('Volkovlabs Calendar Panel', () => {
-  test('Should display a Calendar', async ({
-    readProvisionedDashboard,
-    gotoDashboardPage,
-    page,
-    gotoPanelEditPage,
-  }) => {
+  test('Should display a Calendar', async ({ gotoDashboardPage, page, gotoPanelEditPage }) => {
     /**
-     * Use panels.json dashboard
+     * Go To Panels dashboard panels.json
+     * return dashboardPage
      */
-    const dashboard = await readProvisionedDashboard({ fileName: 'panels.json' });
-
-    /**
-     * Go to panels dashboard
-     */
-    await gotoDashboardPage(dashboard);
+    await gotoDashboardPage({ uid: 'hHK1qmpnk' });
 
     await expect(page.getByRole('heading', { name: 'Calendar' }).first()).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Calendar' }).nth(1)).toBeVisible();
@@ -24,27 +15,34 @@ test.describe('Volkovlabs Calendar Panel', () => {
     /**
      * Go to panel Edit page
      */
-    await gotoPanelEditPage({ dashboard, id: '10' });
+    await gotoPanelEditPage({ dashboard: { uid: 'hHK1qmpnk' }, id: '10' });
 
     /**
      * Wait canvas is visible and animation is finished
      */
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
 
     /**
      * Calendar should be visible
      */
-    await expect(page.getByTestId(TEST_IDS.panel.root)).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root)).toBeVisible();
 
     /**
      * Days of the week should be
      */
-    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Sun')).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Mon')).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Tue')).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Wed')).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Thu')).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Fri')).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.panel.root).getByText('Sat')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Sun' })).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Mon' })).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Tue' })).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Wed' })).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Thu' })).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Fri' })).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Sat' })).toBeVisible();
+
+    /**
+     * Some Controls (buttons and etc.) should be
+     */
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('button', { name: 'Today' })).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('button', { name: 'Week' })).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('button', { name: 'Month' })).toBeVisible();
   });
 });

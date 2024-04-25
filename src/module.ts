@@ -7,7 +7,6 @@ import { CalendarPanel, DefaultViewEditor, MultiFieldEditor, TimeEditor } from '
 import {
   ANNOTATIONS_OPTIONS,
   ANNOTATIONS_TYPE_OPTIONS,
-  CALENDAR_TYPE_OPTIONS,
   CALENDAR_VIEW_OPTIONS,
   COLOR_OPTIONS,
   DATE_FORMAT_OPTIONS,
@@ -15,17 +14,17 @@ import {
   DEFAULT_SCROLL_TO_TIME,
   DEFAULT_VIEW,
   DEFAULT_VIEWS,
-  DISPLAY_TIME_OPTIONS,
   LINK_OPTIONS,
-  SCROLL_OPTIONS,
 } from './constants';
-import { CalendarOptions, CalendarType } from './types';
+import { getMigratedOptions } from './migration';
+import { CalendarOptions } from './types';
 
 /**
  * Panel Plugin
  */
 export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
   .setNoPadding()
+  .setMigrationHandler(getMigratedOptions)
   .useFieldConfig({
     disableStandardOptions: [
       FieldConfigProperty.Min,
@@ -41,18 +40,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
     /**
      * Visibility
      */
-    const showForLegacy = (config: CalendarOptions) => config.calendarType === CalendarType.LEGACY;
-    const showForBigCalendar = (config: CalendarOptions) => config.calendarType === CalendarType.BIG_CALENDAR;
-
     builder
-      .addRadio({
-        path: 'calendarType',
-        name: t('panelOptions.calendarType.label'),
-        settings: {
-          options: CALENDAR_TYPE_OPTIONS(t),
-        },
-        defaultValue: CalendarType.LEGACY,
-      })
       .addMultiSelect({
         path: 'views',
         name: t('panelOptions.views.label'),
@@ -60,7 +48,6 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: CALENDAR_VIEW_OPTIONS(t),
         },
         defaultValue: DEFAULT_VIEWS as unknown,
-        showIf: showForBigCalendar,
       })
       .addCustomEditor({
         id: 'defaultViewEditor',
@@ -68,7 +55,6 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.defaultView.label'),
         editor: DefaultViewEditor,
         defaultValue: DEFAULT_VIEW,
-        showIf: showForBigCalendar,
       })
       .addCustomEditor({
         id: 'scrollToTime',
@@ -77,7 +63,6 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         description: t('panelOptions.scrollToTime.description'),
         editor: TimeEditor,
         defaultValue: DEFAULT_SCROLL_TO_TIME,
-        showIf: showForBigCalendar,
       })
       .addSelect({
         path: 'dateFormat',
@@ -86,27 +71,6 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: DATE_FORMAT_OPTIONS(t),
         },
         defaultValue: DEFAULT_OPTIONS.dateFormat,
-        showIf: showForBigCalendar,
-      })
-      .addRadio({
-        path: 'autoScroll',
-        name: t('panelOptions.autoScroll.label'),
-        description: t('panelOptions.autoScroll.description'),
-        settings: {
-          options: SCROLL_OPTIONS(t),
-        },
-        defaultValue: DEFAULT_OPTIONS.autoScroll,
-        showIf: showForLegacy,
-      })
-      .addRadio({
-        path: 'displayTime',
-        name: t('panelOptions.displayTime.label'),
-        description: t('panelOptions.displayTime.description'),
-        settings: {
-          options: DISPLAY_TIME_OPTIONS(t),
-        },
-        defaultValue: DEFAULT_OPTIONS.annotations,
-        showIf: showForLegacy,
       })
       .addRadio({
         path: 'quickLinks',

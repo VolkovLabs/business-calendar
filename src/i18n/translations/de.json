@@ -58,21 +58,6 @@
       },
       "label": "Anmerkungen"
     },
-    "autoScroll": {
-      "description": "Scrollen Sie automatisch zum Ende des Zeitintervalls.",
-      "label": "Scrollen Sie nach unten",
-      "options": {
-        "disabled": "Deaktiviert",
-        "enabled": "Auto"
-      }
-    },
-    "calendarType": {
-      "label": "Kalendertyp",
-      "options": {
-        "bigCalendar": "Großer Kalender",
-        "legacy": "Vermächtnis"
-      }
-    },
     "colors": {
       "description": "Zeigt Farben basierend auf der Frame- oder Ereignis-ID an, wenn das Feld „Farbe“ nicht angegeben ist.",
       "label": "Farben",
@@ -96,14 +81,6 @@
     },
     "defaultView": {
       "label": "Standardansicht"
-    },
-    "displayTime": {
-      "description": "Anzeigezeit für jeden Eintrag.",
-      "label": "Anzeigezeit",
-      "options": {
-        "disabled": "Deaktiviert",
-        "enabled": "Ermöglicht"
-      }
     },
     "events": {
       "colorField": {

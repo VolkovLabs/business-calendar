@@ -57,18 +57,6 @@ export interface TimeOptions {
  */
 export interface CalendarOptions {
   /**
-   * Calendar Type
-   */
-  calendarType?: CalendarType;
-
-  /**
-   * Auto Scroll
-   *
-   * @type {boolean}
-   */
-  autoScroll: boolean;
-
-  /**
    * Time
    *
    * @type {string}
@@ -146,13 +134,6 @@ export interface CalendarOptions {
   colorField?: string;
 
   /**
-   * Display Time
-   *
-   * @type {boolean}
-   */
-  displayTime?: boolean;
-
-  /**
    * Location Field
    *
    * @type {string}
@@ -186,4 +167,25 @@ export interface CalendarOptions {
    * @type {DateFormat}
    */
   dateFormat: DateFormat;
+}
+
+export interface LegacyCalendarOptions extends CalendarOptions {
+  /**
+   * Auto Scroll
+   *
+   * @type {boolean}
+   */
+  autoScroll?: boolean;
+
+  /**
+   * Display Time
+   *
+   * @type {boolean}
+   */
+  displayTime?: boolean;
+
+  /**
+   * Calendar Type
+   */
+  calendarType?: CalendarType;
 }

@@ -2,9 +2,8 @@ import { PanelProps } from '@grafana/data';
 import React, { useMemo } from 'react';
 
 import { useAnnotationEvents, useCalendarEvents, useColors, useEventFrames } from '../../hooks';
-import { CalendarOptions, CalendarType } from '../../types';
+import { CalendarOptions } from '../../types';
 import { BigCalendar } from '../BigCalendar';
-import { LegacyCalendar } from '../LegacyCalendar';
 
 /**
  * Properties
@@ -21,7 +20,6 @@ export const CalendarPanel: React.FC<Props> = ({
   fieldConfig,
   timeRange,
   onChangeTimeRange,
-  width,
   height,
 }) => {
   /**
@@ -54,29 +52,13 @@ export const CalendarPanel: React.FC<Props> = ({
   /**
    * Big Calendar
    */
-  if (options.calendarType === CalendarType.BIG_CALENDAR) {
-    return (
-      <BigCalendar
-        events={allEvents}
-        timeRange={timeRange}
-        onChangeTimeRange={onChangeTimeRange}
-        height={height}
-        options={options}
-      />
-    );
-  }
-
-  /**
-   * Legacy
-   */
   return (
-    <LegacyCalendar
-      height={height}
-      width={width}
+    <BigCalendar
+      events={allEvents}
       timeRange={timeRange}
       onChangeTimeRange={onChangeTimeRange}
+      height={height}
       options={options}
-      events={allEvents}
     />
   );
 };

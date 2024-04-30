@@ -1,5 +1,6 @@
 import { test, expect } from '@grafana/plugin-e2e';
 import { TEST_IDS } from '../src/constants';
+import { View } from '../src/types';
 
 test.describe('Volkovlabs Calendar Panel', () => {
   test('Should display a Calendar', async ({ gotoDashboardPage, page, gotoPanelEditPage }) => {
@@ -14,7 +15,7 @@ test.describe('Volkovlabs Calendar Panel', () => {
     /**
      * Go to panel Edit page
      */
-    await gotoPanelEditPage({ dashboard: { uid: 'hHK1qmpnk' }, id: '15' });
+    await gotoPanelEditPage({ dashboard: { uid: 'hHK1qmpnk' }, id: '16' });
 
     /**
      * Wait canvas is visible and animation is finished
@@ -38,10 +39,27 @@ test.describe('Volkovlabs Calendar Panel', () => {
     await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Sat' })).toBeVisible();
 
     /**
-     * Some Controls (buttons and etc.) should be
+     * Check calendar navigation controls
      */
     await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('button', { name: 'Today' })).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('button', { name: 'Week' })).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('button', { name: 'Month' })).toBeVisible();
+
+    /**
+     * Check if calendar supports all views
+     */
+    await expect(
+      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.DAY))
+    ).toBeVisible();
+    await expect(
+      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.WEEK))
+    ).toBeVisible();
+    await expect(
+      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.WORK_WEEK))
+    ).toBeVisible();
+    await expect(
+      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.MONTH))
+    ).toBeVisible();
+    await expect(
+      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.YEAR))
+    ).toBeVisible();
   });
 });

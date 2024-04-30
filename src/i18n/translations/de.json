@@ -3,15 +3,6 @@
     "location": "Standort: {{location}}",
     "title": "Veranstaltungsdetails"
   },
-  "legacyCalendar": {
-    "applyTimeRangeButton": "Zeitbereich anwenden",
-    "dayDrawer": {
-      "allTab": "Alle Veranstaltungen",
-      "noEventsMessage": "Veranstaltungen nicht gefunden.",
-      "title": "Tag"
-    },
-    "showMore": "{{count}} mehr"
-  },
   "localizerMessages": {
     "agenda": "Agenda",
     "allDay": "Den ganzen Tag",

@@ -3,15 +3,6 @@
     "location": "Emplacement: {{emplacement}}",
     "title": "Détails de l'évènement"
   },
-  "legacyCalendar": {
-    "applyTimeRangeButton": "Appliquer la plage horaire",
-    "dayDrawer": {
-      "allTab": "Tous les évènements",
-      "noEventsMessage": "Événements introuvables.",
-      "title": "Jour"
-    },
-    "showMore": "{{count}} plus"
-  },
   "localizerMessages": {
     "agenda": "Ordre du jour",
     "allDay": "Toute la journée",

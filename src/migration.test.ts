@@ -1,5 +1,4 @@
 import { getMigratedOptions } from './migration';
-import { LegacyCalendarOptions } from './types';
 
 describe('Migration', () => {
   it('Remove autoScroll option', () => {
@@ -9,9 +8,9 @@ describe('Migration', () => {
       },
     } as any;
 
-    const migratedOptions: LegacyCalendarOptions = getMigratedOptions(panel);
+    const migratedOptions = getMigratedOptions(panel);
 
-    expect(migratedOptions.autoScroll).toBeUndefined();
+    expect(migratedOptions).not.toHaveProperty('autoScroll');
   });
 
   it('Remove displayTime option', () => {
@@ -21,24 +20,24 @@ describe('Migration', () => {
       },
     } as any;
 
-    const migratedOptions: LegacyCalendarOptions = getMigratedOptions(panel);
+    const migratedOptions = getMigratedOptions(panel);
 
-    expect(migratedOptions.displayTime).toBeUndefined();
+    expect(migratedOptions).not.toHaveProperty('displayTime');
   });
 
-  it('remove calendarType option', () => {
+  it('Remove calendarType option', () => {
     const panel = {
       options: {
         calendarType: 'legacy',
       },
     } as any;
 
-    const migratedOptions: LegacyCalendarOptions = getMigratedOptions(panel);
+    const migratedOptions = getMigratedOptions(panel);
 
-    expect(migratedOptions.calendarType).toBeUndefined();
+    expect(migratedOptions).not.toHaveProperty('calendarType');
   });
 
-  it('does not remove any options', () => {
+  it('Should keep valid options', () => {
     const panel = {
       options: {
         someOption: 'value',

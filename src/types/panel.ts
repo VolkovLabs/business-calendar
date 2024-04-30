@@ -1,4 +1,4 @@
-import { CalendarType, DateFormat, View } from './calendar';
+import { DateFormat, View } from './calendar';
 
 /**
  * Language
@@ -167,25 +167,4 @@ export interface CalendarOptions {
    * @type {DateFormat}
    */
   dateFormat: DateFormat;
-}
-
-export interface LegacyCalendarOptions extends CalendarOptions {
-  /**
-   * Auto Scroll
-   *
-   * @type {boolean}
-   */
-  autoScroll?: boolean;
-
-  /**
-   * Display Time
-   *
-   * @type {boolean}
-   */
-  displayTime?: boolean;
-
-  /**
-   * Calendar Type
-   */
-  calendarType?: CalendarType;
 }

@@ -3,15 +3,6 @@
     "location": "Ubicación: {{location}}",
     "title": "Detalles del evento"
   },
-  "legacyCalendar": {
-    "applyTimeRangeButton": "Aplicar rango de tiempo",
-    "dayDrawer": {
-      "allTab": "Todos los eventos",
-      "noEventsMessage": "Eventos no encontrados.",
-      "title": "Día"
-    },
-    "showMore": "{{count}} más"
-  },
   "localizerMessages": {
     "agenda": "El Diario",
     "allDay": "Todo el dia",

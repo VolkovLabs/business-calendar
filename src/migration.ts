@@ -1,11 +1,32 @@
 import { PanelModel } from '@grafana/data';
 
-import { CalendarOptions, LegacyCalendarOptions } from './types';
+import { CalendarOptions } from './types';
 
 /**
  * Outdated Panel Options
  */
-interface OutdatedPanelOptions extends LegacyCalendarOptions {}
+interface OutdatedPanelOptions extends CalendarOptions {
+  /**
+   * Auto Scroll
+   *
+   * Removed in 3.0.0
+   */
+  autoScroll?: boolean;
+
+  /**
+   * Display Time
+   *
+   * Removed in 3.0.0
+   */
+  displayTime?: boolean;
+
+  /**
+   * Calendar Type
+   *
+   * Removed in 3.0.0
+   */
+  calendarType?: string;
+}
 
 /**
  * Get Migrated Options

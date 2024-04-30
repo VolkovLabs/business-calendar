@@ -1,14 +1,6 @@
 import { DateLocalizer as BigDateLocalizer, Messages } from 'react-big-calendar';
 
 /**
- * Calendar Type
- */
-export enum CalendarType {
-  LEGACY = 'legacy',
-  BIG_CALENDAR = 'bigCalendar',
-}
-
-/**
  * View
  */
 export enum View {

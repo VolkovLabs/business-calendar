@@ -3,15 +3,6 @@
     "location": "地点: {{location}}",
     "title": "活动详情"
   },
-  "legacyCalendar": {
-    "applyTimeRangeButton": "申请时间范围",
-    "dayDrawer": {
-      "allTab": "所有活动",
-      "noEventsMessage": "未找到活动。",
-      "title": "天"
-    },
-    "showMore": "{{count}} 更多的"
-  },
   "localizerMessages": {
     "agenda": "议程",
     "allDay": "一整天",

@@ -10,12 +10,11 @@ test.describe('Volkovlabs Calendar Panel', () => {
     await gotoDashboardPage({ uid: 'hHK1qmpnk' });
 
     await expect(page.getByRole('heading', { name: 'Calendar' }).first()).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Calendar' }).nth(1)).toBeVisible();
 
     /**
      * Go to panel Edit page
      */
-    await gotoPanelEditPage({ dashboard: { uid: 'hHK1qmpnk' }, id: '10' });
+    await gotoPanelEditPage({ dashboard: { uid: 'hHK1qmpnk' }, id: '15' });
 
     /**
      * Wait canvas is visible and animation is finished

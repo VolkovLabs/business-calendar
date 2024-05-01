@@ -1,4 +1,4 @@
-# Calendar panel for Grafana
+# Business Calendar panel for Grafana
 
 ![Calendar](https://github.com/VolkovLabs/volkovlabs-calendar-panel/raw/main/src/img/screenshot.png)
 
@@ -10,17 +10,17 @@
 
 ## Introduction
 
-Calendar Panel is a Grafana plugin that displays events from various data sources.
+Business Calendar Panel is a Grafana plugin that displays events from various data sources.
 
 [![Calendar plugin for Grafana tutorial | Step by step | JSON API plugin example](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/video.png)](https://youtu.be/iPJ122x0oos)
 
 ## Requirements
 
-- Calendar Panel 3.X requires **Grafana 10** or **Grafana 11**.
-- Calendar Panel 2.X requires **Grafana 9.2** or **Grafana 10**.
-- Calendar Panel 1.X requires **Grafana 8.5** or **Grafana 9**.
+- Business Calendar Panel 3.X requires **Grafana 10** or **Grafana 11**.
+- Business Calendar Panel 2.X requires **Grafana 9.2** or **Grafana 10**.
+- Business Calendar Panel 1.X requires **Grafana 8.5** or **Grafana 9**.
 
-You can install the Calendar Panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
+You can install the Business Calendar Panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
 
 For the latter, please use the following command:
 

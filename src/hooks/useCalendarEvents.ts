@@ -1,6 +1,6 @@
 import { formattedValueToString, getLocaleData, TimeRange } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
-import dayjs from 'dayjs';
+import dayjs, { OpUnitType } from 'dayjs';
 import { useMemo } from 'react';
 
 import { CalendarEvent, CalendarOptions, ColorMode } from '../types';
@@ -34,7 +34,7 @@ export const useCalendarEvents = (
 
   return useMemo(() => {
     const to = dayjs(timeRange.to.valueOf()).add(minutesOffset, 'minutes');
-    const endOfRangeWeek = to.endOf(firstDay);
+    const endOfRangeWeek = to.endOf(firstDay as OpUnitType);
 
     return frames.flatMap((frame, frameIdx) => {
       const colorFn = frame.color?.display;

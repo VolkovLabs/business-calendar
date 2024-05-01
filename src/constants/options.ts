@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next';
 
-import { AnnotationsType, CalendarType, ColorMode, DateFormat, View } from '../types';
+import { AnnotationsType, ColorMode, DateFormat, View } from '../types';
 
 /**
  * Links Options
@@ -11,35 +11,11 @@ export const LINK_OPTIONS = (t: TFunction) => [
 ];
 
 /**
- * Scroll Options
- */
-export const SCROLL_OPTIONS = (t: TFunction) => [
-  { value: true, label: t('panelOptions.autoScroll.options.enabled') },
-  { value: false, label: t('panelOptions.autoScroll.options.disabled') },
-];
-
-/**
- * Display Time Options
- */
-export const DISPLAY_TIME_OPTIONS = (t: TFunction) => [
-  { value: true, label: t('panelOptions.displayTime.options.enabled') },
-  { value: false, label: t('panelOptions.displayTime.options.disabled') },
-];
-
-/**
  * Color Options
  */
 export const COLOR_OPTIONS = (t: TFunction) => [
   { value: ColorMode.FRAME, label: t('panelOptions.colors.options.frame') },
   { value: ColorMode.EVENT, label: t('panelOptions.colors.options.event') },
-];
-
-/**
- * Calendar Type Options
- */
-export const CALENDAR_TYPE_OPTIONS = (t: TFunction) => [
-  { value: CalendarType.LEGACY, label: t('panelOptions.calendarType.options.legacy') },
-  { value: CalendarType.BIG_CALENDAR, label: t('panelOptions.calendarType.options.bigCalendar') },
 ];
 
 /**

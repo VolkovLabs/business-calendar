@@ -3,15 +3,6 @@
     "location": "地点: {{location}}",
     "title": "活动详情"
   },
-  "legacyCalendar": {
-    "applyTimeRangeButton": "申请时间范围",
-    "dayDrawer": {
-      "allTab": "所有活动",
-      "noEventsMessage": "未找到活动。",
-      "title": "天"
-    },
-    "showMore": "{{count}} 更多的"
-  },
   "localizerMessages": {
     "agenda": "议程",
     "allDay": "一整天",
@@ -58,21 +49,6 @@
       },
       "label": "注释"
     },
-    "autoScroll": {
-      "description": "自动滚动到时间间隔的末尾。",
-      "label": "滚动到底部",
-      "options": {
-        "disabled": "残疾人",
-        "enabled": "汽车"
-      }
-    },
-    "calendarType": {
-      "label": "日历型",
-      "options": {
-        "bigCalendar": "大日历",
-        "legacy": "遗产"
-      }
-    },
     "colors": {
       "description": "如果未指定颜色字段，则根据帧或事件 ID 显示颜色。",
       "label": "颜色",
@@ -96,14 +72,6 @@
     },
     "defaultView": {
       "label": "默认视图"
-    },
-    "displayTime": {
-      "description": "显示每个条目的时间。",
-      "label": "显示时间",
-      "options": {
-        "disabled": "残疾人",
-        "enabled": "启用"
-      }
     },
     "events": {
       "colorField": {

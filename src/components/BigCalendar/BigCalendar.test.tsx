@@ -120,12 +120,26 @@ describe('Big Calendar', () => {
       return null;
     });
 
+    const onEventClick = jest.fn();
     const event: CalendarEvent = {
       text: 'hello',
       start: dayjs(getSafeDate()),
       end: dayjs(getSafeDate()),
       labels: [],
       color: '',
+      links: [
+        {
+          title: 'link',
+          onClick: onEventClick,
+          href: '/',
+        } as any,
+        {
+          title: 'link 2',
+          onClick: onEventClick,
+          href: '/',
+          target: '_self',
+        } as any,
+      ],
     };
     render(getComponent({ events: [event] }));
 
@@ -181,7 +195,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
       })
     );
 
@@ -227,7 +241,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
       })
     );
 
@@ -266,7 +280,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, autoScroll: false, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
       })
     );
 

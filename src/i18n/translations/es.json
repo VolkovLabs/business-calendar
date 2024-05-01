@@ -3,15 +3,6 @@
     "location": "Ubicación: {{location}}",
     "title": "Detalles del evento"
   },
-  "legacyCalendar": {
-    "applyTimeRangeButton": "Aplicar rango de tiempo",
-    "dayDrawer": {
-      "allTab": "Todos los eventos",
-      "noEventsMessage": "Eventos no encontrados.",
-      "title": "Día"
-    },
-    "showMore": "{{count}} más"
-  },
   "localizerMessages": {
     "agenda": "El Diario",
     "allDay": "Todo el dia",
@@ -58,21 +49,6 @@
       },
       "label": "Anotaciones"
     },
-    "autoScroll": {
-      "description": "Desplácese automáticamente hasta el final del intervalo de tiempo.",
-      "label": "Desplazarse hacia abajo",
-      "options": {
-        "disabled": "Desactivado",
-        "enabled": "Auto"
-      }
-    },
-    "calendarType": {
-      "label": "Tipo de calendario",
-      "options": {
-        "bigCalendar": "Gran Calendario",
-        "legacy": "Legado"
-      }
-    },
     "colors": {
       "description": "Muestra colores según el marco o la identificación del evento si no se especifica el campo Color.",
       "label": "Colores",
@@ -96,14 +72,6 @@
     },
     "defaultView": {
       "label": "Vista predeterminada"
-    },
-    "displayTime": {
-      "description": "Mostrar hora para cada entrada.",
-      "label": "Tiempo de visualización",
-      "options": {
-        "disabled": "Desactivado",
-        "enabled": "Activado"
-      }
     },
     "events": {
       "colorField": {

@@ -65,101 +65,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 20,
-        "w": 12,
+        "h": 19,
+        "w": 24,
         "x": 0,
-        "y": 0
-      },
-      "id": 10,
-      "options": {
-        "annotations": false,
-        "annotationsLimit": 100,
-        "annotationsType": "",
-        "autoScroll": true,
-        "calendarType": "legacy",
-        "colors": "event",
-        "dateFormat": "inherit",
-        "defaultView": "month",
-        "descriptionField": "description",
-        "displayTime": true,
-        "labelFields": ["slug", "version"],
-        "quickLinks": false,
-        "scrollToTime": {
-          "hours": 0,
-          "minutes": 0
-        },
-        "textField": "name",
-        "timeField": "updatedAt",
-        "views": ["day", "week", "month"]
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 15,
-          "refId": "A"
-        }
-      ],
-      "title": "Calendar",
-      "transformations": [
-        {
-          "id": "sortBy",
-          "options": {
-            "fields": {},
-            "sort": [
-              {
-                "desc": true,
-                "field": "id (count)"
-              }
-            ]
-          }
-        }
-      ],
-      "type": "marcusolsson-calendar-panel"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "links": [
-            {
-              "title": "Grafana Catalog",
-              "url": "${__data.fields.url}"
-            }
-          ],
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 1000
-              },
-              {
-                "color": "green",
-                "value": 5000
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 20,
-        "w": 12,
-        "x": 12,
         "y": 0
       },
       "id": 16,
@@ -167,14 +75,14 @@
         "annotations": false,
         "annotationsLimit": 100,
         "annotationsType": "",
-        "autoScroll": true,
-        "calendarType": "bigCalendar",
         "colors": "event",
         "dateFormat": "inherit",
         "defaultView": "month",
         "descriptionField": "description",
-        "displayTime": true,
-        "labelFields": ["slug", "version"],
+        "labelFields": [
+          "slug",
+          "version"
+        ],
         "locationField": "version",
         "quickLinks": false,
         "scrollToTime": {
@@ -183,8 +91,15 @@
         },
         "textField": "name",
         "timeField": "updatedAt",
-        "views": ["day", "week", "month", "work_week", "year"]
+        "views": [
+          "day",
+          "week",
+          "month",
+          "work_week",
+          "year"
+        ]
       },
+      "pluginVersion": "3.0.0",
       "targets": [
         {
           "datasource": {
@@ -222,7 +137,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 19
       },
       "id": 14,
       "panels": [],
@@ -256,8 +171,7 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -408,7 +322,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 20
       },
       "id": 15,
       "options": {
@@ -416,7 +330,9 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "showHeader": true,
@@ -427,7 +343,7 @@
           }
         ]
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.2.0",
       "targets": [
         {
           "cacheDurationSeconds": 300,
@@ -581,7 +497,7 @@
   ],
   "refresh": "",
   "revision": 1,
-  "schemaVersion": 39,
+  "schemaVersion": 38,
   "tags": [],
   "templating": {
     "list": []
@@ -596,6 +512,6 @@
   "timezone": "",
   "title": "Grafana Plugins",
   "uid": "hHK1qmpnk",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }

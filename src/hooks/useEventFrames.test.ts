@@ -56,7 +56,6 @@ describe('useEventFrames', () => {
 
   it('Should use field names from options', () => {
     const options: CalendarOptions = {
-      autoScroll: false,
       textField: 'Event Name',
       timeField: 'Event Start',
       endTimeField: 'Event End',
@@ -88,7 +87,6 @@ describe('useEventFrames', () => {
 
   it('Should use field names by type if no names specified', () => {
     const options: CalendarOptions = {
-      autoScroll: false,
       dateFormat: DateFormat.INHERIT,
     };
     const data: PanelData = {

@@ -1,18 +1,18 @@
 # Changelog
 
-## 3.0.0 (IN PROGRESS)
+## 3.0.0 (2024-05-01)
 
 ### Breaking changes
 
 - Legacy Calendar was replaced by Big Calendar.
-- Requires Grafana 10 and Grafana 11
+- Requires Grafana 10 and Grafana 11.
 
 ### Features / Enhancements
 
 - Add keeping refresh dashboard on time range change (#167)
 - Add plugin e2e tests and remove cypress (#168, #170)
 - Remove Legacy calendar replaced by Big Calendar (#172)
-- Prepare for Grafana 11 (#175)
+- Prepare for Grafana 11 (#175, #176)
 
 ## 2.5.0 (2024-03-20)
 

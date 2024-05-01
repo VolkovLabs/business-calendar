@@ -1,4 +1,4 @@
-import { ArrayVector, dateTime, FieldType, getLocaleData } from '@grafana/data';
+import { dateTime, FieldType, getLocaleData } from '@grafana/data';
 import { renderHook } from '@testing-library/react';
 import dayjs from 'dayjs';
 
@@ -35,17 +35,17 @@ describe('useCalendarEvents', () => {
   it('Should return events', () => {
     const frames = [
       {
-        labels: [{ values: new ArrayVector(['label 1']) }],
+        labels: [{ values: ['label 1'] }],
         text: {
           type: FieldType.string,
           name: 'text',
-          values: new ArrayVector(['111']),
+          values: ['111'],
           getLinks: () => null,
         },
         start: {
           type: FieldType.string,
           name: 'start',
-          values: new ArrayVector([getSafeDate()]),
+          values: [getSafeDate()],
         },
       },
     ];
@@ -69,18 +69,18 @@ describe('useCalendarEvents', () => {
         text: {
           type: FieldType.string,
           name: 'text',
-          values: new ArrayVector(['111']),
+          values: ['111'],
           getLinks: () => null,
         },
         start: {
           type: FieldType.string,
           name: 'start',
-          values: new ArrayVector([getSafeDate()]),
+          values: [getSafeDate()],
         },
         end: {
           type: FieldType.string,
           name: 'end',
-          values: new ArrayVector([getSafeDate()]),
+          values: [getSafeDate()],
         },
       },
     ];
@@ -103,18 +103,18 @@ describe('useCalendarEvents', () => {
         text: {
           type: FieldType.string,
           name: 'text',
-          values: new ArrayVector(['111']),
+          values: ['111'],
           getLinks: () => null,
         },
         start: {
           type: FieldType.string,
           name: 'start',
-          values: new ArrayVector([getSafeDate()]),
+          values: [getSafeDate()],
         },
         end: {
           type: FieldType.string,
           name: 'end',
-          values: new ArrayVector([getSafeDate()]),
+          values: [getSafeDate()],
         },
       },
     ];
@@ -177,19 +177,19 @@ describe('useCalendarEvents', () => {
         text: {
           type: FieldType.string,
           name: 'text',
-          values: new ArrayVector(['111']),
+          values: ['111'],
           getLinks: () => null,
           display: () => ({ text: 'displayed' }),
         },
         start: {
           type: FieldType.string,
           name: 'start',
-          values: new ArrayVector([getSafeDate()]),
+          values: [getSafeDate()],
         },
         end: {
           type: FieldType.string,
           name: 'end',
-          values: new ArrayVector([getSafeDate()]),
+          values: [getSafeDate()],
         },
       },
     ];
@@ -209,11 +209,11 @@ describe('useCalendarEvents', () => {
   it('Should not return event without start', () => {
     const frames = [
       {
-        labels: [{ values: new ArrayVector(['label 1']) }],
+        labels: [{ values: ['label 1'] }],
         text: {
           type: FieldType.string,
           name: 'text',
-          values: new ArrayVector(['111']),
+          values: ['111'],
           getLinks: () => null,
         },
       },
@@ -234,18 +234,18 @@ describe('useCalendarEvents', () => {
         text: {
           type: FieldType.string,
           name: 'text',
-          values: new ArrayVector(['111']),
+          values: ['111'],
           getLinks: () => null,
         },
         start: {
           type: FieldType.string,
           name: 'start',
-          values: new ArrayVector([getSafeDate()]),
+          values: [getSafeDate()],
         },
         end: {
           type: FieldType.string,
           name: 'end',
-          values: new ArrayVector([]),
+          values: [],
         },
       },
     ];

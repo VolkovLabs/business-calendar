@@ -1,4 +1,4 @@
-import { ArrayVector, dateTimeParse, Field, FieldType, getDisplayProcessor, GrafanaTheme2 } from '@grafana/data';
+import { dateTimeParse, Field, FieldType, getDisplayProcessor, GrafanaTheme2 } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
 
 /**
@@ -29,13 +29,11 @@ export const toTimeField = ({
     const tmp = {
       ...field,
       type: FieldType.time,
-      values: new ArrayVector(
-        field.values.toArray().map((value: string) =>
-          dateTimeParse(value, {
-            timeZone,
-            format: 'YYYY-MM-DDTHH:mm:ss.SSSSSSSZ',
-          }).valueOf()
-        )
+      values: field.values.map((value: string) =>
+        dateTimeParse(value, {
+          timeZone,
+          format: 'YYYY-MM-DDTHH:mm:ss.SSSSSSSZ',
+        }).valueOf()
       ),
     };
     tmp.display = getDisplayProcessor({ field: tmp, timeZone, theme });

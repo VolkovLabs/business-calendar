@@ -1,4 +1,4 @@
-import { ArrayVector, FieldType, GrafanaTheme2 } from '@grafana/data';
+import { FieldType, GrafanaTheme2 } from '@grafana/data';
 import { getTheme } from '@grafana/ui';
 
 import { toTimeField } from './time';
@@ -23,7 +23,7 @@ describe('To Time Field', () => {
         config: {},
         type: FieldType.number,
         name: 'number',
-        values: new ArrayVector([]),
+        values: [],
       },
       theme,
       timeZone: 'abc',
@@ -38,7 +38,7 @@ describe('To Time Field', () => {
         config: {},
         type: FieldType.string,
         name: 'string',
-        values: new ArrayVector([getSafeDate().toISOString()]),
+        values: [getSafeDate().toISOString()],
       },
       theme,
       timeZone: 'abc',
@@ -52,7 +52,7 @@ describe('To Time Field', () => {
       config: {},
       type: FieldType.time,
       name: 'string',
-      values: new ArrayVector([]),
+      values: [],
     };
     const result = toTimeField({ field, theme, timeZone: 'abc' });
 

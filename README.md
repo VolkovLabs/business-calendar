@@ -16,10 +16,11 @@ Calendar Panel is a Grafana plugin that displays events from various data source
 
 ## Requirements
 
+- Calendar Panel 3.X requires **Grafana 10** or **Grafana 11**.
 - Calendar Panel 2.X requires **Grafana 9.2** or **Grafana 10**.
 - Calendar Panel 1.X requires **Grafana 8.5** or **Grafana 9**.
 
-You can install the Calendar Panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or using the Grafana command line tool.
+You can install the Calendar Panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
 
 For the latter, please use the following command:
 

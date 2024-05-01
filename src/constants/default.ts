@@ -1,7 +1,6 @@
 import {
   AnnotationsType,
   CalendarOptions,
-  CalendarType,
   ColorMode,
   DateFormat,
   Language,
@@ -22,10 +21,7 @@ export const DEFAULT_OPTIONS: CalendarOptions = {
   annotations: false,
   annotationsLimit: 100,
   annotationsType: AnnotationsType.ALL,
-  autoScroll: false,
-  calendarType: CalendarType.LEGACY,
   colors: ColorMode.FRAME,
-  displayTime: false,
   quickLinks: false,
   dateFormat: DateFormat.INHERIT,
 };

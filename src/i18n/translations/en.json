@@ -3,15 +3,6 @@
     "location": "Location: {{location}}",
     "title": "Event Details"
   },
-  "legacyCalendar": {
-    "applyTimeRangeButton": "Apply time range",
-    "dayDrawer": {
-      "allTab": "All Events",
-      "noEventsMessage": "Events not found.",
-      "title": "Day"
-    },
-    "showMore": "{{count}} more"
-  },
   "localizerMessages": {
     "agenda": "Agenda",
     "allDay": "All Day",
@@ -58,21 +49,6 @@
       },
       "label": "Annotations"
     },
-    "autoScroll": {
-      "description": "Automatically scroll to the end of the time interval.",
-      "label": "Scroll to bottom",
-      "options": {
-        "disabled": "Disabled",
-        "enabled": "Auto"
-      }
-    },
-    "calendarType": {
-      "label": "Calendar type",
-      "options": {
-        "bigCalendar": "Big Calendar",
-        "legacy": "Legacy"
-      }
-    },
     "colors": {
       "description": "Display colors based on Frame or Event id if Color field is not specified.",
       "label": "Colors",
@@ -96,14 +72,6 @@
     },
     "defaultView": {
       "label": "Default View"
-    },
-    "displayTime": {
-      "description": "Display Time for each entry.",
-      "label": "Display time",
-      "options": {
-        "disabled": "Disabled",
-        "enabled": "Enabled"
-      }
     },
     "events": {
       "colorField": {

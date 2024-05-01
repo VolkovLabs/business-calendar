@@ -1,4 +1,4 @@
-import { CalendarType, DateFormat, View } from './calendar';
+import { DateFormat, View } from './calendar';
 
 /**
  * Language
@@ -56,18 +56,6 @@ export interface TimeOptions {
  * Calendar Options
  */
 export interface CalendarOptions {
-  /**
-   * Calendar Type
-   */
-  calendarType?: CalendarType;
-
-  /**
-   * Auto Scroll
-   *
-   * @type {boolean}
-   */
-  autoScroll: boolean;
-
   /**
    * Time
    *
@@ -144,13 +132,6 @@ export interface CalendarOptions {
    * @type {string}
    */
   colorField?: string;
-
-  /**
-   * Display Time
-   *
-   * @type {boolean}
-   */
-  displayTime?: boolean;
 
   /**
    * Location Field

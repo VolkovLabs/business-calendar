@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0 (IN PROGRESS)
+
+- Calendar "Agenda" (List) View (#177)
+
 ## 3.0.0 (2024-05-02)
 
 ### Breaking changes

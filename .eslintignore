@@ -11,3 +11,4 @@ dist/
 # Playwright tests
 playwright.config.ts
 test/panel.spec.ts
+playwright-report

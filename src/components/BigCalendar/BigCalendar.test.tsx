@@ -447,6 +447,42 @@ describe('Big Calendar', () => {
     expect(eventDetailsSelectors.root()).toHaveTextContent(`Description`);
   });
 
+  it('Should show location with custom label', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      description: 'Description',
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+      locationLabel: 'Label',
+      fields: ['location'],
+    };
+    render(getComponent({ events: [event] }));
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`Label: Room`);
+  });
+
   it('Should show event info with empty resource', async () => {
     let calendarProps: Required<CalendarProps> = {} as any;
     jest.mocked(Calendar).mockImplementation((props: any): any => {

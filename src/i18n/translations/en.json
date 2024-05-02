@@ -122,6 +122,7 @@
     "views": {
       "label": "Views",
       "options": {
+        "agenda": "Agenda",
         "day": "Day",
         "month": "Month",
         "week": "Week",

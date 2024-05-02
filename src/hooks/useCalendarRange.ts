@@ -1,5 +1,5 @@
 import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
-import dayjs from 'dayjs';
+import dayjs, { OpUnitType } from 'dayjs';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Navigate, NavigateAction } from 'react-big-calendar';
 
@@ -8,13 +8,15 @@ import { View } from '../types';
 /**
  * Get Unit Type
  */
-export const getUnitType = (view: View) => {
+export const getUnitType = (view: View): OpUnitType => {
   switch (view) {
     case View.WORK_WEEK: {
       return 'week';
     }
+    case View.AGENDA: {
+      return 'month';
+    }
   }
-
   return view;
 };
 

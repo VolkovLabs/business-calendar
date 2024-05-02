@@ -65,4 +65,18 @@ export interface CalendarEvent {
    * @type {string}
    */
   location?: string;
+
+  /**
+   * Fields
+   *
+   * @type {string[]}
+   */
+  fields?: string[];
+
+  /**
+   * Fields
+   *
+   * @type {string}
+   */
+  locationLabel?: string;
 }

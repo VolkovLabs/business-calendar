@@ -49,31 +49,7 @@
       },
       "label": "Annotations"
     },
-    "colors": {
-      "description": "Display colors based on Frame or Event id if Color field is not specified.",
-      "label": "Colors",
-      "options": {
-        "event": "Event",
-        "frame": "Frame"
-      }
-    },
-    "dateFormat": {
-      "label": "Date and time format",
-      "options": {
-        "de": "German",
-        "en": "English",
-        "en24": "English 24H",
-        "es": "Spanish",
-        "fr": "French",
-        "inherit": "User selection",
-        "iso": "ISO 8601",
-        "zh": "Chinese"
-      }
-    },
-    "defaultView": {
-      "label": "Default View"
-    },
-    "events": {
+    "data": {
       "colorField": {
         "description": "Field to use as event color.",
         "label": "Color"
@@ -87,7 +63,7 @@
         "description": "Field to use for the event end time. If not set, event is instant.",
         "label": "End time"
       },
-      "label": "Events",
+      "label": "Data",
       "labelFields": {
         "description": "Fields to use as event labels.",
         "label": "Labels"
@@ -107,26 +83,75 @@
         "label": "Start time"
       }
     },
-    "quickLinks": {
-      "description": "Open data link or display drawer when clicking an event.",
-      "label": "On click",
-      "options": {
-        "disabled": "Show Details",
-        "enabled": "Open Link"
+    "events": {
+      "label": "Events",
+      "quickLinks": {
+        "description": "Open data link or display drawer when clicking an event.",
+        "label": "On click",
+        "options": {
+          "disabled": "Show Details",
+          "enabled": "Open Link"
+        }
+      },
+      "displayFields": {
+        "description": "Event display fields",
+        "label": "Display Fields"
+      },
+      "locatioLabel": {
+        "description": "Location label text",
+        "label": "Location label"
       }
     },
+    "layout": {
+      "label": "Layout",
+      "defaultView": {
+        "label": "Default View"
+      },
+      "views": {
+        "label": "Views",
+        "options": {
+          "day": "Day",
+          "month": "Month",
+          "week": "Week",
+          "workWeek": "Work Week",
+          "year": "Year"
+        }
+      },
+      "dateFormat": {
+        "label": "Date and time format",
+        "options": {
+          "de": "German",
+          "en": "English",
+          "en24": "English 24H",
+          "es": "Spanish",
+          "fr": "French",
+          "inherit": "User selection",
+          "iso": "ISO 8601",
+          "zh": "Chinese"
+        }
+      },
+      "colors": {
+        "description": "Display colors based on Frame or Event id if Color field is not specified.",
+        "label": "Colors",
+        "options": {
+          "event": "Event",
+          "frame": "Frame"
+        }
+      }
+    },
+
     "scrollToTime": {
       "description": "Set the initial scroll to the selected time.",
       "label": "Scroll To Time"
     },
-    "views": {
-      "label": "Views",
+    "eventField": {
       "options": {
-        "day": "Day",
-        "month": "Month",
-        "week": "Week",
-        "workWeek": "Work Week",
-        "year": "Year"
+        "description": "Description",
+        "labels": "Labels",
+        "links": "Links",
+        "location": "Location",
+        "text": "Text",
+        "time": "Time"
       }
     }
   }

@@ -174,11 +174,13 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         text: event.title as string,
         start: dayjs(event.start),
         end: event.end && !event.resource?.noEndTime ? dayjs(event.end) : undefined,
+        fields: options.displayFields,
+        locationLabel: options.locationLabel,
         labels: [],
         ...(event.resource || {}),
       });
     },
-    [options.quickLinks]
+    [options.displayFields, options.locationLabel, options.quickLinks]
   );
 
   /**

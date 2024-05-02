@@ -48,3 +48,15 @@ export interface DateLocalizer extends Omit<BigDateLocalizer, 'formats'> {
     yearDateFormat: string;
   };
 }
+
+/**
+ * Event field
+ */
+export enum EventField {
+  DESCRIPTION = 'description',
+  LABELS = 'labels',
+  LINKS = 'links',
+  LOCATION = 'location',
+  TEXT = 'text',
+  TIME = 'time',
+}

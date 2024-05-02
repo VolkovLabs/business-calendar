@@ -167,4 +167,18 @@ export interface CalendarOptions {
    * @type {DateFormat}
    */
   dateFormat: DateFormat;
+
+  /**
+   * Display Fields
+   *
+   * @type {string[]}
+   */
+  displayFields?: string[];
+
+  /**
+   * Location label
+   *
+   * @type {string}
+   */
+  locationLabel?: string;
 }

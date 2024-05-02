@@ -49,31 +49,7 @@
       },
       "label": "Anotaciones"
     },
-    "colors": {
-      "description": "Muestra colores según el marco o la identificación del evento si no se especifica el campo Color.",
-      "label": "Colores",
-      "options": {
-        "event": "Evento",
-        "frame": "Marco"
-      }
-    },
-    "dateFormat": {
-      "label": "Formato de fecha y hora",
-      "options": {
-        "de": "Alemana",
-        "en": "Inglés",
-        "en24": "Inglesa 24H",
-        "es": "Español",
-        "fr": "Francés",
-        "inherit": "Selección de usuario",
-        "iso": "ISO 8601",
-        "zh": "Chino"
-      }
-    },
-    "defaultView": {
-      "label": "Vista predeterminada"
-    },
-    "events": {
+    "data": {
       "colorField": {
         "description": "Campo a utilizar como color del evento.",
         "label": "Color"
@@ -87,7 +63,7 @@
         "description": "Campo a utilizar para la hora de finalización del evento. Si no se establece, el evento es instantáneo.",
         "label": "Hora de finalización"
       },
-      "label": "Eventos",
+      "label": "Datos",
       "labelFields": {
         "description": "Campos para usar como etiquetas de eventos.",
         "label": "Etiquetas"
@@ -107,26 +83,74 @@
         "label": "Hora de inicio"
       }
     },
-    "quickLinks": {
-      "description": "Abra el enlace de datos o muestre el cajón al hacer clic en un evento.",
-      "label": "Al hacer clic",
-      "options": {
-        "disabled": "Mostrar detalles",
-        "enabled": "Enlace abierto"
+    "events": {
+      "label": "Eventos",
+      "quickLinks": {
+        "description": "Abra el enlace de datos o muestre el cajón al hacer clic en un evento.",
+        "label": "Al hacer clic",
+        "options": {
+          "disabled": "Mostrar detalles",
+          "enabled": "Enlace abierto"
+        }
+      },
+      "displayFields": {
+        "description": "Campos de visualización de eventos",
+        "label": "Campos de visualización"
+      },
+      "locatioLabel": {
+        "description": "Texto de la etiqueta de ubicación",
+        "label": "Etiqueta de localización"
+      }
+    },
+    "layout": {
+      "label": "Diseño",
+      "defaultView": {
+        "label": "Vista predeterminada"
+      },
+      "views": {
+        "label": "Puntos de vista",
+        "options": {
+          "day": "Día",
+          "month": "Mes",
+          "week": "Semana",
+          "workWeek": "Semana de trabajo",
+          "year": "Año"
+        }
+      },
+      "dateFormat": {
+        "label": "Formato de fecha y hora",
+        "options": {
+          "de": "Alemana",
+          "en": "Inglés",
+          "en24": "Inglesa 24H",
+          "es": "Español",
+          "fr": "Francés",
+          "inherit": "Selección de usuario",
+          "iso": "ISO 8601",
+          "zh": "Chino"
+        }
+      },
+      "colors": {
+        "description": "Muestra colores según el marco o la identificación del evento si no se especifica el campo Color.",
+        "label": "Colores",
+        "options": {
+          "event": "Evento",
+          "frame": "Marco"
+        }
       }
     },
     "scrollToTime": {
       "description": "Establezca el desplazamiento inicial en la hora seleccionada.",
       "label": "Desplazarse hasta el tiempo"
     },
-    "views": {
-      "label": "Puntos de vista",
+    "eventField": {
       "options": {
-        "day": "Día",
-        "month": "Mes",
-        "week": "Semana",
-        "workWeek": "Semana de trabajo",
-        "year": "Año"
+        "description": "Descripción",
+        "labels": "Etiquetas",
+        "links": "Enlaces",
+        "location": "Ubicación",
+        "text": "Texto",
+        "time": "Tiempo"
       }
     }
   }

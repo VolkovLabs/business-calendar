@@ -31,7 +31,7 @@ export const ANNOTATIONS_OPTIONS = (t: TFunction) => [
  */
 export const ANNOTATIONS_TYPE_OPTIONS = (t: TFunction) => [
   { value: AnnotationsType.ALL, label: t('panelOptions.annotations.annotationsType.options.all') },
-  { value: AnnotationsType.ALERT, label: t('panelOptions.annotations.annotationsType.options.alert') },
+  { value: AnnotationsType.ALERT, label: t('panelOptions.annotations.annotationsType.options.alert'), icon: 'bell' },
   { value: AnnotationsType.ANNOTATION, label: t('panelOptions.annotations.annotationsType.options.annotation') },
 ];
 

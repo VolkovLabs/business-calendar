@@ -248,6 +248,7 @@ describe('Use Calendar Range', () => {
       await runChangeViewTest(View.DAY);
       await runChangeViewTest(View.MONTH);
       await runChangeViewTest(View.WORK_WEEK);
+      await runChangeViewTest(View.AGENDA);
     });
 
     it('Should update time range if start is out of range', async () => {

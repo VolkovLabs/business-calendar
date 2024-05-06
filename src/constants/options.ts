@@ -39,6 +39,7 @@ export const ANNOTATIONS_TYPE_OPTIONS = (t: TFunction) => [
  * Calendar View Options
  */
 export const CALENDAR_VIEW_OPTIONS = (t: TFunction) => [
+  { value: View.AGENDA, label: t('panelOptions.views.options.agenda') },
   { value: View.DAY, label: t('panelOptions.views.options.day') },
   { value: View.WEEK, label: t('panelOptions.views.options.week') },
   { value: View.WORK_WEEK, label: t('panelOptions.views.options.workWeek') },

@@ -4,6 +4,7 @@ import { DateLocalizer as BigDateLocalizer, Messages } from 'react-big-calendar'
  * View
  */
 export enum View {
+  AGENDA = 'agenda',
   DAY = 'day',
   WEEK = 'week',
   WORK_WEEK = 'work_week',

@@ -110,6 +110,7 @@
       "views": {
         "label": "Views",
         "options": {
+          "agenda": "Agenda",
           "day": "Day",
           "month": "Month",
           "week": "Week",
@@ -139,7 +140,6 @@
         }
       }
     },
-
     "scrollToTime": {
       "description": "Set the initial scroll to the selected time.",
       "label": "Scroll To Time"

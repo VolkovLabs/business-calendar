@@ -110,6 +110,7 @@
       "views": {
         "label": "Puntos de vista",
         "options": {
+          "agenda": "El Diario",
           "day": "Día",
           "month": "Mes",
           "week": "Semana",

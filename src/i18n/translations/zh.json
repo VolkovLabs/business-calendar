@@ -110,6 +110,7 @@
       "views": {
         "label": "意见",
         "options": {
+          "agenda": "议程",
           "day": "天",
           "month": "月",
           "week": "星期",

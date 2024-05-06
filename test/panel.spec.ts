@@ -61,5 +61,8 @@ test.describe('Volkovlabs Calendar Panel', () => {
     await expect(
       page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.YEAR))
     ).toBeVisible();
+    await expect(
+      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.AGENDA))
+    ).toBeVisible();
   });
 });

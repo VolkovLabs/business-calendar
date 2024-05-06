@@ -74,6 +74,9 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   const components: Components = useMemo(
     () => ({
       toolbar: BigToolbar,
+      agenda: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
+      },
       day: {
         event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
       },

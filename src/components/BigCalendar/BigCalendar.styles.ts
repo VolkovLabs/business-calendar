@@ -18,7 +18,11 @@ export const getBigCalendarStyles = (theme: GrafanaTheme2) => {
     .rbc-time-content,
     .rbc-timeslot-group,
     .rbc-time-content > * + * > *,
-    .rbc-day-slot .rbc-time-slot
+    .rbc-day-slot .rbc-time-slot,
+    .rbc-agenda-view table.rbc-agenda-table,
+    .rbc-agenda-view table.rbc-agenda-table thead > tr > th,
+    .rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td,
+    .rbc-agenda-view table.rbc-agenda-table tbody > tr + tr
     `;
 
   return {

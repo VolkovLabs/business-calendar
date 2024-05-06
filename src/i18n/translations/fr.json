@@ -110,6 +110,7 @@
       "views": {
         "label": "Vues",
         "options": {
+          "agenda": "Ordre du jour",
           "day": "Jour",
           "month": "Mois",
           "week": "Semaine",

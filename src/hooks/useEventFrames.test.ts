@@ -61,6 +61,8 @@ describe('useEventFrames', () => {
       endTimeField: 'Event End',
       labelFields: ['Event Name'],
       dateFormat: DateFormat.INHERIT,
+      displayFields: [],
+      locationLabel: '',
     };
     const data = getDataFrame(options);
 
@@ -88,7 +90,10 @@ describe('useEventFrames', () => {
   it('Should use field names by type if no names specified', () => {
     const options: CalendarOptions = {
       dateFormat: DateFormat.INHERIT,
+      displayFields: [],
+      locationLabel: '',
     };
+
     const data: PanelData = {
       state: LoadingState.Done,
       timeRange: defaultTimeRange,

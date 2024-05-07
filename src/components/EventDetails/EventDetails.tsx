@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { TEST_IDS } from '../../constants';
 import { CalendarEvent, EventField } from '../../types';
-import { getTime, isFieldDisplay } from '../../utils';
+import { getTime, isFieldVisible } from '../../utils';
 import { getStyles } from './EventDetails.styles';
 
 /**
@@ -26,16 +26,26 @@ interface Props {
    * On Click
    */
   onClick?: (event: unknown) => void;
+
+  /**
+   * Fields
+   *
+   * @type {EventField[]}
+   */
+  fields: EventField[];
+
+  /**
+   * Fields
+   *
+   * @type {string}
+   */
+  locationLabel: string;
 }
 
 /**
  * Event Details
- * @param event
- * @param showFullInfo
- * @param onClick
- * @constructor
  */
-export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onClick }) => {
+export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onClick, locationLabel, fields }) => {
   /**
    * Styles
    */
@@ -54,19 +64,19 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
      * Location text
      */
     const location =
-      isFieldDisplay(EventField.LOCATION, event.fields) && event.location
-        ? event.locationLabel?.trim()
-          ? `${event.locationLabel}: ${event.location}`
+      isFieldVisible(EventField.LOCATION, fields) && event.location
+        ? locationLabel.trim()
+          ? `${locationLabel}: ${event.location}`
           : t('eventDetailsDrawer.location', { location: event.location })
         : '';
 
     let time = '';
 
-    if (isFieldDisplay(EventField.TIME, event.fields)) {
+    if (isFieldVisible(EventField.TIME, fields)) {
       time = getTime(event);
     }
     return [time, location];
-  }, [event, t]);
+  }, [event, fields, locationLabel, t]);
 
   /**
    * Tags
@@ -80,24 +90,24 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
           <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.svg}>
             <circle cx={5} cy={5} r={5} />
           </svg>
-          {isFieldDisplay(EventField.TEXT, event.fields) && event.text}
+          {isFieldVisible(EventField.TEXT, fields) && event.text}
         </div>
       </Card.Heading>
       <Card.Meta>{meta}</Card.Meta>
-      {isFieldDisplay(EventField.LABELS, event.fields) && (
+      {isFieldVisible(EventField.LABELS, fields) && (
         <Card.Tags>
           <TagList tags={tags} className={styles.labels} />
         </Card.Tags>
       )}
       {showFullInfo && (
         <>
-          {isFieldDisplay(EventField.DESCRIPTION, event.fields) && event.description && (
+          {isFieldVisible(EventField.DESCRIPTION, fields) && event.description && (
             <Card.Description>
               <span dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }} />
             </Card.Description>
           )}
           <Card.Actions>
-            {isFieldDisplay(EventField.LINKS, event.fields) &&
+            {isFieldVisible(EventField.LINKS, fields) &&
               event.links
                 ?.filter((link) => link.href)
                 .map((link, index) => (

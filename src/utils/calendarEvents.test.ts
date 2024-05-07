@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
-import { getTime, isFieldDisplay } from './calendarEvents';
+import { EventField } from '../types';
+import { getTime, isFieldVisible } from './calendarEvents';
 
 /**
  * Calendar Events
@@ -11,32 +12,22 @@ describe('Calendar Events', () => {
    */
   describe('isFieldDisplay', () => {
     it('returns true when the field is included in the fields array', () => {
-      const result = isFieldDisplay('field1', ['field1', 'field2', 'field3']);
+      const result = isFieldVisible(EventField.LABELS, [EventField.DESCRIPTION, EventField.LABELS, EventField.TEXT]);
       expect(result).toBe(true);
     });
 
     it('returns false when the field is not included in the fields array', () => {
-      const result = isFieldDisplay('field4', ['field1', 'field2', 'field3']);
+      const result = isFieldVisible(EventField.DESCRIPTION, [EventField.TEXT, EventField.LINKS, EventField.LOCATION]);
       expect(result).toBe(false);
     });
 
     it('returns false when the fields array is empty', () => {
-      const result = isFieldDisplay('field1', []);
-      expect(result).toBe(false);
-    });
-
-    it('returns false when the fields array is undefined', () => {
-      const result = isFieldDisplay('field1');
+      const result = isFieldVisible(EventField.LINKS, []);
       expect(result).toBe(false);
     });
 
     it('returns true when the field is included multiple times in the fields array', () => {
-      const result = isFieldDisplay('field1', ['field1', 'field1', 'field2']);
-      expect(result).toBe(true);
-    });
-
-    it('returns true when the field is included in the fields array along with other fields', () => {
-      const result = isFieldDisplay('field2', ['field1', 'field2', 'field3']);
+      const result = isFieldVisible(EventField.LOCATION, [EventField.LOCATION, EventField.LOCATION, EventField.LABELS]);
       expect(result).toBe(true);
     });
   });

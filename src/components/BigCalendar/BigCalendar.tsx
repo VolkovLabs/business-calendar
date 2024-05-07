@@ -177,13 +177,11 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         text: event.title as string,
         start: dayjs(event.start),
         end: event.end && !event.resource?.noEndTime ? dayjs(event.end) : undefined,
-        fields: options.displayFields,
-        locationLabel: options.locationLabel,
         labels: [],
         ...(event.resource || {}),
       });
     },
-    [options.displayFields, options.locationLabel, options.quickLinks]
+    [options.quickLinks]
   );
 
   /**
@@ -228,7 +226,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     <div data-testid={TEST_IDS.bigCalendar.root}>
       {activeEvent && (
         <Drawer title={t('eventDetailsDrawer.title')} onClose={() => setActiveEvent(null)}>
-          <EventDetails event={activeEvent} />
+          <EventDetails event={activeEvent} fields={options.displayFields} locationLabel={options.locationLabel} />
         </Drawer>
       )}
       <Global styles={libStyles.global} />

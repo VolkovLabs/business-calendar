@@ -3,7 +3,7 @@ import { TimeZone } from '@grafana/schema';
 import dayjs from 'dayjs';
 
 import { DEFAULT_LANGUAGE } from '../constants';
-import { CalendarEvent } from '../types';
+import { CalendarEvent, EventField } from '../types';
 
 /**
  * Get Minutes Offset From Time Zone
@@ -55,8 +55,13 @@ export const getDateWithMinutesOffset = (date: Date, minutesOffset: number): Dat
   return dayjs(date).add(minutesOffset, 'minutes').toDate();
 };
 
-export const isFieldDisplay = (field: string, fields?: string[]) => {
-  return fields ? fields.includes(field) : false;
+/**
+ * Is Field Visible
+ * @param field
+ * @param fields
+ */
+export const isFieldVisible = (field: EventField, fields: EventField[]): boolean => {
+  return fields.includes(field);
 };
 
 export const getTime = (event: CalendarEvent) => {

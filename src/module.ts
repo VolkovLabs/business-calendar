@@ -10,7 +10,6 @@ import {
   CALENDAR_VIEW_OPTIONS,
   COLOR_OPTIONS,
   DATE_FORMAT_OPTIONS,
-  DEFAULT_FIELDS,
   DEFAULT_OPTIONS,
   DEFAULT_SCROLL_TO_TIME,
   DEFAULT_VIEW,
@@ -115,7 +114,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           options: DISPLAY_FIELD_OPTIONS(t),
         },
-        defaultValue: DEFAULT_FIELDS as unknown,
+        defaultValue: DEFAULT_OPTIONS.displayFields as unknown,
       })
       .addTextInput({
         path: 'locationLabel',

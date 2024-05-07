@@ -64,7 +64,11 @@ export const isFieldVisible = (field: EventField, fields: EventField[]): boolean
   return fields.includes(field);
 };
 
-export const getTime = (event: CalendarEvent) => {
+/**
+ * Display time
+ * @param event
+ */
+export const displayTime = (event: CalendarEvent) => {
   return event.end
     ? `${event.start.format('LLL')} - ${
         event.start.startOf('day').isSame(event.end?.startOf('day')) ? event.end.format('LT') : event.end.format('LLL')

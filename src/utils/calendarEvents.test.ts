@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import { EventField } from '../types';
-import { getTime, isFieldVisible } from './calendarEvents';
+import { displayTime, isFieldVisible } from './calendarEvents';
 
 /**
  * Calendar Events
@@ -33,9 +33,9 @@ describe('Calendar Events', () => {
   });
 
   /**
-   * getTime
+   * displayTime
    */
-  describe('getTime', () => {
+  describe('displayTime', () => {
     const getSafeDate = () => new Date('2023-02-02');
 
     it('should return formatted start time if event has no end time', () => {
@@ -44,7 +44,7 @@ describe('Calendar Events', () => {
         end: undefined,
       } as any;
 
-      const result = getTime(event);
+      const result = displayTime(event);
 
       expect(result).toBe('LLL');
     });
@@ -55,7 +55,7 @@ describe('Calendar Events', () => {
         end: dayjs(getSafeDate()),
       } as any;
 
-      const result = getTime(event);
+      const result = displayTime(event);
 
       expect(result).toBe('LLL - LT');
     });
@@ -66,7 +66,7 @@ describe('Calendar Events', () => {
         end: dayjs(getSafeDate()),
       } as any;
 
-      const result = getTime(event);
+      const result = displayTime(event);
 
       expect(result).toBe('LLL - LT');
     });

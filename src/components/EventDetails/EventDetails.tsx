@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { TEST_IDS } from '../../constants';
 import { CalendarEvent, EventField } from '../../types';
-import { getTime, isFieldVisible } from '../../utils';
+import { displayTime, isFieldVisible } from '../../utils';
 import { getStyles } from './EventDetails.styles';
 
 /**
@@ -73,7 +73,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
     let time = '';
 
     if (isFieldVisible(EventField.TIME, fields)) {
-      time = getTime(event);
+      time = displayTime(event);
     }
     return [time, location];
   }, [event, fields, locationLabel, t]);

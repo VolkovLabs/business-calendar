@@ -118,11 +118,14 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       })
       .addTextInput({
         path: 'locationLabel',
-        name: t('panelOptions.events.locatioLabel.label'),
-        description: t('panelOptions.events.locatioLabel.description'),
+        name: t('panelOptions.events.locationLabel.label'),
+        description: t('panelOptions.events.locationLabel.description'),
         category: [t('panelOptions.events.label')],
         showIf: (config) => !config.quickLinks,
         defaultValue: DEFAULT_OPTIONS.locationLabel,
+        settings: {
+          placeholder: t('panelOptions.events.locationLabel.placeholder'),
+        },
       });
 
     /**

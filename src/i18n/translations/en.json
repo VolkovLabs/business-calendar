@@ -83,8 +83,27 @@
         "label": "Start time"
       }
     },
+    "eventField": {
+      "options": {
+        "description": "Description",
+        "labels": "Labels",
+        "links": "Links",
+        "location": "Location",
+        "text": "Text",
+        "time": "Time"
+      }
+    },
     "events": {
+      "displayFields": {
+        "description": "Fields to show in the event details.",
+        "label": "Details info"
+      },
       "label": "Events",
+      "locationLabel": {
+        "description": "Specify a custom label for location field.",
+        "label": "Location label",
+        "placeholder": "Location:"
+      },
       "quickLinks": {
         "description": "Open data link or display drawer when clicking an event.",
         "label": "On click",
@@ -92,30 +111,15 @@
           "disabled": "Show Details",
           "enabled": "Open Link"
         }
-      },
-      "displayFields": {
-        "description": "Event display fields",
-        "label": "Display Fields"
-      },
-      "locatioLabel": {
-        "description": "Location label text",
-        "label": "Location label"
       }
     },
     "layout": {
-      "label": "Layout",
-      "defaultView": {
-        "label": "Default View"
-      },
-      "views": {
-        "label": "Views",
+      "colors": {
+        "description": "Display colors based on Frame or Event id if Color field is not specified.",
+        "label": "Colors",
         "options": {
-          "agenda": "Agenda",
-          "day": "Day",
-          "month": "Month",
-          "week": "Week",
-          "workWeek": "Work Week",
-          "year": "Year"
+          "event": "Event",
+          "frame": "Frame"
         }
       },
       "dateFormat": {
@@ -131,28 +135,25 @@
           "zh": "Chinese"
         }
       },
-      "colors": {
-        "description": "Display colors based on Frame or Event id if Color field is not specified.",
-        "label": "Colors",
+      "defaultView": {
+        "label": "Default View"
+      },
+      "label": "Layout",
+      "views": {
+        "label": "Views",
         "options": {
-          "event": "Event",
-          "frame": "Frame"
+          "agenda": "Agenda",
+          "day": "Day",
+          "month": "Month",
+          "week": "Week",
+          "workWeek": "Work Week",
+          "year": "Year"
         }
       }
     },
     "scrollToTime": {
       "description": "Set the initial scroll to the selected time.",
       "label": "Scroll To Time"
-    },
-    "eventField": {
-      "options": {
-        "description": "Description",
-        "labels": "Labels",
-        "links": "Links",
-        "location": "Location",
-        "text": "Text",
-        "time": "Time"
-      }
     }
   }
 }

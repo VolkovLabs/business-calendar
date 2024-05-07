@@ -83,8 +83,27 @@
         "label": "Heure de début"
       }
     },
+    "eventField": {
+      "options": {
+        "description": "Description",
+        "labels": "Étiquettes",
+        "links": "Liens",
+        "location": "Emplacement",
+        "text": "Texte",
+        "time": "Temps"
+      }
+    },
     "events": {
+      "displayFields": {
+        "description": "Champs à afficher dans les détails de l'événement.",
+        "label": "Informations détaillées"
+      },
       "label": "Événements",
+      "locationLabel": {
+        "description": "Spécifiez une étiquette personnalisée pour le champ d'emplacement.",
+        "label": "Étiquette d'emplacement",
+        "placeholder": "Emplacement:"
+      },
       "quickLinks": {
         "description": "Ouvrez le lien de données ou affichez le tiroir lorsque vous cliquez sur un événement.",
         "label": "Sur clic",
@@ -92,30 +111,15 @@
           "disabled": "Afficher les détails",
           "enabled": "Ouvrir le lien"
         }
-      },
-      "displayFields": {
-        "description": "Champs d'affichage des événements",
-        "label": "Champs d'affichage"
-      },
-      "locatioLabel": {
-        "description": "Texte de l'étiquette de l'emplacement",
-        "label": "Label de localisation"
       }
     },
     "layout": {
-      "label": "Mise en page",
-      "defaultView": {
-        "label": "Vue par défaut"
-      },
-      "views": {
-        "label": "Vues",
+      "colors": {
+        "description": "Afficher les couleurs en fonction de l'ID de l'image ou de l'événement si le champ Couleur n'est pas spécifié.",
+        "label": "Couleurs",
         "options": {
-          "agenda": "Ordre du jour",
-          "day": "Jour",
-          "month": "Mois",
-          "week": "Semaine",
-          "workWeek": "Semaine de travail",
-          "year": "Année"
+          "event": "Événement",
+          "frame": "Cadre"
         }
       },
       "dateFormat": {
@@ -131,29 +135,25 @@
           "zh": "Chinois"
         }
       },
-      "colors": {
-        "description": "Afficher les couleurs en fonction de l'ID de l'image ou de l'événement si le champ Couleur n'est pas spécifié.",
-        "label": "Couleurs",
+      "defaultView": {
+        "label": "Vue par défaut"
+      },
+      "label": "Mise en page",
+      "views": {
+        "label": "Vues",
         "options": {
-          "event": "Événement",
-          "frame": "Cadre"
+          "agenda": "Ordre du jour",
+          "day": "Jour",
+          "month": "Mois",
+          "week": "Semaine",
+          "workWeek": "Semaine de travail",
+          "year": "Année"
         }
       }
     },
-
     "scrollToTime": {
       "description": "Réglez le défilement initial sur l'heure sélectionnée.",
       "label": "Faire défiler jusqu'à l'heure"
-    },
-    "eventField": {
-      "options": {
-        "description": "Description",
-        "labels": "Étiquettes",
-        "links": "Liens",
-        "location": "Emplacement",
-        "text": "Texte",
-        "time": "Temps"
-      }
     }
   }
 }

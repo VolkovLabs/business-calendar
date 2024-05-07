@@ -83,8 +83,27 @@
         "label": "开始时间"
       }
     },
+    "eventField": {
+      "options": {
+        "description": "描述",
+        "labels": "标签",
+        "links": "链接",
+        "location": "地点",
+        "text": "文本",
+        "time": "时间"
+      }
+    },
     "events": {
+      "displayFields": {
+        "description": "要在事件详细信息中显示的字段。",
+        "label": "详细信息"
+      },
       "label": "活动",
+      "locationLabel": {
+        "description": "为位置字段指定自定义标签。",
+        "label": "位置标签",
+        "placeholder": "地点："
+      },
       "quickLinks": {
         "description": "单击事件时打开数据链接或显示抽屉。",
         "label": "单击时",
@@ -92,30 +111,15 @@
           "disabled": "显示详细资料",
           "enabled": "打开链接"
         }
-      },
-      "displayFields": {
-        "description": "事件显示字段",
-        "label": "显示字段"
-      },
-      "locatioLabel": {
-        "description": "位置标签文本",
-        "label": "位置标签"
       }
     },
     "layout": {
-      "label": "布局",
-      "defaultView": {
-        "label": "默认视图"
-      },
-      "views": {
-        "label": "意见",
+      "colors": {
+        "description": "如果未指定颜色字段，则根据帧或事件 ID 显示颜色。",
+        "label": "颜色",
         "options": {
-          "agenda": "议程",
-          "day": "天",
-          "month": "月",
-          "week": "星期",
-          "workWeek": "工作周",
-          "year": "年"
+          "event": "事件",
+          "frame": "框架"
         }
       },
       "dateFormat": {
@@ -131,28 +135,25 @@
           "zh": "中国人"
         }
       },
-      "colors": {
-        "description": "如果未指定颜色字段，则根据帧或事件 ID 显示颜色。",
-        "label": "颜色",
+      "defaultView": {
+        "label": "默认视图"
+      },
+      "label": "布局",
+      "views": {
+        "label": "意见",
         "options": {
-          "event": "事件",
-          "frame": "框架"
+          "agenda": "议程",
+          "day": "天",
+          "month": "月",
+          "week": "星期",
+          "workWeek": "工作周",
+          "year": "年"
         }
       }
     },
     "scrollToTime": {
       "description": "将初始滚动设置为所选时间。",
       "label": "滚动到时间"
-    },
-    "eventField": {
-      "options": {
-        "description": "描述",
-        "labels": "标签",
-        "links": "链接",
-        "location": "地点",
-        "text": "文本",
-        "time": "时间"
-      }
     }
   }
 }

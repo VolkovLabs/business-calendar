@@ -66,7 +66,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
     const location =
       isFieldVisible(EventField.LOCATION, fields) && event.location
         ? locationLabel.trim()
-          ? `${locationLabel}: ${event.location}`
+          ? `${locationLabel} ${event.location}`
           : t('eventDetailsDrawer.location', { location: event.location })
         : '';
 

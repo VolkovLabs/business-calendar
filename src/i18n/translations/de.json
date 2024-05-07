@@ -83,8 +83,27 @@
         "label": "Startzeit"
       }
     },
+    "eventField": {
+      "options": {
+        "description": "Beschreibung",
+        "labels": "Etiketten",
+        "links": "Links",
+        "location": "Standort",
+        "text": "Text",
+        "time": "Zeit"
+      }
+    },
     "events": {
+      "displayFields": {
+        "description": "Felder, die in den Ereignisdetails angezeigt werden sollen.",
+        "label": "Detailinformationen"
+      },
       "label": "Veranstaltungen",
+      "locationLabel": {
+        "description": "Geben Sie eine benutzerdefinierte Beschriftung für das Standortfeld an.",
+        "label": "Location label",
+        "placeholder": "Standort:"
+      },
       "quickLinks": {
         "description": "Öffnen Sie den Datenlink oder zeigen Sie die Schublade an, wenn Sie auf ein Ereignis klicken.",
         "label": "Auf Klick",
@@ -92,30 +111,15 @@
           "disabled": "Zeige Details",
           "enabled": "Verbindung öffnen"
         }
-      },
-      "displayFields": {
-        "description": "Felder für die Ereignisanzeige",
-        "label": "Felder anzeigen"
-      },
-      "locatioLabel": {
-        "description": "Text der Standort-Etikett",
-        "label": "Standort-Etikett"
       }
     },
     "layout": {
-      "label": "Layout",
-      "defaultView": {
-        "label": "Standardansicht"
-      },
-      "views": {
-        "label": "Ansichten",
+      "colors": {
+        "description": "Zeigt Farben basierend auf der Frame- oder Ereignis-ID an, wenn das Feld „Farbe“ nicht angegeben ist.",
+        "label": "Farben",
         "options": {
-          "agenda": "Agenda",
-          "day": "Tag",
-          "month": "Monat",
-          "week": "Woche",
-          "workWeek": "Arbeitswoche",
-          "year": "Jahr"
+          "event": "Ereignis",
+          "frame": "Rahmen"
         }
       },
       "dateFormat": {
@@ -131,28 +135,25 @@
           "zh": "Chinesisch"
         }
       },
-      "colors": {
-        "description": "Zeigt Farben basierend auf der Frame- oder Ereignis-ID an, wenn das Feld „Farbe“ nicht angegeben ist.",
-        "label": "Farben",
+      "defaultView": {
+        "label": "Standardansicht"
+      },
+      "label": "Layout",
+      "views": {
+        "label": "Ansichten",
         "options": {
-          "event": "Ereignis",
-          "frame": "Rahmen"
+          "agenda": "Agenda",
+          "day": "Tag",
+          "month": "Monat",
+          "week": "Woche",
+          "workWeek": "Arbeitswoche",
+          "year": "Jahr"
         }
       }
     },
     "scrollToTime": {
       "description": "Stellen Sie den anfänglichen Bildlauf auf die ausgewählte Zeit ein.",
       "label": "Scrollen Sie zu „Zeit“."
-    },
-    "eventField": {
-      "options": {
-        "description": "Beschreibung",
-        "labels": "Etiketten",
-        "links": "Links",
-        "location": "Standort",
-        "text": "Text",
-        "time": "Zeit"
-      }
     }
   }
 }

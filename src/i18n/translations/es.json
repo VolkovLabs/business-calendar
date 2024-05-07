@@ -83,8 +83,27 @@
         "label": "Hora de inicio"
       }
     },
+    "eventField": {
+      "options": {
+        "description": "Descripción",
+        "labels": "Etiquetas",
+        "links": "Enlaces",
+        "location": "Ubicación",
+        "text": "Texto",
+        "time": "Tiempo"
+      }
+    },
     "events": {
+      "displayFields": {
+        "description": "Campos para mostrar en los detalles del evento.",
+        "label": "Información detallada"
+      },
       "label": "Eventos",
+      "locationLabel": {
+        "description": "Especifique una etiqueta personalizada para el campo de ubicación.",
+        "label": "Etiqueta de ubicación",
+        "placeholder": "Ubicación:"
+      },
       "quickLinks": {
         "description": "Abra el enlace de datos o muestre el cajón al hacer clic en un evento.",
         "label": "Al hacer clic",
@@ -92,30 +111,15 @@
           "disabled": "Mostrar detalles",
           "enabled": "Enlace abierto"
         }
-      },
-      "displayFields": {
-        "description": "Campos de visualización de eventos",
-        "label": "Campos de visualización"
-      },
-      "locatioLabel": {
-        "description": "Texto de la etiqueta de ubicación",
-        "label": "Etiqueta de localización"
       }
     },
     "layout": {
-      "label": "Diseño",
-      "defaultView": {
-        "label": "Vista predeterminada"
-      },
-      "views": {
-        "label": "Puntos de vista",
+      "colors": {
+        "description": "Muestra colores según el marco o la identificación del evento si no se especifica el campo Color.",
+        "label": "Colores",
         "options": {
-          "agenda": "El Diario",
-          "day": "Día",
-          "month": "Mes",
-          "week": "Semana",
-          "workWeek": "Semana de trabajo",
-          "year": "Año"
+          "event": "Evento",
+          "frame": "Marco"
         }
       },
       "dateFormat": {
@@ -131,28 +135,25 @@
           "zh": "Chino"
         }
       },
-      "colors": {
-        "description": "Muestra colores según el marco o la identificación del evento si no se especifica el campo Color.",
-        "label": "Colores",
+      "defaultView": {
+        "label": "Vista predeterminada"
+      },
+      "label": "Diseño",
+      "views": {
+        "label": "Puntos de vista",
         "options": {
-          "event": "Evento",
-          "frame": "Marco"
+          "agenda": "El Diario",
+          "day": "Día",
+          "month": "Mes",
+          "week": "Semana",
+          "workWeek": "Semana de trabajo",
+          "year": "Año"
         }
       }
     },
     "scrollToTime": {
       "description": "Establezca el desplazamiento inicial en la hora seleccionada.",
       "label": "Desplazarse hasta el tiempo"
-    },
-    "eventField": {
-      "options": {
-        "description": "Descripción",
-        "labels": "Etiquetas",
-        "links": "Enlaces",
-        "location": "Ubicación",
-        "text": "Texto",
-        "time": "Tiempo"
-      }
     }
   }
 }

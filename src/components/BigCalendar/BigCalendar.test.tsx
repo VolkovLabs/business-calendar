@@ -503,7 +503,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { ...defaultOptions, locationLabel: 'Label', displayFields: [EventField.LOCATION] },
+        options: { ...defaultOptions, locationLabel: 'Label:', displayFields: [EventField.LOCATION] },
       })
     );
 

@@ -73,6 +73,14 @@
     "defaultView": {
       "label": "默认视图"
     },
+    "endTimeRange": {
+      "description": "設定結束時間",
+      "label": "結束時間範圍（至）"
+    },
+    "endTimeVariable": {
+      "description": "選擇變數",
+      "label": "結束時間範圍（至）"
+    },
     "events": {
       "colorField": {
         "description": "用作事件颜色的字段。",
@@ -118,6 +126,23 @@
     "scrollToTime": {
       "description": "将初始滚动设置为所选时间。",
       "label": "滚动到时间"
+    },
+    "startTimeRange": {
+      "description": "設定開始時間",
+      "label": "開始時間範圍（從）"
+    },
+    "startTimeVariable": {
+      "description": "選擇變數",
+      "label": "開始時間範圍（從）"
+    },
+    "timeRangeType": {
+      "description": "設定時間範圍類型",
+      "label": "時間範圍類型",
+      "options": {
+        "default": "預設",
+        "manual": "手動的",
+        "variable": "多变的"
+      }
     },
     "views": {
       "label": "意见",

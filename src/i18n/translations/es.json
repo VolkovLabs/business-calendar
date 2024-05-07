@@ -73,6 +73,14 @@
     "defaultView": {
       "label": "Vista predeterminada"
     },
+    "endTimeRange": {
+      "description": "Fijar hora de finalización",
+      "label": "Intervalo de tiempo final (a)"
+    },
+    "endTimeVariable": {
+      "description": "Seleccionar variable",
+      "label": "Intervalo de tiempo final (a)"
+    },
     "events": {
       "colorField": {
         "description": "Campo a utilizar como color del evento.",
@@ -118,6 +126,23 @@
     "scrollToTime": {
       "description": "Establezca el desplazamiento inicial en la hora seleccionada.",
       "label": "Desplazarse hasta el tiempo"
+    },
+    "startTimeRange": {
+      "description": "Hora de inicio",
+      "label": "Intervalo de tiempo de inicio (desde)"
+    },
+    "startTimeVariable": {
+      "description": "Seleccionar variable",
+      "label": "Intervalo de tiempo de inicio (desde)"
+    },
+    "timeRangeType": {
+      "description": "Establecer el tipo de intervalo de tiempo",
+      "label": "Tipo de intervalo de tiempo",
+      "options": {
+        "default": "Por defecto",
+        "manual": "Manual",
+        "variable": "Variable"
+      }
     },
     "views": {
       "label": "Puntos de vista",

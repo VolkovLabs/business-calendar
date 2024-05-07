@@ -18,11 +18,29 @@ jest.mock('@grafana/runtime', () => ({
 }));
 
 /**
+ * Mock timeRange for useTimeRange
+ */
+const timeRange = {
+  from: dateTime('2023-02-02'),
+  to: dateTime('2023-02-02'),
+  raw: {
+    from: dateTime('2023-02-02'),
+    to: dateTime('2023-02-02'),
+  },
+};
+
+/**
  * Mock utils
  */
 jest.mock('../../hooks', () => ({
   ...jest.requireActual('../../hooks'),
   useAnnotationEvents: jest.fn(() => [{ id: '123' }]),
+  useTimeRange: jest.fn(() => {
+    return {
+      timeRange: timeRange,
+      onChangeTimeRange: jest.fn(),
+    };
+  }),
 }));
 
 /**
@@ -50,7 +68,10 @@ describe('Panel', () => {
    * Get Tested Component
    * @param props
    */
-  const getComponent = ({ options = { dateFormat: DateFormat.INHERIT }, ...restProps }: Partial<Props>) => {
+  const getComponent = ({
+    options = { dateFormat: DateFormat.INHERIT, timeRangeType: 'default' },
+    ...restProps
+  }: Partial<Props>) => {
     const allOptions = {
       textField: 'Event Name',
       timeField: 'Event Start',
@@ -120,7 +141,7 @@ describe('Panel', () => {
   it('Should render lib calendar', async () => {
     await renderWithoutWarning(
       getComponent({
-        options: { dateFormat: DateFormat.INHERIT },
+        options: { dateFormat: DateFormat.INHERIT, timeRangeType: 'default' },
       })
     );
 
@@ -156,6 +177,7 @@ describe('Panel', () => {
         options: {
           annotations: true,
           dateFormat: DateFormat.INHERIT,
+          timeRangeType: 'default',
         },
       })
     );

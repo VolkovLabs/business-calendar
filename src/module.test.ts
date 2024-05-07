@@ -1,4 +1,5 @@
 import { Field, FieldType, PanelPlugin } from '@grafana/data';
+import { CalendarOptions, TimeRangeType } from 'types';
 
 import { plugin } from './module';
 
@@ -6,6 +7,16 @@ import { plugin } from './module';
  * Test Field
  */
 type TestField = Pick<Field, 'name' | 'type'>;
+
+/**
+ * Mock @grafana/runtime
+ */
+jest.mock('@grafana/runtime', () => ({
+  ...jest.requireActual('@grafana/runtime'),
+  getTemplateSrv: jest.fn(() => ({
+    getVariables: jest.fn(() => []),
+  })),
+}));
 
 /*
  Plugin
@@ -51,6 +62,22 @@ describe('plugin', () => {
         }
         return builder;
       };
+
+    /**
+     * Add Input Implementation
+     * @param config
+     * @param result
+     */
+    const addInputImplementation = (config: Partial<CalendarOptions>, result: string[]) => (input: any) => {
+      if (input.showIf) {
+        if (input.showIf(config)) {
+          result.push(input.path);
+        }
+      } else {
+        result.push(input.path);
+      }
+      return builder;
+    };
 
     it('Should return only string fields for textField', () => {
       const fields: TestField[] = [
@@ -144,6 +171,30 @@ describe('plugin', () => {
       plugin['optionsSupplier'](builder);
 
       expect(shownFields).toEqual([fields[0]]);
+    });
+
+    it('Should show endTimeVariable and startTimeVariable if timeRangeType is `variable` ', () => {
+      const shownOptionsPaths: string[] = [];
+
+      builder.addSelect.mockImplementation(
+        addInputImplementation({ timeRangeType: TimeRangeType.VARIABLE }, shownOptionsPaths)
+      );
+      plugin['optionsSupplier'](builder);
+
+      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['startTimeVariable', 'endTimeVariable', 'dateFormat']));
+    });
+
+    it('Should show endTimeRange and startTimeRange if timeRangeType is `manual` ', () => {
+      const shownOptionsPaths: string[] = [];
+
+      builder.addCustomEditor.mockImplementation(
+        addInputImplementation({ timeRangeType: TimeRangeType.MANUAL }, shownOptionsPaths)
+      );
+      plugin['optionsSupplier'](builder);
+
+      expect(shownOptionsPaths).toEqual(
+        expect.arrayContaining(['startTimeRange', 'endTimeRange', 'defaultView', 'scrollToTime', 'labelFields'])
+      );
     });
   });
 });

@@ -1,9 +1,10 @@
 import './i18n';
 
 import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
+import { getTemplateSrv } from '@grafana/runtime';
 import { t } from 'i18next';
 
-import { CalendarPanel, DefaultViewEditor, MultiFieldEditor, TimeEditor } from './components';
+import { CalendarPanel, DateEditor, DefaultViewEditor, MultiFieldEditor, TimeEditor } from './components';
 import {
   ANNOTATIONS_OPTIONS,
   ANNOTATIONS_TYPE_OPTIONS,
@@ -15,9 +16,10 @@ import {
   DEFAULT_VIEW,
   DEFAULT_VIEWS,
   LINK_OPTIONS,
+  TIME_RANGE_TYPE_OPRIONS,
 } from './constants';
 import { getMigratedOptions } from './migration';
-import { CalendarOptions } from './types';
+import { CalendarOptions, TimeRangeType } from './types';
 
 /**
  * Panel Plugin
@@ -36,11 +38,66 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       'fieldMinMax' as never,
     ],
   })
+
   .setPanelOptions((builder) => {
+    /**
+     * Variables
+     */
+    const variables = getTemplateSrv().getVariables();
+    const variableOptions = variables.map((vr) => ({
+      label: vr.name,
+      value: vr.name,
+    }));
+
     /**
      * Visibility
      */
     builder
+      .addRadio({
+        path: 'timeRangeType',
+        name: t('panelOptions.timeRangeType.label'),
+        description: t('panelOptions.timeRangeType.description'),
+        settings: {
+          options: TIME_RANGE_TYPE_OPRIONS(t),
+        },
+        defaultValue: DEFAULT_OPTIONS.timeRangeType,
+      })
+      .addSelect({
+        path: 'startTimeVariable',
+        name: t('panelOptions.startTimeVariable.label'),
+        description: t('panelOptions.startTimeVariable.description'),
+        settings: {
+          options: variableOptions,
+          isClearable: true,
+        },
+        showIf: (config) => config.timeRangeType === TimeRangeType.VARIABLE,
+      })
+      .addSelect({
+        path: 'endTimeVariable',
+        name: t('panelOptions.endTimeVariable.label'),
+        description: t('panelOptions.endTimeVariable.description'),
+        settings: {
+          options: variableOptions,
+          isClearable: true,
+        },
+        showIf: (config) => config.timeRangeType === TimeRangeType.VARIABLE,
+      })
+      .addCustomEditor({
+        id: 'startTimeRange',
+        path: 'startTimeRange',
+        name: t('panelOptions.startTimeRange.label'),
+        description: t('panelOptions.startTimeRange.description'),
+        editor: DateEditor,
+        showIf: (config) => config.timeRangeType === TimeRangeType.MANUAL,
+      })
+      .addCustomEditor({
+        id: 'endTimeRange',
+        path: 'endTimeRange',
+        name: t('panelOptions.endTimeRange.label'),
+        description: t('panelOptions.endTimeRange.description'),
+        editor: DateEditor,
+        showIf: (config) => config.timeRangeType === TimeRangeType.MANUAL,
+      })
       .addMultiSelect({
         path: 'views',
         name: t('panelOptions.views.label'),

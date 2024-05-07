@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next';
 
-import { AnnotationsType, ColorMode, DateFormat, View } from '../types';
+import { AnnotationsType, ColorMode, DateFormat, TimeRangeType, View } from '../types';
 
 /**
  * Links Options
@@ -54,3 +54,12 @@ export const DATE_FORMAT_OPTIONS = (t: TFunction) =>
     value: format,
     label: t(`panelOptions.dateFormat.options.${format}`),
   }));
+
+/**
+ * TIME RANGE OPTIONS
+ */
+export const TIME_RANGE_TYPE_OPRIONS = (t: TFunction) => [
+  { value: TimeRangeType.DEFAULT, label: t('panelOptions.timeRangeType.options.default') },
+  { value: TimeRangeType.MANUAL, label: t('panelOptions.timeRangeType.options.manual') },
+  { value: TimeRangeType.VARIABLE, label: t('panelOptions.timeRangeType.options.variable') },
+];

@@ -195,7 +195,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT, timeRangeType: 'default' },
       })
     );
 
@@ -241,7 +241,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT, timeRangeType: 'default' },
       })
     );
 
@@ -280,7 +280,7 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
+        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT, timeRangeType: 'default' },
       })
     );
 

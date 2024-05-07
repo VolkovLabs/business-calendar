@@ -73,6 +73,14 @@
     "defaultView": {
       "label": "Standardansicht"
     },
+    "endTimeRange": {
+      "description": "Endzeit einstellen",
+      "label": "Endzeitbereich (bis)"
+    },
+    "endTimeVariable": {
+      "description": "Variable auswählen",
+      "label": "Endzeitbereich (bis)"
+    },
     "events": {
       "colorField": {
         "description": "Feld, das als Ereignisfarbe verwendet werden soll.",
@@ -118,6 +126,23 @@
     "scrollToTime": {
       "description": "Stellen Sie den anfänglichen Bildlauf auf die ausgewählte Zeit ein.",
       "label": "Scrollen Sie zu „Zeit“."
+    },
+    "startTimeRange": {
+      "description": "Startzeit einstellen",
+      "label": "Startzeitbereich (von)"
+    },
+    "startTimeVariable": {
+      "description": "Variable auswählen",
+      "label": "Startzeitbereich (von)"
+    },
+    "timeRangeType": {
+      "description": "Einstellen der Art des Zeitbereichs",
+      "label": "Zeitbereichstyp",
+      "options": {
+        "default": "Standard",
+        "manual": "Handbuch",
+        "variable": "Variable"
+      }
     },
     "views": {
       "label": "Ansichten",

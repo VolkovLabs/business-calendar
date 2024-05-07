@@ -73,6 +73,14 @@
     "defaultView": {
       "label": "Default View"
     },
+    "endTimeRange": {
+      "description": "Set end time",
+      "label": "End time range (to)"
+    },
+    "endTimeVariable": {
+      "description": "Select variable",
+      "label": "End time range (to)"
+    },
     "events": {
       "colorField": {
         "description": "Field to use as event color.",
@@ -118,6 +126,23 @@
     "scrollToTime": {
       "description": "Set the initial scroll to the selected time.",
       "label": "Scroll To Time"
+    },
+    "startTimeRange": {
+      "description": "Set Start time",
+      "label": "Start time range (from)"
+    },
+    "startTimeVariable": {
+      "description": "Select variable",
+      "label": "Start time range (from)"
+    },
+    "timeRangeType": {
+      "description": "Set the type of time range",
+      "label": "Time Range Type",
+      "options": {
+        "default": "Default",
+        "manual": "Manual",
+        "variable": "Variable"
+      }
     },
     "views": {
       "label": "Views",

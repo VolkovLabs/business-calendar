@@ -73,6 +73,14 @@
     "defaultView": {
       "label": "Vue par défaut"
     },
+    "endTimeRange": {
+      "description": "Définir l'heure de fin",
+      "label": "Plage horaire de fin (à)"
+    },
+    "endTimeVariable": {
+      "description": "Sélectionner une variable",
+      "label": "Plage horaire de fin (à)"
+    },
     "events": {
       "colorField": {
         "description": "Champ à utiliser comme couleur d'événement.",
@@ -118,6 +126,23 @@
     "scrollToTime": {
       "description": "Réglez le défilement initial sur l'heure sélectionnée.",
       "label": "Faire défiler jusqu'à l'heure"
+    },
+    "startTimeRange": {
+      "description": "Définir l'heure de début",
+      "label": "Plage d'heures de début (à partir de)"
+    },
+    "startTimeVariable": {
+      "description": "Sélectionner une variable",
+      "label": "Plage d'heures de début (à partir de)"
+    },
+    "timeRangeType": {
+      "description": "Définir le type de plage horaire",
+      "label": "Type de plage horaire",
+      "options": {
+        "default": "Défaut",
+        "manual": "Manuel",
+        "variable": "Variable"
+      }
     },
     "views": {
       "label": "Vues",

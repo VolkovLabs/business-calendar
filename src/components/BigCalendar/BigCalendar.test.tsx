@@ -8,7 +8,7 @@ import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 
 import { DEFAULT_VIEWS, TEST_IDS } from '../../constants';
 import { useCalendarRange } from '../../hooks';
-import { CalendarEvent, DateFormat, View } from '../../types';
+import { CalendarEvent, CalendarOptions, DateFormat, View } from '../../types';
 import { BigCalendar } from './BigCalendar';
 
 /**
@@ -62,6 +62,18 @@ type Props = React.ComponentProps<typeof BigCalendar>;
  * Big Calendar
  */
 describe('Big Calendar', () => {
+  /**
+   * Default Options
+   */
+  const defaultOptions: CalendarOptions = {
+    dateFormat: DateFormat.EN_24H,
+    views: DEFAULT_VIEWS,
+    scrollToTime: {
+      hours: 0,
+      minutes: 0,
+    },
+  };
+
   /**
    * Selectors
    */
@@ -421,6 +433,41 @@ describe('Big Calendar', () => {
         backgroundColor: event.color,
       }),
     });
+  });
+
+  it('Should show Description', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      description: 'Description',
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+    };
+
+    render(getComponent({ events: [event], options: { ...defaultOptions } }));
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`Description`);
   });
 
   it('Should keep refresh on time range change', () => {

@@ -88,7 +88,7 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
         <>
           <Card.Description>
             {event.description && (
-              <p
+              <span
                 className={styles.description}
                 dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
               />

@@ -239,6 +239,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         events={calendarEvents}
         eventPropGetter={eventPropGetter}
         startAccessor="start"
+        showMultiDayTimes={true}
         endAccessor="end"
         style={{ height }}
         views={views}

@@ -543,13 +543,7 @@ describe('Big Calendar', () => {
         events: [event],
         options: {
           ...defaultOptions,
-          displayFields: [
-            EventField.DESCRIPTION,
-            EventField.LABELS,
-            EventField.TEXT,
-            EventField.TIME,
-            EventField.DESCRIPTION,
-          ],
+          displayFields: [EventField.DESCRIPTION, EventField.LABELS, EventField.TEXT, EventField.TIME],
         },
       })
     );
@@ -594,13 +588,7 @@ describe('Big Calendar', () => {
         events: [event],
         options: {
           ...defaultOptions,
-          displayFields: [
-            EventField.DESCRIPTION,
-            EventField.LABELS,
-            EventField.TEXT,
-            EventField.TIME,
-            EventField.DESCRIPTION,
-          ],
+          displayFields: [EventField.DESCRIPTION, EventField.LABELS, EventField.TEXT, EventField.TIME],
         },
       })
     );
@@ -635,13 +623,7 @@ describe('Big Calendar', () => {
         events: [event],
         options: {
           ...defaultOptions,
-          displayFields: [
-            EventField.DESCRIPTION,
-            EventField.LABELS,
-            EventField.TEXT,
-            EventField.TIME,
-            EventField.DESCRIPTION,
-          ],
+          displayFields: [EventField.DESCRIPTION, EventField.LABELS, EventField.TEXT, EventField.TIME],
         },
       })
     );
@@ -672,7 +654,15 @@ describe('Big Calendar', () => {
       location: 'Room',
     };
 
-    render(getComponent({ events: [event], options: { ...defaultOptions } }));
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [EventField.DESCRIPTION],
+        },
+      })
+    );
 
     expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 

@@ -226,7 +226,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     <div data-testid={TEST_IDS.bigCalendar.root}>
       {activeEvent && (
         <Drawer title={t('eventDetailsDrawer.title')} onClose={() => setActiveEvent(null)}>
-          <EventDetails event={activeEvent} />
+          <EventDetails event={activeEvent} fields={options.displayFields} locationLabel={options.locationLabel} />
         </Drawer>
       )}
       <Global styles={libStyles.global} />

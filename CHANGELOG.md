@@ -4,6 +4,7 @@
 
 - Add Agenda (List) View (#177)
 - Update customization for Event Bubble (#178)
+- Update multi-day window (#183)
 
 ## 3.0.0 (2024-05-02)
 

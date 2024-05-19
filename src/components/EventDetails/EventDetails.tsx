@@ -102,10 +102,12 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
       {showFullInfo && (
         <>
           {isFieldVisible(EventField.DESCRIPTION, fields) && event.description && (
-            <span
-              className={styles.description}
-              dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
-            />
+            <Card.Description>
+              <span
+                className={styles.description}
+                dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
+              />
+            </Card.Description>
           )}
           <Card.Actions>
             {isFieldVisible(EventField.LINKS, fields) &&

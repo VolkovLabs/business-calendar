@@ -6,8 +6,8 @@ import { AnnotationsType, ColorMode, DateFormat, EventField, View } from '../typ
  * Links Options
  */
 export const LINK_OPTIONS = (t: TFunction) => [
-  { value: true, label: t('panelOptions.events.quickLinks.options.enabled') },
-  { value: false, label: t('panelOptions.events.quickLinks.options.disabled') },
+  { value: true, label: t('panelOptions.events.quickLinks.options.enabled'), icon: 'link' },
+  { value: false, label: t('panelOptions.events.quickLinks.options.disabled'), icon: 'document-info' },
 ];
 
 /**
@@ -15,15 +15,15 @@ export const LINK_OPTIONS = (t: TFunction) => [
  */
 export const COLOR_OPTIONS = (t: TFunction) => [
   { value: ColorMode.FRAME, label: t('panelOptions.layout.colors.options.frame') },
-  { value: ColorMode.EVENT, label: t('panelOptions.layout.colors.options.event') },
+  { value: ColorMode.EVENT, label: t('panelOptions.layout.colors.options.event'), icon: 'calendar-alt' },
 ];
 
 /**
  * Annotations Options
  */
 export const ANNOTATIONS_OPTIONS = (t: TFunction) => [
-  { value: true, label: t('panelOptions.annotations.annotations.options.enabled') },
-  { value: false, label: t('panelOptions.annotations.annotations.options.disabled') },
+  { value: true, label: t('panelOptions.annotations.annotations.options.enabled'), icon: 'toggle-on' },
+  { value: false, label: t('panelOptions.annotations.annotations.options.disabled'), icon: 'toggle-off' },
 ];
 
 /**

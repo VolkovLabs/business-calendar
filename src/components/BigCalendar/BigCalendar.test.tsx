@@ -8,7 +8,7 @@ import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 
 import { DEFAULT_VIEWS, TEST_IDS } from '../../constants';
 import { useCalendarRange } from '../../hooks';
-import { CalendarEvent, CalendarOptions, DateFormat, View } from '../../types';
+import { CalendarEvent, CalendarOptions, DateFormat, EventField, View } from '../../types';
 import { BigCalendar } from './BigCalendar';
 
 /**
@@ -67,6 +67,8 @@ describe('Big Calendar', () => {
    */
   const defaultOptions: CalendarOptions = {
     dateFormat: DateFormat.EN_24H,
+    displayFields: [],
+    locationLabel: '',
     views: DEFAULT_VIEWS,
     scrollToTime: {
       hours: 0,
@@ -103,14 +105,7 @@ describe('Big Calendar', () => {
         to: dateTime(getSafeDate()),
       },
     };
-    return (
-      <BigCalendar
-        events={[]}
-        timeRange={timeRange}
-        options={{ views: DEFAULT_VIEWS, scrollToTime: '2023-01-01T00:00:00.000Z' }}
-        {...(props as any)}
-      />
-    );
+    return <BigCalendar events={[]} timeRange={timeRange} options={defaultOptions} {...(props as any)} />;
   };
 
   it('Should find component', () => {
@@ -207,7 +202,13 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
+        options: {
+          views: DEFAULT_VIEWS,
+          quickLinks: true,
+          dateFormat: DateFormat.INHERIT,
+          displayFields: [],
+          locationLabel: '',
+        },
       })
     );
 
@@ -253,7 +254,13 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
+        options: {
+          views: DEFAULT_VIEWS,
+          quickLinks: true,
+          dateFormat: DateFormat.INHERIT,
+          displayFields: [],
+          locationLabel: '',
+        },
       })
     );
 
@@ -292,7 +299,13 @@ describe('Big Calendar', () => {
     render(
       getComponent({
         events: [event],
-        options: { views: DEFAULT_VIEWS, quickLinks: true, dateFormat: DateFormat.INHERIT },
+        options: {
+          views: DEFAULT_VIEWS,
+          quickLinks: true,
+          dateFormat: DateFormat.INHERIT,
+          displayFields: [],
+          locationLabel: '',
+        },
       })
     );
 
@@ -326,7 +339,23 @@ describe('Big Calendar', () => {
       color: '#99999',
       location: 'Room',
     };
-    render(getComponent({ events: [event] }));
+
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [
+            EventField.DESCRIPTION,
+            EventField.LABELS,
+            EventField.TEXT,
+            EventField.TIME,
+            EventField.DESCRIPTION,
+            EventField.LOCATION,
+          ],
+        },
+      })
+    );
 
     expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
@@ -347,6 +376,153 @@ describe('Big Calendar', () => {
     expect(eventDetailsSelectors.root()).toHaveTextContent(event.labels[1]);
   });
 
+  it('Should display start time', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+    };
+    render(getComponent({ events: [event], options: { ...defaultOptions, displayFields: [EventField.TIME] } }));
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`LLL`);
+  });
+
+  it('Should display links', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+      links: [
+        {
+          href: 'https://volkovlabs.io/',
+          title: 'Volkovlabs',
+          target: undefined,
+          origin: {} as any,
+        },
+      ],
+    };
+    render(getComponent({ events: [event], options: { ...defaultOptions, displayFields: [EventField.LINKS] } }));
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`Volkovlabs`);
+  });
+
+  it('Should not show Description', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      description: 'Description',
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+    };
+    render(getComponent({ events: [event], options: { ...defaultOptions, displayFields: [EventField.DESCRIPTION] } }));
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`Description`);
+  });
+
+  it('Should show location with custom label', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      description: 'Description',
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+    };
+    render(
+      getComponent({
+        events: [event],
+        options: { ...defaultOptions, locationLabel: 'Label:', displayFields: [EventField.LOCATION] },
+      })
+    );
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`Label: Room`);
+  });
+
   it('Should show event info with empty resource', async () => {
     let calendarProps: Required<CalendarProps> = {} as any;
     jest.mocked(Calendar).mockImplementation((props: any): any => {
@@ -361,7 +537,22 @@ describe('Big Calendar', () => {
       labels: [],
       color: '#99999',
     };
-    render(getComponent({ events: [event] }));
+
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [
+            EventField.DESCRIPTION,
+            EventField.LABELS,
+            EventField.TEXT,
+            EventField.TIME,
+            EventField.DESCRIPTION,
+          ],
+        },
+      })
+    );
 
     expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
@@ -397,7 +588,22 @@ describe('Big Calendar', () => {
       labels: [],
       color: '#99999',
     };
-    render(getComponent({ events: [event] }));
+
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [
+            EventField.DESCRIPTION,
+            EventField.LABELS,
+            EventField.TEXT,
+            EventField.TIME,
+            EventField.DESCRIPTION,
+          ],
+        },
+      })
+    );
 
     expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
@@ -424,7 +630,21 @@ describe('Big Calendar', () => {
       labels: [],
       color: '#99999',
     };
-    render(getComponent({ events: [event] }));
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [
+            EventField.DESCRIPTION,
+            EventField.LABELS,
+            EventField.TEXT,
+            EventField.TIME,
+            EventField.DESCRIPTION,
+          ],
+        },
+      })
+    );
 
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();

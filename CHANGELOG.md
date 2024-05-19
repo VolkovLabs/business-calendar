@@ -3,6 +3,7 @@
 ## 3.1.0 (IN PROGRESS)
 
 - Add Agenda (List) View (#177)
+- Update customization for Event Bubble (#178)
 
 ## 3.0.0 (2024-05-02)
 

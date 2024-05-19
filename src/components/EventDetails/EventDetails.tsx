@@ -4,7 +4,8 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TEST_IDS } from '../../constants';
-import { CalendarEvent } from '../../types';
+import { CalendarEvent, EventField } from '../../types';
+import { displayTime, isFieldVisible } from '../../utils';
 import { getStyles } from './EventDetails.styles';
 
 /**
@@ -25,16 +26,26 @@ interface Props {
    * On Click
    */
   onClick?: (event: unknown) => void;
+
+  /**
+   * Fields
+   *
+   * @type {EventField[]}
+   */
+  fields: EventField[];
+
+  /**
+   * Fields
+   *
+   * @type {string}
+   */
+  locationLabel: string;
 }
 
 /**
  * Event Details
- * @param event
- * @param showFullInfo
- * @param onClick
- * @constructor
  */
-export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onClick }) => {
+export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onClick, locationLabel, fields }) => {
   /**
    * Styles
    */
@@ -49,21 +60,23 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
    * Meta
    */
   const meta = useMemo(() => {
-    const location = event.location ? t('eventDetailsDrawer.location', { location: event.location }) : '';
+    /**
+     * Location text
+     */
+    const location =
+      isFieldVisible(EventField.LOCATION, fields) && event.location
+        ? locationLabel.trim()
+          ? `${locationLabel} ${event.location}`
+          : t('eventDetailsDrawer.location', { location: event.location })
+        : '';
 
-    if (event.end) {
-      return [
-        `${event.start.format('LLL')} - ${
-          event.start.startOf('day').isSame(event.end?.startOf('day'))
-            ? event.end.format('LT')
-            : event.end.format('LLL')
-        }`,
-        location,
-      ];
+    let time = '';
+
+    if (isFieldVisible(EventField.TIME, fields)) {
+      time = displayTime(event);
     }
-
-    return [`${event.start.format('LLL')}`, location];
-  }, [event.end, event.location, event.start, t]);
+    return [time, location];
+  }, [event, fields, locationLabel, t]);
 
   /**
    * Tags
@@ -77,39 +90,40 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
           <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.svg}>
             <circle cx={5} cy={5} r={5} />
           </svg>
-          {event.text}
+          {isFieldVisible(EventField.TEXT, fields) && event.text}
         </div>
       </Card.Heading>
       <Card.Meta>{meta}</Card.Meta>
-      <Card.Tags>
-        <TagList tags={tags} className={styles.labels} />
-      </Card.Tags>
+      {isFieldVisible(EventField.LABELS, fields) && (
+        <Card.Tags>
+          <TagList tags={tags} className={styles.labels} />
+        </Card.Tags>
+      )}
       {showFullInfo && (
         <>
-          <Card.Description>
-            {event.description && (
-              <span
-                className={styles.description}
-                dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
-              />
-            )}
-          </Card.Description>
+          {isFieldVisible(EventField.DESCRIPTION, fields) && event.description && (
+            <span
+              className={styles.description}
+              dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
+            />
+          )}
           <Card.Actions>
-            {event.links
-              ?.filter((link) => link.href)
-              .map((link, index) => (
-                <LinkButton
-                  key={index}
-                  icon={link.target === '_self' ? 'link' : 'external-link-alt'}
-                  href={link.href}
-                  target={link.target}
-                  variant={'secondary'}
-                  onClick={link.onClick}
-                  aria-label={TEST_IDS.eventDetails.link}
-                >
-                  {link.title}
-                </LinkButton>
-              ))}
+            {isFieldVisible(EventField.LINKS, fields) &&
+              event.links
+                ?.filter((link) => link.href)
+                .map((link, index) => (
+                  <LinkButton
+                    key={index}
+                    icon={link.target === '_self' ? 'link' : 'external-link-alt'}
+                    href={link.href}
+                    target={link.target}
+                    variant={'secondary'}
+                    onClick={link.onClick}
+                    aria-label={TEST_IDS.eventDetails.link}
+                  >
+                    {link.title}
+                  </LinkButton>
+                ))}
           </Card.Actions>
         </>
       )}

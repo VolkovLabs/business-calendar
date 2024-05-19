@@ -49,31 +49,7 @@
       },
       "label": "Anmerkungen"
     },
-    "colors": {
-      "description": "Zeigt Farben basierend auf der Frame- oder Ereignis-ID an, wenn das Feld „Farbe“ nicht angegeben ist.",
-      "label": "Farben",
-      "options": {
-        "event": "Ereignis",
-        "frame": "Rahmen"
-      }
-    },
-    "dateFormat": {
-      "label": "Datums- und Uhrzeitformat",
-      "options": {
-        "de": "Deutsch",
-        "en": "Englisch",
-        "en24": "Englisch 24H",
-        "es": "Spanisch",
-        "fr": "Französisch",
-        "inherit": "Benutzerauswahl",
-        "iso": "ISO 8601",
-        "zh": "Chinesisch"
-      }
-    },
-    "defaultView": {
-      "label": "Standardansicht"
-    },
-    "events": {
+    "data": {
       "colorField": {
         "description": "Feld, das als Ereignisfarbe verwendet werden soll.",
         "label": "Farbe"
@@ -87,7 +63,7 @@
         "description": "Feld, das für die Endzeit des Ereignisses verwendet werden soll. Wenn nicht festgelegt, erfolgt das Ereignis sofort.",
         "label": "Endzeit"
       },
-      "label": "Veranstaltungen",
+      "label": "Daten",
       "labelFields": {
         "description": "Felder, die als Ereignisbezeichnungen verwendet werden sollen.",
         "label": "Etiketten"
@@ -107,28 +83,77 @@
         "label": "Startzeit"
       }
     },
-    "quickLinks": {
-      "description": "Öffnen Sie den Datenlink oder zeigen Sie die Schublade an, wenn Sie auf ein Ereignis klicken.",
-      "label": "Auf Klick",
+    "eventField": {
       "options": {
-        "disabled": "Zeige Details",
-        "enabled": "Verbindung öffnen"
+        "description": "Beschreibung",
+        "labels": "Etiketten",
+        "links": "Links",
+        "location": "Standort",
+        "text": "Text",
+        "time": "Zeit"
+      }
+    },
+    "events": {
+      "displayFields": {
+        "description": "Felder, die in den Ereignisdetails angezeigt werden sollen.",
+        "label": "Detailinformationen"
+      },
+      "label": "Veranstaltungen",
+      "locationLabel": {
+        "description": "Geben Sie eine benutzerdefinierte Beschriftung für das Standortfeld an.",
+        "label": "Location label",
+        "placeholder": "Standort:"
+      },
+      "quickLinks": {
+        "description": "Öffnen Sie den Datenlink oder zeigen Sie die Schublade an, wenn Sie auf ein Ereignis klicken.",
+        "label": "Auf Klick",
+        "options": {
+          "disabled": "Zeige Details",
+          "enabled": "Verbindung öffnen"
+        }
+      }
+    },
+    "layout": {
+      "colors": {
+        "description": "Zeigt Farben basierend auf der Frame- oder Ereignis-ID an, wenn das Feld „Farbe“ nicht angegeben ist.",
+        "label": "Farben",
+        "options": {
+          "event": "Ereignis",
+          "frame": "Rahmen"
+        }
+      },
+      "dateFormat": {
+        "label": "Datums- und Uhrzeitformat",
+        "options": {
+          "de": "Deutsch",
+          "en": "Englisch",
+          "en24": "Englisch 24H",
+          "es": "Spanisch",
+          "fr": "Französisch",
+          "inherit": "Benutzerauswahl",
+          "iso": "ISO 8601",
+          "zh": "Chinesisch"
+        }
+      },
+      "defaultView": {
+        "label": "Standardansicht"
+      },
+      "label": "Layout",
+      "views": {
+        "label": "Ansichten",
+        "options": {
+          "agenda": "Agenda",
+          "day": "Tag",
+          "month": "Monat",
+          "week": "Woche",
+          "workWeek": "Arbeitswoche",
+          "year": "Jahr"
+        }
       }
     },
     "scrollToTime": {
       "description": "Stellen Sie den anfänglichen Bildlauf auf die ausgewählte Zeit ein.",
       "label": "Scrollen Sie zu „Zeit“."
-    },
-    "views": {
-      "label": "Ansichten",
-      "options": {
-        "agenda": "Agenda",
-        "day": "Tag",
-        "month": "Monat",
-        "week": "Woche",
-        "workWeek": "Arbeitswoche",
-        "year": "Jahr"
-      }
     }
   }
 }

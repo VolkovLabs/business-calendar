@@ -11,6 +11,7 @@
 
 ### Breaking changes
 
+- Plugin rebranding, the new name is the Business Calendar Panel.
 - Legacy Calendar was replaced by Big Calendar.
 - Requires Grafana 10 and Grafana 11.
 

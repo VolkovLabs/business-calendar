@@ -3,6 +3,7 @@ import {
   CalendarOptions,
   ColorMode,
   DateFormat,
+  EventField,
   Language,
   SupportedLanguage,
   TimeOptions,
@@ -26,6 +27,15 @@ export const DEFAULT_OPTIONS: CalendarOptions = {
   quickLinks: false,
   dateFormat: DateFormat.INHERIT,
   timeRangeType: TimeRangeType.DEFAULT,
+  locationLabel: '',
+  displayFields: [
+    EventField.DESCRIPTION,
+    EventField.LABELS,
+    EventField.LINKS,
+    EventField.LOCATION,
+    EventField.TEXT,
+    EventField.TIME,
+  ],
 };
 
 /**

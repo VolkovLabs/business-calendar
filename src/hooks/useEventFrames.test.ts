@@ -62,6 +62,8 @@ describe('useEventFrames', () => {
       labelFields: ['Event Name'],
       dateFormat: DateFormat.INHERIT,
       timeRangeType: 'default',
+      displayFields: [],
+      locationLabel: '',
     };
     const data = getDataFrame(options);
 
@@ -90,7 +92,10 @@ describe('useEventFrames', () => {
     const options: CalendarOptions = {
       dateFormat: DateFormat.INHERIT,
       timeRangeType: 'default',
+      displayFields: [],
+      locationLabel: '',
     };
+
     const data: PanelData = {
       state: LoadingState.Done,
       timeRange: defaultTimeRange,

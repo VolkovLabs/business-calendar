@@ -32,6 +32,7 @@ describe('plugin', () => {
     addSliderInput: jest.fn().mockImplementation(() => builder),
     addSelect: jest.fn().mockImplementation(() => builder),
     addMultiSelect: jest.fn().mockImplementation(() => builder),
+    addTextInput: jest.fn().mockImplementation(() => builder),
   };
 
   it('Should be instance of PanelPlugin', () => {
@@ -51,6 +52,7 @@ describe('plugin', () => {
     expect(builder.addRadio).toHaveBeenCalled();
     expect(builder.addFieldNamePicker).toHaveBeenCalled();
     expect(builder.addSliderInput).toHaveBeenCalled();
+    expect(builder.addTextInput).toHaveBeenCalled();
   });
 
   describe('Settings', () => {
@@ -78,6 +80,24 @@ describe('plugin', () => {
       }
       return builder;
     };
+
+    it('Should show displayFields if quickLinks specified', () => {
+      const shownOptionsPaths: string[] = [];
+
+      builder.addMultiSelect.mockImplementation(addInputImplementation({ quickLinks: false }, shownOptionsPaths));
+      plugin['optionsSupplier'](builder);
+
+      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['views', 'displayFields']));
+    });
+
+    it('Should show locationLabel if quickLinks specified', () => {
+      const shownOptionsPaths: string[] = [];
+
+      builder.addTextInput.mockImplementation(addInputImplementation({ quickLinks: false }, shownOptionsPaths));
+      plugin['optionsSupplier'](builder);
+
+      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['locationLabel']));
+    });
 
     it('Should return only string fields for textField', () => {
       const fields: TestField[] = [

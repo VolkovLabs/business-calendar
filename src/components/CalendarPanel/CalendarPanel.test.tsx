@@ -3,8 +3,9 @@ import { act, render } from '@testing-library/react';
 import dayjs from 'dayjs';
 import React from 'react';
 
+import { DEFAULT_VIEWS } from '../../constants';
 import { useAnnotationEvents } from '../../hooks';
-import { DateFormat } from '../../types';
+import { CalendarOptions, DateFormat } from '../../types';
 import { BigCalendar } from '../BigCalendar';
 import { CalendarPanel } from './CalendarPanel';
 
@@ -60,6 +61,21 @@ type Props = React.ComponentProps<typeof CalendarPanel>;
  */
 describe('Panel', () => {
   /**
+   * Default Options
+   */
+  const defaultOptions: CalendarOptions = {
+    dateFormat: DateFormat.INHERIT,
+    displayFields: [],
+    locationLabel: '',
+    views: DEFAULT_VIEWS,
+    timeRangeType: 'default',
+    scrollToTime: {
+      hours: 0,
+      minutes: 0,
+    },
+  };
+
+  /**
    * Return particular day to prevent unexpected behaviors with dates
    */
   const getSafeDate = () => new Date('2023-02-02');
@@ -68,10 +84,7 @@ describe('Panel', () => {
    * Get Tested Component
    * @param props
    */
-  const getComponent = ({
-    options = { dateFormat: DateFormat.INHERIT, timeRangeType: 'default' },
-    ...restProps
-  }: Partial<Props>) => {
+  const getComponent = ({ options = defaultOptions, ...restProps }: Partial<Props>) => {
     const allOptions = {
       textField: 'Event Name',
       timeField: 'Event Start',
@@ -124,7 +137,7 @@ describe('Panel', () => {
    */
   const renderWithoutWarning = async (component: React.ReactElement) => {
     await act(async () => {
-      await render(component);
+      render(component);
 
       /**
        * Remove act warnings
@@ -141,7 +154,7 @@ describe('Panel', () => {
   it('Should render lib calendar', async () => {
     await renderWithoutWarning(
       getComponent({
-        options: { dateFormat: DateFormat.INHERIT, timeRangeType: 'default' },
+        options: { ...defaultOptions, dateFormat: DateFormat.INHERIT },
       })
     );
 
@@ -175,6 +188,7 @@ describe('Panel', () => {
     await renderWithoutWarning(
       getComponent({
         options: {
+          ...defaultOptions,
           annotations: true,
           dateFormat: DateFormat.INHERIT,
           timeRangeType: 'default',

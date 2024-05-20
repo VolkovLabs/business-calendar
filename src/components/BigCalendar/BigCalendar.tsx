@@ -74,6 +74,9 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   const components: Components = useMemo(
     () => ({
       toolbar: BigToolbar,
+      agenda: {
+        event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
+      },
       day: {
         event: (props) => <BigEventContent {...props} localizer={localizer} showTime={true} />,
       },
@@ -223,7 +226,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     <div data-testid={TEST_IDS.bigCalendar.root}>
       {activeEvent && (
         <Drawer title={t('eventDetailsDrawer.title')} onClose={() => setActiveEvent(null)}>
-          <EventDetails event={activeEvent} />
+          <EventDetails event={activeEvent} fields={options.displayFields} locationLabel={options.locationLabel} />
         </Drawer>
       )}
       <Global styles={libStyles.global} />
@@ -236,6 +239,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         events={calendarEvents}
         eventPropGetter={eventPropGetter}
         startAccessor="start"
+        showMultiDayTimes={true}
         endAccessor="end"
         style={{ height }}
         views={views}

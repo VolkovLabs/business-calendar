@@ -49,30 +49,6 @@
       },
       "label": "注释"
     },
-    "colors": {
-      "description": "如果未指定颜色字段，则根据帧或事件 ID 显示颜色。",
-      "label": "颜色",
-      "options": {
-        "event": "事件",
-        "frame": "框架"
-      }
-    },
-    "dateFormat": {
-      "label": "日期和时间格式",
-      "options": {
-        "de": "德语",
-        "en": "英语",
-        "en24": "英语 24H",
-        "es": "西班牙语",
-        "fr": "法语",
-        "inherit": "用户选择",
-        "iso": "ISO 8601",
-        "zh": "中国人"
-      }
-    },
-    "defaultView": {
-      "label": "默认视图"
-    },
     "endTimeRange": {
       "description": "設定結束時間",
       "label": "結束時間範圍（至）"
@@ -81,7 +57,24 @@
       "description": "選擇變數",
       "label": "結束時間範圍（至）"
     },
-    "events": {
+    "startTimeRange": {
+      "description": "設定開始時間",
+      "label": "開始時間範圍（從）"
+    },
+    "startTimeVariable": {
+      "description": "選擇變數",
+      "label": "開始時間範圍（從）"
+    },
+    "timeRangeType": {
+      "description": "設定時間範圍類型",
+      "label": "時間範圍類型",
+      "options": {
+        "default": "預設",
+        "manual": "手動的",
+        "variable": "多变的"
+      }
+    },
+    "data": {
       "colorField": {
         "description": "用作事件颜色的字段。",
         "label": "颜色"
@@ -95,7 +88,7 @@
         "description": "用于事件结束时间的字段。 如果未设置，事件是即时的。",
         "label": "时间结束"
       },
-      "label": "活动",
+      "label": "数据",
       "labelFields": {
         "description": "用作事件标签的字段。",
         "label": "标签"
@@ -115,44 +108,77 @@
         "label": "开始时间"
       }
     },
-    "quickLinks": {
-      "description": "单击事件时打开数据链接或显示抽屉。",
-      "label": "单击时",
+    "eventField": {
       "options": {
-        "disabled": "显示详细资料",
-        "enabled": "打开链接"
+        "description": "描述",
+        "labels": "标签",
+        "links": "链接",
+        "location": "地点",
+        "text": "文本",
+        "time": "时间"
+      }
+    },
+    "events": {
+      "displayFields": {
+        "description": "要在事件详细信息中显示的字段。",
+        "label": "详细信息"
+      },
+      "label": "活动",
+      "locationLabel": {
+        "description": "为位置字段指定自定义标签。",
+        "label": "位置标签",
+        "placeholder": "地点："
+      },
+      "quickLinks": {
+        "description": "单击事件时打开数据链接或显示抽屉。",
+        "label": "单击时",
+        "options": {
+          "disabled": "显示详细资料",
+          "enabled": "打开链接"
+        }
+      }
+    },
+    "layout": {
+      "colors": {
+        "description": "如果未指定颜色字段，则根据帧或事件 ID 显示颜色。",
+        "label": "颜色",
+        "options": {
+          "event": "事件",
+          "frame": "框架"
+        }
+      },
+      "dateFormat": {
+        "label": "日期和时间格式",
+        "options": {
+          "de": "德语",
+          "en": "英语",
+          "en24": "英语 24H",
+          "es": "西班牙语",
+          "fr": "法语",
+          "inherit": "用户选择",
+          "iso": "ISO 8601",
+          "zh": "中国人"
+        }
+      },
+      "defaultView": {
+        "label": "默认视图"
+      },
+      "label": "布局",
+      "views": {
+        "label": "意见",
+        "options": {
+          "agenda": "议程",
+          "day": "天",
+          "month": "月",
+          "week": "星期",
+          "workWeek": "工作周",
+          "year": "年"
+        }
       }
     },
     "scrollToTime": {
       "description": "将初始滚动设置为所选时间。",
       "label": "滚动到时间"
-    },
-    "startTimeRange": {
-      "description": "設定開始時間",
-      "label": "開始時間範圍（從）"
-    },
-    "startTimeVariable": {
-      "description": "選擇變數",
-      "label": "開始時間範圍（從）"
-    },
-    "timeRangeType": {
-      "description": "設定時間範圍類型",
-      "label": "時間範圍類型",
-      "options": {
-        "default": "預設",
-        "manual": "手動的",
-        "variable": "多变的"
-      }
-    },
-    "views": {
-      "label": "意见",
-      "options": {
-        "day": "天",
-        "month": "月",
-        "week": "星期",
-        "workWeek": "工作周",
-        "year": "年"
-      }
     }
   }
 }

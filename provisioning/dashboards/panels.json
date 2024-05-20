@@ -24,6 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -79,10 +80,7 @@
         "dateFormat": "inherit",
         "defaultView": "month",
         "descriptionField": "description",
-        "labelFields": [
-          "slug",
-          "version"
-        ],
+        "labelFields": ["slug", "version"],
         "locationField": "version",
         "quickLinks": false,
         "scrollToTime": {
@@ -91,13 +89,7 @@
         },
         "textField": "name",
         "timeField": "updatedAt",
-        "views": [
-          "day",
-          "week",
-          "month",
-          "work_week",
-          "year"
-        ]
+        "views": ["day", "week", "month", "work_week", "year", "agenda"]
       },
       "pluginVersion": "3.0.0",
       "targets": [
@@ -171,7 +163,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -330,9 +323,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -343,7 +334,7 @@
           }
         ]
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "cacheDurationSeconds": 300,
@@ -497,7 +488,7 @@
   ],
   "refresh": "",
   "revision": 1,
-  "schemaVersion": 38,
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []

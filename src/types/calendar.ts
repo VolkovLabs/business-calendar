@@ -4,6 +4,7 @@ import { DateLocalizer as BigDateLocalizer, Messages } from 'react-big-calendar'
  * View
  */
 export enum View {
+  AGENDA = 'agenda',
   DAY = 'day',
   WEEK = 'week',
   WORK_WEEK = 'work_week',
@@ -47,4 +48,16 @@ export interface DateLocalizer extends Omit<BigDateLocalizer, 'formats'> {
     yearWeekFormat: string;
     yearDateFormat: string;
   };
+}
+
+/**
+ * Event field
+ */
+export enum EventField {
+  DESCRIPTION = 'description',
+  LABELS = 'labels',
+  LINKS = 'links',
+  LOCATION = 'location',
+  TEXT = 'text',
+  TIME = 'time',
 }

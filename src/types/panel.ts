@@ -1,4 +1,4 @@
-import { DateFormat, View } from './calendar';
+import { DateFormat, EventField, View } from './calendar';
 
 /**
  * Language
@@ -211,4 +211,18 @@ export interface CalendarOptions {
    * @type {string}
    */
   endTimeVariable?: string;
+
+  /**
+   * Display Fields
+   *
+   * @type {EventField[]}
+   */
+  displayFields: EventField[];
+
+  /**
+   * Location label
+   *
+   * @type {string}
+   */
+  locationLabel: string;
 }

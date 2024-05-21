@@ -2,7 +2,7 @@
 
 ![Calendar](https://github.com/VolkovLabs/volkovlabs-calendar-panel/raw/main/src/img/screenshot.png)
 
-![Grafana](https://img.shields.io/badge/Grafana-10.4-orange)
+![Grafana](https://img.shields.io/badge/Grafana-11.0-orange)
 ![CI](https://github.com/volkovlabs/volkovlabs-calendar-panel/workflows/CI/badge.svg)
 ![E2E](https://github.com/volkovlabs/volkovlabs-calendar-panel/workflows/E2E/badge.svg)
 [![codecov](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel/branch/main/graph/badge.svg?token=0m6f0ktUar)](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel)
@@ -12,13 +12,13 @@
 
 Business Calendar Panel is a Grafana plugin that displays events from various data sources.
 
-[![Calendar plugin for Grafana tutorial | Step by step | JSON API plugin example](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/video.png)](https://youtu.be/iPJ122x0oos)
+[![How to display events from PostgreSQL | Calendar plugin for Grafana](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/release.png)](https://youtu.be/6WGmm5y4fs4)
 
 ## Requirements
 
 - Business Calendar Panel 3.X requires **Grafana 10** or **Grafana 11**.
-- Business Calendar Panel 2.X requires **Grafana 9.2** or **Grafana 10**.
-- Business Calendar Panel 1.X requires **Grafana 8.5** or **Grafana 9**.
+- Calendar Panel 2.X requires **Grafana 9.2** or **Grafana 10**.
+- Calendar Panel 1.X requires **Grafana 8.5** or **Grafana 9**.
 
 You can install the Business Calendar Panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
 
@@ -35,7 +35,7 @@ grafana-cli plugins install marcusolsson-calendar-panel
 - Supports the filtration of events by a time range.
 - Supports the event coloring based on thresholds.
 - Enables the opening of a data link instead of a sidebar when clicking an event.
-- Enables the display of annotations across all dashboards for the specified time period.
+- Enables the display of annotations across all dashboards for the specified period.
 - Supports Internationalization: Spanish, French, German, and Chinese
 
 ## Documentation
@@ -45,12 +45,6 @@ grafana-cli plugins install marcusolsson-calendar-panel
 | [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display events.  |
 | [Features](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/features/)     | Explains the plugin's features.                       |
 | [Release Notes](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/release/) | Stay up to date with the latest features and updates. |
-
-## Tutorial
-
-This video outlines all the new features we implemented and explains how to configure events.
-
-[![How to display events from PostgreSQL | Calendar plugin for Grafana | February 2023 Release](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/release.png)](https://youtu.be/6WGmm5y4fs4)
 
 ## Feedback
 

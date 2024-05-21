@@ -1,15 +1,18 @@
 # Changelog
 
-## 3.1.0 (IN PROGRESS)
+## 3.1.0 (2024-05-19)
 
 - Add Agenda (List) View (#177)
 - Update customization for Event Bubble (#178)
 - Add Formatting for event description (#182)
+- Update multi-day window (#183)
+- Update to Grafana 11 (#184)
 
 ## 3.0.0 (2024-05-02)
 
 ### Breaking changes
 
+- Plugin rebranding, the new name is the Business Calendar Panel.
 - Legacy Calendar was replaced by Big Calendar.
 - Requires Grafana 10 and Grafana 11.
 

@@ -104,6 +104,16 @@
         "label": "Etiqueta de ubicación",
         "placeholder": "Ubicación:"
       },
+      "preformattedDescription": {
+        "description": "Utilizar texto de descripción preformateado",
+        "label": "Texto de descripción preformateado"
+      },
+      "preformattedOptions": {
+        "options": {
+          "default": "En línea",
+          "preformatted": "Preformateado"
+        }
+      },
       "quickLinks": {
         "description": "Abra el enlace de datos o muestre el cajón al hacer clic en un evento.",
         "label": "Al hacer clic",

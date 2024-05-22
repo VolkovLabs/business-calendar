@@ -181,4 +181,11 @@ export interface CalendarOptions {
    * @type {string}
    */
   locationLabel: string;
+
+  /**
+   * Preformatted Description
+   *
+   * @type {boolean}
+   */
+  preformattedDescription?: boolean;
 }

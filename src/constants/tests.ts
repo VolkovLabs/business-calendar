@@ -50,6 +50,7 @@ export const TEST_IDS = {
     titleButton: 'event-details title-button',
     titleText: 'data-testid event-details title-text',
     link: 'event-details link',
+    preformatted: 'data-testid event-details preformatted',
   },
   multiFieldEditor: {
     select: 'multi-field-editor select',

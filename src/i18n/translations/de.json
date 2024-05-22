@@ -104,6 +104,16 @@
         "label": "Location label",
         "placeholder": "Standort:"
       },
+      "preformattedDescription": {
+        "description": "Vorformatierten Beschreibungstext verwenden",
+        "label": "Vorformatierter Beschreibungstext"
+      },
+      "preformattedOptions": {
+        "options": {
+          "default": "Inline",
+          "preformatted": "Vorformatierter Text"
+        }
+      },
       "quickLinks": {
         "description": "Öffnen Sie den Datenlink oder zeigen Sie die Schublade an, wenn Sie auf ein Ereignis klicken.",
         "label": "Auf Klick",

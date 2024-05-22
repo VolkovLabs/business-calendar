@@ -40,12 +40,26 @@ interface Props {
    * @type {string}
    */
   locationLabel: string;
+
+  /**
+   * Preforamtted Description
+   *
+   * @type {boolean}
+   */
+  preformattedDescription?: boolean;
 }
 
 /**
  * Event Details
  */
-export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onClick, locationLabel, fields }) => {
+export const EventDetails: React.FC<Props> = ({
+  event,
+  showFullInfo = true,
+  onClick,
+  locationLabel,
+  fields,
+  preformattedDescription,
+}) => {
   /**
    * Styles
    */
@@ -103,10 +117,14 @@ export const EventDetails: React.FC<Props> = ({ event, showFullInfo = true, onCl
         <>
           {isFieldVisible(EventField.DESCRIPTION, fields) && event.description && (
             <Card.Description>
-              <span
-                className={styles.description}
-                dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
-              />
+              {preformattedDescription ? (
+                <pre data-testid={TEST_IDS.eventDetails.preformatted}>{textUtil.sanitize(event.description)}</pre>
+              ) : (
+                <span
+                  className={styles.description}
+                  dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
+                />
+              )}
             </Card.Description>
           )}
           <Card.Actions>

@@ -42,7 +42,7 @@ interface Props {
   locationLabel: string;
 
   /**
-   * Preforamtted Description
+   * Preformatted Description
    *
    * @type {boolean}
    */

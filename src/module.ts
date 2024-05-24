@@ -16,7 +16,7 @@ import {
   DEFAULT_VIEWS,
   DISPLAY_FIELD_OPTIONS,
   LINK_OPTIONS,
-  PREFORMATED_OPTIONS,
+  PREFORMATTED_OPTIONS,
 } from './constants';
 import { getMigratedOptions } from './migration';
 import { CalendarOptions } from './types';
@@ -134,7 +134,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         description: t('panelOptions.events.preformattedDescription.description'),
         category: [t('panelOptions.events.label')],
         settings: {
-          options: PREFORMATED_OPTIONS(t),
+          options: PREFORMATTED_OPTIONS(t),
         },
         defaultValue: DEFAULT_OPTIONS.quickLinks,
       });

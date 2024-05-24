@@ -17,7 +17,7 @@ import {
   DEFAULT_VIEWS,
   DISPLAY_FIELD_OPTIONS,
   LINK_OPTIONS,
-  TIME_RANGE_TYPE_OPRIONS,
+  TIME_RANGE_TYPE_OPTIONS,
 } from './constants';
 import { getMigratedOptions } from './migration';
 import { CalendarOptions, TimeRangeType } from './types';
@@ -71,7 +71,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.timeRangeType.label'),
         description: t('panelOptions.timeRangeType.description'),
         settings: {
-          options: TIME_RANGE_TYPE_OPRIONS(t),
+          options: TIME_RANGE_TYPE_OPTIONS(t),
         },
         defaultValue: DEFAULT_OPTIONS.timeRangeType,
       })

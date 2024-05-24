@@ -69,7 +69,7 @@
       "description": "Establecer el tipo de intervalo de tiempo",
       "label": "Tipo de intervalo de tiempo",
       "options": {
-        "default": "Por defecto",
+        "default": "Panel",
         "manual": "Manual",
         "variable": "Variable"
       }

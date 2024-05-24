@@ -58,10 +58,10 @@
       "label": "Start time range (from)"
     },
     "timeRangeType": {
-      "description": "Set the type of time range",
-      "label": "Time Range Type",
+      "description": "Time Range source used for Calendar",
+      "label": "Time Range",
       "options": {
-        "default": "Default",
+        "default": "Dashboard",
         "manual": "Manual",
         "variable": "Variable"
       }

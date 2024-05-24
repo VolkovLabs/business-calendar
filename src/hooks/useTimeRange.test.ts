@@ -33,7 +33,12 @@ describe('useTimeRange', () => {
 
   it('should initialize the time range with the provided default value', () => {
     const { result } = renderHook(() =>
-      useTimeRange({ defaultTimeRange, defultOnChangeTimeRange, options: baseOptions, eventBus })
+      useTimeRange({
+        defaultTimeRange,
+        defaultOnChangeTimeRange: defultOnChangeTimeRange,
+        options: baseOptions,
+        eventBus,
+      })
     );
 
     expect(result.current.timeRange).toEqual(defaultTimeRange);
@@ -49,7 +54,9 @@ describe('useTimeRange', () => {
       endTimeVariable: 'end',
     } as any;
 
-    const { result } = renderHook(() => useTimeRange({ defaultTimeRange, defultOnChangeTimeRange, options, eventBus }));
+    const { result } = renderHook(() =>
+      useTimeRange({ defaultTimeRange, defaultOnChangeTimeRange: defultOnChangeTimeRange, options, eventBus })
+    );
 
     expect(result.current.timeRange.from.toISOString()).toEqual('2022-02-10T00:00:00.000Z');
     expect(result.current.timeRange.to.toISOString()).toEqual('2022-06-15T00:00:00.000Z');
@@ -60,14 +67,21 @@ describe('useTimeRange', () => {
     const endTimeVariable = 'end';
     const options = { ...baseOptions, timeRangeType: 'variable', startTimeVariable, endTimeVariable };
 
-    const { result } = renderHook(() => useTimeRange({ defaultTimeRange, defultOnChangeTimeRange, options, eventBus }));
+    const { result } = renderHook(() =>
+      useTimeRange({ defaultTimeRange, defaultOnChangeTimeRange: defultOnChangeTimeRange, options, eventBus })
+    );
 
     expect(result.current.timeRange.from.toISOString()).toEqual('2022-04-10T00:00:00.000Z');
   });
 
-  it('should call defultOnChangeTimeRange when options.timeRangeType is DEFAULT', () => {
+  it('should call defaultOnChangeTimeRange when options.timeRangeType is DEFAULT', () => {
     const { result } = renderHook(() =>
-      useTimeRange({ defaultTimeRange, defultOnChangeTimeRange, options: baseOptions, eventBus })
+      useTimeRange({
+        defaultTimeRange,
+        defaultOnChangeTimeRange: defultOnChangeTimeRange,
+        options: baseOptions,
+        eventBus,
+      })
     );
 
     const newTimeRange = { from: '2022-01-10', to: '2022-01-15' } as any;

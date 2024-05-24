@@ -59,7 +59,7 @@ export const DATE_FORMAT_OPTIONS = (t: TFunction) =>
 /**
  * TIME RANGE OPTIONS
  */
-export const TIME_RANGE_TYPE_OPRIONS = (t: TFunction) => [
+export const TIME_RANGE_TYPE_OPTIONS = (t: TFunction) => [
   { value: TimeRangeType.DEFAULT, label: t('panelOptions.timeRangeType.options.default') },
   { value: TimeRangeType.MANUAL, label: t('panelOptions.timeRangeType.options.manual') },
   { value: TimeRangeType.VARIABLE, label: t('panelOptions.timeRangeType.options.variable') },

@@ -10,12 +10,12 @@ import { useRuntimeVariables } from './useRuntimeVariables';
  */
 export const useTimeRange = ({
   defaultTimeRange,
-  defultOnChangeTimeRange,
+  defaultOnChangeTimeRange,
   options,
   eventBus,
 }: {
   defaultTimeRange: TimeRange;
-  defultOnChangeTimeRange: (timeRange: AbsoluteTimeRange) => void;
+  defaultOnChangeTimeRange: (timeRange: AbsoluteTimeRange) => void;
   options: CalendarOptions;
   eventBus: EventBus;
 }) => {
@@ -28,7 +28,13 @@ export const useTimeRange = ({
 
   const [timeRange, setTimeRange] = useState(defaultTimeRange);
 
+  /**
+   * Update time range in state on source update
+   */
   useEffect(() => {
+    /**
+     * Manual
+     */
     if (options.timeRangeType === TimeRangeType.MANUAL && options.endTimeRange && options.startTimeRange) {
       /**
        * Set Time Range for manual type
@@ -41,6 +47,10 @@ export const useTimeRange = ({
       setTimeRange(manualTimeRange);
       return;
     }
+
+    /**
+     * Variable
+     */
     if (options.timeRangeType === TimeRangeType.VARIABLE && startTimeVariable && endTimeVariable) {
       /**
        * Set Time Range for variable type
@@ -56,6 +66,10 @@ export const useTimeRange = ({
       setTimeRange(manualTimeRange);
       return;
     }
+
+    /**
+     * Default
+     */
     setTimeRange(defaultTimeRange);
   }, [
     defaultTimeRange,
@@ -66,16 +80,19 @@ export const useTimeRange = ({
     startTimeVariable,
   ]);
 
+  /**
+   * On Change Time Range
+   */
   const onChangeTimeRange = useCallback(
     (timeRange: AbsoluteTimeRange) => {
       /**
        * Change time range only for default
        */
       if (options.timeRangeType === TimeRangeType.DEFAULT) {
-        defultOnChangeTimeRange(timeRange);
+        defaultOnChangeTimeRange(timeRange);
       }
     },
-    [defultOnChangeTimeRange, options.timeRangeType]
+    [defaultOnChangeTimeRange, options.timeRangeType]
   );
 
   return {

@@ -69,7 +69,7 @@
       "description": "Définir le type de plage horaire",
       "label": "Type de plage horaire",
       "options": {
-        "default": "Défaut",
+        "default": "Tableau de bord",
         "manual": "Manuel",
         "variable": "Variable"
       }

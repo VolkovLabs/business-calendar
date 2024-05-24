@@ -69,7 +69,7 @@
       "description": "設定時間範圍類型",
       "label": "時間範圍類型",
       "options": {
-        "default": "預設",
+        "default": "仪表板",
         "manual": "手動的",
         "variable": "多变的"
       }

@@ -28,7 +28,7 @@ export const CalendarPanel: React.FC<Props> = ({
    */
   const { timeRange, onChangeTimeRange } = useTimeRange({
     defaultTimeRange,
-    defultOnChangeTimeRange,
+    defaultOnChangeTimeRange: defultOnChangeTimeRange,
     options,
     eventBus,
   });

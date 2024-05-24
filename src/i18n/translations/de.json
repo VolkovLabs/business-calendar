@@ -69,7 +69,7 @@
       "description": "Einstellen der Art des Zeitbereichs",
       "label": "Zeitbereichstyp",
       "options": {
-        "default": "Standard",
+        "default": "Armaturenbrett",
         "manual": "Handbuch",
         "variable": "Variable"
       }

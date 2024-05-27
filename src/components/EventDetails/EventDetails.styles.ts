@@ -25,6 +25,7 @@ export const getStyles = (theme: GrafanaTheme2) => {
     `,
     description: css`
       word-break: break-all;
+      padding: ${theme.spacing(2)};
     `,
   };
 };

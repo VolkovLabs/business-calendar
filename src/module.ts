@@ -117,6 +117,17 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         },
         defaultValue: DEFAULT_OPTIONS.displayFields as unknown,
       })
+      .addRadio({
+        path: 'preformattedDescription',
+        name: t('panelOptions.events.preformattedDescription.label'),
+        description: t('panelOptions.events.preformattedDescription.description'),
+        category: [t('panelOptions.events.label')],
+        settings: {
+          options: PREFORMATTED_OPTIONS(t),
+        },
+        showIf: (config) => !config.quickLinks,
+        defaultValue: DEFAULT_OPTIONS.quickLinks,
+      })
       .addTextInput({
         path: 'locationLabel',
         name: t('panelOptions.events.locationLabel.label'),
@@ -127,16 +138,6 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           placeholder: t('panelOptions.events.locationLabel.placeholder'),
         },
-      })
-      .addRadio({
-        path: 'preformattedDescription',
-        name: t('panelOptions.events.preformattedDescription.label'),
-        description: t('panelOptions.events.preformattedDescription.description'),
-        category: [t('panelOptions.events.label')],
-        settings: {
-          options: PREFORMATTED_OPTIONS(t),
-        },
-        defaultValue: DEFAULT_OPTIONS.quickLinks,
       });
 
     /**

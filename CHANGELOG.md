@@ -5,6 +5,7 @@
 ### Features / Enhancements
 
 - Updated tutorial video (#190)
+- Add Formatting for event description (#182)
 
 ## 3.1.0 (2024-05-19)
 

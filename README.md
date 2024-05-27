@@ -12,7 +12,7 @@
 
 Business Calendar Panel is a Grafana plugin that displays events from various data sources.
 
-[![Business Calendar 3.1.0 | Overview and detailed tutorial | Display dates and time in Grafana](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/release.png)](https://youtu.be/CvLqyY2fQfo)
+[![Business Calendar 3.1.0 | Overview and detailed tutorial | Display dates and time in Grafana](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/business.png)](https://youtu.be/CvLqyY2fQfo)
 
 ## Requirements
 

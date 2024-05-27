@@ -104,6 +104,16 @@
         "label": "Étiquette d'emplacement",
         "placeholder": "Emplacement:"
       },
+      "preformattedDescription": {
+        "description": "Permet d'afficher du texte préformaté dans la description.",
+        "label": "Format descriptif"
+      },
+      "preformattedOptions": {
+        "options": {
+          "default": "En ligne",
+          "preformatted": "Préformaté"
+        }
+      },
       "quickLinks": {
         "description": "Ouvrez le lien de données ou affichez le tiroir lorsque vous cliquez sur un événement.",
         "label": "Sur clic",

@@ -72,6 +72,6 @@ export const DISPLAY_FIELD_OPTIONS = (t: TFunction) => [
  * Preformatted Options
  */
 export const PREFORMATTED_OPTIONS = (t: TFunction) => [
-  { value: false, label: t('panelOptions.events.preformattedOptions.options.default'), icon: 'align-left' },
+  { value: false, label: t('panelOptions.events.preformattedOptions.options.default'), icon: 'text-fields' },
   { value: true, label: t('panelOptions.events.preformattedOptions.options.preformatted'), icon: 'bars' },
 ];

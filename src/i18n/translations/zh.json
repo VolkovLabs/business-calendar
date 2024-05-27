@@ -105,8 +105,8 @@
         "placeholder": "地点："
       },
       "preformattedDescription": {
-        "description": "使用预设格式的说明文本",
-        "label": "预格式化描述文本"
+        "description": "允许在描述中显示预先格式化的文本。",
+        "label": "描述格式"
       },
       "preformattedOptions": {
         "options": {

@@ -105,8 +105,8 @@
         "placeholder": "Ubicación:"
       },
       "preformattedDescription": {
-        "description": "Utilizar texto de descripción preformateado",
-        "label": "Texto de descripción preformateado"
+        "description": "Permite mostrar texto preformateado en la descripción.",
+        "label": "Formato de descripción"
       },
       "preformattedOptions": {
         "options": {

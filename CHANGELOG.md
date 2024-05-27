@@ -5,7 +5,8 @@
 ### Features / Enhancements
 
 - Updated tutorial video (#190)
-- Add Formatting for event description (#182)
+- Added Formatting for event description (#182)
+- Updated Details drawer layout (#192)
 
 ## 3.1.0 (2024-05-19)
 

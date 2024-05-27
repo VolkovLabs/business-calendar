@@ -17,8 +17,8 @@ import {
   DEFAULT_VIEWS,
   DISPLAY_FIELD_OPTIONS,
   LINK_OPTIONS,
-  TIME_RANGE_TYPE_OPTIONS,
   PREFORMATTED_OPTIONS,
+  TIME_RANGE_TYPE_OPTIONS,
 } from './constants';
 import { getMigratedOptions } from './migration';
 import { CalendarOptions, TimeRangeType } from './types';

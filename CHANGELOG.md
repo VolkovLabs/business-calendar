@@ -4,7 +4,7 @@
 
 ### Features / Enhancements
 
-- Updated tutorial video
+- Updated tutorial video (#190)
 
 ## 3.1.0 (2024-05-19)
 

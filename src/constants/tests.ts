@@ -47,6 +47,7 @@ export const TEST_IDS = {
   },
   eventDetails: {
     root: 'data-testid event-details',
+    description: 'data-testid event-description',
     titleButton: 'event-details title-button',
     titleText: 'data-testid event-details title-text',
     link: 'event-details link',

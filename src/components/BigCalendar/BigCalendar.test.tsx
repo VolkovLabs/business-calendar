@@ -466,7 +466,7 @@ describe('Big Calendar', () => {
       color: '#99999',
       location: 'Room',
     };
-    render(getComponent({ events: [event], options: { ...defaultOptions, displayFields: [EventField.DESCRIPTION] } }));
+    render(getComponent({ events: [event], options: { ...defaultOptions, displayFields: [EventField.LABELS] } }));
 
     expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
 
@@ -480,8 +480,7 @@ describe('Big Calendar', () => {
     /**
      * Event Details
      */
-    expect(eventDetailsSelectors.root()).toBeInTheDocument();
-    expect(eventDetailsSelectors.root()).toHaveTextContent(`Description`);
+    expect(eventDetailsSelectors.description(true)).not.toBeInTheDocument();
   });
 
   it('Should show location with custom label', async () => {
@@ -676,8 +675,8 @@ describe('Big Calendar', () => {
     /**
      * Event Details
      */
-    expect(eventDetailsSelectors.root()).toBeInTheDocument();
-    expect(eventDetailsSelectors.root()).toHaveTextContent(`Description`);
+    expect(eventDetailsSelectors.description()).toBeInTheDocument();
+    expect(eventDetailsSelectors.description()).toHaveTextContent(`Description`);
   });
 
   it('Should show <pre> tag', async () => {
@@ -722,7 +721,7 @@ describe('Big Calendar', () => {
      */
     expect(eventDetailsSelectors.root()).toBeInTheDocument();
     expect(eventDetailsSelectors.preformatted()).toBeInTheDocument();
-    expect(eventDetailsSelectors.root()).toHaveTextContent(`Description`);
+    expect(eventDetailsSelectors.preformatted()).toHaveTextContent(`Description`);
   });
 
   it('Should keep refresh on time range change', () => {

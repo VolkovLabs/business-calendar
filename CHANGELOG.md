@@ -1,11 +1,19 @@
 # Changelog
 
+## 3.2.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Updated tutorial video (#190)
+
 ## 3.1.0 (2024-05-19)
 
-- Add Agenda (List) View (#177)
-- Update customization for Event Bubble (#178)
-- Update multi-day window (#183)
-- Update to Grafana 11 (#184)
+### Features / Enhancements
+
+- Added Agenda (List) View (#177)
+- Updated customization for Event Bubble (#178)
+- Updated multi-day window (#183)
+- Updated to Grafana 11 (#184)
 
 ## 3.0.0 (2024-05-02)
 

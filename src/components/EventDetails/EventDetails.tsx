@@ -98,35 +98,24 @@ export const EventDetails: React.FC<Props> = ({
   const tags = useMemo(() => event.labels.flatMap((label) => label.split(',')), [event.labels]);
 
   return (
-    <Card onClick={onClick} data-testid={TEST_IDS.eventDetails.root}>
-      <Card.Heading aria-label={TEST_IDS.eventDetails.titleButton}>
-        <div data-testid={TEST_IDS.eventDetails.titleText}>
-          <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.svg}>
-            <circle cx={5} cy={5} r={5} />
-          </svg>
-          {isFieldVisible(EventField.TEXT, fields) && event.text}
-        </div>
-      </Card.Heading>
-      <Card.Meta>{meta}</Card.Meta>
-      {isFieldVisible(EventField.LABELS, fields) && (
-        <Card.Tags>
-          <TagList tags={tags} className={styles.labels} />
-        </Card.Tags>
-      )}
-      {showFullInfo && (
-        <>
-          {isFieldVisible(EventField.DESCRIPTION, fields) && event.description && (
-            <Card.Description>
-              {preformattedDescription ? (
-                <pre data-testid={TEST_IDS.eventDetails.preformatted}>{textUtil.sanitize(event.description)}</pre>
-              ) : (
-                <span
-                  className={styles.description}
-                  dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
-                />
-              )}
-            </Card.Description>
-          )}
+    <>
+      <Card onClick={onClick} data-testid={TEST_IDS.eventDetails.root}>
+        <Card.Heading aria-label={TEST_IDS.eventDetails.titleButton}>
+          <div data-testid={TEST_IDS.eventDetails.titleText}>
+            <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" fill={event.color} className={styles.svg}>
+              <circle cx={5} cy={5} r={5} />
+            </svg>
+            {isFieldVisible(EventField.TEXT, fields) && event.text}
+          </div>
+        </Card.Heading>
+        <Card.Meta>{meta}</Card.Meta>
+        {isFieldVisible(EventField.LABELS, fields) && (
+          <Card.Tags>
+            <TagList tags={tags} className={styles.labels} />
+          </Card.Tags>
+        )}
+
+        {showFullInfo && (
           <Card.Actions>
             {isFieldVisible(EventField.LINKS, fields) &&
               event.links
@@ -145,8 +134,23 @@ export const EventDetails: React.FC<Props> = ({
                   </LinkButton>
                 ))}
           </Card.Actions>
-        </>
-      )}
-    </Card>
+        )}
+      </Card>
+
+      {showFullInfo &&
+        isFieldVisible(EventField.DESCRIPTION, fields) &&
+        event.description &&
+        (preformattedDescription ? (
+          <pre className={styles.description} data-testid={TEST_IDS.eventDetails.preformatted}>
+            {textUtil.sanitize(event.description)}
+          </pre>
+        ) : (
+          <p
+            data-testid={TEST_IDS.eventDetails.description}
+            className={styles.description}
+            dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
+          />
+        ))}
+    </>
   );
 };

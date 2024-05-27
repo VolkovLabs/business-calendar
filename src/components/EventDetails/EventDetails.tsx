@@ -114,6 +114,7 @@ export const EventDetails: React.FC<Props> = ({
             <TagList tags={tags} className={styles.labels} />
           </Card.Tags>
         )}
+
         {showFullInfo && (
           <Card.Actions>
             {isFieldVisible(EventField.LINKS, fields) &&
@@ -135,6 +136,7 @@ export const EventDetails: React.FC<Props> = ({
           </Card.Actions>
         )}
       </Card>
+
       {showFullInfo &&
         isFieldVisible(EventField.DESCRIPTION, fields) &&
         event.description &&

@@ -129,6 +129,16 @@
         "label": "位置标签",
         "placeholder": "地点："
       },
+      "preformattedDescription": {
+        "description": "允许在描述中显示预先格式化的文本。",
+        "label": "描述格式"
+      },
+      "preformattedOptions": {
+        "options": {
+          "default": "内联",
+          "preformatted": "预格式化"
+        }
+      },
       "quickLinks": {
         "description": "单击事件时打开数据链接或显示抽屉。",
         "label": "单击时",

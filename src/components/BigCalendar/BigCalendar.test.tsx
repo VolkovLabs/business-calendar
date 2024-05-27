@@ -547,13 +547,7 @@ describe('Big Calendar', () => {
         events: [event],
         options: {
           ...defaultOptions,
-          displayFields: [
-            EventField.DESCRIPTION,
-            EventField.LABELS,
-            EventField.TEXT,
-            EventField.TIME,
-            EventField.DESCRIPTION,
-          ],
+          displayFields: [EventField.DESCRIPTION, EventField.LABELS, EventField.TEXT, EventField.TIME],
         },
       })
     );
@@ -598,13 +592,7 @@ describe('Big Calendar', () => {
         events: [event],
         options: {
           ...defaultOptions,
-          displayFields: [
-            EventField.DESCRIPTION,
-            EventField.LABELS,
-            EventField.TEXT,
-            EventField.TIME,
-            EventField.DESCRIPTION,
-          ],
+          displayFields: [EventField.DESCRIPTION, EventField.LABELS, EventField.TEXT, EventField.TIME],
         },
       })
     );
@@ -639,13 +627,7 @@ describe('Big Calendar', () => {
         events: [event],
         options: {
           ...defaultOptions,
-          displayFields: [
-            EventField.DESCRIPTION,
-            EventField.LABELS,
-            EventField.TEXT,
-            EventField.TIME,
-            EventField.DESCRIPTION,
-          ],
+          displayFields: [EventField.DESCRIPTION, EventField.LABELS, EventField.TEXT, EventField.TIME],
         },
       })
     );
@@ -657,6 +639,94 @@ describe('Big Calendar', () => {
         backgroundColor: event.color,
       }),
     });
+  });
+
+  it('Should show Description', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      description: 'Description',
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+    };
+
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [EventField.DESCRIPTION],
+        },
+      })
+    );
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`Description`);
+  });
+
+  it('Should show <pre> tag', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      description: 'Description',
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+    };
+
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [EventField.DESCRIPTION],
+          preformattedDescription: true,
+        },
+      })
+    );
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.preformatted()).toBeInTheDocument();
+    expect(eventDetailsSelectors.root()).toHaveTextContent(`Description`);
   });
 
   it('Should keep refresh on time range change', () => {

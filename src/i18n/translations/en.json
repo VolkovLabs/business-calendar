@@ -104,6 +104,16 @@
         "label": "Location label",
         "placeholder": "Location:"
       },
+      "preformattedDescription": {
+        "description": "Allows to display preformatted text in description.",
+        "label": "Description format"
+      },
+      "preformattedOptions": {
+        "options": {
+          "default": "Inline",
+          "preformatted": "Preformatted"
+        }
+      },
       "quickLinks": {
         "description": "Open data link or display drawer when clicking an event.",
         "label": "On click",

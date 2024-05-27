@@ -26,6 +26,7 @@ export const DEFAULT_OPTIONS: CalendarOptions = {
   quickLinks: false,
   dateFormat: DateFormat.INHERIT,
   locationLabel: '',
+  preformattedDescription: false,
   displayFields: [
     EventField.DESCRIPTION,
     EventField.LABELS,

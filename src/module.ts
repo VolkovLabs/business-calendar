@@ -16,6 +16,7 @@ import {
   DEFAULT_VIEWS,
   DISPLAY_FIELD_OPTIONS,
   LINK_OPTIONS,
+  PREFORMATTED_OPTIONS,
 } from './constants';
 import { getMigratedOptions } from './migration';
 import { CalendarOptions } from './types';
@@ -126,6 +127,16 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           placeholder: t('panelOptions.events.locationLabel.placeholder'),
         },
+      })
+      .addRadio({
+        path: 'preformattedDescription',
+        name: t('panelOptions.events.preformattedDescription.label'),
+        description: t('panelOptions.events.preformattedDescription.description'),
+        category: [t('panelOptions.events.label')],
+        settings: {
+          options: PREFORMATTED_OPTIONS(t),
+        },
+        defaultValue: DEFAULT_OPTIONS.quickLinks,
       });
 
     /**

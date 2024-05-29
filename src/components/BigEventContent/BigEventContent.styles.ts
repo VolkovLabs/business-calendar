@@ -37,7 +37,7 @@ export const getStyles = (theme: GrafanaTheme2) => {
       line-height: 1;
     `,
     text: css`
-      margin: ${theme.spacing(0.5, 0.5)};
+      margin: ${theme.spacing(0.5)};
     `,
   };
 };

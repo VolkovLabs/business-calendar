@@ -24,6 +24,13 @@ describe('useAnnotationEvents', () => {
    */
   const getSafeDate = () => new Date('2023-02-02');
 
+  /**
+   * Default dashboard Data
+   */
+  const defaultData = {
+    annotations: [],
+  };
+
   it('Should return annotation events', async () => {
     const promise = Promise.resolve([
       {
@@ -42,7 +49,10 @@ describe('useAnnotationEvents', () => {
         }) as any
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
-    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any));
+
+    const { result } = renderHook(() =>
+      useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any, defaultData as any)
+    );
 
     await waitFor(() =>
       expect(result.current).toEqual(
@@ -72,7 +82,11 @@ describe('useAnnotationEvents', () => {
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
     renderHook(() =>
-      useAnnotationEvents(timeRange as any, { ...DEFAULT_OPTIONS, annotationsType: AnnotationsType.ALERT } as any)
+      useAnnotationEvents(
+        timeRange as any,
+        { ...DEFAULT_OPTIONS, annotationsType: AnnotationsType.ALERT } as any,
+        defaultData as any
+      )
     );
 
     await waitFor(() =>
@@ -95,7 +109,11 @@ describe('useAnnotationEvents', () => {
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
     renderHook(() =>
-      useAnnotationEvents(timeRange as any, { ...DEFAULT_OPTIONS, annotationsType: AnnotationsType.ANNOTATION } as any)
+      useAnnotationEvents(
+        timeRange as any,
+        { ...DEFAULT_OPTIONS, annotationsType: AnnotationsType.ANNOTATION } as any,
+        defaultData as any
+      )
     );
 
     await waitFor(() =>
@@ -117,7 +135,190 @@ describe('useAnnotationEvents', () => {
         }) as any
     );
     const timeRange = { from: getSafeDate(), to: getSafeDate() };
-    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any));
+    const { result } = renderHook(() =>
+      useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any, defaultData as any)
+    );
+
+    await waitFor(() => expect(result.current).toEqual([]));
+  });
+
+  it('Should return dashboard annotations', async () => {
+    const promise = Promise.resolve(null);
+    jest.mocked(getBackendSrv).mockImplementationOnce(
+      () =>
+        ({
+          get: jest.fn(() => promise),
+        }) as any
+    );
+
+    /**
+     * Time Range
+     */
+
+    const getStartDate = () => new Date('2024-05-01');
+    const getEndDate = () => new Date('2024-06-01');
+
+    const timeRange = { from: getStartDate(), to: getEndDate() };
+
+    /**
+     * Dashboard Annotations
+     */
+    const firstAnnotation = {
+      color: '#FF780A',
+      title: 'dashboard annotation title 1',
+      tags: [''],
+      id: 'ds-ann-1',
+      time: 1716014857000,
+      timeEnd: 1716032857000,
+    };
+
+    const secondAnnotation = {
+      color: '#FF780A',
+      title: 'dashboard annotation title 2',
+      tags: ['tags 1', 'tags 2'],
+      id: 'ds-ann-2',
+      time: 1717057979941,
+      timeEnd: 1717057979941,
+    };
+
+    /**
+     * Dashboard data
+     */
+    const data = {
+      annotations: [
+        {
+          length: 2,
+          fields: [
+            {
+              name: 'color',
+              values: [firstAnnotation.color, secondAnnotation.color],
+            },
+            {
+              name: 'title',
+              values: [firstAnnotation.title, secondAnnotation.title],
+            },
+            {
+              name: 'tags',
+              values: [firstAnnotation.tags, secondAnnotation.tags],
+            },
+            {
+              name: 'id',
+              values: [firstAnnotation.id, secondAnnotation.id],
+            },
+            {
+              name: 'time',
+              values: [firstAnnotation.time, secondAnnotation.time],
+            },
+            {
+              name: 'timeEnd',
+              values: [firstAnnotation.timeEnd, secondAnnotation.timeEnd],
+            },
+          ],
+        },
+      ],
+    };
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any, data as any));
+
+    await waitFor(() =>
+      expect(result.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            text: firstAnnotation.title,
+            labels: firstAnnotation.tags,
+            color: firstAnnotation.color,
+            start: dayjs(firstAnnotation.time),
+            end: dayjs(firstAnnotation.timeEnd),
+            open: false,
+          }),
+          expect.objectContaining({
+            text: secondAnnotation.title,
+            labels: secondAnnotation.tags,
+            color: secondAnnotation.color,
+            start: dayjs(secondAnnotation.time),
+            end: dayjs(secondAnnotation.timeEnd),
+            open: false,
+          }),
+        ])
+      )
+    );
+  });
+
+  it('Should not return dashboard annotations out of range', async () => {
+    const promise = Promise.resolve(null);
+    jest.mocked(getBackendSrv).mockImplementationOnce(
+      () =>
+        ({
+          get: jest.fn(() => promise),
+        }) as any
+    );
+
+    /**
+     * Time Range
+     */
+
+    const getStartDate = () => new Date('2024-05-01');
+    const getEndDate = () => new Date('2024-05-04');
+
+    const timeRange = { from: getStartDate(), to: getEndDate() };
+
+    /**
+     * Dashboard Annotations
+     */
+    const firstAnnotation = {
+      color: '#FF780A',
+      title: 'dashboard annotation title 1',
+      tags: [''],
+      id: 'ds-ann-1',
+      time: 1716014857000,
+      timeEnd: 1716032857000,
+    };
+
+    const secondAnnotation = {
+      color: '#FF780A',
+      title: 'dashboard annotation title 2',
+      tags: ['tags 1', 'tags 2'],
+      id: 'ds-ann-2',
+      time: 1717057979941,
+      timeEnd: 1717057979941,
+    };
+
+    /**
+     * Dashboard data
+     */
+    const data = {
+      annotations: [
+        {
+          length: 2,
+          fields: [
+            {
+              name: 'color',
+              values: [firstAnnotation.color, secondAnnotation.color],
+            },
+            {
+              name: 'title',
+              values: [firstAnnotation.title, secondAnnotation.title],
+            },
+            {
+              name: 'tags',
+              values: [firstAnnotation.tags, secondAnnotation.tags],
+            },
+            {
+              name: 'id',
+              values: [firstAnnotation.id, secondAnnotation.id],
+            },
+            {
+              name: 'time',
+              values: [firstAnnotation.time, secondAnnotation.time],
+            },
+            {
+              name: 'timeEnd',
+              values: [firstAnnotation.timeEnd, secondAnnotation.timeEnd],
+            },
+          ],
+        },
+      ],
+    };
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any, data as any));
 
     await waitFor(() => expect(result.current).toEqual([]));
   });

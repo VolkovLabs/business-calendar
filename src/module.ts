@@ -246,4 +246,5 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         },
         category: [t('panelOptions.annotations.label')],
       });
-  });
+  })
+  .setDataSupport({ annotations: true });

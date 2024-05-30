@@ -40,7 +40,7 @@ export const CalendarPanel: React.FC<Props> = ({
   /**
    * Annotations Events
    */
-  const annotationsEvents = useAnnotationEvents(timeRange, options);
+  const annotationsEvents = useAnnotationEvents(timeRange, options, data);
 
   /**
    * All Events

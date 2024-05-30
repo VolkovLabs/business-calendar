@@ -1,16 +1,16 @@
-import { AnnotationEvent, TimeRange } from '@grafana/data';
+import { AnnotationEvent, DataFrame, PanelData, TimeRange } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
 
-import { AnnotationsType, CalendarEvent, CalendarOptions } from '../types';
+import { AnnotationsType, CalendarEvent, CalendarOptions, DashboardAnnotation } from '../types';
 
 /**
- * Get Annotations
+ * Get Api Annotations
  * @param timeRange
  * @param options
  */
-const useAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
+const useApiAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
   const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
 
   useEffect(() => {
@@ -44,15 +44,72 @@ const useAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
 };
 
 /**
+ * Get Dashboard Annotations
+ * @param timeRange
+ * @param data
+ */
+const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: DataFrame[]) => {
+  const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
+
+  useEffect(() => {
+    if (!!dashboardAnnotations?.length) {
+      /**
+       * Get dashboard annotations
+       */
+      const annotations = dashboardAnnotations.flatMap((annotation) => {
+        /**
+         * Create annotation object based on fields
+         */
+        const annotationObject = annotation.fields.reduce((acc, curr) => {
+          acc[curr.name] = curr.values;
+          return acc;
+        }, {} as DashboardAnnotation);
+
+        /**
+         * Return annotations
+         */
+        return Array.from(Array(annotation.length)).map((event, index) => {
+          return {
+            text: annotationObject.title[index],
+            tags: annotationObject.tags[index],
+            color: annotationObject.color[index],
+            time: annotationObject.time[index],
+            timeEnd: annotationObject.timeEnd[index],
+            id: annotationObject.id[index],
+          };
+        });
+      });
+
+      /**
+       * Filter annotations by time rannge
+       * Define start and end dates
+       */
+      const startDate = timeRange.from.valueOf();
+      const endDate = timeRange.to.valueOf();
+
+      const filteredAnnotations = annotations.filter((item) => {
+        const itemDate = dayjs(item.time);
+        return itemDate.isAfter(startDate) && itemDate.isBefore(endDate);
+      });
+
+      setAnnotations(filteredAnnotations);
+    }
+  }, [dashboardAnnotations, timeRange]);
+
+  return annotations;
+};
+
+/**
  * Get Annotation events
  * @param timeRange
  * @param options
  */
-export const useAnnotationEvents = (timeRange: TimeRange, options: CalendarOptions) => {
-  const annotations = useAnnotations(timeRange, options);
+export const useAnnotationEvents = (timeRange: TimeRange, options: CalendarOptions, data: PanelData) => {
+  const apiAnnotations = useApiAnnotations(timeRange, options);
+  const dashboardAnnotations = useDashboardAnnotations(timeRange, data.annotations);
 
   return useMemo(() => {
-    return annotations.map<CalendarEvent>((annotation) => ({
+    return [...apiAnnotations, ...dashboardAnnotations].map<CalendarEvent>((annotation) => ({
       text: annotation.text ?? '',
       start: dayjs(annotation.time),
       end: annotation.timeEnd ? dayjs(annotation.timeEnd) : undefined,
@@ -60,5 +117,5 @@ export const useAnnotationEvents = (timeRange: TimeRange, options: CalendarOptio
       labels: annotation.tags || [],
       color: annotation.color || '',
     }));
-  }, [annotations]);
+  }, [apiAnnotations, dashboardAnnotations]);
 };

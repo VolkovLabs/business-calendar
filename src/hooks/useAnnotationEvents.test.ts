@@ -154,7 +154,6 @@ describe('useAnnotationEvents', () => {
     /**
      * Time Range
      */
-
     const getStartDate = () => new Date('2024-05-01');
     const getEndDate = () => new Date('2024-06-01');
 
@@ -255,7 +254,6 @@ describe('useAnnotationEvents', () => {
     /**
      * Time Range
      */
-
     const getStartDate = () => new Date('2024-05-01');
     const getEndDate = () => new Date('2024-05-04');
 

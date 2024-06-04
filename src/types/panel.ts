@@ -34,6 +34,15 @@ export enum AnnotationsType {
 }
 
 /**
+ * Time rannge Type
+ */
+export const enum TimeRangeType {
+  DEFAULT = 'default',
+  MANUAL = 'manual',
+  VARIABLE = 'variable',
+}
+
+/**
  * Time Options
  */
 export interface TimeOptions {
@@ -167,6 +176,41 @@ export interface CalendarOptions {
    * @type {DateFormat}
    */
   dateFormat: DateFormat;
+
+  /**
+   * Time Range type
+   *
+   * @type {string}
+   */
+  timeRangeType: string;
+
+  /**
+   * Start time range
+   *
+   * @type {string}
+   */
+  startTimeRange?: string;
+
+  /**
+   * End time range
+   *
+   * @type {string}
+   */
+  endTimeRange?: string;
+
+  /**
+   * Start time variable
+   *
+   * @type {string}
+   */
+  startTimeVariable?: string;
+
+  /**
+   * End time variable
+   *
+   * @type {string}
+   */
+  endTimeVariable?: string;
 
   /**
    * Display Fields

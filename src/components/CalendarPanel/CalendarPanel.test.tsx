@@ -19,11 +19,29 @@ jest.mock('@grafana/runtime', () => ({
 }));
 
 /**
+ * Mock timeRange for useTimeRange
+ */
+const timeRange = {
+  from: dateTime('2023-02-02'),
+  to: dateTime('2023-02-02'),
+  raw: {
+    from: dateTime('2023-02-02'),
+    to: dateTime('2023-02-02'),
+  },
+};
+
+/**
  * Mock utils
  */
 jest.mock('../../hooks', () => ({
   ...jest.requireActual('../../hooks'),
   useAnnotationEvents: jest.fn(() => [{ id: '123' }]),
+  useTimeRange: jest.fn(() => {
+    return {
+      timeRange: timeRange,
+      onChangeTimeRange: jest.fn(),
+    };
+  }),
 }));
 
 /**
@@ -50,6 +68,7 @@ describe('Panel', () => {
     displayFields: [],
     locationLabel: '',
     views: DEFAULT_VIEWS,
+    timeRangeType: 'default',
     scrollToTime: {
       hours: 0,
       minutes: 0,
@@ -172,6 +191,7 @@ describe('Panel', () => {
           ...defaultOptions,
           annotations: true,
           dateFormat: DateFormat.INHERIT,
+          timeRangeType: 'default',
         },
       })
     );

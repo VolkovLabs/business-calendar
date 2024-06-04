@@ -1,7 +1,7 @@
 import { PanelProps } from '@grafana/data';
 import React, { useMemo } from 'react';
 
-import { useAnnotationEvents, useCalendarEvents, useColors, useEventFrames } from '../../hooks';
+import { useAnnotationEvents, useCalendarEvents, useColors, useEventFrames, useTimeRange } from '../../hooks';
 import { CalendarOptions } from '../../types';
 import { BigCalendar } from '../BigCalendar';
 
@@ -18,10 +18,21 @@ export const CalendarPanel: React.FC<Props> = ({
   options,
   timeZone,
   fieldConfig,
-  timeRange,
-  onChangeTimeRange,
+  timeRange: defaultTimeRange,
+  onChangeTimeRange: defultOnChangeTimeRange,
   height,
+  eventBus,
 }) => {
+  /**
+   * Time Range Hook
+   */
+  const { timeRange, onChangeTimeRange } = useTimeRange({
+    defaultTimeRange,
+    defaultOnChangeTimeRange: defultOnChangeTimeRange,
+    options,
+    eventBus,
+  });
+
   /**
    * Frame events
    */

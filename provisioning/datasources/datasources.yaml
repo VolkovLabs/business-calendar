@@ -15,3 +15,6 @@ datasources:
     access: proxy
     orgId: 1
     uid: U0HP2Rv4z
+    editable: true
+    jsonData:
+      codeEditorEnabled: true

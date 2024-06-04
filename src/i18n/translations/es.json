@@ -49,6 +49,31 @@
       },
       "label": "Anotaciones"
     },
+    "endTimeRange": {
+      "description": "Fijar hora de finalización",
+      "label": "Intervalo de tiempo final (a)"
+    },
+    "endTimeVariable": {
+      "description": "Seleccionar variable",
+      "label": "Intervalo de tiempo final (a)"
+    },
+    "startTimeRange": {
+      "description": "Hora de inicio",
+      "label": "Intervalo de tiempo de inicio (desde)"
+    },
+    "startTimeVariable": {
+      "description": "Seleccionar variable",
+      "label": "Intervalo de tiempo de inicio (desde)"
+    },
+    "timeRangeType": {
+      "description": "Establecer el tipo de intervalo de tiempo",
+      "label": "Tipo de intervalo de tiempo",
+      "options": {
+        "default": "Panel",
+        "manual": "Manual",
+        "variable": "Variable"
+      }
+    },
     "data": {
       "colorField": {
         "description": "Campo a utilizar como color del evento.",

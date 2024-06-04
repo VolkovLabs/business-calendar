@@ -45,6 +45,12 @@ export const TEST_IDS = {
     buttonNext: 'data-testid big-calendar-toolbar button-next',
     buttonView: (view: string) => `data-testid big-calendar-toolbar button-${view}`,
   },
+  eventContent: {
+    agenda: 'data-testid event-content month',
+    month: 'data-testid event-content month',
+    longDuration: 'data-testid event-content long-duration',
+    averageDuration: 'data-testid event-content average-duration',
+  },
   eventDetails: {
     root: 'data-testid event-details',
     description: 'data-testid event-description',

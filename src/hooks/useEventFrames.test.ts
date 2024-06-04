@@ -61,6 +61,7 @@ describe('useEventFrames', () => {
       endTimeField: 'Event End',
       labelFields: ['Event Name'],
       dateFormat: DateFormat.INHERIT,
+      timeRangeType: 'default',
       displayFields: [],
       locationLabel: '',
     };
@@ -90,6 +91,7 @@ describe('useEventFrames', () => {
   it('Should use field names by type if no names specified', () => {
     const options: CalendarOptions = {
       dateFormat: DateFormat.INHERIT,
+      timeRangeType: 'default',
       displayFields: [],
       locationLabel: '',
     };

@@ -7,6 +7,7 @@ import {
   Language,
   SupportedLanguage,
   TimeOptions,
+  TimeRangeType,
   View,
 } from '../types';
 
@@ -25,6 +26,7 @@ export const DEFAULT_OPTIONS: CalendarOptions = {
   colors: ColorMode.FRAME,
   quickLinks: false,
   dateFormat: DateFormat.INHERIT,
+  timeRangeType: TimeRangeType.DEFAULT,
   locationLabel: '',
   preformattedDescription: false,
   displayFields: [

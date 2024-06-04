@@ -77,4 +77,7 @@ export const TEST_IDS = {
   timeEditor: {
     field: 'data-testid time-editor field',
   },
+  dateEditor: {
+    field: 'data-testid date-editor field',
+  },
 };

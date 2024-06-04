@@ -81,7 +81,7 @@ const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: Da
       });
 
       /**
-       * Filter annotations by time rannge
+       * Filter annotations by time range
        * Define start and end dates
        */
       const startDate = timeRange.from.valueOf();

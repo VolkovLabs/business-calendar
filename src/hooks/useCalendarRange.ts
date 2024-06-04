@@ -41,8 +41,15 @@ export const useCalendarRange = (
    * Middle date within the range to show current date in Calendar
    */
   const middleDate = useMemo(() => {
+    /**
+     * Return date for Agenda view (from 1st day in month)
+     */
+    if (view === View.AGENDA) {
+      return new Date(calendarFrom.getFullYear(), calendarFrom.getMonth(), 1);
+    }
+
     return new Date((calendarFrom.valueOf() + calendarTo.valueOf()) / 2);
-  }, [calendarFrom, calendarTo]);
+  }, [calendarFrom, calendarTo, view]);
 
   /**
    * Change Calendar View
@@ -80,6 +87,12 @@ export const useCalendarRange = (
       let view: View = action === Navigate.DATE ? View.DAY : currentView;
 
       /**
+       * Prevent incorrect navigation for Agenda view
+       * Add 1 extra day
+       */
+      const newCurrentDate = view === View.AGENDA ? dayjs(newDate).add(1, 'day').toDate() : newDate;
+
+      /**
        * Open Week by clicking on day in Year View
        */
       if (currentView === View.YEAR && action === Navigate.DATE) {
@@ -88,8 +101,8 @@ export const useCalendarRange = (
 
       const unitType = getUnitType(view);
       const { from, to } = timeRange;
-      const newFrom = dayjs(newDate).startOf(unitType);
-      const newTo = dayjs(newDate).endOf(unitType);
+      const newFrom = dayjs(newCurrentDate).startOf(unitType);
+      const newTo = dayjs(newCurrentDate).endOf(unitType);
 
       /**
        * Change time range if one of dates are out of the current range

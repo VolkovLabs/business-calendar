@@ -164,6 +164,19 @@ describe('Use Calendar Range', () => {
       });
     });
 
+    it('Should handle navigation correct for agenda view', async () => {
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+
+      const nextMonth = dayjs(getSafeDate()).add(1, 'month');
+
+      await act(() => result.current.onNavigate(nextMonth.toDate(), View.AGENDA, 'NEXT'));
+
+      expect(onChangeTimeRange).toHaveBeenCalledWith({
+        from: nextMonth.startOf('month').valueOf(),
+        to: nextMonth.endOf('month').valueOf(),
+      });
+    });
+
     it('Should replace time range if newStart is out of range', async () => {
       const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
 
@@ -238,7 +251,10 @@ describe('Use Calendar Range', () => {
 
         const firstDayInPeriod = dayjs(previousDate).startOf(getUnitType(view));
         const lastDayInPeriod = dayjs(previousDate).endOf(getUnitType(view));
-        const expectedDate = new Date((firstDayInPeriod.valueOf() + lastDayInPeriod.valueOf()) / 2);
+        const expectedDate =
+          view === View.AGENDA
+            ? new Date(previousDate.getFullYear(), previousDate.getMonth(), 1)
+            : new Date((firstDayInPeriod.valueOf() + lastDayInPeriod.valueOf()) / 2);
 
         expect(result.current.date.toISOString()).toEqual(expectedDate.toISOString());
       };

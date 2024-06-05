@@ -90,7 +90,7 @@ export const useCalendarRange = (
 
       /**
        * Prevent incorrect navigation for Agenda view
-       * Add 1 extra day
+       * Add 1 day because agenda view has month days - 1 to keep end date in the last day of month
        */
       const newCurrentDate = view === View.AGENDA ? dayjs(newDate).add(1, 'day').toDate() : newDate;
 

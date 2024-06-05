@@ -3,7 +3,7 @@ import { getBackendSrv } from '@grafana/runtime';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
 
-import { AnnotationsType, CalendarEvent, CalendarOptions, DashboardAnnotation } from '../types';
+import { AnnotationsType, CalendarEvent, CalendarOptions } from '../types';
 
 /**
  * Get Api Annotations
@@ -58,24 +58,24 @@ const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: Da
        */
       const annotations = dashboardAnnotations.flatMap((annotation) => {
         /**
-         * Create annotation object based on fields
+         * Get necessary fields
          */
-        const annotationObject = annotation.fields.reduce((acc, curr) => {
-          acc[curr.name] = curr.values;
-          return acc;
-        }, {} as DashboardAnnotation);
+        const title = annotation.fields.find((field) => field.name === 'title');
+        const tags = annotation.fields.find((field) => field.name === 'tags');
+        const color = annotation.fields.find((field) => field.name === 'color');
+        const time = annotation.fields.find((field) => field.name === 'time');
+        const timeEnd = annotation.fields.find((field) => field.name === 'timeEnd');
 
         /**
          * Return annotations
          */
         return Array.from(Array(annotation.length)).map((event, index) => {
           return {
-            text: annotationObject.title?.[index] ?? '',
-            tags: annotationObject.tags?.[index] ?? [],
-            color: annotationObject.color?.[index] ?? '',
-            time: annotationObject.time?.[index] ?? undefined,
-            timeEnd: annotationObject.timeEnd?.[index] ?? undefined,
-            id: annotationObject.id?.[index] ?? '',
+            text: title?.values[index] || '',
+            tags: tags?.values[index] || [],
+            color: color?.values[index] || '',
+            time: time?.values[index] || undefined,
+            timeEnd: timeEnd?.values[index] || undefined,
           };
         });
       });

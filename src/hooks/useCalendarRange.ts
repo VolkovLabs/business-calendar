@@ -40,12 +40,14 @@ export const useCalendarRange = (
   /**
    * Middle date within the range to show current date in Calendar
    */
-  const middleDate = useMemo(() => {
+  const middleDate = useMemo((): Date => {
     /**
-     * Return date for Agenda view (from 1st day in month)
+     * Return start of period date for agenda due to different calculation
+     * From: date
+     * To: date + days count
      */
     if (view === View.AGENDA) {
-      return new Date(calendarFrom.getFullYear(), calendarFrom.getMonth(), 1);
+      return dayjs(calendarTo).startOf('month').toDate();
     }
 
     return new Date((calendarFrom.valueOf() + calendarTo.valueOf()) / 2);

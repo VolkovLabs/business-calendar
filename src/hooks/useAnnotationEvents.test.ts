@@ -320,4 +320,112 @@ describe('useAnnotationEvents', () => {
 
     await waitFor(() => expect(result.current).toEqual([]));
   });
+
+  it('Should return dashboard annotations if only time field specified', async () => {
+    const promise = Promise.resolve(null);
+    jest.mocked(getBackendSrv).mockImplementationOnce(
+      () =>
+        ({
+          get: jest.fn(() => promise),
+        }) as any
+    );
+
+    /**
+     * Time Range
+     */
+    const getStartDate = () => new Date('2024-05-01');
+    const getEndDate = () => new Date('2024-06-01');
+
+    const timeRange = { from: getStartDate(), to: getEndDate() };
+
+    /**
+     * Dashboard Annotations
+     */
+    const firstAnnotation = {
+      time: 1716014857000,
+    };
+
+    const secondAnnotation = {
+      time: 1717057979941,
+    };
+
+    /**
+     * Dashboard data
+     */
+    const data = {
+      annotations: [
+        {
+          length: 2,
+          fields: [
+            {
+              name: 'time',
+              values: [firstAnnotation.time, secondAnnotation.time],
+            },
+          ],
+        },
+      ],
+    };
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any, data as any));
+
+    await waitFor(() =>
+      expect(result.current).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            text: '',
+            labels: [],
+            color: '',
+            start: dayjs(firstAnnotation.time),
+            end: undefined,
+            open: false,
+          }),
+          expect.objectContaining({
+            text: '',
+            labels: [],
+            color: '',
+            start: dayjs(secondAnnotation.time),
+            end: undefined,
+            open: false,
+          }),
+        ])
+      )
+    );
+  });
+
+  it('Should not return dashboard annotations if time field unset', async () => {
+    const promise = Promise.resolve(null);
+    jest.mocked(getBackendSrv).mockImplementationOnce(
+      () =>
+        ({
+          get: jest.fn(() => promise),
+        }) as any
+    );
+
+    /**
+     * Time Range
+     */
+    const getStartDate = () => new Date('2024-05-01');
+    const getEndDate = () => new Date('2024-06-01');
+
+    const timeRange = { from: getStartDate(), to: getEndDate() };
+
+    /**
+     * Dashboard data
+     */
+    const data = {
+      annotations: [
+        {
+          length: 2,
+          fields: [
+            {
+              name: 'time',
+              values: ['', ''],
+            },
+          ],
+        },
+      ],
+    };
+    const { result } = renderHook(() => useAnnotationEvents(timeRange as any, DEFAULT_OPTIONS as any, data as any));
+
+    await waitFor(() => expect(result.current).toEqual([]));
+  });
 });

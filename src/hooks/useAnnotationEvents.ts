@@ -70,12 +70,12 @@ const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: Da
          */
         return Array.from(Array(annotation.length)).map((event, index) => {
           return {
-            text: annotationObject.title[index],
-            tags: annotationObject.tags[index],
-            color: annotationObject.color[index],
-            time: annotationObject.time[index],
-            timeEnd: annotationObject.timeEnd[index],
-            id: annotationObject.id[index],
+            text: annotationObject.title?.[index] ?? '',
+            tags: annotationObject.tags?.[index] ?? [],
+            color: annotationObject.color?.[index] ?? '',
+            time: annotationObject.time?.[index] ?? undefined,
+            timeEnd: annotationObject.timeEnd?.[index] ?? undefined,
+            id: annotationObject.id?.[index] ?? '',
           };
         });
       });

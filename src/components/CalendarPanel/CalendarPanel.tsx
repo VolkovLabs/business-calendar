@@ -19,7 +19,7 @@ export const CalendarPanel: React.FC<Props> = ({
   timeZone,
   fieldConfig,
   timeRange: defaultTimeRange,
-  onChangeTimeRange: defultOnChangeTimeRange,
+  onChangeTimeRange: defaultOnChangeTimeRange,
   height,
   eventBus,
 }) => {
@@ -28,7 +28,7 @@ export const CalendarPanel: React.FC<Props> = ({
    */
   const { timeRange, onChangeTimeRange } = useTimeRange({
     defaultTimeRange,
-    defaultOnChangeTimeRange: defultOnChangeTimeRange,
+    defaultOnChangeTimeRange: defaultOnChangeTimeRange,
     options,
     eventBus,
   });

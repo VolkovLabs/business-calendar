@@ -9,6 +9,7 @@
 - Updated Details drawer layout (#192)
 - Added support for additional Time Range sources (#179)
 - Update format and view (#188)
+- Updated Time Range in Agenda view (#196)
 - Added display dashboard annotations (#194)
 
 ## 3.1.0 (2024-05-19)

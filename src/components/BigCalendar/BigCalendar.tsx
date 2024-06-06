@@ -255,6 +255,8 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         view={view as never}
         onSelectEvent={onSelectEvent}
         scrollToTime={scrollToTime}
+        // Set length days for agenda view. 30 days by default which is not correct due to different months length
+        length={dayjs(date).daysInMonth() - 1}
       />
     </div>
   );

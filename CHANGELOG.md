@@ -8,6 +8,7 @@
 - Added Formatting for event description (#182)
 - Updated Details drawer layout (#192)
 - Added support for additional Time Range sources (#179)
+- Updated Time Range in Agenda view (#196)
 
 ## 3.1.0 (2024-05-19)
 

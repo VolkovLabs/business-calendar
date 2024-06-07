@@ -2,6 +2,7 @@ import de from './de.json';
 import en from './en.json';
 import es from './es.json';
 import fr from './fr.json';
+import pt from './pt.json';
 import zh from './zh.json';
 
 /**
@@ -41,5 +42,12 @@ export const resources = {
    */
   zh: {
     translation: zh,
+  },
+
+  /**
+   * Portuguese
+   */
+  pt: {
+    translation: pt,
   },
 } as const;

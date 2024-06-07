@@ -167,7 +167,8 @@
           "fr": "Französisch",
           "inherit": "Benutzerauswahl",
           "iso": "ISO 8601",
-          "zh": "Chinesisch"
+          "zh": "Chinesisch",
+          "pt": "Portugese"
         }
       },
       "defaultView": {

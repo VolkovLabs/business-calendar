@@ -65,13 +65,19 @@ const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: Da
         const color = annotation.fields.find((field) => field.name === 'color');
         const time = annotation.fields.find((field) => field.name === 'time');
         const timeEnd = annotation.fields.find((field) => field.name === 'timeEnd');
+        const text = annotation.fields.find((field) => field.name === 'text');
 
         /**
          * Return annotations
          */
         return Array.from(Array(annotation.length)).map((event, index) => {
+          /**
+           * Annotations description
+           */
+          const description = `${title?.values[index] || ''} ${text?.values[index] || ''}`;
+
           return {
-            text: title?.values[index] || '',
+            text: description.trim(),
             tags: tags?.values[index] || [],
             color: color?.values[index] || '',
             time: time?.values[index] || undefined,

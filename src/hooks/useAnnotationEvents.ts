@@ -3,7 +3,7 @@ import { getBackendSrv } from '@grafana/runtime';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
 
-import { AnnotationsType, CalendarEvent, CalendarOptions, DashboardAnnotationEvent } from '../types';
+import { AnnotationsType, CalendarEvent, CalendarOptions } from '../types';
 
 /**
  * Get Api Annotations
@@ -11,7 +11,7 @@ import { AnnotationsType, CalendarEvent, CalendarOptions, DashboardAnnotationEve
  * @param options
  */
 const useApiAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
-  const [annotations, setAnnotations] = useState<DashboardAnnotationEvent[]>([]);
+  const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
 
   useEffect(() => {
     /**
@@ -37,7 +37,19 @@ const useApiAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
 
     getBackendSrv()
       .get<AnnotationEvent[] | null>('/api/annotations', params)
-      .then((res) => setAnnotations(Array.isArray(res) ? res : []));
+      .then((res) => {
+        let apiEvents: AnnotationEvent[] = [];
+
+        if (res && Array.isArray(res)) {
+          apiEvents = res?.map((event) => ({
+            ...event,
+            title: event.title || event.text,
+            text: !event.title ? '' : event.text,
+          }));
+        }
+
+        setAnnotations(apiEvents);
+      });
   }, [timeRange, options.annotationsLimit, options.annotationsType]);
 
   return annotations;
@@ -49,7 +61,7 @@ const useApiAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
  * @param data
  */
 const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: DataFrame[]) => {
-  const [annotations, setAnnotations] = useState<DashboardAnnotationEvent[]>([]);
+  const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
 
   useEffect(() => {
     if (!!dashboardAnnotations?.length) {
@@ -75,11 +87,11 @@ const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: Da
          */
         return Array.from(Array(annotation.length)).map((event, index) => {
           return {
-            text: title?.values[index] || '',
+            title: title?.values[index] || '',
             tags: tags?.values[index] || [],
             color: color?.values[index] || '',
             time: time?.values[index] || undefined,
-            description: text?.values[index] || '',
+            text: text?.values[index] || '',
             timeEnd: timeEnd?.values[index] || undefined,
           };
         });
@@ -115,12 +127,12 @@ export const useAnnotationEvents = (timeRange: TimeRange, options: CalendarOptio
 
   return useMemo(() => {
     return [...apiAnnotations, ...dashboardAnnotations].map<CalendarEvent>((annotation) => ({
-      text: annotation.text ?? '',
+      text: annotation.title ?? '',
       start: dayjs(annotation.time),
       end: annotation.timeEnd ? dayjs(annotation.timeEnd) : undefined,
       open: false,
       labels: annotation.tags || [],
-      description: annotation.description ?? '',
+      description: annotation.text ?? '',
       color: annotation.color || '',
     }));
   }, [apiAnnotations, dashboardAnnotations]);

@@ -9,6 +9,8 @@
 - Updated Details drawer layout (#192)
 - Added support for additional Time Range sources (#179)
 - Updated Time Range in Agenda view (#196)
+- Updated mouse cursor for Agenda view (#200)
+- Updated dependencies (#200)
 
 ## 3.1.0 (2024-05-19)
 

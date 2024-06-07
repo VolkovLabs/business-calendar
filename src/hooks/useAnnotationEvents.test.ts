@@ -227,6 +227,7 @@ describe('useAnnotationEvents', () => {
             color: firstAnnotation.color,
             start: dayjs(firstAnnotation.time),
             end: dayjs(firstAnnotation.timeEnd),
+            description: '',
             open: false,
           }),
           expect.objectContaining({
@@ -235,6 +236,7 @@ describe('useAnnotationEvents', () => {
             color: secondAnnotation.color,
             start: dayjs(secondAnnotation.time),
             end: dayjs(secondAnnotation.timeEnd),
+            description: '',
             open: false,
           }),
         ])
@@ -242,7 +244,7 @@ describe('useAnnotationEvents', () => {
     );
   });
 
-  it('Should return dashboard annotations with full description', async () => {
+  it('Should return dashboard annotations with description', async () => {
     const promise = Promise.resolve(null);
     jest.mocked(getBackendSrv).mockImplementationOnce(
       () =>
@@ -328,16 +330,18 @@ describe('useAnnotationEvents', () => {
       expect(result.current).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            text: `${firstAnnotation.title} ${firstAnnotation.text}`,
+            text: firstAnnotation.title,
             labels: firstAnnotation.tags,
             color: firstAnnotation.color,
+            description: firstAnnotation.text,
             start: dayjs(firstAnnotation.time),
             end: dayjs(firstAnnotation.timeEnd),
             open: false,
           }),
           expect.objectContaining({
-            text: `${secondAnnotation.title} ${secondAnnotation.text}`,
+            text: secondAnnotation.title,
             labels: secondAnnotation.tags,
+            description: secondAnnotation.text,
             color: secondAnnotation.color,
             start: dayjs(secondAnnotation.time),
             end: dayjs(secondAnnotation.timeEnd),

@@ -1,4 +1,4 @@
-import { Field, LinkModel } from '@grafana/data';
+import { AnnotationEvent, Field, LinkModel } from '@grafana/data';
 import dayjs from 'dayjs';
 
 /**
@@ -65,4 +65,16 @@ export interface CalendarEvent {
    * @type {string}
    */
   location?: string;
+}
+
+/**
+ * Dashboard Annotation Event
+ */
+export interface DashboardAnnotationEvent extends AnnotationEvent {
+  /**
+   * Description
+   *
+   * @type {string}
+   */
+  description?: string;
 }

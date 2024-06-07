@@ -3,7 +3,7 @@ import { getBackendSrv } from '@grafana/runtime';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
 
-import { AnnotationsType, CalendarEvent, CalendarOptions } from '../types';
+import { AnnotationsType, CalendarEvent, CalendarOptions, DashboardAnnotationEvent } from '../types';
 
 /**
  * Get Api Annotations
@@ -11,7 +11,7 @@ import { AnnotationsType, CalendarEvent, CalendarOptions } from '../types';
  * @param options
  */
 const useApiAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
-  const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
+  const [annotations, setAnnotations] = useState<DashboardAnnotationEvent[]>([]);
 
   useEffect(() => {
     /**
@@ -49,7 +49,7 @@ const useApiAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
  * @param data
  */
 const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: DataFrame[]) => {
-  const [annotations, setAnnotations] = useState<AnnotationEvent[]>([]);
+  const [annotations, setAnnotations] = useState<DashboardAnnotationEvent[]>([]);
 
   useEffect(() => {
     if (!!dashboardAnnotations?.length) {
@@ -65,22 +65,21 @@ const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: Da
         const color = annotation.fields.find((field) => field.name === 'color');
         const time = annotation.fields.find((field) => field.name === 'time');
         const timeEnd = annotation.fields.find((field) => field.name === 'timeEnd');
+        /**
+         * Text use for description
+         */
         const text = annotation.fields.find((field) => field.name === 'text');
 
         /**
          * Return annotations
          */
         return Array.from(Array(annotation.length)).map((event, index) => {
-          /**
-           * Annotations description
-           */
-          const description = `${title?.values[index] || ''} ${text?.values[index] || ''}`;
-
           return {
-            text: description.trim(),
+            text: title?.values[index] || '',
             tags: tags?.values[index] || [],
             color: color?.values[index] || '',
             time: time?.values[index] || undefined,
+            description: text?.values[index] || '',
             timeEnd: timeEnd?.values[index] || undefined,
           };
         });
@@ -121,6 +120,7 @@ export const useAnnotationEvents = (timeRange: TimeRange, options: CalendarOptio
       end: annotation.timeEnd ? dayjs(annotation.timeEnd) : undefined,
       open: false,
       labels: annotation.tags || [],
+      description: annotation.description ?? '',
       color: annotation.color || '',
     }));
   }, [apiAnnotations, dashboardAnnotations]);

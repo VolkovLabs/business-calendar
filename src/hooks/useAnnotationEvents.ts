@@ -41,7 +41,7 @@ const useApiAnnotations = (timeRange: TimeRange, options: CalendarOptions) => {
         let apiEvents: AnnotationEvent[] = [];
 
         if (res && Array.isArray(res)) {
-          apiEvents = res?.map((event) => ({
+          apiEvents = res.map((event) => ({
             ...event,
             title: event.title || event.text,
             text: !event.title ? '' : event.text,

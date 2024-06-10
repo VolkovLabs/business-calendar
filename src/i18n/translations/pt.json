@@ -49,31 +49,6 @@
       },
       "label": "Anotações"
     },
-    "startTimeRange": {
-      "description": "Definir hora de início",
-      "label": "Intervalo de Início (de)"
-    },
-    "startTimeVariable": {
-      "description": "Selecionar variável",
-      "label": "Intervalo de Início (de)"
-    },
-    "timeRangeType": {
-      "description": "Fonte de Intervalo de Tempo usada para o Calendário",
-      "label": "Intervalo de Tempo",
-      "options": {
-        "default": "Painel de Controle",
-        "manual": "Manual",
-        "variable": "Variável"
-      }
-    },
-    "endTimeRange": {
-      "description": "Definir hora de término",
-      "label": "Intervalo de Término (até)"
-    },
-    "endTimeVariable": {
-      "description": "Selecionar variável",
-      "label": "Intervalo de Término (até)"
-    },
     "data": {
       "colorField": {
         "description": "Campo a ser usado como cor do evento.",
@@ -107,6 +82,14 @@
         "description": "Campo a ser usado para o horário de início do evento. Padrão para o primeiro campo de tempo.",
         "label": "Horário de Início"
       }
+    },
+    "endTimeRange": {
+      "description": "Definir hora de término",
+      "label": "Intervalo de Término (até)"
+    },
+    "endTimeVariable": {
+      "description": "Selecionar variável",
+      "label": "Intervalo de Término (até)"
     },
     "eventField": {
       "options": {
@@ -167,8 +150,8 @@
           "fr": "Francês",
           "inherit": "Seleção do Usuário",
           "iso": "ISO 8601",
-          "zh": "Chinês",
-          "pt": "Português"
+          "pt": "Português",
+          "zh": "Chinês"
         }
       },
       "defaultView": {
@@ -190,6 +173,23 @@
     "scrollToTime": {
       "description": "Define a rolagem inicial para o horário selecionado",
       "label": "Deslocar para a hora"
+    },
+    "startTimeRange": {
+      "description": "Definir hora de início",
+      "label": "Intervalo de Início (de)"
+    },
+    "startTimeVariable": {
+      "description": "Selecionar variável",
+      "label": "Intervalo de Início (de)"
+    },
+    "timeRangeType": {
+      "description": "Fonte de Intervalo de Tempo usada para o Calendário",
+      "label": "Intervalo de Tempo",
+      "options": {
+        "default": "Painel de Controle",
+        "manual": "Manual",
+        "variable": "Variável"
+      }
     }
   }
 }

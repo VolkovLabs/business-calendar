@@ -35,6 +35,7 @@ export const getStyles = (theme: GrafanaTheme2) => {
       text-overflow: ellipsis;
       white-space: nowrap;
       line-height: 1;
+      cursor: pointer;
     `,
     text: css`
       margin: ${theme.spacing(0.5)};

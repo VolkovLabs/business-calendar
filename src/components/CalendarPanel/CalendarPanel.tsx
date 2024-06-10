@@ -70,6 +70,7 @@ export const CalendarPanel: React.FC<Props> = ({
       i18next.changeLanguage(format);
     }
   }, [options.dateFormat]);
+
   /**
    * Big Calendar
    */

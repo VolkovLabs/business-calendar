@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.2.0 (2024-06-10)
+## 3.2.0 (2024-06-11)
 
 ### Features / Enhancements
 

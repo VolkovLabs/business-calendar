@@ -34,7 +34,7 @@ export enum AnnotationsType {
 }
 
 /**
- * Time rannge Type
+ * Time range Type
  */
 export const enum TimeRangeType {
   DEFAULT = 'default',

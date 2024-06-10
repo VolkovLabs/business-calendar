@@ -1,6 +1,7 @@
 import { dateTime, FieldType, LoadingState, PanelData, toDataFrame } from '@grafana/data';
 import { act, render } from '@testing-library/react';
 import dayjs from 'dayjs';
+import i18next from 'i18next';
 import React from 'react';
 
 import { DEFAULT_VIEWS } from '../../constants';
@@ -206,5 +207,33 @@ describe('Panel', () => {
       }),
       expect.anything()
     );
+  });
+
+  it('Should change i18next language based on dateFormat', async () => {
+    jest.spyOn(i18next, 'changeLanguage');
+
+    await renderWithoutWarning(
+      getComponent({
+        options: {
+          ...defaultOptions,
+          dateFormat: DateFormat.EN_24H,
+        },
+      })
+    );
+
+    expect(i18next.changeLanguage).toHaveBeenCalledWith(DateFormat.EN);
+
+    jest.mocked(i18next.changeLanguage).mockClear();
+
+    await renderWithoutWarning(
+      getComponent({
+        options: {
+          ...defaultOptions,
+          dateFormat: DateFormat.FR,
+        },
+      })
+    );
+
+    expect(i18next.changeLanguage).toHaveBeenCalledWith(DateFormat.FR);
   });
 });

@@ -77,6 +77,7 @@ const useDashboardAnnotations = (timeRange: TimeRange, dashboardAnnotations?: Da
         const color = annotation.fields.find((field) => field.name === 'color');
         const time = annotation.fields.find((field) => field.name === 'time');
         const timeEnd = annotation.fields.find((field) => field.name === 'timeEnd');
+
         /**
          * Text use for description
          */

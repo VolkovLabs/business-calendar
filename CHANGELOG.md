@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.2.0 (IN PROGRESS)
+## 3.2.0 (2024-06-10)
 
 ### Features / Enhancements
 
@@ -13,6 +13,7 @@
 - Updated mouse cursor for Agenda view (#200)
 - Updated dependencies (#200)
 - Added display dashboard annotations (#194)
+- Added Portuguese language (#201)
 
 ## 3.1.0 (2024-05-19)
 

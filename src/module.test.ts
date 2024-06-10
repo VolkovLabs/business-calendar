@@ -201,7 +201,7 @@ describe('plugin', () => {
       );
       plugin['optionsSupplier'](builder);
 
-      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['startTimeVariable', 'endTimeVariable', 'dateFormat']));
+      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['startTimeVariable', 'endTimeVariable']));
     });
 
     it('Should show endTimeRange and startTimeRange if timeRangeType is `manual` ', () => {
@@ -213,7 +213,14 @@ describe('plugin', () => {
       plugin['optionsSupplier'](builder);
 
       expect(shownOptionsPaths).toEqual(
-        expect.arrayContaining(['startTimeRange', 'endTimeRange', 'defaultView', 'scrollToTime', 'labelFields'])
+        expect.arrayContaining([
+          'startTimeRange',
+          'endTimeRange',
+          'defaultView',
+          'scrollToTime',
+          'labelFields',
+          'dateFormat',
+        ])
       );
     });
   });

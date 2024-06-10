@@ -4,6 +4,7 @@ import deLocale from 'dayjs/locale/de';
 import enLocale from 'dayjs/locale/en';
 import esLocale from 'dayjs/locale/es';
 import frLocale from 'dayjs/locale/fr';
+import ptLocale from 'dayjs/locale/pt';
 import zhLocale from 'dayjs/locale/zh';
 import { useEffect, useMemo, useState } from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
@@ -46,6 +47,7 @@ const dayjsLocales: Record<string, ILocale> = {
   fr: frLocale,
   de: deLocale,
   zh: zhLocale,
+  pt: ptLocale,
   iso: {
     ...enLocale,
     formats: {

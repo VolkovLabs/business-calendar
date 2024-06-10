@@ -23,7 +23,7 @@ jest.mock('./useRuntimeVariables', () => ({
 
 describe('useTimeRange', () => {
   const defaultTimeRange = { from: '2022-01-01', to: '2022-01-07' } as any;
-  const defultOnChangeTimeRange = jest.fn();
+  const defaultOnChangeTimeRange = jest.fn();
   const baseOptions = { timeRangeType: 'default' } as any;
   const eventBus = {} as any;
 
@@ -35,7 +35,7 @@ describe('useTimeRange', () => {
     const { result } = renderHook(() =>
       useTimeRange({
         defaultTimeRange,
-        defaultOnChangeTimeRange: defultOnChangeTimeRange,
+        defaultOnChangeTimeRange: defaultOnChangeTimeRange,
         options: baseOptions,
         eventBus,
       })
@@ -55,7 +55,7 @@ describe('useTimeRange', () => {
     } as any;
 
     const { result } = renderHook(() =>
-      useTimeRange({ defaultTimeRange, defaultOnChangeTimeRange: defultOnChangeTimeRange, options, eventBus })
+      useTimeRange({ defaultTimeRange, defaultOnChangeTimeRange: defaultOnChangeTimeRange, options, eventBus })
     );
 
     expect(result.current.timeRange.from.toISOString()).toEqual('2022-02-10T00:00:00.000Z');
@@ -68,7 +68,7 @@ describe('useTimeRange', () => {
     const options = { ...baseOptions, timeRangeType: 'variable', startTimeVariable, endTimeVariable };
 
     const { result } = renderHook(() =>
-      useTimeRange({ defaultTimeRange, defaultOnChangeTimeRange: defultOnChangeTimeRange, options, eventBus })
+      useTimeRange({ defaultTimeRange, defaultOnChangeTimeRange: defaultOnChangeTimeRange, options, eventBus })
     );
 
     expect(result.current.timeRange.from.toISOString()).toEqual('2022-04-10T00:00:00.000Z');
@@ -78,7 +78,7 @@ describe('useTimeRange', () => {
     const { result } = renderHook(() =>
       useTimeRange({
         defaultTimeRange,
-        defaultOnChangeTimeRange: defultOnChangeTimeRange,
+        defaultOnChangeTimeRange: defaultOnChangeTimeRange,
         options: baseOptions,
         eventBus,
       })
@@ -90,6 +90,6 @@ describe('useTimeRange', () => {
       result.current.onChangeTimeRange(newTimeRange);
     });
 
-    expect(defultOnChangeTimeRange).toHaveBeenCalledWith(newTimeRange);
+    expect(defaultOnChangeTimeRange).toHaveBeenCalledWith(newTimeRange);
   });
 });

@@ -49,31 +49,6 @@
       },
       "label": "Anotaciones"
     },
-    "endTimeRange": {
-      "description": "Fijar hora de finalización",
-      "label": "Intervalo de tiempo final (a)"
-    },
-    "endTimeVariable": {
-      "description": "Seleccionar variable",
-      "label": "Intervalo de tiempo final (a)"
-    },
-    "startTimeRange": {
-      "description": "Hora de inicio",
-      "label": "Intervalo de tiempo de inicio (desde)"
-    },
-    "startTimeVariable": {
-      "description": "Seleccionar variable",
-      "label": "Intervalo de tiempo de inicio (desde)"
-    },
-    "timeRangeType": {
-      "description": "Establecer el tipo de intervalo de tiempo",
-      "label": "Tipo de intervalo de tiempo",
-      "options": {
-        "default": "Panel",
-        "manual": "Manual",
-        "variable": "Variable"
-      }
-    },
     "data": {
       "colorField": {
         "description": "Campo a utilizar como color del evento.",
@@ -107,6 +82,14 @@
         "description": "Campo a utilizar para la hora de inicio del evento. El valor predeterminado es el primer campo de tiempo.",
         "label": "Hora de inicio"
       }
+    },
+    "endTimeRange": {
+      "description": "Fijar hora de finalización",
+      "label": "Intervalo de tiempo final (a)"
+    },
+    "endTimeVariable": {
+      "description": "Seleccionar variable",
+      "label": "Intervalo de tiempo final (a)"
     },
     "eventField": {
       "options": {
@@ -167,6 +150,7 @@
           "fr": "Francés",
           "inherit": "Selección de usuario",
           "iso": "ISO 8601",
+          "pt": "Portugués",
           "zh": "Chino"
         }
       },
@@ -189,6 +173,23 @@
     "scrollToTime": {
       "description": "Establezca el desplazamiento inicial en la hora seleccionada.",
       "label": "Desplazarse hasta el tiempo"
+    },
+    "startTimeRange": {
+      "description": "Hora de inicio",
+      "label": "Intervalo de tiempo de inicio (desde)"
+    },
+    "startTimeVariable": {
+      "description": "Seleccionar variable",
+      "label": "Intervalo de tiempo de inicio (desde)"
+    },
+    "timeRangeType": {
+      "description": "Establecer el tipo de intervalo de tiempo",
+      "label": "Tipo de intervalo de tiempo",
+      "options": {
+        "default": "Panel",
+        "manual": "Manual",
+        "variable": "Variable"
+      }
     }
   }
 }

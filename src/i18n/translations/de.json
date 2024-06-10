@@ -49,31 +49,6 @@
       },
       "label": "Anmerkungen"
     },
-    "endTimeRange": {
-      "description": "Endzeit einstellen",
-      "label": "Endzeitbereich (bis)"
-    },
-    "endTimeVariable": {
-      "description": "Variable auswählen",
-      "label": "Endzeitbereich (bis)"
-    },
-    "startTimeRange": {
-      "description": "Startzeit einstellen",
-      "label": "Startzeitbereich (von)"
-    },
-    "startTimeVariable": {
-      "description": "Variable auswählen",
-      "label": "Startzeitbereich (von)"
-    },
-    "timeRangeType": {
-      "description": "Einstellen der Art des Zeitbereichs",
-      "label": "Zeitbereichstyp",
-      "options": {
-        "default": "Armaturenbrett",
-        "manual": "Handbuch",
-        "variable": "Variable"
-      }
-    },
     "data": {
       "colorField": {
         "description": "Feld, das als Ereignisfarbe verwendet werden soll.",
@@ -107,6 +82,14 @@
         "description": "Feld, das für die Startzeit des Ereignisses verwendet werden soll. Standardmäßig wird das erste Zeitfeld verwendet.",
         "label": "Startzeit"
       }
+    },
+    "endTimeRange": {
+      "description": "Endzeit einstellen",
+      "label": "Endzeitbereich (bis)"
+    },
+    "endTimeVariable": {
+      "description": "Variable auswählen",
+      "label": "Endzeitbereich (bis)"
     },
     "eventField": {
       "options": {
@@ -167,6 +150,7 @@
           "fr": "Französisch",
           "inherit": "Benutzerauswahl",
           "iso": "ISO 8601",
+          "pt": "Portugese",
           "zh": "Chinesisch"
         }
       },
@@ -189,6 +173,23 @@
     "scrollToTime": {
       "description": "Stellen Sie den anfänglichen Bildlauf auf die ausgewählte Zeit ein.",
       "label": "Scrollen Sie zu „Zeit“."
+    },
+    "startTimeRange": {
+      "description": "Startzeit einstellen",
+      "label": "Startzeitbereich (von)"
+    },
+    "startTimeVariable": {
+      "description": "Variable auswählen",
+      "label": "Startzeitbereich (von)"
+    },
+    "timeRangeType": {
+      "description": "Einstellen der Art des Zeitbereichs",
+      "label": "Zeitbereichstyp",
+      "options": {
+        "default": "Armaturenbrett",
+        "manual": "Handbuch",
+        "variable": "Variable"
+      }
     }
   }
 }

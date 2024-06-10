@@ -9,12 +9,13 @@ export const enum Language {
   ES = 'es',
   FR = 'fr',
   ZH = 'zh',
+  PT = 'pt',
 }
 
 /**
  * Supported Language
  */
-export type SupportedLanguage = Language.EN | Language.ES | Language.FR | Language.DE | Language.ZH;
+export type SupportedLanguage = Language.EN | Language.ES | Language.FR | Language.DE | Language.ZH | Language.PT;
 
 /**
  * Color Mode

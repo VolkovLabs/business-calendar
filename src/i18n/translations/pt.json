@@ -1,0 +1,195 @@
+{
+  "eventDetailsDrawer": {
+    "location": "Ubicación: {{location}}",
+    "title": "Detalhes do Evento"
+  },
+  "localizerMessages": {
+    "agenda": "Agenda",
+    "allDay": "Dia Inteiro",
+    "date": "Data",
+    "day": "Dia",
+    "event": "Evento",
+    "month": "Mês",
+    "next": "Próximo",
+    "noEventsInRange": "Não há eventos neste intervalo.",
+    "previous": "Anterior",
+    "showMore": "+{{total}} mais",
+    "time": "Tempo",
+    "today": "Hoje",
+    "tomorrow": "Amanhã",
+    "week": "Semana",
+    "workWeek": "Semana de Trabalho",
+    "year": "Ano",
+    "yesterday": "Ontem"
+  },
+  "panel": {
+    "noViewsMessage": "Por favor, habilite pelo menos uma visualização.",
+    "noViewsTitle": "Nenhuma Visualização"
+  },
+  "panelOptions": {
+    "annotations": {
+      "annotations": {
+        "description": "Exibir anotações.",
+        "label": "Anotações",
+        "options": {
+          "disabled": "Desativado",
+          "enabled": "Ativado"
+        }
+      },
+      "annotationsLimit": {
+        "label": "Limite Máximo"
+      },
+      "annotationsType": {
+        "label": "Tipo",
+        "options": {
+          "alert": "Alertas",
+          "all": "Qualquer",
+          "annotation": "Anotações"
+        }
+      },
+      "label": "Anotações"
+    },
+    "data": {
+      "colorField": {
+        "description": "Campo a ser usado como cor do evento.",
+        "label": "Cor"
+      },
+      "descriptionField": {
+        "description": "Campo a ser usado para a descrição do evento.",
+        "label": "Descrição",
+        "noFieldsMessage": "Nenhum campo de string encontrado"
+      },
+      "endTimeField": {
+        "description": "Campo a ser usado para o horário de término do evento. Se não for definido, o evento é instantâneo.",
+        "label": "Horário de Término"
+      },
+      "label": "Dados",
+      "labelFields": {
+        "description": "Campos a serem usados como rótulos de eventos.",
+        "label": "Rótulos"
+      },
+      "locationField": {
+        "description": "Campo a ser usado para a localização do evento.",
+        "label": "Localização",
+        "noFieldsMessage": "Nenhum campo de string encontrado"
+      },
+      "textField": {
+        "description": "Campo a ser usado para o texto do evento. Padrão para o primeiro campo textual.",
+        "label": "Texto",
+        "noFieldsMessage": "Nenhum campo de string encontrado"
+      },
+      "timeField": {
+        "description": "Campo a ser usado para o horário de início do evento. Padrão para o primeiro campo de tempo.",
+        "label": "Horário de Início"
+      }
+    },
+    "endTimeRange": {
+      "description": "Definir hora de término",
+      "label": "Intervalo de Término (até)"
+    },
+    "endTimeVariable": {
+      "description": "Selecionar variável",
+      "label": "Intervalo de Término (até)"
+    },
+    "eventField": {
+      "options": {
+        "description": "Descrição",
+        "labels": "Rótulos",
+        "links": "Links",
+        "location": "Localização",
+        "text": "Texto",
+        "time": "Tempo"
+      }
+    },
+    "events": {
+      "displayFields": {
+        "description": "Campos para mostrar nos detalhes do evento.",
+        "label": "Informações Detalhadas"
+      },
+      "label": "Eventos",
+      "locationLabel": {
+        "description": "Especificar um rótulo personalizado para o campo de localização.",
+        "label": "Rótulo de Localização",
+        "placeholder": "Localização:"
+      },
+      "preformattedDescription": {
+        "description": "Permite exibir texto pré-formatado na descrição.",
+        "label": "Formato da Descrição"
+      },
+      "preformattedOptions": {
+        "options": {
+          "default": "Em Linha",
+          "preformatted": "Pré-formatado"
+        }
+      },
+      "quickLinks": {
+        "description": "Abrir link de dados ou exibir gaveta ao clicar em um evento.",
+        "label": "Ao Clicar",
+        "options": {
+          "disabled": "Mostrar Detalhes",
+          "enabled": "Abrir Link"
+        }
+      }
+    },
+    "layout": {
+      "colors": {
+        "description": "Exibir cores com base no Quadro ou ID do Evento se o campo de Cor não for especificado.",
+        "label": "Cores",
+        "options": {
+          "event": "Evento",
+          "frame": "Quadro"
+        }
+      },
+      "dateFormat": {
+        "label": "Formato de Data e Hora",
+        "options": {
+          "de": "Alemão",
+          "en": "Inglês",
+          "en24": "Inglês 24H",
+          "es": "Espanhol",
+          "fr": "Francês",
+          "inherit": "Seleção do Usuário",
+          "iso": "ISO 8601",
+          "pt": "Português",
+          "zh": "Chinês"
+        }
+      },
+      "defaultView": {
+        "label": "Visualização Padrão"
+      },
+      "label": "Layout",
+      "views": {
+        "label": "Visualizações",
+        "options": {
+          "agenda": "Agenda",
+          "day": "Dia",
+          "month": "Mês",
+          "week": "Semana",
+          "workWeek": "Semana de Trabalho",
+          "year": "Ano"
+        }
+      }
+    },
+    "scrollToTime": {
+      "description": "Define a rolagem inicial para o horário selecionado",
+      "label": "Deslocar para a hora"
+    },
+    "startTimeRange": {
+      "description": "Definir hora de início",
+      "label": "Intervalo de Início (de)"
+    },
+    "startTimeVariable": {
+      "description": "Selecionar variável",
+      "label": "Intervalo de Início (de)"
+    },
+    "timeRangeType": {
+      "description": "Fonte de Intervalo de Tempo usada para o Calendário",
+      "label": "Intervalo de Tempo",
+      "options": {
+        "default": "Painel de Controle",
+        "manual": "Manual",
+        "variable": "Variável"
+      }
+    }
+  }
+}

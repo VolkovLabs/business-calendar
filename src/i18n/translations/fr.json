@@ -49,31 +49,6 @@
       },
       "label": "Annotations"
     },
-    "endTimeRange": {
-      "description": "Définir l'heure de fin",
-      "label": "Plage horaire de fin (à)"
-    },
-    "endTimeVariable": {
-      "description": "Sélectionner une variable",
-      "label": "Plage horaire de fin (à)"
-    },
-    "startTimeRange": {
-      "description": "Définir l'heure de début",
-      "label": "Plage d'heures de début (à partir de)"
-    },
-    "startTimeVariable": {
-      "description": "Sélectionner une variable",
-      "label": "Plage d'heures de début (à partir de)"
-    },
-    "timeRangeType": {
-      "description": "Définir le type de plage horaire",
-      "label": "Type de plage horaire",
-      "options": {
-        "default": "Tableau de bord",
-        "manual": "Manuel",
-        "variable": "Variable"
-      }
-    },
     "data": {
       "colorField": {
         "description": "Champ à utiliser comme couleur d'événement.",
@@ -107,6 +82,14 @@
         "description": "Champ à utiliser pour l'heure de début de l'événement. La valeur par défaut est le premier champ de temps.",
         "label": "Heure de début"
       }
+    },
+    "endTimeRange": {
+      "description": "Définir l'heure de fin",
+      "label": "Plage horaire de fin (à)"
+    },
+    "endTimeVariable": {
+      "description": "Sélectionner une variable",
+      "label": "Plage horaire de fin (à)"
     },
     "eventField": {
       "options": {
@@ -167,6 +150,7 @@
           "fr": "Français",
           "inherit": "Sélection de l'utilisateur",
           "iso": "ISO 8601",
+          "pt": "Portugais",
           "zh": "Chinois"
         }
       },
@@ -189,6 +173,23 @@
     "scrollToTime": {
       "description": "Réglez le défilement initial sur l'heure sélectionnée.",
       "label": "Faire défiler jusqu'à l'heure"
+    },
+    "startTimeRange": {
+      "description": "Définir l'heure de début",
+      "label": "Plage d'heures de début (à partir de)"
+    },
+    "startTimeVariable": {
+      "description": "Sélectionner une variable",
+      "label": "Plage d'heures de début (à partir de)"
+    },
+    "timeRangeType": {
+      "description": "Définir le type de plage horaire",
+      "label": "Type de plage horaire",
+      "options": {
+        "default": "Tableau de bord",
+        "manual": "Manuel",
+        "variable": "Variable"
+      }
     }
   }
 }

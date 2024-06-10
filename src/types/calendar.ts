@@ -34,6 +34,7 @@ export enum DateFormat {
   DE = 'de',
   ES = 'es',
   FR = 'fr',
+  PT = 'pt',
   ZH = 'zh',
   ISO = 'iso',
 }

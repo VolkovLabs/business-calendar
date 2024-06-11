@@ -35,6 +35,11 @@ describe('plugin', () => {
     addTextInput: jest.fn().mockImplementation(() => builder),
   };
 
+  /**
+   * Context
+   */
+  const context = {};
+
   it('Should be instance of PanelPlugin', () => {
     expect(plugin).toBeInstanceOf(PanelPlugin);
   });
@@ -43,7 +48,7 @@ describe('plugin', () => {
     /**
      * Supplier
      */
-    plugin['optionsSupplier'](builder);
+    plugin['optionsSupplier'](builder, context);
 
     /**
      * Inputs
@@ -85,7 +90,7 @@ describe('plugin', () => {
       const shownOptionsPaths: string[] = [];
 
       builder.addMultiSelect.mockImplementation(addInputImplementation({ quickLinks: false }, shownOptionsPaths));
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownOptionsPaths).toEqual(expect.arrayContaining(['views', 'displayFields']));
     });
@@ -94,7 +99,7 @@ describe('plugin', () => {
       const shownOptionsPaths: string[] = [];
 
       builder.addTextInput.mockImplementation(addInputImplementation({ quickLinks: false }, shownOptionsPaths));
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownOptionsPaths).toEqual(expect.arrayContaining(['locationLabel']));
     });
@@ -108,7 +113,7 @@ describe('plugin', () => {
 
       builder.addFieldNamePicker.mockImplementation(addFieldNameImplementation('textField', fields, shownFields));
 
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownFields).toEqual([{ name: 'string', type: FieldType.string }]);
     });
@@ -124,7 +129,7 @@ describe('plugin', () => {
         addFieldNameImplementation('descriptionField', fields, shownFields)
       );
 
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownFields).toEqual([{ name: 'string', type: FieldType.string }]);
     });
@@ -140,7 +145,7 @@ describe('plugin', () => {
 
       builder.addFieldNamePicker.mockImplementation(addFieldNameImplementation('timeField', fields, shownFields));
 
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownFields).toEqual([fields[0], fields[1], fields[2]]);
     });
@@ -156,7 +161,7 @@ describe('plugin', () => {
 
       builder.addFieldNamePicker.mockImplementation(addFieldNameImplementation('endTimeField', fields, shownFields));
 
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownFields).toEqual([fields[0], fields[1], fields[2]]);
     });
@@ -172,7 +177,7 @@ describe('plugin', () => {
 
       builder.addFieldNamePicker.mockImplementation(addFieldNameImplementation('colorField', fields, shownFields));
 
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownFields).toEqual([fields[0], fields[1]]);
     });
@@ -188,7 +193,7 @@ describe('plugin', () => {
 
       builder.addFieldNamePicker.mockImplementation(addFieldNameImplementation('locationField', fields, shownFields));
 
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownFields).toEqual([fields[0]]);
     });
@@ -199,9 +204,9 @@ describe('plugin', () => {
       builder.addSelect.mockImplementation(
         addInputImplementation({ timeRangeType: TimeRangeType.VARIABLE }, shownOptionsPaths)
       );
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
-      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['startTimeVariable', 'endTimeVariable']));
+      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['startTimeVariable', 'endTimeVariable', 'dateFormat']));
     });
 
     it('Should show endTimeRange and startTimeRange if timeRangeType is `manual` ', () => {
@@ -210,17 +215,10 @@ describe('plugin', () => {
       builder.addCustomEditor.mockImplementation(
         addInputImplementation({ timeRangeType: TimeRangeType.MANUAL }, shownOptionsPaths)
       );
-      plugin['optionsSupplier'](builder);
+      plugin['optionsSupplier'](builder, context);
 
       expect(shownOptionsPaths).toEqual(
-        expect.arrayContaining([
-          'startTimeRange',
-          'endTimeRange',
-          'defaultView',
-          'scrollToTime',
-          'labelFields',
-          'dateFormat',
-        ])
+        expect.arrayContaining(['startTimeRange', 'endTimeRange', 'defaultView', 'scrollToTime', 'labelFields'])
       );
     });
   });

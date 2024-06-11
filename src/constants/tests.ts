@@ -74,9 +74,6 @@ export const TEST_IDS = {
   defaultViewEditor: {
     field: 'default-view-editor field',
   },
-  defaultDateFormatEditor: {
-    field: 'default-date-format-editor field',
-  },
   timeEditor: {
     field: 'data-testid time-editor field',
   },

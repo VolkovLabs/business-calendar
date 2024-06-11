@@ -2,21 +2,15 @@ import './i18n';
 
 import { Field, FieldConfigProperty, FieldType, PanelPlugin } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
-import { t } from 'i18next';
+import { changeLanguage, t } from 'i18next';
 
-import {
-  CalendarPanel,
-  DateEditor,
-  DefaultDateFormatEditor,
-  DefaultViewEditor,
-  MultiFieldEditor,
-  TimeEditor,
-} from './components';
+import { CalendarPanel, DateEditor, DefaultViewEditor, MultiFieldEditor, TimeEditor } from './components';
 import {
   ANNOTATIONS_OPTIONS,
   ANNOTATIONS_TYPE_OPTIONS,
   CALENDAR_VIEW_OPTIONS,
   COLOR_OPTIONS,
+  DATE_FORMAT_OPTIONS,
   DEFAULT_OPTIONS,
   DEFAULT_SCROLL_TO_TIME,
   DEFAULT_VIEW,
@@ -28,6 +22,7 @@ import {
 } from './constants';
 import { getMigratedOptions } from './migration';
 import { CalendarOptions, TimeRangeType } from './types';
+import { getLanguage } from './utils';
 
 /**
  * Panel Plugin
@@ -46,8 +41,12 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
       'fieldMinMax' as never,
     ],
   })
+  .setPanelOptions((builder, context) => {
+    /**
+     * Set i18n language
+     */
+    changeLanguage(getLanguage(context.options?.dateFormat));
 
-  .setPanelOptions((builder) => {
     /**
      * Variables
      */
@@ -135,12 +134,13 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         editor: DefaultViewEditor,
         defaultValue: DEFAULT_VIEW,
       })
-      .addCustomEditor({
-        id: 'dateFormatEditor',
+      .addSelect({
         path: 'dateFormat',
         name: t('panelOptions.layout.dateFormat.label'),
         category: [t('panelOptions.layout.label')],
-        editor: DefaultDateFormatEditor,
+        settings: {
+          options: DATE_FORMAT_OPTIONS(t),
+        },
         defaultValue: DEFAULT_OPTIONS.dateFormat,
       })
       .addRadio({

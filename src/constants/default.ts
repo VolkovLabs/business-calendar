@@ -4,7 +4,6 @@ import {
   ColorMode,
   DateFormat,
   EventField,
-  Language,
   SupportedLanguage,
   TimeOptions,
   TimeRangeType,
@@ -14,7 +13,7 @@ import {
 /**
  * Default Language
  */
-export const DEFAULT_LANGUAGE: SupportedLanguage = Language.EN;
+export const DEFAULT_LANGUAGE: SupportedLanguage = DateFormat.EN;
 
 /**
  * Default Options

@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import { Language } from '../../types';
+import { DateFormat } from '../../types';
 import { resources } from '../translations';
 
 /**
@@ -13,7 +13,7 @@ export const defaultNamespace = 'translation';
  * Init i18next
  */
 i18next.use(initReactI18next).init({
-  lng: Language.EN,
+  lng: DateFormat.EN,
   debug: false,
   resources,
   // eslint-disable-next-line @typescript-eslint/naming-convention

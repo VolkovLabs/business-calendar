@@ -1,6 +1,5 @@
 import { PanelProps } from '@grafana/data';
-import i18next from 'i18next';
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useAnnotationEvents, useCalendarEvents, useColors, useEventFrames, useTimeRange } from '../../hooks';
 import { CalendarOptions } from '../../types';
@@ -60,16 +59,6 @@ export const CalendarPanel: React.FC<Props> = ({
   const allEvents = useMemo(() => {
     return dataFrameEvents.concat(options.annotations ? annotationsEvents : []);
   }, [dataFrameEvents, annotationsEvents, options.annotations]);
-
-  /**
-   * Compare i18next language from config and dateFormat
-   */
-  useEffect(() => {
-    if (options.dateFormat !== i18next.language) {
-      // const format = options.dateFormat === DateFormat.EN_24H ? DateFormat.EN : options.dateFormat;
-      // i18next.changeLanguage(format);
-    }
-  }, [options.dateFormat]);
 
   /**
    * Big Calendar

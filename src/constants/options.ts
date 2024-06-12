@@ -61,8 +61,8 @@ export const DATE_FORMAT_OPTIONS = (t: TFunction) =>
  */
 export const TIME_RANGE_TYPE_OPTIONS = (t: TFunction) => [
   { value: TimeRangeType.DEFAULT, label: t('panelOptions.timeRangeType.options.default'), icon: 'dashboard' },
-  { value: TimeRangeType.MANUAL, label: t('panelOptions.timeRangeType.options.manual') },
-  { value: TimeRangeType.VARIABLE, label: t('panelOptions.timeRangeType.options.variable') },
+  { value: TimeRangeType.MANUAL, label: t('panelOptions.timeRangeType.options.manual'), icon: 'pen' },
+  { value: TimeRangeType.VARIABLE, label: t('panelOptions.timeRangeType.options.variable'), icon: 'sliders-v-alt' },
 ];
 
 /**

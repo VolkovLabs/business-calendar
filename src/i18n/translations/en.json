@@ -84,12 +84,12 @@
       }
     },
     "endTimeRange": {
-      "description": "Set end time",
-      "label": "End time range (to)"
+      "description": "Set 'to' time",
+      "label": "End time range"
     },
     "endTimeVariable": {
-      "description": "Select variable",
-      "label": "End time range (to)"
+      "description": "Select 'to' variable",
+      "label": "End time range"
     },
     "eventField": {
       "options": {
@@ -175,12 +175,12 @@
       "label": "Scroll To Time"
     },
     "startTimeRange": {
-      "description": "Set Start time",
-      "label": "Start time range (from)"
+      "description": "Set 'from' time",
+      "label": "Start time range"
     },
     "startTimeVariable": {
-      "description": "Select variable",
-      "label": "Start time range (from)"
+      "description": "Select 'from' variable",
+      "label": "Start time range"
     },
     "timeRangeType": {
       "description": "Time Range source used for Calendar",

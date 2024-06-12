@@ -14,6 +14,7 @@
 - Updated dependencies (#200)
 - Added display dashboard annotations (#194)
 - Added Portuguese language (#201)
+- Updated toolbar and messages to the selected language (#203)
 
 ## 3.1.0 (2024-05-19)
 

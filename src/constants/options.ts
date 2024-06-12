@@ -22,8 +22,8 @@ export const COLOR_OPTIONS = (t: TFunction) => [
  * Annotations Options
  */
 export const ANNOTATIONS_OPTIONS = (t: TFunction) => [
-  { value: true, label: t('panelOptions.annotations.annotations.options.enabled'), icon: 'toggle-on' },
-  { value: false, label: t('panelOptions.annotations.annotations.options.disabled'), icon: 'toggle-off' },
+  { value: true, label: t('panelOptions.annotations.annotations.options.enabled'), icon: 'comments-alt' },
+  { value: false, label: t('panelOptions.annotations.annotations.options.disabled') },
 ];
 
 /**
@@ -60,7 +60,7 @@ export const DATE_FORMAT_OPTIONS = (t: TFunction) =>
  * TIME RANGE OPTIONS
  */
 export const TIME_RANGE_TYPE_OPTIONS = (t: TFunction) => [
-  { value: TimeRangeType.DEFAULT, label: t('panelOptions.timeRangeType.options.default') },
+  { value: TimeRangeType.DEFAULT, label: t('panelOptions.timeRangeType.options.default'), icon: 'dashboard' },
   { value: TimeRangeType.MANUAL, label: t('panelOptions.timeRangeType.options.manual') },
   { value: TimeRangeType.VARIABLE, label: t('panelOptions.timeRangeType.options.variable') },
 ];

@@ -29,7 +29,7 @@ const isoFormat = 'YYYY-MM-DDTHH:mm:ssZ[Z]';
  * Dynamic import is not needed until there is too many locales
  * Each locale is about 1kb
  */
-const dayjsLocales: Record<string, ILocale> = {
+const dayjsLocales: Record<Exclude<DateFormat, 'inherit'>, ILocale> = {
   en: enLocale,
   en24: {
     ...enLocale,

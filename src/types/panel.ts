@@ -15,7 +15,13 @@ export const enum Language {
 /**
  * Supported Language
  */
-export type SupportedLanguage = Language.EN | Language.ES | Language.FR | Language.DE | Language.ZH | Language.PT;
+export type SupportedLanguage =
+  | DateFormat.EN
+  | DateFormat.ES
+  | DateFormat.FR
+  | DateFormat.DE
+  | DateFormat.ZH
+  | DateFormat.PT;
 
 /**
  * Color Mode

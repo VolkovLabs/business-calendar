@@ -1,8 +1,8 @@
 import { config } from '@grafana/runtime';
 
 import { DEFAULT_LANGUAGE } from '../constants';
-import { Language } from '../types';
-import { getUserLanguage } from './locale';
+import { DateFormat } from '../types';
+import { getLanguage, getUserLanguage } from './locale';
 
 /**
  * Mock User Language
@@ -22,23 +22,23 @@ describe('Locale Utils', () => {
     it.each([
       {
         locale: 'en-Any',
-        expectedLanguage: Language.EN,
+        expectedLanguage: DateFormat.EN,
       },
       {
         locale: 'es-Any',
-        expectedLanguage: Language.ES,
+        expectedLanguage: DateFormat.ES,
       },
       {
         locale: 'fr-Any',
-        expectedLanguage: Language.FR,
+        expectedLanguage: DateFormat.FR,
       },
       {
         locale: 'de-Any',
-        expectedLanguage: Language.DE,
+        expectedLanguage: DateFormat.DE,
       },
       {
         locale: 'zh-Any',
-        expectedLanguage: Language.ZH,
+        expectedLanguage: DateFormat.ZH,
       },
     ])('Should return user lang $expectedLanguage for $locale', ({ locale, expectedLanguage }) => {
       config.bootData.user.language = locale;
@@ -48,6 +48,21 @@ describe('Locale Utils', () => {
     it('Should return fallback lang', () => {
       config.bootData.user.language = '';
       expect(getUserLanguage()).toEqual(DEFAULT_LANGUAGE);
+    });
+  });
+
+  describe('getLanguage', () => {
+    it('Should take language from dateFormat', () => {
+      expect(getLanguage(DateFormat.EN_24H)).toEqual(DateFormat.EN);
+      expect(getLanguage(DateFormat.FR)).toEqual(DateFormat.FR);
+    });
+
+    it('Should take language from user preferences', () => {
+      config.bootData.user.language = 'de-Any';
+
+      expect(getLanguage()).toEqual(DateFormat.DE);
+      expect(getLanguage(DateFormat.INHERIT)).toEqual(DateFormat.DE);
+      expect(getLanguage(DateFormat.ISO)).toEqual(DateFormat.DE);
     });
   });
 });

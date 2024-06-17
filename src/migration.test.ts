@@ -48,4 +48,29 @@ describe('Migration', () => {
 
     expect(migratedOptions).toEqual(panel.options);
   });
+
+  it('Should return descriptionField as array', () => {
+    const panel = {
+      options: {
+        someOption: 'value',
+        descriptionField: 'description',
+      },
+    } as any;
+
+    const migratedOptions = getMigratedOptions(panel);
+
+    expect(migratedOptions.descriptionField).toEqual(['description']);
+  });
+
+  it('Should not return descriptionField as array if not specified', () => {
+    const panel = {
+      options: {
+        someOption: 'value',
+      },
+    } as any;
+
+    const migratedOptions = getMigratedOptions(panel);
+
+    expect(migratedOptions).not.toHaveProperty('descriptionField');
+  });
 });

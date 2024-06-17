@@ -53,11 +53,11 @@ export const TEST_IDS = {
   },
   eventDetails: {
     root: 'data-testid event-details',
-    description: 'data-testid event-description',
+    description: (index: number) => `data-testid event-details description-${index}`,
     titleButton: 'event-details title-button',
     titleText: 'data-testid event-details title-text',
     link: 'event-details link',
-    preformatted: 'data-testid event-details preformatted',
+    preformatted: (index: number) => `data-testid event-details preformatted-${index}`,
   },
   multiFieldEditor: {
     select: 'multi-field-editor select',

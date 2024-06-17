@@ -465,7 +465,7 @@ describe('Big Calendar', () => {
       text: 'hello',
       start: dayjs(getSafeDate()),
       end: undefined,
-      description: 'Description',
+      description: ['Description'],
       labels: ['111', '222'],
       color: '#99999',
       location: 'Room',
@@ -484,7 +484,7 @@ describe('Big Calendar', () => {
     /**
      * Event Details
      */
-    expect(eventDetailsSelectors.description(true)).not.toBeInTheDocument();
+    expect(eventDetailsSelectors.description(true, 0)).not.toBeInTheDocument();
   });
 
   it('Should show location with custom label', async () => {
@@ -498,7 +498,7 @@ describe('Big Calendar', () => {
       text: 'hello',
       start: dayjs(getSafeDate()),
       end: undefined,
-      description: 'Description',
+      description: ['Description'],
       labels: ['111', '222'],
       color: '#99999',
       location: 'Room',
@@ -651,7 +651,7 @@ describe('Big Calendar', () => {
       text: 'hello',
       start: dayjs(getSafeDate()),
       end: undefined,
-      description: 'Description',
+      description: ['Description'],
       labels: ['111', '222'],
       color: '#99999',
       location: 'Room',
@@ -679,8 +679,53 @@ describe('Big Calendar', () => {
     /**
      * Event Details
      */
-    expect(eventDetailsSelectors.description()).toBeInTheDocument();
-    expect(eventDetailsSelectors.description()).toHaveTextContent(`Description`);
+    expect(eventDetailsSelectors.description(true, 0)).toBeInTheDocument();
+    expect(eventDetailsSelectors.description(true, 0)).toHaveTextContent(`Description`);
+  });
+
+  it('Should show list of descriptions', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      description: ['Description 1', 'Description 2'],
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+    };
+
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [EventField.DESCRIPTION],
+        },
+      })
+    );
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.description(false, 0)).toBeInTheDocument();
+    expect(eventDetailsSelectors.description(false, 0)).toHaveTextContent(`Description 1`);
+    expect(eventDetailsSelectors.description(false, 1)).toBeInTheDocument();
+    expect(eventDetailsSelectors.description(false, 1)).toHaveTextContent(`Description 2`);
   });
 
   it('Should show <pre> tag', async () => {
@@ -694,7 +739,7 @@ describe('Big Calendar', () => {
       text: 'hello',
       start: dayjs(getSafeDate()),
       end: undefined,
-      description: 'Description',
+      description: ['Description'],
       labels: ['111', '222'],
       color: '#99999',
       location: 'Room',
@@ -724,8 +769,56 @@ describe('Big Calendar', () => {
      * Event Details
      */
     expect(eventDetailsSelectors.root()).toBeInTheDocument();
-    expect(eventDetailsSelectors.preformatted()).toBeInTheDocument();
-    expect(eventDetailsSelectors.preformatted()).toHaveTextContent(`Description`);
+    expect(eventDetailsSelectors.preformatted(false, 0)).toBeInTheDocument();
+    expect(eventDetailsSelectors.preformatted(false, 0)).toHaveTextContent(`Description`);
+  });
+
+  it('Should show list of <pre> tag`s', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: undefined,
+      description: ['Description 1', 'Description 2'],
+      labels: ['111', '222'],
+      color: '#99999',
+      location: 'Room',
+    };
+
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [EventField.DESCRIPTION],
+          preformattedDescription: true,
+        },
+      })
+    );
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+
+    /**
+     * Event Details
+     */
+    expect(eventDetailsSelectors.root()).toBeInTheDocument();
+    expect(eventDetailsSelectors.preformatted(false, 0)).toBeInTheDocument();
+    expect(eventDetailsSelectors.preformatted(false, 0)).toHaveTextContent(`Description 1`);
+
+    expect(eventDetailsSelectors.preformatted(false, 1)).toBeInTheDocument();
+    expect(eventDetailsSelectors.preformatted(false, 1)).toHaveTextContent(`Description 2`);
   });
 
   it('Should keep refresh on time range change', () => {

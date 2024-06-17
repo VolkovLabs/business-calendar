@@ -48,7 +48,7 @@ export const useCalendarEvents = (
           text: frame.text?.display
             ? (formattedValueToString(frame.text.display(frame.text?.values[i])) as string)
             : frame.text?.values[i],
-          description: frame.description?.values[i],
+          description: frame.description?.map((field) => field.values[i]).filter((label) => label),
           start: frame.start?.values[i],
           end: frame.end?.values[i],
           labels: frame.labels?.map((field) => field.values[i]).filter((label) => label),

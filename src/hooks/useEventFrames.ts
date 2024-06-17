@@ -14,14 +14,14 @@ import { toTimeField } from '../utils';
  */
 export const useEventFrames = (dataFrames: DataFrame[], options: CalendarOptions, timeZone: TimeZone) => {
   const theme = useTheme2();
-
+  console.log('console >>> dataFrames', dataFrames);
   return useMemo(
     () =>
       dataFrames.map((frame) => ({
         text: options.textField
           ? frame.fields.find((f) => f.name === options.textField)
           : frame.fields.find((f) => f.type === FieldType.string),
-        description: frame.fields.find((f) => f.name === options.descriptionField),
+        description: frame.fields.filter((f) => options.descriptionField?.includes(f.name)),
         start: toTimeField({
           field: options.timeField
             ? frame.fields.find((f) => f.name === options.timeField)

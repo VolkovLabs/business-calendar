@@ -14,7 +14,7 @@ import { toTimeField } from '../utils';
  */
 export const useEventFrames = (dataFrames: DataFrame[], options: CalendarOptions, timeZone: TimeZone) => {
   const theme = useTheme2();
-  console.log('console >>> dataFrames', dataFrames);
+
   return useMemo(
     () =>
       dataFrames.map((frame) => ({

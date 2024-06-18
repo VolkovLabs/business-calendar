@@ -63,7 +63,9 @@ export const useCalendarEvents = (
             description,
             labels,
             start: dayjs(start).add(minutesOffset, 'minutes'),
-            color: colorFn?.(color).color ?? colors[Math.floor(idx % colors.length)],
+            color:
+              (options.colors === ColorMode.THRESHOLDS && colorFn?.(color).color) ||
+              colors[Math.floor(idx % colors.length)],
             links,
             end: frame.end ? (end ? dayjs(end).add(minutesOffset, 'minutes') : endOfRangeWeek) : undefined,
             location,

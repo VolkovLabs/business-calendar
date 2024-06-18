@@ -137,7 +137,8 @@
         "label": "Colores",
         "options": {
           "event": "Evento",
-          "frame": "Marco"
+          "frame": "Marco",
+          "thresholds": "Umbrales"
         }
       },
       "dateFormat": {

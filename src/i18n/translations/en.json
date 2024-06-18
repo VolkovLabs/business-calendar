@@ -137,7 +137,8 @@
         "label": "Colors",
         "options": {
           "event": "Event",
-          "frame": "Frame"
+          "frame": "Frame",
+          "thresholds": "Thresholds"
         }
       },
       "dateFormat": {

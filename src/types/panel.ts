@@ -29,6 +29,7 @@ export type SupportedLanguage =
 export const enum ColorMode {
   FRAME = 'frame',
   EVENT = 'event',
+  THRESHOLDS = 'thresholds',
 }
 
 /**

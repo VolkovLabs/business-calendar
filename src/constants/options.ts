@@ -14,8 +14,9 @@ export const LINK_OPTIONS = (t: TFunction) => [
  * Color Options
  */
 export const COLOR_OPTIONS = (t: TFunction) => [
-  { value: ColorMode.FRAME, label: t('panelOptions.layout.colors.options.frame') },
+  { value: ColorMode.FRAME, label: t('panelOptions.layout.colors.options.frame'), icon: 'database' },
   { value: ColorMode.EVENT, label: t('panelOptions.layout.colors.options.event'), icon: 'calendar-alt' },
+  { value: ColorMode.THRESHOLDS, label: t('panelOptions.layout.colors.options.thresholds'), icon: 'circle-mono' },
 ];
 
 /**

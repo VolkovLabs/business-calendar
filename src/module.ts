@@ -21,7 +21,7 @@ import {
   TIME_RANGE_TYPE_OPTIONS,
 } from './constants';
 import { getMigratedOptions } from './migration';
-import { CalendarOptions, TimeRangeType } from './types';
+import { CalendarOptions, ColorMode, TimeRangeType } from './types';
 import { getLanguage } from './utils';
 
 /**
@@ -273,6 +273,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           filter: (f: Field) => [FieldType.string, FieldType.number].includes(f.type),
         },
+        showIf: (config) => config.colors === ColorMode.THRESHOLDS,
       });
 
     /**

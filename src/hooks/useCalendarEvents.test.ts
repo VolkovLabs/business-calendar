@@ -2,6 +2,7 @@ import { dateTime, FieldType, getLocaleData } from '@grafana/data';
 import { renderHook } from '@testing-library/react';
 import dayjs from 'dayjs';
 
+import { ColorMode } from '../types';
 import { useCalendarEvents } from './useCalendarEvents';
 
 /**
@@ -50,7 +51,7 @@ describe('useCalendarEvents', () => {
       },
     ];
     const { result } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, [], defaultTimeRange, 'browser')
     );
 
     expect(result.current).toEqual(
@@ -85,7 +86,7 @@ describe('useCalendarEvents', () => {
       },
     ];
     const { result } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, [], defaultTimeRange, 'browser')
     );
 
     expect(result.current).toEqual(
@@ -124,7 +125,7 @@ describe('useCalendarEvents', () => {
      * UTC-7:00
      */
     const { result: result1 } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'America/Phoenix')
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, [], defaultTimeRange, 'America/Phoenix')
     );
 
     expect(result1.current).toEqual(
@@ -141,7 +142,7 @@ describe('useCalendarEvents', () => {
      * UTC+10:00
      */
     const { result: result2 } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'Australia/Brisbane')
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, [], defaultTimeRange, 'Australia/Brisbane')
     );
 
     expect(result2.current).toEqual(
@@ -158,7 +159,7 @@ describe('useCalendarEvents', () => {
      * UTC
      */
     const { result: result3 } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'utc')
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, [], defaultTimeRange, 'utc')
     );
 
     expect(result3.current).toEqual(
@@ -194,7 +195,7 @@ describe('useCalendarEvents', () => {
       },
     ];
     const { result } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, [], defaultTimeRange, 'browser')
     );
 
     expect(result.current).toEqual(
@@ -219,7 +220,7 @@ describe('useCalendarEvents', () => {
       },
     ];
     const { result } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, [], defaultTimeRange, 'browser')
     );
 
     expect(result.current).toHaveLength(0);
@@ -250,13 +251,102 @@ describe('useCalendarEvents', () => {
       },
     ];
     const { result } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, [], defaultTimeRange, 'browser')
     );
 
     expect(result.current).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           end: dayjs(getSafeDate()),
+        }),
+      ])
+    );
+  });
+
+  it('Should return event with override color if thresholds specified', () => {
+    const frames = [
+      {
+        text: {
+          type: FieldType.string,
+          name: 'text',
+          values: ['111'],
+          getLinks: () => null,
+          display: () => ({ text: 'displayed' }),
+        },
+        start: {
+          type: FieldType.string,
+          name: 'start',
+          values: [getSafeDate()],
+        },
+        end: {
+          type: FieldType.string,
+          name: 'end',
+          values: [getSafeDate()],
+        },
+        color: {
+          type: FieldType.number,
+          name: 'color',
+          values: ['50'],
+          getLinks: () => null,
+          display: () => ({ color: '#FF7383' }),
+        },
+      },
+    ];
+    const { result } = renderHook(() =>
+      useCalendarEvents(
+        frames as any,
+        { colors: ColorMode.THRESHOLDS } as any,
+        ['#000000', '#ffffff'],
+        defaultTimeRange,
+        'browser'
+      )
+    );
+    expect(result.current).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          color: frames[0].color.display().color,
+        }),
+      ])
+    );
+  });
+
+  it('Should return event with color if thresholds is not specified', () => {
+    const colors = ['#000000', '#ffffff'];
+    const frames = [
+      {
+        text: {
+          type: FieldType.string,
+          name: 'text',
+          values: ['111'],
+          getLinks: () => null,
+          display: () => ({ text: 'displayed' }),
+        },
+        start: {
+          type: FieldType.string,
+          name: 'start',
+          values: [getSafeDate()],
+        },
+        end: {
+          type: FieldType.string,
+          name: 'end',
+          values: [getSafeDate()],
+        },
+        color: {
+          type: FieldType.number,
+          name: 'color',
+          values: ['50'],
+          getLinks: () => null,
+          display: () => ({ color: '#FF7383' }),
+        },
+      },
+    ];
+    const { result } = renderHook(() =>
+      useCalendarEvents(frames as any, { colors: ColorMode.FRAME } as any, colors, defaultTimeRange, 'browser')
+    );
+    expect(result.current).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          color: colors[0],
         }),
       ])
     );

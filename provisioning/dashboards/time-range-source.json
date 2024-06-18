@@ -62,7 +62,14 @@
         "colors": "frame",
         "dateFormat": "inherit",
         "defaultView": "week",
-        "displayFields": ["description", "labels", "links", "location", "text", "time"],
+        "displayFields": [
+          "description",
+          "labels",
+          "links",
+          "location",
+          "text",
+          "time"
+        ],
         "locationLabel": "",
         "preformattedDescription": false,
         "quickLinks": false,
@@ -71,9 +78,12 @@
           "minutes": 0
         },
         "timeRangeType": "default",
-        "views": ["day", "week"]
+        "views": [
+          "day",
+          "week"
+        ]
       },
-      "pluginVersion": "3.1.0",
+      "pluginVersion": "3.2.0",
       "targets": [
         {
           "datasource": {
@@ -127,7 +137,14 @@
         "colors": "frame",
         "dateFormat": "inherit",
         "defaultView": "week",
-        "displayFields": ["description", "labels", "links", "location", "text", "time"],
+        "displayFields": [
+          "description",
+          "labels",
+          "links",
+          "location",
+          "text",
+          "time"
+        ],
         "endTimeVariable": "to",
         "locationLabel": "",
         "preformattedDescription": false,
@@ -138,9 +155,12 @@
         },
         "startTimeVariable": "from",
         "timeRangeType": "variable",
-        "views": ["day", "week"]
+        "views": [
+          "day",
+          "week"
+        ]
       },
-      "pluginVersion": "3.1.0",
+      "pluginVersion": "3.2.0",
       "title": "From Variable",
       "type": "marcusolsson-calendar-panel"
     },
@@ -177,64 +197,6 @@
         "x": 0,
         "y": 16
       },
-      "id": 4,
-      "options": {
-        "annotations": false,
-        "annotationsLimit": 100,
-        "annotationsType": "",
-        "colors": "frame",
-        "dateFormat": "inherit",
-        "defaultView": "week",
-        "displayFields": ["description", "labels", "links", "location", "text", "time"],
-        "endTimeVariable": "dynamicTo",
-        "locationLabel": "",
-        "preformattedDescription": false,
-        "quickLinks": false,
-        "scrollToTime": {
-          "hours": 0,
-          "minutes": 0
-        },
-        "startTimeVariable": "from",
-        "timeRangeType": "variable",
-        "views": ["day", "week"]
-      },
-      "pluginVersion": "3.2.0",
-      "title": "From Dynamic Variable",
-      "type": "marcusolsson-calendar-panel"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-static-datasource",
-        "uid": "U0HP2Rv4z"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 24
-      },
       "id": 3,
       "options": {
         "annotations": false,
@@ -243,7 +205,14 @@
         "colors": "frame",
         "dateFormat": "inherit",
         "defaultView": "week",
-        "displayFields": ["description", "labels", "links", "location", "text", "time"],
+        "displayFields": [
+          "description",
+          "labels",
+          "links",
+          "location",
+          "text",
+          "time"
+        ],
         "endTimeVariable": "to",
         "locationLabel": "",
         "preformattedDescription": false,
@@ -255,23 +224,26 @@
         "startTimeRange": "2024-05-19T21:00:00.000Z",
         "startTimeVariable": "from",
         "timeRangeType": "manual",
-        "views": ["day", "week"]
+        "views": [
+          "day",
+          "week"
+        ]
       },
-      "pluginVersion": "3.1.0",
+      "pluginVersion": "3.2.0",
       "title": "From Manual",
       "type": "marcusolsson-calendar-panel"
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "2022-03-10T00:00:00.000Z",
-          "value": "2022-03-10T00:00:00.000Z"
+          "selected": true,
+          "text": "2022-02-10T00:00:00.000Z",
+          "value": "2022-02-10T00:00:00.000Z"
         },
         "hide": 0,
         "includeAll": false,
@@ -280,12 +252,12 @@
         "name": "from",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "2022-02-10T00:00:00.000Z",
             "value": "2022-02-10T00:00:00.000Z"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "2022-03-10T00:00:00.000Z",
             "value": "2022-03-10T00:00:00.000Z"
           },
@@ -303,41 +275,8 @@
       {
         "current": {
           "selected": false,
-          "text": "2022-03-15T00:00:00.000Z",
-          "value": "2022-03-15T00:00:00.000Z"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": "To",
-        "multi": false,
-        "name": "to",
-        "options": [
-          {
-            "selected": false,
-            "text": "2022-06-15T00:00:00.000Z",
-            "value": "2022-06-15T00:00:00.000Z"
-          },
-          {
-            "selected": false,
-            "text": "2022-06-16T00:00:00.000Z",
-            "value": "2022-06-16T00:00:00.000Z"
-          },
-          {
-            "selected": false,
-            "text": "2022-06-17T00:00:00.000Z",
-            "value": "2022-06-17T00:00:00.000Z"
-          }
-        ],
-        "query": "2022-02-15T00:00:00.000Z,\n2022-03-15T00:00:00.000Z,\n2022-04-15T00:00:00.000Z",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "2022-03-17T00:00:00.000Z",
-          "value": "2022-03-17T00:00:00.000Z"
+          "text": "2022-02-17T00:00:00.000Z",
+          "value": "2022-02-17T00:00:00.000Z"
         },
         "datasource": {
           "type": "marcusolsson-static-datasource",
@@ -346,9 +285,9 @@
         "definition": "",
         "hide": 0,
         "includeAll": false,
-        "label": "Dynamic To",
+        "label": "To",
         "multi": false,
-        "name": "dynamicTo",
+        "name": "to",
         "options": [],
         "query": {
           "frame": {
@@ -384,6 +323,6 @@
   "timezone": "",
   "title": "Time Range Source",
   "uid": "b083062d-f04a-48a6-9e01-78e4173bb13a",
-  "version": 10,
+  "version": 3,
   "weekStart": ""
 }

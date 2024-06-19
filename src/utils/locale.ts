@@ -19,6 +19,7 @@ export const getUserLanguage = (fallback = DEFAULT_LANGUAGE): SupportedLanguage 
     case DateFormat.ES:
     case DateFormat.FR:
     case DateFormat.DE:
+    case DateFormat.PT:
     case DateFormat.ZH: {
       return lang;
     }

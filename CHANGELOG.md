@@ -4,9 +4,10 @@
 
 ### Features / Enhancements
 
-- Update variables with static datasource for time range source dashboard (#205)
-- Add multiple description fields (#206)
-- Add Threshold option for Colors (#208)
+- Updated variables with static datasource for time range source dashboard (#205)
+- Added multiple description fields (#206)
+- Added Threshold option for Colors (#208)
+- Added Portuguese language in Grafana 11 (#209)
 
 ## 3.2.0 (2024-06-11)
 

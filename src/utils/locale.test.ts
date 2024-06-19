@@ -40,6 +40,10 @@ describe('Locale Utils', () => {
         locale: 'zh-Any',
         expectedLanguage: DateFormat.ZH,
       },
+      {
+        locale: 'pt-Any',
+        expectedLanguage: DateFormat.PT,
+      },
     ])('Should return user lang $expectedLanguage for $locale', ({ locale, expectedLanguage }) => {
       config.bootData.user.language = locale;
       expect(getUserLanguage()).toEqual(expectedLanguage);

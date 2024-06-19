@@ -56,5 +56,12 @@ export const getMigratedOptions = (panel: PanelModel<OutdatedPanelOptions>): Cal
     delete options.calendarType;
   }
 
+  /**
+   * Description fields transform to array
+   */
+  if (options.descriptionField && !Array.isArray(options.descriptionField)) {
+    options.descriptionField = [options.descriptionField];
+  }
+
   return options as CalendarOptions;
 };

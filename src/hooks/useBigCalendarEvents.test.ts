@@ -28,7 +28,7 @@ describe('useBigCalendarEvents', () => {
     end: dayjs(getSafeDate()),
     labels: [],
     color: '#666',
-    description: 'description',
+    description: ['description'],
   };
   const event3: CalendarEvent = {
     text: 'text',

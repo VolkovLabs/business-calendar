@@ -34,9 +34,9 @@ export interface CalendarEvent {
   /**
    * Description
    *
-   * @type {string}
+   * @type {string[]}
    */
-  description?: string;
+  description?: string[];
 
   /**
    * Labels

@@ -227,7 +227,7 @@ describe('useAnnotationEvents', () => {
             color: firstAnnotation.color,
             start: dayjs(firstAnnotation.time),
             end: dayjs(firstAnnotation.timeEnd),
-            description: '',
+            description: [],
             open: false,
           }),
           expect.objectContaining({
@@ -236,7 +236,7 @@ describe('useAnnotationEvents', () => {
             color: secondAnnotation.color,
             start: dayjs(secondAnnotation.time),
             end: dayjs(secondAnnotation.timeEnd),
-            description: '',
+            description: [],
             open: false,
           }),
         ])
@@ -333,7 +333,7 @@ describe('useAnnotationEvents', () => {
             text: firstAnnotation.title,
             labels: firstAnnotation.tags,
             color: firstAnnotation.color,
-            description: firstAnnotation.text,
+            description: [firstAnnotation.text],
             start: dayjs(firstAnnotation.time),
             end: dayjs(firstAnnotation.timeEnd),
             open: false,
@@ -341,7 +341,7 @@ describe('useAnnotationEvents', () => {
           expect.objectContaining({
             text: secondAnnotation.title,
             labels: secondAnnotation.tags,
-            description: secondAnnotation.text,
+            description: [secondAnnotation.text],
             color: secondAnnotation.color,
             start: dayjs(secondAnnotation.time),
             end: dayjs(secondAnnotation.timeEnd),

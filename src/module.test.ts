@@ -1,5 +1,5 @@
 import { Field, FieldType, PanelPlugin } from '@grafana/data';
-import { CalendarOptions, TimeRangeType } from 'types';
+import { CalendarOptions, ColorMode, TimeRangeType } from 'types';
 
 import { plugin } from './module';
 
@@ -211,6 +211,17 @@ describe('plugin', () => {
           'descriptionField',
         ])
       );
+    });
+
+    it('Should show colorField if thresholds is selected', () => {
+      const shownOptionsPaths: string[] = [];
+
+      builder.addFieldNamePicker.mockImplementation(
+        addInputImplementation({ colors: ColorMode.THRESHOLDS }, shownOptionsPaths)
+      );
+      plugin['optionsSupplier'](builder, context);
+
+      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['colorField']));
     });
 
     it('Should show preformattedDescription if quickLinks is false', () => {

@@ -1,11 +1,12 @@
 # Changelog
 
-## 3.3.0 (IN PROGRESS)
+## 3.3.0 (2024-06-19)
 
 ### Features / Enhancements
 
 - Update variables with static datasource for time range source dashboard (#205)
 - Add multiple description fields (#206)
+- Add Threshold option for Colors (#208)
 
 ## 3.2.0 (2024-06-11)
 

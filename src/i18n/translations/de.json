@@ -137,7 +137,8 @@
         "label": "Farben",
         "options": {
           "event": "Ereignis",
-          "frame": "Rahmen"
+          "frame": "Rahmen",
+          "thresholds": "Schwellenwerte"
         }
       },
       "dateFormat": {

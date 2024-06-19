@@ -137,7 +137,8 @@
         "label": "颜色",
         "options": {
           "event": "事件",
-          "frame": "框架"
+          "frame": "框架",
+          "thresholds": "阈值"
         }
       },
       "dateFormat": {

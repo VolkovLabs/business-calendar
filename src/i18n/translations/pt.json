@@ -137,7 +137,8 @@
         "label": "Cores",
         "options": {
           "event": "Evento",
-          "frame": "Quadro"
+          "frame": "Quadro",
+          "thresholds": "Limiares"
         }
       },
       "dateFormat": {

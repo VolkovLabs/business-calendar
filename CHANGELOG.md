@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Update variables with static datasource for time range source dashboard (#205)
+
 ## 3.2.0 (2024-06-11)
 
 ### Features / Enhancements

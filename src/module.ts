@@ -216,14 +216,15 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           noFieldsMessage: t('panelOptions.data.textField.noFieldsMessage'),
         },
       })
-      .addFieldNamePicker({
+      .addCustomEditor({
+        id: 'descriptionField',
         path: 'descriptionField',
         name: t('panelOptions.data.descriptionField.label'),
         description: t('panelOptions.data.descriptionField.description'),
+        editor: MultiFieldEditor,
         category: [t('panelOptions.data.label')],
         settings: {
-          filter: (f: Field) => f.type === FieldType.string,
-          noFieldsMessage: t('panelOptions.data.descriptionField.noFieldsMessage'),
+          filterByType: [FieldType.string],
         },
       })
       .addFieldNamePicker({

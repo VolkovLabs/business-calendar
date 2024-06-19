@@ -118,22 +118,6 @@ describe('plugin', () => {
       expect(shownFields).toEqual([{ name: 'string', type: FieldType.string }]);
     });
 
-    it('Should return only string fields for descriptionField', () => {
-      const fields: TestField[] = [
-        { name: 'string', type: FieldType.string },
-        { name: 'number', type: FieldType.number },
-      ];
-      const shownFields: TestField[] = [];
-
-      builder.addFieldNamePicker.mockImplementation(
-        addFieldNameImplementation('descriptionField', fields, shownFields)
-      );
-
-      plugin['optionsSupplier'](builder, context);
-
-      expect(shownFields).toEqual([{ name: 'string', type: FieldType.string }]);
-    });
-
     it('Should return correct fields for timeField', () => {
       const fields: TestField[] = [
         { name: 'string', type: FieldType.string },
@@ -218,7 +202,14 @@ describe('plugin', () => {
       plugin['optionsSupplier'](builder, context);
 
       expect(shownOptionsPaths).toEqual(
-        expect.arrayContaining(['startTimeRange', 'endTimeRange', 'defaultView', 'scrollToTime', 'labelFields'])
+        expect.arrayContaining([
+          'startTimeRange',
+          'endTimeRange',
+          'defaultView',
+          'scrollToTime',
+          'labelFields',
+          'descriptionField',
+        ])
       );
     });
 
@@ -231,6 +222,15 @@ describe('plugin', () => {
       plugin['optionsSupplier'](builder, context);
 
       expect(shownOptionsPaths).toEqual(expect.arrayContaining(['colorField']));
+    });
+
+    it('Should show preformattedDescription if quickLinks is false', () => {
+      const shownOptionsPaths: string[] = [];
+
+      builder.addRadio.mockImplementation(addInputImplementation({ quickLinks: false }, shownOptionsPaths));
+      plugin['optionsSupplier'](builder, context);
+
+      expect(shownOptionsPaths).toEqual(expect.arrayContaining(['preformattedDescription']));
     });
   });
 });

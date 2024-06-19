@@ -133,7 +133,7 @@ export const useAnnotationEvents = (timeRange: TimeRange, options: CalendarOptio
       end: annotation.timeEnd ? dayjs(annotation.timeEnd) : undefined,
       open: false,
       labels: annotation.tags || [],
-      description: annotation.text ?? '',
+      description: annotation.text ? [annotation.text] : [],
       color: annotation.color || '',
     }));
   }, [apiAnnotations, dashboardAnnotations]);

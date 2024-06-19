@@ -80,5 +80,5 @@
     "test:e2e": "npx playwright test",
     "upgrade": "npm upgrade --save"
   },
-  "version": "3.2.0"
+  "version": "3.3.0"
 }

@@ -83,9 +83,9 @@ export interface CalendarOptions {
   /**
    * Description
    *
-   * @type {string}
+   * @type {string[]}
    */
-  descriptionField?: string;
+  descriptionField?: string[];
 
   /**
    * End Time

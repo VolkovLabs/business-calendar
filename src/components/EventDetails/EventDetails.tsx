@@ -140,17 +140,27 @@ export const EventDetails: React.FC<Props> = ({
       {showFullInfo &&
         isFieldVisible(EventField.DESCRIPTION, fields) &&
         event.description &&
-        (preformattedDescription ? (
-          <pre className={styles.description} data-testid={TEST_IDS.eventDetails.preformatted}>
-            {textUtil.sanitize(event.description)}
-          </pre>
-        ) : (
-          <p
-            data-testid={TEST_IDS.eventDetails.description}
-            className={styles.description}
-            dangerouslySetInnerHTML={{ __html: textUtil.sanitize(event.description) }}
-          />
-        ))}
+        event.description.map((description, index) => {
+          if (preformattedDescription) {
+            return (
+              <pre
+                key={description}
+                className={styles.description}
+                data-testid={TEST_IDS.eventDetails.preformatted(index)}
+              >
+                {textUtil.sanitize(description)}
+              </pre>
+            );
+          }
+          return (
+            <p
+              key={description}
+              data-testid={TEST_IDS.eventDetails.description(index)}
+              className={styles.description}
+              dangerouslySetInnerHTML={{ __html: textUtil.sanitize(description) }}
+            />
+          );
+        })}
     </>
   );
 };

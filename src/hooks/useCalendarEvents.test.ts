@@ -263,6 +263,49 @@ describe('useCalendarEvents', () => {
     );
   });
 
+  it('Should return events with description', () => {
+    const frames = [
+      {
+        labels: [{ values: ['label 1'] }],
+        text: {
+          type: FieldType.string,
+          name: 'text',
+          values: ['111'],
+          getLinks: () => null,
+          display: () => ({ text: 'displayed' }),
+        },
+        start: {
+          type: FieldType.string,
+          name: 'start',
+          values: [getSafeDate()],
+        },
+        end: {
+          type: FieldType.string,
+          name: 'end',
+          values: [getSafeDate()],
+        },
+        description: [
+          {
+            type: FieldType.string,
+            name: 'description',
+            values: ['description 1'],
+          },
+        ],
+      },
+    ];
+    const { result } = renderHook(() =>
+      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
+    );
+
+    expect(result.current).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          description: ['description 1'],
+        }),
+      ])
+    );
+  });
+
   it('Should return event with override color if thresholds specified', () => {
     const frames = [
       {

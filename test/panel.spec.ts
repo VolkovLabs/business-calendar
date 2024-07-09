@@ -3,6 +3,11 @@ import { TEST_IDS } from '../src/constants';
 import { View } from '../src/types';
 
 test.describe('Volkovlabs Calendar Panel', () => {
+  test('Check grafana version', async ({ grafanaVersion }) => {
+    console.log('Grafana version: ', grafanaVersion);
+    expect(grafanaVersion).toEqual(grafanaVersion);
+  });
+
   test('Should display a Calendar', async ({ gotoDashboardPage, page, gotoPanelEditPage }) => {
     /**
      * Go To Panels dashboard panels.json

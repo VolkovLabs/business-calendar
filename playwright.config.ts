@@ -11,6 +11,7 @@ export default defineConfig({
    * Directory with tests
    */
   testDir: './test',
+
   /**
    * Run tests in files in parallel
    */

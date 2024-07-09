@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Update E2E workflow using Docker (#211)
+
 ## 3.3.0 (2024-06-19)
 
 ### Features / Enhancements

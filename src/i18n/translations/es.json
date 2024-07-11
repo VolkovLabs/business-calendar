@@ -169,6 +169,10 @@
           "workWeek": "Semana de trabajo",
           "year": "Año"
         }
+      },
+      "textSize": {
+        "label": "Tamaño del texto",
+        "description": "Establece el tamaño del texto en px."
       }
     },
     "scrollToTime": {

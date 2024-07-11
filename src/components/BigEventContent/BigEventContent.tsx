@@ -31,16 +31,21 @@ interface Props {
    * is Agenda
    */
   isAgenda?: boolean;
+
+  /**
+   * Text Size
+   */
+  textSize?: number;
 }
 
 /**
  * Big Event Content
  */
-export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = false, isAgenda = false }) => {
+export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = false, isAgenda = false, textSize }) => {
   /**
    * Styles
    */
-  const styles = useStyles2(getStyles);
+  const styles = useStyles2(getStyles, textSize);
 
   /**
    * Return view for Month

@@ -4,14 +4,21 @@ import { GrafanaTheme2 } from '@grafana/data';
 /**
  * Styles
  */
-export const getStyles = (theme: GrafanaTheme2) => {
+export const getStyles = (theme: GrafanaTheme2, textSize?: number) => {
+  /**
+   * Font Sizes
+   */
+  const dateFontSize = textSize ? `${textSize}px` : `80%`;
+  const agendaFontSize = textSize ? `${textSize}px` : `90%`;
+  const locationFontSize = textSize ? `${textSize}px` : theme.typography.bodySmall.fontSize;
+
   return {
     location: css`
-      font-size: ${theme.typography.bodySmall.fontSize};
+      font-size: ${locationFontSize};
       margin: ${theme.spacing(0.5, 0.5)};
     `,
     date: css`
-      font-size: 80%;
+      font-size: ${dateFontSize};
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -29,7 +36,7 @@ export const getStyles = (theme: GrafanaTheme2) => {
     `,
     agenda: css`
       display: flex;
-      font-size: 90%;
+      font-size: ${agendaFontSize};
       flex-direction: column;
       overflow: hidden;
       text-overflow: ellipsis;

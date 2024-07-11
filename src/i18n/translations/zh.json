@@ -169,6 +169,10 @@
           "workWeek": "工作周",
           "year": "年"
         }
+      },
+      "textSize": {
+        "label": "文字大小",
+        "description": "以 px 为单位设置文字大小。"
       }
     },
     "scrollToTime": {

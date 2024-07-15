@@ -1,11 +1,12 @@
 # Changelog
 
-## 3.4.0 (IN PROGRESS)
+## 3.4.0 (2024-07-16)
 
 ### Features / Enhancements
 
 - Updated E2E workflow using Docker (#211)
 - Added Font size configuration (#213)
+- Updated to Grafana 11.1 dependencies (#214)
 
 ## 3.3.0 (2024-06-19)
 

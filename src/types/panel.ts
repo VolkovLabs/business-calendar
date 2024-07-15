@@ -240,4 +240,11 @@ export interface CalendarOptions {
    * @type {boolean}
    */
   preformattedDescription?: boolean;
+
+  /**
+   * Text Size
+   *
+   * @type {number}
+   */
+  textSize?: number;
 }

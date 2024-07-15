@@ -152,6 +152,15 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: COLOR_OPTIONS(t),
         },
         defaultValue: DEFAULT_OPTIONS.colors,
+      })
+      .addNumberInput({
+        path: 'textSize',
+        name: t('panelOptions.layout.textSize.label'),
+        description: t('panelOptions.layout.textSize.description'),
+        category: [t('panelOptions.layout.label')],
+        settings: {
+          placeholder: 'Auto',
+        },
       });
 
     /**

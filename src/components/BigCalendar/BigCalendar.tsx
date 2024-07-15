@@ -75,23 +75,23 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     () => ({
       toolbar: BigToolbar,
       agenda: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} isAgenda />,
+        event: (props) => <BigEventContent {...props} localizer={localizer} isAgenda textSize={options.textSize} />,
       },
       day: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} />,
+        event: (props) => <BigEventContent {...props} localizer={localizer} textSize={options.textSize} />,
       },
       week: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} />,
+        event: (props) => <BigEventContent {...props} localizer={localizer} textSize={options.textSize} />,
       },
       month: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} isMonth />,
+        event: (props) => <BigEventContent {...props} localizer={localizer} isMonth textSize={options.textSize} />,
       },
       // eslint-disable-next-line @typescript-eslint/naming-convention
       work_week: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} />,
+        event: (props) => <BigEventContent {...props} localizer={localizer} textSize={options.textSize} />,
       },
     }),
-    [localizer]
+    [localizer, options.textSize]
   );
 
   /**
@@ -237,7 +237,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       <Global styles={libStyles.global} />
       <Global styles={styles.global} />
       <Calendar
-        key={height}
+        key={height + (options.textSize ?? 0)}
         dayLayoutAlgorithm="no-overlap"
         localizer={localizer}
         messages={messages}

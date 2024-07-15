@@ -33,6 +33,7 @@ describe('plugin', () => {
     addSelect: jest.fn().mockImplementation(() => builder),
     addMultiSelect: jest.fn().mockImplementation(() => builder),
     addTextInput: jest.fn().mockImplementation(() => builder),
+    addNumberInput: jest.fn().mockImplementation(() => builder),
   };
 
   /**
@@ -58,6 +59,7 @@ describe('plugin', () => {
     expect(builder.addFieldNamePicker).toHaveBeenCalled();
     expect(builder.addSliderInput).toHaveBeenCalled();
     expect(builder.addTextInput).toHaveBeenCalled();
+    expect(builder.addNumberInput).toHaveBeenCalled();
   });
 
   describe('Settings', () => {

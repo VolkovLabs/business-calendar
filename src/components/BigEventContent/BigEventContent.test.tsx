@@ -79,6 +79,23 @@ describe('Big Event Content', () => {
     expect(selectors.month()).toBeInTheDocument();
   });
 
+  it('Should render Month view with font', () => {
+    render(
+      getComponent({
+        ...defaultOptions,
+        isAgenda: true,
+        textSize: 24,
+      })
+    );
+
+    expect(screen.getByText('123')).toBeInTheDocument();
+
+    expect(selectors.month()).toBeInTheDocument();
+    expect(selectors.month()).toHaveStyle({
+      fontSize: '24px',
+    });
+  });
+
   it('Should render Agenda view', () => {
     render(
       getComponent({
@@ -89,6 +106,23 @@ describe('Big Event Content', () => {
 
     expect(screen.getByText('123')).toBeInTheDocument();
     expect(selectors.agenda()).toBeInTheDocument();
+  });
+
+  it('Should render Agenda view with font', () => {
+    render(
+      getComponent({
+        ...defaultOptions,
+        isAgenda: true,
+        textSize: 24,
+      })
+    );
+
+    expect(screen.getByText('123')).toBeInTheDocument();
+
+    expect(selectors.agenda()).toBeInTheDocument();
+    expect(selectors.agenda()).toHaveStyle({
+      fontSize: '24px',
+    });
   });
 
   it('Should render view for duration more or equal 90 minutes', () => {

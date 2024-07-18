@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Add event details in tooltip by hover (#217)
+
 ## 3.4.0 (2024-07-16)
 
 ### Features / Enhancements

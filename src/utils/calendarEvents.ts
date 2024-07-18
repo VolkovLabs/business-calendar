@@ -1,6 +1,7 @@
 import { InternalTimeZones } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
 import dayjs from 'dayjs';
+import { Event } from 'react-big-calendar';
 
 import { DEFAULT_LANGUAGE } from '../constants';
 import { CalendarEvent, EventField } from '../types';
@@ -75,3 +76,15 @@ export const displayTime = (event: CalendarEvent) => {
       }`
     : `${event.start.format('LLL')}`;
 };
+
+/**
+ * Return CalendarEvent type
+ * @param event
+ */
+export const returnCalendarEvent = (event: Event) => ({
+  text: event.title as string,
+  start: dayjs(event.start),
+  end: event.end && !event.resource?.noEndTime ? dayjs(event.end) : undefined,
+  labels: [],
+  ...(event.resource || {}),
+});

@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { TEST_IDS } from '../../constants';
 import { useBigCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
+import { returnCalendarEvent } from '../../utils';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
@@ -75,23 +76,33 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     () => ({
       toolbar: BigToolbar,
       agenda: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} isAgenda textSize={options.textSize} />,
+        event: (props) => (
+          <BigEventContent {...props} localizer={localizer} isAgenda textSize={options.textSize} options={options} />
+        ),
       },
       day: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} textSize={options.textSize} />,
+        event: (props) => (
+          <BigEventContent {...props} localizer={localizer} textSize={options.textSize} options={options} />
+        ),
       },
       week: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} textSize={options.textSize} />,
+        event: (props) => (
+          <BigEventContent {...props} localizer={localizer} textSize={options.textSize} options={options} />
+        ),
       },
       month: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} isMonth textSize={options.textSize} />,
+        event: (props) => (
+          <BigEventContent {...props} localizer={localizer} isMonth textSize={options.textSize} options={options} />
+        ),
       },
       // eslint-disable-next-line @typescript-eslint/naming-convention
       work_week: {
-        event: (props) => <BigEventContent {...props} localizer={localizer} textSize={options.textSize} />,
+        event: (props) => (
+          <BigEventContent {...props} localizer={localizer} textSize={options.textSize} options={options} />
+        ),
       },
     }),
-    [localizer, options.textSize]
+    [localizer, options]
   );
 
   /**
@@ -173,13 +184,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       /**
        * Show event details
        */
-      setActiveEvent({
-        text: event.title as string,
-        start: dayjs(event.start),
-        end: event.end && !event.resource?.noEndTime ? dayjs(event.end) : undefined,
-        labels: [],
-        ...(event.resource || {}),
-      });
+      setActiveEvent(returnCalendarEvent(event));
     },
     [options.quickLinks]
   );
@@ -231,6 +236,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
             fields={options.displayFields}
             locationLabel={options.locationLabel}
             preformattedDescription={options.preformattedDescription}
+            isForTooltip={false}
           />
         </Drawer>
       )}

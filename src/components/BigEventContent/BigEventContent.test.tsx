@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { getJestSelectors } from '@volkovlabs/jest-selectors';
 import dayjs from 'dayjs';
 import React from 'react';
 import { dayjsLocalizer } from 'react-big-calendar';
+import { EventField } from 'types';
 
 import { TEST_IDS } from '../../constants';
 import { BigEventContent } from './BigEventContent';
@@ -28,7 +29,7 @@ describe('Big Event Content', () => {
     title: '123',
     start: new Date('2020-02-02 02:00'),
     end: new Date('2020-02-02 02:30'),
-    resource: { location: 'Room' },
+    resource: { location: 'Room', labels: ['111', '222'] },
   };
 
   /**
@@ -37,6 +38,17 @@ describe('Big Event Content', () => {
   const defaultOptions = {
     event: defaultEvent,
     localizer: localizer as any,
+    options: {
+      displayFields: [
+        EventField.DESCRIPTION,
+        EventField.LABELS,
+        EventField.LINKS,
+        EventField.LOCATION,
+        EventField.TEXT,
+        EventField.TIME,
+      ],
+      locationLabel: 'Location',
+    },
   } as any;
 
   /**
@@ -79,11 +91,37 @@ describe('Big Event Content', () => {
     expect(selectors.month()).toBeInTheDocument();
   });
 
-  it('Should render Month view with font', () => {
+  it('Should render Month view and tooltip on hover', () => {
     render(
       getComponent({
         ...defaultOptions,
-        isAgenda: true,
+        isMonth: true,
+      })
+    );
+
+    /**
+     * Check event
+     */
+    expect(screen.getByText('123')).toBeInTheDocument();
+    expect(selectors.month(true)).toBeInTheDocument();
+
+    /**
+     * Hover on element
+     */
+    fireEvent.mouseEnter(selectors.month());
+
+    /**
+     * Check labels on Tooltip
+     */
+    expect(screen.getByText('111')).toBeInTheDocument();
+    expect(screen.getByText('222')).toBeInTheDocument();
+  });
+
+  it('Should render Month view with font size', () => {
+    render(
+      getComponent({
+        ...defaultOptions,
+        isMonth: true,
         textSize: 24,
       })
     );
@@ -108,7 +146,7 @@ describe('Big Event Content', () => {
     expect(selectors.agenda()).toBeInTheDocument();
   });
 
-  it('Should render Agenda view with font', () => {
+  it('Should render Agenda view with font size', () => {
     render(
       getComponent({
         ...defaultOptions,

@@ -21,26 +21,36 @@ interface Props {
 
   /**
    * Localizer
+   *
+   * @type {DateLocalizer}
    */
   localizer: DateLocalizer;
 
   /**
    * is Month
+   *
+   * @type {boolean}
    */
   isMonth?: boolean;
 
   /**
    * is Agenda
+   *
+   * @type {boolean}
    */
   isAgenda?: boolean;
 
   /**
    * Text Size
+   *
+   * @type {number}
    */
   textSize?: number;
 
   /**
    * Options
+   *
+   * @type {CalendarOptions}
    */
   options: CalendarOptions;
 }
@@ -48,26 +58,19 @@ interface Props {
 /**
  * Big Event Content
  */
-export const BigEventContent: React.FC<Props> = ({
-  event,
-  localizer,
-  isMonth = false,
-  isAgenda = false,
-  textSize,
-  options,
-}) => {
+export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = false, isAgenda = false, options }) => {
   /**
    * Styles
    */
-  const styles = useStyles2(getStyles, textSize);
+  const styles = useStyles2(getStyles, options.textSize);
 
   /**
-   * return CalendarEvent type
+   * Active Event
    */
   const activeEvent = useMemo(() => returnCalendarEvent(event), [event]);
 
   /**
-   * Return contentElement
+   * Return Content Element
    */
   const eventContentElement = useMemo(() => {
     /**

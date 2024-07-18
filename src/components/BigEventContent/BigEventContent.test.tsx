@@ -122,7 +122,7 @@ describe('Big Event Content', () => {
       getComponent({
         ...defaultOptions,
         isMonth: true,
-        textSize: 24,
+        options: { ...defaultOptions.options, textSize: 24 },
       })
     );
 
@@ -151,7 +151,7 @@ describe('Big Event Content', () => {
       getComponent({
         ...defaultOptions,
         isAgenda: true,
-        textSize: 24,
+        options: { ...defaultOptions.options, textSize: 24 },
       })
     );
 

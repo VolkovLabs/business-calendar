@@ -76,30 +76,20 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     () => ({
       toolbar: BigToolbar,
       agenda: {
-        event: (props) => (
-          <BigEventContent {...props} localizer={localizer} isAgenda textSize={options.textSize} options={options} />
-        ),
+        event: (props) => <BigEventContent {...props} localizer={localizer} isAgenda options={options} />,
       },
       day: {
-        event: (props) => (
-          <BigEventContent {...props} localizer={localizer} textSize={options.textSize} options={options} />
-        ),
+        event: (props) => <BigEventContent {...props} localizer={localizer} options={options} />,
       },
       week: {
-        event: (props) => (
-          <BigEventContent {...props} localizer={localizer} textSize={options.textSize} options={options} />
-        ),
+        event: (props) => <BigEventContent {...props} localizer={localizer} options={options} />,
       },
       month: {
-        event: (props) => (
-          <BigEventContent {...props} localizer={localizer} isMonth textSize={options.textSize} options={options} />
-        ),
+        event: (props) => <BigEventContent {...props} localizer={localizer} isMonth options={options} />,
       },
       // eslint-disable-next-line @typescript-eslint/naming-convention
       work_week: {
-        event: (props) => (
-          <BigEventContent {...props} localizer={localizer} textSize={options.textSize} options={options} />
-        ),
+        event: (props) => <BigEventContent {...props} localizer={localizer} options={options} />,
       },
     }),
     [localizer, options]

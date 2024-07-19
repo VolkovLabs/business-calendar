@@ -129,6 +129,14 @@
           "disabled": "Mostrar detalles",
           "enabled": "Enlace abierto"
         }
+      },
+      "showEventTooltip": {
+        "label": "Mostrar Tooltip",
+        "description": "Mostrar detalles del evento al pasar el ratón por encima",
+        "options": {
+          "disabled": "Ocultar Tooltip",
+          "enabled": "Mostrar Tooltip"
+        }
       }
     },
     "layout": {

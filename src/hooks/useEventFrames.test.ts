@@ -64,6 +64,7 @@ describe('useEventFrames', () => {
       timeRangeType: 'default',
       displayFields: [],
       locationLabel: '',
+      showEventTooltip: false,
     };
     const data = getDataFrame(options);
 
@@ -94,6 +95,7 @@ describe('useEventFrames', () => {
       timeRangeType: 'default',
       displayFields: [],
       locationLabel: '',
+      showEventTooltip: false,
     };
 
     const data: PanelData = {

@@ -129,6 +129,14 @@
           "disabled": "Zeige Details",
           "enabled": "Verbindung öffnen"
         }
+      },
+      "showEventTooltip": {
+        "label": "Tooltip anzeigen",
+        "description": "Ereignisdetails beim Hovern anzeigen",
+        "options": {
+          "disabled": "Tooltip ausblenden",
+          "enabled": "Tooltip anzeigen"
+        }
       }
     },
     "layout": {

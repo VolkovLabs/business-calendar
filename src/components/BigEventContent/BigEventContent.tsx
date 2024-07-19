@@ -142,7 +142,7 @@ export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = f
     );
   }, [event, isAgenda, isMonth, localizer, styles]);
 
-  return (
+  return options.showEventTooltip ? (
     <Tooltip
       theme="info-alt"
       placement="auto"
@@ -158,5 +158,7 @@ export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = f
     >
       {eventContentElement}
     </Tooltip>
+  ) : (
+    eventContentElement
   );
 };

@@ -48,6 +48,7 @@ describe('Big Event Content', () => {
         EventField.TIME,
       ],
       locationLabel: 'Location',
+      showEventTooltip: true,
     },
   } as any;
 
@@ -115,6 +116,40 @@ describe('Big Event Content', () => {
      */
     expect(screen.getByText('111')).toBeInTheDocument();
     expect(screen.getByText('222')).toBeInTheDocument();
+  });
+
+  it('Should not show tooltip if disabled via options', () => {
+    const options = {
+      ...defaultOptions,
+      options: {
+        ...defaultOptions.options,
+        showEventTooltip: false,
+      },
+    };
+
+    render(
+      getComponent({
+        ...options,
+        isMonth: true,
+      })
+    );
+
+    /**
+     * Check event
+     */
+    expect(screen.getByText('123')).toBeInTheDocument();
+    expect(selectors.month(true)).toBeInTheDocument();
+
+    /**
+     * Hover on element
+     */
+    fireEvent.mouseEnter(selectors.month());
+
+    /**
+     * Check labels on Tooltip
+     */
+    expect(screen.queryByText('111')).not.toBeInTheDocument();
+    expect(screen.queryByText('222')).not.toBeInTheDocument();
   });
 
   it('Should render Month view with font size', () => {

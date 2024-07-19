@@ -247,4 +247,11 @@ export interface CalendarOptions {
    * @type {number}
    */
   textSize?: number;
+
+  /**
+   * Show event tooltip
+   *
+   * @type {boolean}
+   */
+  showEventTooltip: boolean;
 }

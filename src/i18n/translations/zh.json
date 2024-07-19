@@ -129,6 +129,14 @@
           "disabled": "显示详细资料",
           "enabled": "打开链接"
         }
+      },
+      "showEventTooltip": {
+        "label": "顯示工具提示",
+        "description": "懸停時顯示事件詳細資訊",
+        "options": {
+          "disabled": "隱藏工具提示",
+          "enabled": "顯示工具提示"
+        }
       }
     },
     "layout": {

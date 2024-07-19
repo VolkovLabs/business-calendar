@@ -75,6 +75,7 @@ describe('Big Calendar', () => {
       hours: 0,
       minutes: 0,
     },
+    showEventTooltip: false,
   };
 
   /**
@@ -210,6 +211,7 @@ describe('Big Calendar', () => {
           timeRangeType: 'default',
           displayFields: [],
           locationLabel: '',
+          showEventTooltip: false,
         },
       })
     );
@@ -263,6 +265,7 @@ describe('Big Calendar', () => {
           timeRangeType: 'default',
           displayFields: [],
           locationLabel: '',
+          showEventTooltip: false,
         },
       })
     );
@@ -309,6 +312,7 @@ describe('Big Calendar', () => {
           timeRangeType: 'default',
           displayFields: [],
           locationLabel: '',
+          showEventTooltip: false,
         },
       })
     );

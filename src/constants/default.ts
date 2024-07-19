@@ -28,6 +28,7 @@ export const DEFAULT_OPTIONS: CalendarOptions = {
   timeRangeType: TimeRangeType.DEFAULT,
   locationLabel: '',
   preformattedDescription: false,
+  showEventTooltip: false,
   displayFields: [
     EventField.DESCRIPTION,
     EventField.LABELS,

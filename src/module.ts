@@ -16,6 +16,7 @@ import {
   DEFAULT_VIEW,
   DEFAULT_VIEWS,
   DISPLAY_FIELD_OPTIONS,
+  EVENT_TOOLTIP_OPTIONS,
   LINK_OPTIONS,
   PREFORMATTED_OPTIONS,
   TIME_RANGE_TYPE_OPTIONS,
@@ -176,6 +177,16 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: LINK_OPTIONS(t),
         },
         defaultValue: DEFAULT_OPTIONS.quickLinks,
+      })
+      .addRadio({
+        path: 'showEventTooltip',
+        name: t('panelOptions.events.showEventTooltip.label'),
+        description: t('panelOptions.events.showEventTooltip.description'),
+        category: [t('panelOptions.events.label')],
+        settings: {
+          options: EVENT_TOOLTIP_OPTIONS(t),
+        },
+        defaultValue: DEFAULT_OPTIONS.showEventTooltip,
       })
       .addMultiSelect({
         path: 'displayFields',

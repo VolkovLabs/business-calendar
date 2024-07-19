@@ -129,6 +129,14 @@
           "disabled": "Show Details",
           "enabled": "Open Link"
         }
+      },
+      "showEventTooltip": {
+        "label": "Show Tooltip",
+        "description": "Show event details on hover.",
+        "options": {
+          "disabled": "Hide Tooltip",
+          "enabled": "Show Tooltip"
+        }
       }
     },
     "layout": {

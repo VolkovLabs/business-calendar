@@ -155,7 +155,7 @@ export const EventDetails: React.FC<Props> = ({
             return (
               <pre
                 key={description}
-                className={styles.description}
+                className={isForTooltip ? styles.descriptionTooltip : styles.description}
                 data-testid={TEST_IDS.eventDetails.preformatted(index)}
               >
                 {textUtil.sanitize(description)}
@@ -166,7 +166,7 @@ export const EventDetails: React.FC<Props> = ({
             <p
               key={description}
               data-testid={TEST_IDS.eventDetails.description(index)}
-              className={styles.description}
+              className={isForTooltip ? styles.descriptionTooltip : styles.description}
               dangerouslySetInnerHTML={{ __html: textUtil.sanitize(description) }}
             />
           );

@@ -25,6 +25,8 @@ export const getStyles = (theme: GrafanaTheme2) => {
     `,
     labelsTooltip: css`
       justify-content: flex-start;
+      padding-left: ${theme.spacing(2)};
+      margin-bottom: ${theme.spacing(1)};
       li {
         max-width: 100%;
 
@@ -37,6 +39,10 @@ export const getStyles = (theme: GrafanaTheme2) => {
     description: css`
       word-break: break-all;
       padding: ${theme.spacing(1)};
+    `,
+    descriptionTooltip: css`
+      word-break: break-all;
+      margin-left: ${theme.spacing(2)};
     `,
   };
 };

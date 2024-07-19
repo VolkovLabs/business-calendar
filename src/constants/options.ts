@@ -85,3 +85,11 @@ export const PREFORMATTED_OPTIONS = (t: TFunction) => [
   { value: false, label: t('panelOptions.events.preformattedOptions.options.default'), icon: 'text-fields' },
   { value: true, label: t('panelOptions.events.preformattedOptions.options.preformatted'), icon: 'bars' },
 ];
+
+/**
+ * Event Tooltip Options
+ */
+export const EVENT_TOOLTIP_OPTIONS = (t: TFunction) => [
+  { value: true, label: t('panelOptions.events.showEventTooltip.options.enabled'), icon: 'comment-alt-message' },
+  { value: false, label: t('panelOptions.events.showEventTooltip.options.disabled') },
+];

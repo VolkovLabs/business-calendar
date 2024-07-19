@@ -129,6 +129,14 @@
           "disabled": "显示详细资料",
           "enabled": "打开链接"
         }
+      },
+      "showEventTooltip": {
+        "label": "工具提示",
+        "description": "懸停時顯示事件詳細資訊",
+        "options": {
+          "disabled": "残疾人",
+          "enabled": "启用"
+        }
       }
     },
     "layout": {

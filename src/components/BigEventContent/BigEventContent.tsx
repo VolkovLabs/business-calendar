@@ -1,10 +1,12 @@
-import { useStyles2 } from '@grafana/ui';
+import { Tooltip, useStyles2 } from '@grafana/ui';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Event } from 'react-big-calendar';
 
 import { TEST_IDS } from '../../constants';
-import { DateLocalizer } from '../../types';
+import { CalendarOptions, DateLocalizer } from '../../types';
+import { returnCalendarEvent } from '../../utils';
+import { EventDetails } from '../EventDetails';
 import { getStyles } from './BigEventContent.styles';
 /**
  * Properties
@@ -19,99 +21,145 @@ interface Props {
 
   /**
    * Localizer
+   *
+   * @type {DateLocalizer}
    */
   localizer: DateLocalizer;
 
   /**
    * is Month
+   *
+   * @type {boolean}
    */
   isMonth?: boolean;
 
   /**
    * is Agenda
+   *
+   * @type {boolean}
    */
   isAgenda?: boolean;
 
   /**
    * Text Size
+   *
+   * @type {number}
    */
   textSize?: number;
+
+  /**
+   * Options
+   *
+   * @type {CalendarOptions}
+   */
+  options: CalendarOptions;
 }
 
 /**
  * Big Event Content
  */
-export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = false, isAgenda = false, textSize }) => {
+export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = false, isAgenda = false, options }) => {
   /**
    * Styles
    */
-  const styles = useStyles2(getStyles, textSize);
+  const styles = useStyles2(getStyles, options.textSize);
 
   /**
-   * Return view for Month
+   * Active Event
    */
-  if (isMonth) {
-    return (
-      <div data-testid={TEST_IDS.eventContent.month} className={styles.date}>
-        {!event.resource.allDay && localizer.format(event.start as Date, 'LT')}
-        <span className={styles.text}>{event.title}</span>
-      </div>
-    );
-  }
+  const activeEvent = useMemo(() => returnCalendarEvent(event), [event]);
 
   /**
-   * Return view for Agenda
+   * Return Content Element
    */
-  if (isAgenda) {
-    return (
-      <div data-testid={TEST_IDS.eventContent.agenda} className={styles.agenda}>
-        <span className={styles.text}>{event.title}</span>
-        {!!event.resource?.location && <span className={styles.location}>{event.resource.location}</span>}
-      </div>
-    );
-  }
-
-  /**
-   * Calculate duration time
-   */
-  const durationInMinutes = event.resource.noEndTime ? 0 : dayjs(event.end).diff(dayjs(event.start), 'minutes');
-
-  /**
-   * Return view for duration In Minutes more or equal 90 minutes
-   */
-  if (durationInMinutes >= 90) {
-    return (
-      <div data-testid={TEST_IDS.eventContent.longDuration} className={styles.date}>
-        <span className={styles.title}>{event.title}</span>
-        <div className={styles.info}>
-          {!event.resource.allDay &&
-            `${localizer.format(event.start as Date, 'LT')} – ${localizer.format(event.end as Date, 'LT')}`}
-          {!event.resource.allDay && !!event.resource?.location && <span>{`${event.resource.location}`}</span>}
+  const eventContentElement = useMemo(() => {
+    /**
+     * Return view for Month
+     */
+    if (isMonth) {
+      return (
+        <div data-testid={TEST_IDS.eventContent.month} className={styles.date}>
+          {!event.resource.allDay && localizer.format(event.start as Date, 'LT')}
+          <span className={styles.text}>{event.title}</span>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 
-  /**
-   * Return view for duration In Minutes more or equal 45 minutes
-   */
-  if (durationInMinutes >= 45) {
-    return (
-      <div data-testid={TEST_IDS.eventContent.averageDuration} className={styles.date}>
-        <span className={styles.title}>{event.title}</span>
-        <div>
-          {localizer.format(event.start as Date, 'LT')}
-          {!!event.resource?.location && <span className={styles.location}>{`${event.resource.location}`}</span>}
+    /**
+     * Return view for Agenda
+     */
+    if (isAgenda) {
+      return (
+        <div data-testid={TEST_IDS.eventContent.agenda} className={styles.agenda}>
+          <span className={styles.text}>{event.title}</span>
+          {!!event.resource?.location && <span className={styles.location}>{event.resource.location}</span>}
         </div>
+      );
+    }
+
+    /**
+     * Calculate duration time
+     */
+    const durationInMinutes = event.resource.noEndTime ? 0 : dayjs(event.end).diff(dayjs(event.start), 'minutes');
+
+    /**
+     * Return view for duration In Minutes more or equal 90 minutes
+     */
+    if (durationInMinutes >= 90) {
+      return (
+        <div data-testid={TEST_IDS.eventContent.longDuration} className={styles.date}>
+          <span className={styles.title}>{event.title}</span>
+          <div className={styles.info}>
+            {!event.resource.allDay &&
+              `${localizer.format(event.start as Date, 'LT')} – ${localizer.format(event.end as Date, 'LT')}`}
+            {!event.resource.allDay && !!event.resource?.location && <span>{`${event.resource.location}`}</span>}
+          </div>
+        </div>
+      );
+    }
+
+    /**
+     * Return view for duration In Minutes more or equal 45 minutes
+     */
+    if (durationInMinutes >= 45) {
+      return (
+        <div data-testid={TEST_IDS.eventContent.averageDuration} className={styles.date}>
+          <span className={styles.title}>{event.title}</span>
+          <div>
+            {localizer.format(event.start as Date, 'LT')}
+            {!!event.resource?.location && <span className={styles.location}>{`${event.resource.location}`}</span>}
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={styles.date}>
+        <span className={styles.title}>{event.title}</span>
+        <span className={styles.text}>{localizer.format(event.start as Date, 'LT')}</span>
+        {!!event.resource?.location && <span className={styles.location}>{`${event.resource.location}`}</span>}
       </div>
     );
-  }
+  }, [event, isAgenda, isMonth, localizer, styles]);
 
-  return (
-    <div className={styles.date}>
-      <span className={styles.title}>{event.title}</span>
-      <span className={styles.text}>{localizer.format(event.start as Date, 'LT')}</span>
-      {!!event.resource?.location && <span className={styles.location}>{`${event.resource.location}`}</span>}
-    </div>
+  return options.showEventTooltip ? (
+    <Tooltip
+      theme="info-alt"
+      placement="auto"
+      interactive
+      content={
+        <EventDetails
+          event={activeEvent}
+          fields={options.displayFields}
+          locationLabel={options.locationLabel}
+          preformattedDescription={options.preformattedDescription}
+          isForTooltip
+        />
+      }
+    >
+      {eventContentElement}
+    </Tooltip>
+  ) : (
+    eventContentElement
   );
 };

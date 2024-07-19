@@ -47,6 +47,13 @@ interface Props {
    * @type {boolean}
    */
   preformattedDescription?: boolean;
+
+  /**
+   * is Event Details use for tooltip displaying
+   *
+   * @type {boolean}
+   */
+  isForTooltip: boolean;
 }
 
 /**
@@ -59,6 +66,7 @@ export const EventDetails: React.FC<Props> = ({
   locationLabel,
   fields,
   preformattedDescription,
+  isForTooltip,
 }) => {
   /**
    * Styles
@@ -109,7 +117,7 @@ export const EventDetails: React.FC<Props> = ({
           </div>
         </Card.Heading>
         <Card.Meta>{meta}</Card.Meta>
-        {isFieldVisible(EventField.LABELS, fields) && (
+        {isFieldVisible(EventField.LABELS, fields) && !isForTooltip && (
           <Card.Tags>
             <TagList tags={tags} className={styles.labels} />
           </Card.Tags>
@@ -136,7 +144,9 @@ export const EventDetails: React.FC<Props> = ({
           </Card.Actions>
         )}
       </Card>
-
+      {isFieldVisible(EventField.LABELS, fields) && isForTooltip && (
+        <TagList tags={tags} className={styles.labelsTooltip} />
+      )}
       {showFullInfo &&
         isFieldVisible(EventField.DESCRIPTION, fields) &&
         event.description &&
@@ -145,7 +155,7 @@ export const EventDetails: React.FC<Props> = ({
             return (
               <pre
                 key={description}
-                className={styles.description}
+                className={isForTooltip ? styles.descriptionTooltip : styles.description}
                 data-testid={TEST_IDS.eventDetails.preformatted(index)}
               >
                 {textUtil.sanitize(description)}
@@ -156,7 +166,7 @@ export const EventDetails: React.FC<Props> = ({
             <p
               key={description}
               data-testid={TEST_IDS.eventDetails.description(index)}
-              className={styles.description}
+              className={isForTooltip ? styles.descriptionTooltip : styles.description}
               dangerouslySetInnerHTML={{ __html: textUtil.sanitize(description) }}
             />
           );

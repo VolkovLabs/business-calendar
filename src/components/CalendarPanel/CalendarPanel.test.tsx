@@ -73,6 +73,7 @@ describe('Panel', () => {
       hours: 0,
       minutes: 0,
     },
+    showEventTooltip: false,
   };
 
   /**

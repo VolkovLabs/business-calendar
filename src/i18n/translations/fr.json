@@ -129,6 +129,14 @@
           "disabled": "Afficher les détails",
           "enabled": "Ouvrir le lien"
         }
+      },
+      "showEventTooltip": {
+        "label": "Info-bulle",
+        "description": "Afficher les détails de l'événement au survol",
+        "options": {
+          "disabled": "Désactivé",
+          "enabled": "Activé"
+        }
       }
     },
     "layout": {

@@ -146,6 +146,7 @@ export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = f
     <Tooltip
       theme="info-alt"
       placement="auto"
+      interactive
       content={
         <EventDetails
           event={activeEvent}

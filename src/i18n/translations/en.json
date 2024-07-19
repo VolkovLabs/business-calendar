@@ -131,11 +131,11 @@
         }
       },
       "showEventTooltip": {
-        "label": "Show Tooltip",
+        "label": "Tooltip",
         "description": "Show event details on hover.",
         "options": {
-          "disabled": "Hide Tooltip",
-          "enabled": "Show Tooltip"
+          "disabled": "Disabled",
+          "enabled": "Enabled"
         }
       }
     },

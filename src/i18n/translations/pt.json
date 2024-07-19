@@ -131,11 +131,11 @@
         }
       },
       "showEventTooltip": {
-        "label": "Mostrar dica de ferramenta",
+        "label": "Dica",
         "description": "Mostrar detalhes do evento ao passar o mouse",
         "options": {
-          "disabled": "Ocultar dica de ferramenta",
-          "enabled": "Mostrar dica de ferramenta"
+          "disabled": "Desativado",
+          "enabled": "Ativado"
         }
       }
     },

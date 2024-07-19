@@ -131,11 +131,11 @@
         }
       },
       "showEventTooltip": {
-        "label": "Afficher l'infobulle",
+        "label": "Info-bulle",
         "description": "Afficher les détails de l'événement au survol",
         "options": {
-          "disabled": "Cacher l'info-bulle",
-          "enabled": "Afficher l'infobulle"
+          "disabled": "Désactivé",
+          "enabled": "Activé"
         }
       }
     },

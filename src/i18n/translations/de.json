@@ -131,11 +131,11 @@
         }
       },
       "showEventTooltip": {
-        "label": "Tooltip anzeigen",
+        "label": "Tooltip",
         "description": "Ereignisdetails beim Hovern anzeigen",
         "options": {
-          "disabled": "Tooltip ausblenden",
-          "enabled": "Tooltip anzeigen"
+          "disabled": "Deaktiviert",
+          "enabled": "Ermöglicht"
         }
       }
     },

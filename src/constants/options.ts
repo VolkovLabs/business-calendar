@@ -90,6 +90,6 @@ export const PREFORMATTED_OPTIONS = (t: TFunction) => [
  * Event Tooltip Options
  */
 export const EVENT_TOOLTIP_OPTIONS = (t: TFunction) => [
+  { value: true, label: t('panelOptions.events.showEventTooltip.options.enabled'), icon: 'comment-alt-message' },
   { value: false, label: t('panelOptions.events.showEventTooltip.options.disabled') },
-  { value: true, label: t('panelOptions.events.showEventTooltip.options.enabled') },
 ];

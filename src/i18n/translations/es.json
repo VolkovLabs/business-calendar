@@ -131,11 +131,11 @@
         }
       },
       "showEventTooltip": {
-        "label": "Mostrar Tooltip",
+        "label": "Tooltip",
         "description": "Mostrar detalles del evento al pasar el ratón por encima",
         "options": {
-          "disabled": "Ocultar Tooltip",
-          "enabled": "Mostrar Tooltip"
+          "disabled": "Desactivado",
+          "enabled": "Activado"
         }
       }
     },

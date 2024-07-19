@@ -131,11 +131,11 @@
         }
       },
       "showEventTooltip": {
-        "label": "顯示工具提示",
+        "label": "工具提示",
         "description": "懸停時顯示事件詳細資訊",
         "options": {
-          "disabled": "隱藏工具提示",
-          "enabled": "顯示工具提示"
+          "disabled": "残疾人",
+          "enabled": "启用"
         }
       }
     },

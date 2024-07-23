@@ -256,7 +256,7 @@ export interface CalendarOptions {
   showEventTooltip: boolean;
 
   /**
-   * Show Time for Month Time
+   * Show Time for Month view
    *
    * @type {boolean}
    */

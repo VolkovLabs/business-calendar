@@ -128,17 +128,6 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         },
         defaultValue: DEFAULT_VIEWS as unknown,
       })
-      .addRadio({
-        path: 'showMonthTime',
-        name: t('panelOptions.layout.showTime.month.label'),
-        description: t('panelOptions.layout.showTime.month.description'),
-        category: [t('panelOptions.layout.label')],
-        settings: {
-          options: DISPLAY_TIME_OPTIONS(t),
-        },
-        showIf: (config) => config.views?.includes(View.MONTH),
-        defaultValue: DEFAULT_OPTIONS.showMonthTime,
-      })
       .addCustomEditor({
         id: 'defaultViewEditor',
         path: 'defaultView',
@@ -155,6 +144,17 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: DATE_FORMAT_OPTIONS(t),
         },
         defaultValue: DEFAULT_OPTIONS.dateFormat,
+      })
+      .addRadio({
+        path: 'showMonthTime',
+        name: t('panelOptions.layout.showTime.month.label'),
+        description: t('panelOptions.layout.showTime.month.description'),
+        category: [t('panelOptions.layout.label')],
+        settings: {
+          options: DISPLAY_TIME_OPTIONS(t),
+        },
+        showIf: (config) => config.views?.includes(View.MONTH),
+        defaultValue: DEFAULT_OPTIONS.showMonthTime,
       })
       .addRadio({
         path: 'colors',

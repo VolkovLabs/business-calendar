@@ -4,7 +4,8 @@
 
 ### Features / Enhancements
 
-- Add event details in tooltip by hover (#217, #221)
+- Added event details in tooltip by hover (#217, #221)
+- Added option to Disable Event Time (#223)
 
 ## 3.4.0 (2024-07-16)
 

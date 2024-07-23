@@ -79,7 +79,7 @@ export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = f
     if (isMonth) {
       return (
         <div data-testid={TEST_IDS.eventContent.month} className={styles.date}>
-          {!event.resource.allDay && localizer.format(event.start as Date, 'LT')}
+          {!event.resource.allDay && options.showMonthTime && localizer.format(event.start as Date, 'LT')}
           <span className={styles.text}>{event.title}</span>
         </div>
       );
@@ -140,7 +140,7 @@ export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = f
         {!!event.resource?.location && <span className={styles.location}>{`${event.resource.location}`}</span>}
       </div>
     );
-  }, [event, isAgenda, isMonth, localizer, styles]);
+  }, [event, isAgenda, isMonth, localizer, styles, options.showMonthTime]);
 
   return options.showEventTooltip ? (
     <Tooltip

@@ -93,3 +93,11 @@ export const EVENT_TOOLTIP_OPTIONS = (t: TFunction) => [
   { value: true, label: t('panelOptions.events.showEventTooltip.options.enabled'), icon: 'comment-alt-message' },
   { value: false, label: t('panelOptions.events.showEventTooltip.options.disabled') },
 ];
+
+/**
+ * Display time options
+ */
+export const DISPLAY_TIME_OPTIONS = (t: TFunction) => [
+  { value: true, label: t('panelOptions.layout.showTime.options.enabled'), icon: 'clock-nine' },
+  { value: false, label: t('panelOptions.layout.showTime.options.disabled') },
+];

@@ -181,6 +181,16 @@
       "textSize": {
         "label": "Text Size",
         "description": "Set text size in px."
+      },
+      "showTime": {
+        "options": {
+          "disabled": "Disabled",
+          "enabled": "Enabled"
+        },
+        "month": {
+          "label": "Month time",
+          "description": "Display event time in the month view."
+        }
       }
     },
     "scrollToTime": {

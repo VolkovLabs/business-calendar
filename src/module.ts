@@ -16,13 +16,14 @@ import {
   DEFAULT_VIEW,
   DEFAULT_VIEWS,
   DISPLAY_FIELD_OPTIONS,
+  DISPLAY_TIME_OPTIONS,
   EVENT_TOOLTIP_OPTIONS,
   LINK_OPTIONS,
   PREFORMATTED_OPTIONS,
   TIME_RANGE_TYPE_OPTIONS,
 } from './constants';
 import { getMigratedOptions } from './migration';
-import { CalendarOptions, ColorMode, TimeRangeType } from './types';
+import { CalendarOptions, ColorMode, TimeRangeType, View } from './types';
 import { getLanguage } from './utils';
 
 /**
@@ -143,6 +144,17 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
           options: DATE_FORMAT_OPTIONS(t),
         },
         defaultValue: DEFAULT_OPTIONS.dateFormat,
+      })
+      .addRadio({
+        path: 'showMonthTime',
+        name: t('panelOptions.layout.showTime.month.label'),
+        description: t('panelOptions.layout.showTime.month.description'),
+        category: [t('panelOptions.layout.label')],
+        settings: {
+          options: DISPLAY_TIME_OPTIONS(t),
+        },
+        showIf: (config) => config.views?.includes(View.MONTH),
+        defaultValue: DEFAULT_OPTIONS.showMonthTime,
       })
       .addRadio({
         path: 'colors',

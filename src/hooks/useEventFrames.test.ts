@@ -65,6 +65,7 @@ describe('useEventFrames', () => {
       displayFields: [],
       locationLabel: '',
       showEventTooltip: false,
+      showMonthTime: true,
     };
     const data = getDataFrame(options);
 
@@ -96,6 +97,7 @@ describe('useEventFrames', () => {
       displayFields: [],
       locationLabel: '',
       showEventTooltip: false,
+      showMonthTime: true,
     };
 
     const data: PanelData = {

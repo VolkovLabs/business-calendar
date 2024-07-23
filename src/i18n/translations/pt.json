@@ -181,6 +181,16 @@
       "textSize": {
         "label": "Tamanho do texto",
         "description": "Defina o tamanho do texto em px."
+      },
+      "showTime": {
+        "options": {
+          "disabled": "Desativado",
+          "enabled": "Ativado"
+        },
+        "month": {
+          "label": "Hora do mês",
+          "description": "Exibir a hora do evento na visualização do mês"
+        }
       }
     },
     "scrollToTime": {

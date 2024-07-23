@@ -29,6 +29,7 @@ export const DEFAULT_OPTIONS: CalendarOptions = {
   locationLabel: '',
   preformattedDescription: false,
   showEventTooltip: false,
+  showMonthTime: true,
   displayFields: [
     EventField.DESCRIPTION,
     EventField.LABELS,

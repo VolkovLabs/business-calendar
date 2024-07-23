@@ -29,7 +29,16 @@ describe('Big Event Content', () => {
     title: '123',
     start: new Date('2020-02-02 02:00'),
     end: new Date('2020-02-02 02:30'),
-    resource: { location: 'Room', labels: ['111', '222'] },
+    resource: {
+      location: 'Room',
+      labels: ['111', '222'],
+      links: [
+        {
+          href: 'test.com',
+          title: 'Link 1',
+        },
+      ],
+    },
   };
 
   /**
@@ -178,6 +187,73 @@ describe('Big Event Content', () => {
      */
     expect(screen.queryByText('111')).not.toBeInTheDocument();
     expect(screen.queryByText('222')).not.toBeInTheDocument();
+  });
+
+  it('Should call onClick function on link element and stopPropagation if tooltip', () => {
+    const onClick = jest.fn();
+
+    const eventStopPropagationSpy = jest.spyOn(Event.prototype, 'stopPropagation');
+    const event = {
+      title: '123',
+      start: new Date('2020-02-02 02:00'),
+      end: new Date('2020-02-02 02:30'),
+      resource: {
+        location: 'Room',
+        labels: ['111', '222'],
+        links: [
+          {
+            href: 'test.com',
+            title: 'Link 1',
+            onClick: onClick,
+          },
+        ],
+      },
+    };
+    const options = {
+      ...defaultOptions,
+      event: event,
+      options: {
+        ...defaultOptions.options,
+        showEventTooltip: true,
+      },
+    };
+
+    render(
+      getComponent({
+        ...options,
+        isMonth: true,
+      })
+    );
+
+    /**
+     * Check event
+     */
+    expect(screen.getByText('123')).toBeInTheDocument();
+    expect(selectors.month(true)).toBeInTheDocument();
+
+    /**
+     * Hover on element
+     */
+    fireEvent.mouseEnter(selectors.month());
+
+    expect(screen.getByText('Link 1')).toBeInTheDocument();
+
+    const linkButton = screen.getByText('Link 1');
+
+    /**
+     * Click on Link
+     */
+    fireEvent.click(linkButton);
+
+    /**
+     * Call onClick
+     */
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClick.mock.calls[0][0]).toHaveProperty('currentTarget');
+    /**
+     * Call stopPropagation for tooltip mode
+     */
+    expect(eventStopPropagationSpy).toHaveBeenCalledTimes(1);
   });
 
   it('Should render Month view with font size', () => {

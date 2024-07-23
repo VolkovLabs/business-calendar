@@ -136,6 +136,10 @@ export const EventDetails: React.FC<Props> = ({
                     variant={'secondary'}
                     onClick={(e) => {
                       link.onClick && link.onClick(e);
+
+                      /**
+                       * Stop Propagation
+                       */
                       if (isForTooltip) {
                         e.stopPropagation();
                       }

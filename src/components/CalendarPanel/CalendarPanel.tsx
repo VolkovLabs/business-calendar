@@ -70,6 +70,7 @@ export const CalendarPanel: React.FC<Props> = ({
       onChangeTimeRange={onChangeTimeRange}
       height={height}
       options={options}
+      timeZone={timeZone}
     />
   );
 };

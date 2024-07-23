@@ -20,7 +20,8 @@ import { getBigCalendarStyles, getLibStyles } from './BigCalendar.styles';
 /**
  * Properties
  */
-interface Props extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange' | 'onChangeTimeRange' | 'options'> {
+interface Props
+  extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange' | 'onChangeTimeRange' | 'options' | 'timeZone'> {
   /**
    * Events
    *
@@ -33,7 +34,7 @@ interface Props extends Pick<PanelProps<CalendarOptions>, 'height' | 'timeRange'
  * Big Calendar
  * @param props
  */
-export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChangeTimeRange, options }) => {
+export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChangeTimeRange, options, timeZone }) => {
   /**
    * Styles and Theme
    */
@@ -130,7 +131,8 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   const { date, view, onChangeView, onNavigate } = useCalendarRange(
     timeRange,
     onChangeTimeRangeWithRefresh,
-    options.defaultView
+    options.defaultView,
+    timeZone
   );
 
   /**

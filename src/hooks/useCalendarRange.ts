@@ -1,9 +1,14 @@
 import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
 import dayjs, { OpUnitType } from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Navigate, NavigateAction } from 'react-big-calendar';
 
 import { View } from '../types';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 /**
  * Get Unit Type
@@ -25,11 +30,13 @@ export const getUnitType = (view: View): OpUnitType => {
  * @param timeRange
  * @param onChangeTimeRange
  * @param defaultView
+ * @param timeZone
  */
 export const useCalendarRange = (
   timeRange: TimeRange,
   onChangeTimeRange: (timeRange: AbsoluteTimeRange) => void,
-  defaultView = View.MONTH
+  defaultView = View.MONTH,
+  timeZone: string
 ) => {
   const [view, setView] = useState(defaultView);
   const previousTimeRange = useRef(timeRange);
@@ -47,11 +54,28 @@ export const useCalendarRange = (
      * To: date + days count
      */
     if (view === View.AGENDA) {
-      return dayjs(calendarTo).startOf('month').toDate();
+      /**
+       * Return date based on timeZone option if timeZone specified in TimePicker
+       */
+      return timeZone === 'browser'
+        ? dayjs(calendarTo).startOf('month').toDate()
+        : dayjs(calendarTo).tz(timeZone).startOf('month').toDate();
     }
 
-    return new Date((calendarFrom.valueOf() + calendarTo.valueOf()) / 2);
-  }, [calendarFrom, calendarTo, view]);
+    const middle = new Date((calendarFrom.valueOf() + calendarTo.valueOf()) / 2);
+
+    /**
+     * Return date based on timeZone option if timeZone specified in TimePicker
+     */
+
+    return timeZone === 'browser'
+      ? middle
+      : new Date(
+          middle.toLocaleString('en-US', {
+            timeZone: timeZone,
+          })
+        );
+  }, [calendarFrom, calendarTo, timeZone, view]);
 
   /**
    * Change Calendar View

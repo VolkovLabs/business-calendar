@@ -131,11 +131,16 @@ export const EventDetails: React.FC<Props> = ({
                 .map((link, index) => (
                   <LinkButton
                     key={index}
-                    icon={link.target === '_self' ? 'link' : 'external-link-alt'}
                     href={link.href}
                     target={link.target}
                     variant={'secondary'}
-                    onClick={link.onClick}
+                    icon={link.target === '_self' ? 'link' : 'external-link-alt'}
+                    onClick={(e) => {
+                      link.onClick && link.onClick(e);
+                      if (isForTooltip) {
+                        e.stopPropagation();
+                      }
+                    }}
                     aria-label={TEST_IDS.eventDetails.link}
                   >
                     {link.title}

@@ -181,6 +181,16 @@
       "textSize": {
         "label": "文字大小",
         "description": "以 px 为单位设置文字大小。"
+      },
+      "showTime": {
+        "options": {
+          "disabled": "残疾人",
+          "enabled": "启用"
+        },
+        "month": {
+          "label": "月份時間",
+          "description": "在月份檢視中顯示事件時間"
+        }
       }
     },
     "scrollToTime": {

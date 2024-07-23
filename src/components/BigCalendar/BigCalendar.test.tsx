@@ -76,6 +76,7 @@ describe('Big Calendar', () => {
       minutes: 0,
     },
     showEventTooltip: false,
+    showMonthTime: true,
   };
 
   /**
@@ -212,6 +213,7 @@ describe('Big Calendar', () => {
           displayFields: [],
           locationLabel: '',
           showEventTooltip: false,
+          showMonthTime: true,
         },
       })
     );
@@ -266,6 +268,7 @@ describe('Big Calendar', () => {
           displayFields: [],
           locationLabel: '',
           showEventTooltip: false,
+          showMonthTime: true,
         },
       })
     );
@@ -313,6 +316,7 @@ describe('Big Calendar', () => {
           displayFields: [],
           locationLabel: '',
           showEventTooltip: false,
+          showMonthTime: true,
         },
       })
     );

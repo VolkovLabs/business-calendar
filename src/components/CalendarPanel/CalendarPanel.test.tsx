@@ -74,6 +74,7 @@ describe('Panel', () => {
       minutes: 0,
     },
     showEventTooltip: false,
+    showMonthTime: true,
   };
 
   /**

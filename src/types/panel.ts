@@ -254,4 +254,11 @@ export interface CalendarOptions {
    * @type {boolean}
    */
   showEventTooltip: boolean;
+
+  /**
+   * Show Time for Month Time
+   *
+   * @type {boolean}
+   */
+  showMonthTime: boolean;
 }

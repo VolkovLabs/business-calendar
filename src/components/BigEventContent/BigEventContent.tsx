@@ -140,7 +140,7 @@ export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = f
         {!!event.resource?.location && <span className={styles.location}>{`${event.resource.location}`}</span>}
       </div>
     );
-  }, [event, isAgenda, isMonth, localizer, styles]);
+  }, [event, isAgenda, isMonth, localizer, styles, options.showMonthTime]);
 
   return options.showEventTooltip ? (
     <Tooltip

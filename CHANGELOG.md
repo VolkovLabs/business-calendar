@@ -4,7 +4,7 @@
 
 ### Features / Enhancements
 
-- Add event details in tooltip by hover (#217)
+- Add event details in tooltip by hover (#217, #221)
 
 ## 3.4.0 (2024-07-16)
 

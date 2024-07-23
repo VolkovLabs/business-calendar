@@ -205,7 +205,9 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.events.displayFields.label'),
         description: t('panelOptions.events.displayFields.description'),
         category: [t('panelOptions.events.label')],
-        showIf: (config) => !config.quickLinks,
+        showIf: (config) => {
+          return !config.quickLinks || config.showEventTooltip;
+        },
         settings: {
           options: DISPLAY_FIELD_OPTIONS(t),
         },
@@ -219,7 +221,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         settings: {
           options: PREFORMATTED_OPTIONS(t),
         },
-        showIf: (config) => !config.quickLinks,
+        showIf: (config) => !config.quickLinks || config.showEventTooltip,
         defaultValue: DEFAULT_OPTIONS.quickLinks,
       })
       .addTextInput({
@@ -227,7 +229,7 @@ export const plugin = new PanelPlugin<CalendarOptions>(CalendarPanel)
         name: t('panelOptions.events.locationLabel.label'),
         description: t('panelOptions.events.locationLabel.description'),
         category: [t('panelOptions.events.label')],
-        showIf: (config) => !config.quickLinks,
+        showIf: (config) => !config.quickLinks || config.showEventTooltip,
         defaultValue: DEFAULT_OPTIONS.locationLabel,
         settings: {
           placeholder: t('panelOptions.events.locationLabel.placeholder'),

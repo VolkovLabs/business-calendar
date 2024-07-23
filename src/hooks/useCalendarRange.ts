@@ -67,7 +67,6 @@ export const useCalendarRange = (
     /**
      * Return date based on timeZone option if timeZone specified in TimePicker
      */
-
     return timeZone === 'browser'
       ? middle
       : new Date(

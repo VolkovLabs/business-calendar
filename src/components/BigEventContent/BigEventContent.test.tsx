@@ -66,6 +66,34 @@ describe('Big Event Content', () => {
     expect(screen.getByText('2:00 AM')).toBeInTheDocument();
   });
 
+  it('Should not render time in the month view if option not specified', () => {
+    const options = {
+      ...defaultOptions,
+      options: {
+        ...defaultOptions.options,
+        showMonthTime: false,
+      },
+    };
+
+    render(getComponent({ ...options, isMonth: true }));
+
+    expect(screen.queryByText('2:00 AM')).not.toBeInTheDocument();
+  });
+
+  it('Should render time in the month view if option specified', () => {
+    const options = {
+      ...defaultOptions,
+      options: {
+        ...defaultOptions.options,
+        showMonthTime: true,
+      },
+    };
+
+    render(getComponent({ ...options, isMonth: true }));
+
+    expect(screen.queryByText('2:00 AM')).toBeInTheDocument();
+  });
+
   it('Should render title', () => {
     render(getComponent(defaultOptions));
 

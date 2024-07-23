@@ -134,7 +134,6 @@ export const EventDetails: React.FC<Props> = ({
                     href={link.href}
                     target={link.target}
                     variant={'secondary'}
-                    icon={link.target === '_self' ? 'link' : 'external-link-alt'}
                     onClick={(e) => {
                       link.onClick && link.onClick(e);
                       if (isForTooltip) {

@@ -44,6 +44,17 @@ describe('Use Calendar Range', () => {
     expect(result.current.date.toISOString()).toEqual(new Date('2023-02-01 12:00').toISOString());
   });
 
+  it('Should display date for agenda view with specified `browser` timeZone ', () => {
+    const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
+    const timeRange = {
+      ...defaultTimeRange,
+      from: dateTime(last3Months.toDate()),
+    };
+    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.AGENDA, 'browser'));
+
+    expect(result.current.date.toISOString()).toEqual(new Date('2023-02-01 00:00').toISOString());
+  });
+
   it('Should set last week for initial date if week by default', () => {
     const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
     const timeRange = {

@@ -64,6 +64,9 @@ export const useCalendarRange = (
       const newFrom = dayjs(middleDate).startOf(unitType);
       const newTo = dayjs(middleDate).endOf(unitType);
 
+      /**
+       * Out of Range
+       */
       const outOfRange = isOutOfRange({
         view: newView,
         from,
@@ -115,6 +118,9 @@ export const useCalendarRange = (
       const newFrom = dayjs(newCurrentDate).startOf(unitType);
       const newTo = dayjs(newCurrentDate).endOf(unitType);
 
+      /**
+       * Out of Range
+       */
       const outOfRange = isOutOfRange({
         view,
         from,
@@ -156,6 +162,9 @@ export const useCalendarRange = (
       const newFrom = dayjs(middleDate).startOf(unitType);
       const newTo = dayjs(middleDate).endOf(unitType);
 
+      /**
+       * Out of Range
+       */
       const outOfRange = isOutOfRange({
         view,
         from,

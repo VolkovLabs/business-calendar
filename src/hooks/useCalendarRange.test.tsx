@@ -66,7 +66,7 @@ describe('Use Calendar Range', () => {
     expect(result.current.date.toISOString()).toEqual(new Date('2023-02-02 00:00').toISOString());
   });
 
-  it('Should update calendar dates on time range update', () => {
+  it('Should not update calendar dates on time range update and display in Time Range', () => {
     const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
     const timeRange = {
       ...defaultTimeRange,
@@ -92,7 +92,51 @@ describe('Use Calendar Range', () => {
      */
     rerender(<Component timeRange={{ ...timeRange, from: dateTime(last3Months.subtract(1, 'month').toDate()) }} />);
 
-    expect(screen.getByTestId('date')).toHaveTextContent('2022-12-02T12:00:00.000Z');
+    expect(screen.getByTestId('date')).toHaveTextContent('2023-02-02T00:00:00.000Z');
+  });
+
+  it('Should update calendar dates on time range update if display not in Time Range', () => {
+    const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
+    const timeRange = {
+      ...defaultTimeRange,
+      from: dateTime(last3Months.toDate()),
+    };
+
+    /**
+     * Component to test re-render
+     * @param timeRange
+     * @constructor
+     */
+    const Component = ({ timeRange }: any) => {
+      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY);
+      return <div data-testid="date">{date.toISOString()}</div>;
+    };
+
+    const { rerender } = render(<Component timeRange={timeRange} />);
+
+    expect(screen.getByTestId('date')).toHaveTextContent('2023-02-02T00:00:00.000Z');
+
+    /**
+     * Return new dates
+     */
+    const getFromDate = () => new Date('2023-02-02');
+    const getToDate = () => new Date('2023-01-01');
+
+    /**
+     * Updated time range
+     */
+    const newTimeRange: TimeRange = {
+      from: dateTime(getFromDate()),
+      to: dateTime(getToDate()),
+      raw: {
+        from: dateTime(getFromDate()),
+        to: dateTime(getToDate()),
+      },
+    };
+
+    rerender(<Component timeRange={newTimeRange} />);
+
+    expect(screen.getByTestId('date')).toHaveTextContent('2023-01-17T00:00:00.000Z');
   });
 
   it('Should keep calendar dates if time range not updated', () => {

@@ -1,5 +1,8 @@
-import { dateTimeParse, Field, FieldType, getDisplayProcessor, GrafanaTheme2 } from '@grafana/data';
+import { DateTime, dateTimeParse, Field, FieldType, getDisplayProcessor, GrafanaTheme2 } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
+import dayjs from 'dayjs';
+
+import { View } from '../types';
 
 /**
  * Time Field
@@ -42,3 +45,20 @@ export const toTimeField = ({
 
   return field;
 };
+
+export const isOutOfRange = ({
+  view,
+  newFrom,
+  from,
+  newTo,
+  to,
+}: {
+  view: View;
+  from: DateTime;
+  to: DateTime;
+  newFrom: dayjs.Dayjs;
+  newTo: dayjs.Dayjs;
+}) =>
+  view === View.DAY
+    ? newFrom.valueOf() < from.valueOf() || newFrom.valueOf() > to.valueOf()
+    : newFrom.valueOf() < from.valueOf() || newTo.valueOf() > to.valueOf();

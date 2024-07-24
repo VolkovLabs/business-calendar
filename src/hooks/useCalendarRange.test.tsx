@@ -119,7 +119,7 @@ describe('Use Calendar Range', () => {
      * @constructor
      */
     const Component = ({ timeRange }: any) => {
-      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY);
+      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY, 'utc');
       return <div data-testid="date">{date.toISOString()}</div>;
     };
 

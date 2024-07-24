@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Navigate, NavigateAction } from 'react-big-calendar';
 
 import { View } from '../types';
+import { isOutOfRange } from '../utils';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -87,9 +88,20 @@ export const useCalendarRange = (
       const newTo = dayjs(middleDate).endOf(unitType);
 
       /**
+       * Out of Range
+       */
+      const outOfRange = isOutOfRange({
+        view: newView,
+        from,
+        to,
+        newFrom,
+        newTo,
+      });
+
+      /**
        * Change time range if one of dates are out of the current range
        */
-      if (newFrom.valueOf() < from.valueOf() || newTo.valueOf() > to.valueOf()) {
+      if (outOfRange) {
         onChangeTimeRange({
           from: newFrom.valueOf(),
           to: newTo.valueOf(),
@@ -130,9 +142,20 @@ export const useCalendarRange = (
       const newTo = dayjs(newCurrentDate).endOf(unitType);
 
       /**
+       * Out of Range
+       */
+      const outOfRange = isOutOfRange({
+        view,
+        from,
+        to,
+        newFrom,
+        newTo,
+      });
+
+      /**
        * Change time range if one of dates are out of the current range
        */
-      if (newFrom.valueOf() < from.valueOf() || newTo.valueOf() > to.valueOf()) {
+      if (outOfRange) {
         onChangeTimeRange({
           from: newFrom.valueOf(),
           to: newTo.valueOf(),
@@ -157,13 +180,31 @@ export const useCalendarRange = (
    */
   useEffect(() => {
     if (isExternalUpdate.current && previousTimeRange.current !== timeRange) {
-      setCalendarFrom(timeRange.from.toDate());
-      setCalendarTo(timeRange.to.toDate());
-      previousTimeRange.current = timeRange;
+      const unitType = getUnitType(view);
+      const { from, to } = timeRange;
+      const newFrom = dayjs(middleDate).startOf(unitType);
+      const newTo = dayjs(middleDate).endOf(unitType);
+
+      /**
+       * Out of Range
+       */
+      const outOfRange = isOutOfRange({
+        view,
+        from,
+        to,
+        newFrom,
+        newTo,
+      });
+
+      if (outOfRange) {
+        setCalendarFrom(timeRange.from.toDate());
+        setCalendarTo(timeRange.to.toDate());
+        previousTimeRange.current = timeRange;
+      }
     } else {
       isExternalUpdate.current = true;
     }
-  }, [timeRange, timeRange.from, timeRange.to]);
+  }, [middleDate, timeRange, timeRange.from, timeRange.to, view]);
 
   return {
     date: middleDate,

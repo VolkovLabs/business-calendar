@@ -1,8 +1,9 @@
 import { FieldType, GrafanaTheme2 } from '@grafana/data';
 import { getTheme } from '@grafana/ui';
+import dayjs from 'dayjs';
 
-import { toTimeField } from './time';
-
+import { View } from '../types';
+import { isOutOfRange, toTimeField } from './time';
 /**
  * To Time Field
  */
@@ -57,5 +58,58 @@ describe('To Time Field', () => {
     const result = toTimeField({ field, theme, timeZone: 'abc' });
 
     expect(result).toEqual(field);
+  });
+});
+
+/**
+ * is Out of Range
+ */
+describe('isOutOfRange', () => {
+  it('Should return false in DAY view if day in range', () => {
+    const view = View.DAY;
+    const from = dayjs('2023-01-01') as any;
+    const to = dayjs('2023-01-07') as any;
+    const newFrom = dayjs('2023-01-02');
+    const newTo = dayjs('2023-01-02');
+
+    const result = isOutOfRange({ view, from, to, newFrom, newTo });
+
+    expect(result).toBe(false);
+  });
+
+  it('Should return true in DAY view if day out of range', () => {
+    const view = View.DAY;
+    const from = dayjs('2023-01-01') as any;
+    const to = dayjs('2023-01-07') as any;
+    const newFrom = dayjs('2023-01-08');
+    const newTo = dayjs('2023-01-08');
+
+    const result = isOutOfRange({ view, from, to, newFrom, newTo });
+
+    expect(result).toBe(true);
+  });
+
+  it('Should return true in non-DAY view if out of range', () => {
+    const view = View.WEEK;
+    const from = dayjs('2023-01-01') as any;
+    const to = dayjs('2023-01-31') as any;
+    const newFrom = dayjs('2022-12-25');
+    const newTo = dayjs('2023-01-02');
+
+    const result = isOutOfRange({ view, from, to, newFrom, newTo });
+
+    expect(result).toBe(true);
+  });
+
+  it('Should return false in non-DAY view if in range', () => {
+    const view = View.WEEK;
+    const from = dayjs('2023-01-01') as any;
+    const to = dayjs('2023-01-31') as any;
+    const newFrom = dayjs('2023-01-15');
+    const newTo = dayjs('2023-01-22');
+
+    const result = isOutOfRange({ view, from, to, newFrom, newTo });
+
+    expect(result).toBe(false);
   });
 });

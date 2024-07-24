@@ -294,13 +294,176 @@ describe('useCalendarEvents', () => {
       },
     ];
     const { result } = renderHook(() =>
-      useCalendarEvents(frames as any, { colors: 'frame' } as any, [], defaultTimeRange, 'browser')
+      useCalendarEvents(
+        frames as any,
+        { colors: 'frame', descriptionField: ['description'] } as any,
+        [],
+        defaultTimeRange,
+        'browser'
+      )
     );
 
     expect(result.current).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           description: ['description 1'],
+        }),
+      ])
+    );
+  });
+
+  it('Should return events with description in correct order', () => {
+    const frames = [
+      {
+        labels: [{ values: ['label 1'] }],
+        text: {
+          type: FieldType.string,
+          name: 'text',
+          values: ['111'],
+          getLinks: () => null,
+          display: () => ({ text: 'displayed' }),
+        },
+        start: {
+          type: FieldType.string,
+          name: 'start',
+          values: [getSafeDate()],
+        },
+        end: {
+          type: FieldType.string,
+          name: 'end',
+          values: [getSafeDate()],
+        },
+        description: [
+          {
+            type: FieldType.string,
+            name: 'description',
+            values: ['description 1'],
+          },
+          {
+            type: FieldType.string,
+            name: 'description2',
+            values: ['description 2'],
+          },
+          {
+            type: FieldType.string,
+            name: 'description3',
+            values: ['description 3'],
+          },
+        ],
+      },
+    ];
+    const { result } = renderHook(() =>
+      useCalendarEvents(
+        frames as any,
+        { colors: 'frame', descriptionField: ['description2', 'description', 'description3'] } as any,
+        [],
+        defaultTimeRange,
+        'browser'
+      )
+    );
+
+    expect(result.current).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          description: ['description 2', 'description 1', 'description 3'],
+        }),
+      ])
+    );
+  });
+
+  it('Should not return events with description if options not specified', () => {
+    const frames = [
+      {
+        labels: [{ values: ['label 1'] }],
+        text: {
+          type: FieldType.string,
+          name: 'text',
+          values: ['111'],
+          getLinks: () => null,
+          display: () => ({ text: 'displayed' }),
+        },
+        start: {
+          type: FieldType.string,
+          name: 'start',
+          values: [getSafeDate()],
+        },
+        end: {
+          type: FieldType.string,
+          name: 'end',
+          values: [getSafeDate()],
+        },
+        description: [
+          {
+            type: FieldType.string,
+            name: 'description',
+            values: ['description 1'],
+          },
+        ],
+      },
+    ];
+    const { result } = renderHook(() =>
+      useCalendarEvents(
+        frames as any,
+        { colors: 'frame', descriptionField: [] } as any,
+        [],
+        defaultTimeRange,
+        'browser'
+      )
+    );
+
+    expect(result.current).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          description: [],
+        }),
+      ])
+    );
+  });
+
+  it('Should not return events with description if options specified incorrect', () => {
+    const frames = [
+      {
+        labels: [{ values: ['label 1'] }],
+        text: {
+          type: FieldType.string,
+          name: 'text',
+          values: ['111'],
+          getLinks: () => null,
+          display: () => ({ text: 'displayed' }),
+        },
+        start: {
+          type: FieldType.string,
+          name: 'start',
+          values: [getSafeDate()],
+        },
+        end: {
+          type: FieldType.string,
+          name: 'end',
+          values: [getSafeDate()],
+        },
+        description: [
+          {
+            type: FieldType.string,
+            name: 'description',
+            values: ['description 1'],
+          },
+        ],
+      },
+    ];
+    const { result } = renderHook(() =>
+      useCalendarEvents(
+        frames as any,
+        { colors: 'frame', descriptionField: ['des'] } as any,
+        [],
+        defaultTimeRange,
+        'browser'
+      )
+    );
+
+    expect(result.current).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          description: [],
         }),
       ])
     );

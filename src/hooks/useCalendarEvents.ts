@@ -44,18 +44,29 @@ export const useCalendarEvents = (
       }
 
       return Array.from({ length: frame.text.values.length })
-        .map((item, i) => ({
-          text: frame.text?.display
-            ? (formattedValueToString(frame.text.display(frame.text?.values[i])) as string)
-            : frame.text?.values[i],
-          description: frame.description?.map((field) => field.values[i]).filter((label) => label),
-          start: frame.start?.values[i],
-          end: frame.end?.values[i],
-          labels: frame.labels?.map((field) => field.values[i]).filter((label) => label),
-          links: frame.text?.getLinks!({ valueRowIndex: i }),
-          color: frame.color?.values[i],
-          location: frame.location?.values[i],
-        }))
+        .map((item, i) => {
+          /**
+           * Define description with correct order
+           */
+          const description =
+            options.descriptionField
+              ?.map((name) => frame.description.find((obj) => obj.name === name))
+              .map((field) => field?.values[i])
+              .filter((label) => label) || [];
+
+          return {
+            text: frame.text?.display
+              ? (formattedValueToString(frame.text.display(frame.text?.values[i])) as string)
+              : frame.text?.values[i],
+            description: description,
+            start: frame.start?.values[i],
+            end: frame.end?.values[i],
+            labels: frame.labels?.map((field) => field.values[i]).filter((label) => label),
+            links: frame.text?.getLinks!({ valueRowIndex: i }),
+            color: frame.color?.values[i],
+            location: frame.location?.values[i],
+          };
+        })
         .map<CalendarEvent>(({ text, description, labels, links, start, end, color, location }, i) => {
           const idx = options.colors === ColorMode.FRAME ? frameIdx : i;
           return {
@@ -72,5 +83,5 @@ export const useCalendarEvents = (
           };
         });
     });
-  }, [colors, minutesOffset, firstDay, frames, options.colors, timeRange.to]);
+  }, [timeRange.to, minutesOffset, firstDay, frames, options.descriptionField, options.colors, colors]);
 };

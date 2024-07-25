@@ -1,15 +1,10 @@
 import { AbsoluteTimeRange, TimeRange } from '@grafana/data';
 import dayjs, { OpUnitType } from 'dayjs';
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Navigate, NavigateAction } from 'react-big-calendar';
 
 import { View } from '../types';
 import { isOutOfRange } from '../utils';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 /**
  * Get Unit Type
@@ -58,9 +53,15 @@ export const useCalendarRange = (
       /**
        * Return date based on timeZone option if timeZone specified in TimePicker
        */
+      const agenda = dayjs(calendarTo).startOf('month').toDate();
+
       return timeZone === 'browser'
-        ? dayjs(calendarTo).startOf('month').toDate()
-        : dayjs(calendarTo).tz(timeZone).startOf('month').toDate();
+        ? agenda
+        : new Date(
+            agenda.toLocaleString('en-US', {
+              timeZone: timeZone,
+            })
+          );
     }
 
     const middle = new Date((calendarFrom.valueOf() + calendarTo.valueOf()) / 2);

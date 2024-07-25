@@ -26,11 +26,13 @@ export const getUnitType = (view: View): OpUnitType => {
  * @param timeRange
  * @param onChangeTimeRange
  * @param defaultView
+ * @param timeZone
  */
 export const useCalendarRange = (
   timeRange: TimeRange,
   onChangeTimeRange: (timeRange: AbsoluteTimeRange) => void,
-  defaultView = View.MONTH
+  defaultView = View.MONTH,
+  timeZone: string
 ) => {
   const [view, setView] = useState(defaultView);
   const previousTimeRange = useRef(timeRange);
@@ -48,11 +50,33 @@ export const useCalendarRange = (
      * To: date + days count
      */
     if (view === View.AGENDA) {
-      return dayjs(calendarTo).startOf('month').toDate();
+      /**
+       * Return date based on timeZone option if timeZone specified in TimePicker
+       */
+      const agenda = dayjs(calendarTo).startOf('month').toDate();
+
+      return timeZone === 'browser'
+        ? agenda
+        : new Date(
+            agenda.toLocaleString('en-US', {
+              timeZone: timeZone,
+            })
+          );
     }
 
-    return new Date((calendarFrom.valueOf() + calendarTo.valueOf()) / 2);
-  }, [calendarFrom, calendarTo, view]);
+    const middle = new Date((calendarFrom.valueOf() + calendarTo.valueOf()) / 2);
+
+    /**
+     * Return date based on timeZone option if timeZone specified in TimePicker
+     */
+    return timeZone === 'browser'
+      ? middle
+      : new Date(
+          middle.toLocaleString('en-US', {
+            timeZone: timeZone,
+          })
+        );
+  }, [calendarFrom, calendarTo, timeZone, view]);
 
   /**
    * Change Calendar View

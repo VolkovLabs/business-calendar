@@ -8,6 +8,7 @@
 - Added option to Disable Event Time (#223)
 - Updated daily calendar view if timeRange changed (#229)
 - Updated description to follow fields order (#230)
+- Updated date using timeZone option (#227)
 
 ## 3.4.0 (2024-07-16)
 

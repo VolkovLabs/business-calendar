@@ -39,9 +39,20 @@ describe('Use Calendar Range', () => {
       ...defaultTimeRange,
       from: dateTime(last3Months.toDate()),
     };
-    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.MONTH));
+    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.MONTH, 'utc'));
 
     expect(result.current.date.toISOString()).toEqual(new Date('2023-02-01 12:00').toISOString());
+  });
+
+  it('Should display date for agenda view with specified `browser` timeZone ', () => {
+    const last3Months = dayjs(getSafeDate()).subtract(3, 'month');
+    const timeRange = {
+      ...defaultTimeRange,
+      from: dateTime(last3Months.toDate()),
+    };
+    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.AGENDA, 'browser'));
+
+    expect(result.current.date.toISOString()).toEqual(new Date('2023-02-01 00:00').toISOString());
   });
 
   it('Should set last week for initial date if week by default', () => {
@@ -50,7 +61,7 @@ describe('Use Calendar Range', () => {
       ...defaultTimeRange,
       from: dateTime(last3Months.toDate()),
     };
-    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.WEEK));
+    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.WEEK, 'utc'));
 
     expect(result.current.date.toISOString()).toEqual(new Date('2023-01-31 00:00').toISOString());
   });
@@ -61,7 +72,7 @@ describe('Use Calendar Range', () => {
       ...defaultTimeRange,
       from: dateTime(last3Months.toDate()),
     };
-    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.DAY));
+    const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.DAY, 'utc'));
 
     expect(result.current.date.toISOString()).toEqual(new Date('2023-02-02 00:00').toISOString());
   });
@@ -79,7 +90,7 @@ describe('Use Calendar Range', () => {
      * @constructor
      */
     const Component = ({ timeRange }: any) => {
-      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY);
+      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY, 'utc');
       return <div data-testid="date">{date.toISOString()}</div>;
     };
 
@@ -108,7 +119,7 @@ describe('Use Calendar Range', () => {
      * @constructor
      */
     const Component = ({ timeRange }: any) => {
-      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY);
+      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY, 'utc');
       return <div data-testid="date">{date.toISOString()}</div>;
     };
 
@@ -152,7 +163,7 @@ describe('Use Calendar Range', () => {
      * @constructor
      */
     const Component = ({ timeRange }: any) => {
-      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY);
+      const { date } = useCalendarRange(timeRange, onChangeTimeRange, View.DAY, 'utc');
       return <div data-testid="date">{date.toISOString()}</div>;
     };
 
@@ -175,7 +186,7 @@ describe('Use Calendar Range', () => {
         ...defaultTimeRange,
         from: dateTime(last3Months.toDate()),
       };
-      const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.MONTH));
+      const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.MONTH, 'utc'));
 
       /**
        * Month
@@ -209,7 +220,7 @@ describe('Use Calendar Range', () => {
     });
 
     it('Should handle navigation correct for agenda view', async () => {
-      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange, View.MONTH, 'utc'));
 
       const nextMonth = dayjs(getSafeDate()).add(1, 'month');
 
@@ -222,7 +233,7 @@ describe('Use Calendar Range', () => {
     });
 
     it('Should replace time range if newStart is out of range', async () => {
-      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange, View.MONTH, 'utc'));
 
       const previousMonth = dayjs(getSafeDate()).subtract(1, 'month');
 
@@ -235,7 +246,7 @@ describe('Use Calendar Range', () => {
     });
 
     it('Should replace time range if newEnd is out of range', async () => {
-      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange, View.MONTH, 'utc'));
 
       const nextMonth = dayjs(getSafeDate()).add(1, 'month');
 
@@ -248,7 +259,7 @@ describe('Use Calendar Range', () => {
     });
 
     it('Should use day view if action is date', async () => {
-      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange, View.MONTH, 'browser'));
 
       const nextMonth = dayjs(getSafeDate()).add(1, 'month');
 
@@ -261,7 +272,7 @@ describe('Use Calendar Range', () => {
     });
 
     it('Should use week view if action is date from year view', async () => {
-      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange, View.MONTH, 'browser'));
 
       const nextMonth = dayjs(getSafeDate()).add(1, 'month');
 
@@ -276,7 +287,7 @@ describe('Use Calendar Range', () => {
 
   describe('Change View', () => {
     it('Should update view', async () => {
-      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange, View.MONTH, 'utc'));
 
       expect(result.current.view).toEqual('month');
 
@@ -286,7 +297,7 @@ describe('Use Calendar Range', () => {
     });
 
     it('Should set date according to view', async () => {
-      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange, View.MONTH, 'utc'));
 
       const runChangeViewTest = async (view: View) => {
         const previousDate = new Date(result.current.date.valueOf());
@@ -298,7 +309,11 @@ describe('Use Calendar Range', () => {
         const expectedDate =
           view === View.AGENDA
             ? new Date(previousDate.getFullYear(), previousDate.getMonth(), 1)
-            : new Date((firstDayInPeriod.valueOf() + lastDayInPeriod.valueOf()) / 2);
+            : new Date(
+                new Date((firstDayInPeriod.valueOf() + lastDayInPeriod.valueOf()) / 2).toLocaleString('en-US', {
+                  timeZone: 'utc',
+                })
+              );
 
         expect(result.current.date.toISOString()).toEqual(expectedDate.toISOString());
       };
@@ -312,7 +327,7 @@ describe('Use Calendar Range', () => {
     });
 
     it('Should update time range if start is out of range', async () => {
-      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(defaultTimeRange, onChangeTimeRange, View.MONTH, 'utc'));
 
       await act(async () => result.current.onChangeView(View.WEEK));
 
@@ -330,7 +345,7 @@ describe('Use Calendar Range', () => {
         from: dateTime(dayjs(getSafeDate()).subtract(1, 'month').toDate()),
         to: dateTime(dayjs(getSafeDate()).toDate()),
       };
-      const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange));
+      const { result } = renderHook(() => useCalendarRange(timeRange, onChangeTimeRange, View.MONTH, 'browser'));
 
       await act(async () => result.current.onChangeView(View.DAY));
 

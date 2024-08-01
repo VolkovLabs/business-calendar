@@ -10,17 +10,17 @@
 
 ## Introduction
 
-Business Calendar Panel is a Grafana plugin that displays events from various data sources.
+Business Calendar is a Grafana plugin that displays events from various data sources.
 
 [![Business Calendar 3.1.0 | Overview and detailed tutorial | Display dates and time in Grafana](https://raw.githubusercontent.com/volkovlabs/business-calendar/main/img/business.png)](https://youtu.be/CvLqyY2fQfo)
 
 ## Requirements
 
-- Business Calendar Panel 3.X requires **Grafana 10** or **Grafana 11**.
-- Calendar Panel 2.X requires **Grafana 9.2** or **Grafana 10**.
-- Calendar Panel 1.X requires **Grafana 8.5** or **Grafana 9**.
+- Business Calendar panel 3.X requires **Grafana 10** or **Grafana 11**.
+- Calendar panel 2.X requires **Grafana 9.2** or **Grafana 10**.
+- Calendar panel 1.X requires **Grafana 8.5** or **Grafana 9**.
 
-You can install the Business Calendar Panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
+You can install the Business Calendar panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
 
 For the latter, please use the following command:
 

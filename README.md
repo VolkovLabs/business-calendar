@@ -1,26 +1,26 @@
-# Business Calendar panel for Grafana
+# Business Calendar for Grafana
 
-![Calendar](https://github.com/VolkovLabs/volkovlabs-calendar-panel/raw/main/src/img/screenshot.png)
+![Calendar](https://github.com/VolkovLabs/business-calendar/raw/main/src/img/screenshot.png)
 
 ![Grafana](https://img.shields.io/badge/Grafana-11.1-orange)
-![CI](https://github.com/volkovlabs/volkovlabs-calendar-panel/workflows/CI/badge.svg)
-![E2E](https://github.com/volkovlabs/volkovlabs-calendar-panel/workflows/E2E/badge.svg)
-[![codecov](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel/branch/main/graph/badge.svg?token=0m6f0ktUar)](https://codecov.io/gh/VolkovLabs/volkovlabs-calendar-panel)
-[![CodeQL](https://github.com/VolkovLabs/volkovlabs-calendar-panel/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/VolkovLabs/volkovlabs-calendar-panel/actions/workflows/codeql-analysis.yml)
+![CI](https://github.com/volkovlabs/business-calendar/workflows/CI/badge.svg)
+![E2E](https://github.com/volkovlabs/business-calendar/workflows/E2E/badge.svg)
+[![codecov](https://codecov.io/gh/VolkovLabs/business-calendar/branch/main/graph/badge.svg)](https://codecov.io/gh/VolkovLabs/business-calendar)
+[![CodeQL](https://github.com/VolkovLabs/business-calendar/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/VolkovLabs/business-calendar/actions/workflows/codeql-analysis.yml)
 
 ## Introduction
 
-Business Calendar Panel is a Grafana plugin that displays events from various data sources.
+Business Calendar panel is a Grafana plugin that displays events from various data sources.
 
-[![Business Calendar 3.1.0 | Overview and detailed tutorial | Display dates and time in Grafana](https://raw.githubusercontent.com/volkovlabs/volkovlabs-calendar-panel/main/img/business.png)](https://youtu.be/CvLqyY2fQfo)
+[![Business Calendar 3.1.0 | Overview and detailed tutorial | Display dates and time in Grafana](https://raw.githubusercontent.com/volkovlabs/business-calendar/main/img/business.png)](https://youtu.be/CvLqyY2fQfo)
 
 ## Requirements
 
-- Business Calendar Panel 3.X requires **Grafana 10** or **Grafana 11**.
-- Calendar Panel 2.X requires **Grafana 9.2** or **Grafana 10**.
-- Calendar Panel 1.X requires **Grafana 8.5** or **Grafana 9**.
+- Business Calendar panel 3.X requires **Grafana 10** or **Grafana 11**.
+- Calendar panel 2.X requires **Grafana 9.2** or **Grafana 10**.
+- Calendar panel 1.X requires **Grafana 8.5** or **Grafana 9**.
 
-You can install the Business Calendar Panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
+You can install the Business Calendar panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
 
 For the latter, please use the following command:
 
@@ -58,11 +58,11 @@ The collection aims to solve the most frequent business tasks by providing an in
 
 We're looking forward to hearing from you. You can use different ways to get in touch with us.
 
-- Ask a question, request a new feature, or report an issue at [GitHub issues](https://github.com/volkovlabs/volkovlabs-calendar-panel/issues).
+- Ask a question, request a new feature, or report an issue at [GitHub issues](https://github.com/volkovlabs/business-calendar/issues).
 - Subscribe to our [YouTube Channel](https://www.youtube.com/@volkovlabs) and leave your comments.
 - Sponsor our open-source plugins for Grafana at [GitHub Sponsor](https://github.com/sponsors/VolkovLabs).
 - Support our project by starring the repository.
 
 ## License
 
-Apache License Version 2.0, see [LICENSE](https://github.com/volkovlabs/volkovlabs-calendar-panel/blob/main/LICENSE).
+Apache License Version 2.0, see [LICENSE](https://github.com/volkovlabs/business-calendar/blob/main/LICENSE).

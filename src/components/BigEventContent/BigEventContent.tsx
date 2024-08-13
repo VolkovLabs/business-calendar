@@ -147,15 +147,22 @@ export const BigEventContent: React.FC<Props> = ({ event, localizer, isMonth = f
       theme="info-alt"
       placement="auto"
       interactive
-      content={
-        <EventDetails
-          event={activeEvent}
-          fields={options.displayFields}
-          locationLabel={options.locationLabel}
-          preformattedDescription={options.preformattedDescription}
-          isForTooltip
-        />
-      }
+      content={() => (
+        <div
+          data-testid={TEST_IDS.eventContent.tooltipContentWrap}
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
+          <EventDetails
+            event={activeEvent}
+            fields={options.displayFields}
+            locationLabel={options.locationLabel}
+            preformattedDescription={options.preformattedDescription}
+            isForTooltip
+          />
+        </div>
+      )}
     >
       {eventContentElement}
     </Tooltip>

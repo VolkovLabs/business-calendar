@@ -358,4 +358,66 @@ describe('Big Event Content', () => {
     expect(selectors.month(true)).not.toBeInTheDocument();
     expect(selectors.agenda(true)).not.toBeInTheDocument();
   });
+
+  describe('Click on Tooltip', () => {
+    it('Should call stopPropagation on tooltip body click', () => {
+      const onClick = jest.fn();
+
+      const eventStopPropagationSpy = jest.spyOn(Event.prototype, 'stopPropagation');
+      const event = {
+        title: '123',
+        start: new Date('2020-02-02 02:00'),
+        end: new Date('2020-02-02 02:30'),
+        resource: {
+          location: 'Room',
+          labels: ['111', '222'],
+          links: [
+            {
+              href: 'test.com',
+              title: 'Link 1',
+              onClick: onClick,
+            },
+          ],
+        },
+      };
+      const options = {
+        ...defaultOptions,
+        event: event,
+        options: {
+          ...defaultOptions.options,
+          showEventTooltip: true,
+        },
+      };
+
+      render(
+        getComponent({
+          ...options,
+          isMonth: true,
+        })
+      );
+
+      /**
+       * Check event
+       */
+      expect(screen.getByText('123')).toBeInTheDocument();
+      expect(selectors.month(true)).toBeInTheDocument();
+
+      /**
+       * Hover on element
+       */
+      fireEvent.mouseEnter(selectors.month());
+
+      expect(screen.getByText('Link 1')).toBeInTheDocument();
+      expect(selectors.tooltipContentWrap()).toBeInTheDocument();
+
+      fireEvent.click(selectors.tooltipContentWrap());
+
+      /**
+       * Call onClick on link should not be triggered
+       */
+      expect(onClick).toHaveBeenCalledTimes(0);
+
+      expect(eventStopPropagationSpy).toHaveBeenCalledTimes(2);
+    });
+  });
 });

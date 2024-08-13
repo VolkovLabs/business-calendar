@@ -50,6 +50,7 @@ export const TEST_IDS = {
     month: 'data-testid event-content month',
     longDuration: 'data-testid event-content long-duration',
     averageDuration: 'data-testid event-content average-duration',
+    tooltipContentWrap: 'data-testid event-content tooltip-content-wrap',
   },
   eventDetails: {
     root: 'data-testid event-details',

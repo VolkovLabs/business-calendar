@@ -79,19 +79,25 @@
         "colors": "event",
         "dateFormat": "inherit",
         "defaultView": "month",
-        "descriptionField": "description",
+        "descriptionField": ["description"],
+        "displayFields": ["description", "labels", "links", "location", "text", "time"],
         "labelFields": ["slug", "version"],
         "locationField": "version",
+        "locationLabel": "",
+        "preformattedDescription": false,
         "quickLinks": false,
         "scrollToTime": {
           "hours": 0,
           "minutes": 0
         },
+        "showEventTooltip": true,
+        "showMonthTime": true,
         "textField": "name",
         "timeField": "updatedAt",
+        "timeRangeType": "default",
         "views": ["day", "week", "month", "work_week", "year", "agenda"]
       },
-      "pluginVersion": "3.0.0",
+      "pluginVersion": "3.6.0",
       "targets": [
         {
           "datasource": {
@@ -163,8 +169,7 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {

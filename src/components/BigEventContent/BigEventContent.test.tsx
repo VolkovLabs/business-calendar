@@ -418,6 +418,11 @@ describe('Big Event Content', () => {
       expect(onClick).toHaveBeenCalledTimes(0);
 
       expect(eventStopPropagationSpy).toHaveBeenCalledTimes(2);
+
+      /**
+       * Should not open Details Drawer
+       */
+      expect(screen.queryByText('Event Details')).not.toBeInTheDocument();
     });
   });
 });

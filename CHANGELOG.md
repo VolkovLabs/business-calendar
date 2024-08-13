@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Update tooltip to prevent opening drawer when selecting text (#235)
+
 ## 3.5.0 (2024-07-25)
 
 ### Features / Enhancements

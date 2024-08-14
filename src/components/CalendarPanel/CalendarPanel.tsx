@@ -31,7 +31,7 @@ export const CalendarPanel: React.FC<Props> = ({
   const langInstance = useMemo(() => {
     return i18nextInstance(options?.dateFormat);
   }, [options?.dateFormat]);
-  console.log('console >> langInstance', langInstance);
+
   /**
    * Time Range Hook
    */

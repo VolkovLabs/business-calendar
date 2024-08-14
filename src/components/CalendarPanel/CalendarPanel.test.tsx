@@ -5,7 +5,6 @@ import React from 'react';
 
 import { DEFAULT_VIEWS } from '../../constants';
 import { useAnnotationEvents } from '../../hooks';
-import { i18nextInstance } from '../../i18n';
 import { CalendarOptions, DateFormat } from '../../types';
 import { BigCalendar } from '../BigCalendar';
 import { CalendarPanel } from './CalendarPanel';

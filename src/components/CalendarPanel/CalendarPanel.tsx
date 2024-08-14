@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
 import { useAnnotationEvents, useCalendarEvents, useColors, useEventFrames, useTimeRange } from '../../hooks';
-import { i18nextInstance } from '../../i18n/config';
+import { i18nextInstance } from '../../i18n';
 import { CalendarOptions } from '../../types';
 import { BigCalendar } from '../BigCalendar';
 
@@ -31,7 +31,7 @@ export const CalendarPanel: React.FC<Props> = ({
   const langInstance = useMemo(() => {
     return i18nextInstance(options?.dateFormat);
   }, [options?.dateFormat]);
-
+  console.log('console >> langInstance', langInstance);
   /**
    * Time Range Hook
    */

@@ -5,6 +5,7 @@ import React from 'react';
 
 import { DEFAULT_VIEWS } from '../../constants';
 import { useAnnotationEvents } from '../../hooks';
+import { i18nextInstance } from '../../i18n';
 import { CalendarOptions, DateFormat } from '../../types';
 import { BigCalendar } from '../BigCalendar';
 import { CalendarPanel } from './CalendarPanel';
@@ -16,6 +17,14 @@ jest.mock('@grafana/runtime', () => ({
   getBackendSrv: jest.fn(() => ({
     get: jest.fn(() => Promise.resolve()),
   })),
+}));
+
+/**
+ * Mock @grafana/runtime
+ */
+jest.mock('../../i18n', () => ({
+  ...jest.requireActual('../../i18n'),
+  i18nextInstance: jest.fn(() => 'en'),
 }));
 
 /**

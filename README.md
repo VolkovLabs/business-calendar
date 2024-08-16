@@ -40,11 +40,11 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 ## Documentation
 
-| Section                                                                           | Description                                           |
-| --------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| [Events](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/events/)         | Explains how to set up a calendar to display events.  |
-| [Features](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/features/)     | Explains the plugin's features.                       |
-| [Release Notes](https://volkovlabs.io/plugins/volkovlabs-calendar-panel/release/) | Stay up to date with the latest features and updates. |
+| Section                                                                   | Description                                           |
+| ------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [Events](https://volkovlabs.io/plugins/business-calendar/events/)         | Explains how to set up a calendar to display events.  |
+| [Features](https://volkovlabs.io/plugins/business-calendar/features/)     | Explains the plugin's features.                       |
+| [Release Notes](https://volkovlabs.io/plugins/business-calendar/release/) | Stay up to date with the latest features and updates. |
 
 ## Business Suite for Grafana
 

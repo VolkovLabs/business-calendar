@@ -1,10 +1,11 @@
 # Changelog
 
-## 3.6.0 (IN PROGRESS)
+## 3.6.0 (2024-08-16)
 
 ### Features / Enhancements
 
 - Update tooltip to prevent opening drawer when selecting text (#235)
+- Update Date time format for different languages (#236)
 
 ## 3.5.0 (2024-07-25)
 

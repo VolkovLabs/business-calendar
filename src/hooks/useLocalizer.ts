@@ -76,6 +76,9 @@ export const useLocalizer = (options: CalendarOptions) => {
 
   const localeDate = getLocaleData();
   const language = getUserLanguage();
+  /**
+   * Is used for days of the week and month names
+   */
   const [dayjsLocale, setDayjsLocale] = useState(dayjsLocales.en);
 
   /**

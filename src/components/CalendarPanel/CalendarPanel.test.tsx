@@ -19,6 +19,14 @@ jest.mock('@grafana/runtime', () => ({
 }));
 
 /**
+ * Mock @grafana/runtime
+ */
+jest.mock('../../i18n', () => ({
+  ...jest.requireActual('../../i18n'),
+  i18nextInstance: jest.fn(() => 'en'),
+}));
+
+/**
  * Mock timeRange for useTimeRange
  */
 const timeRange = {

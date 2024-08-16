@@ -1,7 +1,9 @@
 import { PanelProps } from '@grafana/data';
 import React, { useMemo } from 'react';
+import { I18nextProvider } from 'react-i18next';
 
 import { useAnnotationEvents, useCalendarEvents, useColors, useEventFrames, useTimeRange } from '../../hooks';
+import { i18nextInstance } from '../../i18n';
 import { CalendarOptions } from '../../types';
 import { BigCalendar } from '../BigCalendar';
 
@@ -23,6 +25,13 @@ export const CalendarPanel: React.FC<Props> = ({
   height,
   eventBus,
 }) => {
+  /**
+   * Instance for translations
+   */
+  const langInstance = useMemo(() => {
+    return i18nextInstance(options?.dateFormat);
+  }, [options?.dateFormat]);
+
   /**
    * Time Range Hook
    */
@@ -64,13 +73,15 @@ export const CalendarPanel: React.FC<Props> = ({
    * Big Calendar
    */
   return (
-    <BigCalendar
-      events={allEvents}
-      timeRange={timeRange}
-      onChangeTimeRange={onChangeTimeRange}
-      height={height}
-      options={options}
-      timeZone={timeZone}
-    />
+    <I18nextProvider i18n={langInstance}>
+      <BigCalendar
+        events={allEvents}
+        timeRange={timeRange}
+        onChangeTimeRange={onChangeTimeRange}
+        height={height}
+        options={options}
+        timeZone={timeZone}
+      />
+    </I18nextProvider>
   );
 };

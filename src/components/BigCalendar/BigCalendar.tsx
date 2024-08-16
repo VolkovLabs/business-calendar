@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { TEST_IDS } from '../../constants';
 import { useBigCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
-import { returnCalendarEvent } from '../../utils';
+import { getLanguage, returnCalendarEvent } from '../../utils';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
@@ -235,6 +235,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
       <Global styles={libStyles.global} />
       <Global styles={styles.global} />
       <Calendar
+        culture={getLanguage(options?.dateFormat)}
         key={height + (options.textSize ?? 0)}
         dayLayoutAlgorithm="no-overlap"
         localizer={localizer}

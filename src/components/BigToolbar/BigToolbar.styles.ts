@@ -11,6 +11,7 @@ export const getStyles = (theme: GrafanaTheme2) => {
       justify-content: space-between;
       align-items: center;
       margin: 0 ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)};
+      overflow: auto;
     `,
     div: css`
       display: flex;

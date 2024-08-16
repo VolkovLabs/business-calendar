@@ -5,6 +5,7 @@
 ### Features / Enhancements
 
 - Update tooltip to prevent opening drawer when selecting text (#235)
+- Update Date time format for different languages (#236)
 
 ## 3.5.0 (2024-07-25)
 

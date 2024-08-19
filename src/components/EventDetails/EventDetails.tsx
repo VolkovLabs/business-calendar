@@ -105,6 +105,11 @@ export const EventDetails: React.FC<Props> = ({
    */
   const tags = useMemo(() => event.labels.flatMap((label) => label.split(',')), [event.labels]);
 
+  /**
+   * Action links
+   */
+  const actionLinks = useMemo(() => event.links?.filter((link) => link.href), [event.links]);
+
   return (
     <>
       <Card onClick={onClick} data-testid={TEST_IDS.eventDetails.root}>
@@ -123,32 +128,30 @@ export const EventDetails: React.FC<Props> = ({
           </Card.Tags>
         )}
 
-        {showFullInfo && (
+        {showFullInfo && !!actionLinks?.length && (
           <Card.Actions>
             {isFieldVisible(EventField.LINKS, fields) &&
-              event.links
-                ?.filter((link) => link.href)
-                .map((link, index) => (
-                  <LinkButton
-                    key={index}
-                    href={link.href}
-                    target={link.target}
-                    variant={'secondary'}
-                    onClick={(e) => {
-                      link.onClick && link.onClick(e);
+              actionLinks.map((link, index) => (
+                <LinkButton
+                  key={index}
+                  href={link.href}
+                  target={link.target}
+                  variant={'secondary'}
+                  onClick={(e) => {
+                    link.onClick && link.onClick(e);
 
-                      /**
-                       * Stop Propagation
-                       */
-                      if (isForTooltip) {
-                        e.stopPropagation();
-                      }
-                    }}
-                    aria-label={TEST_IDS.eventDetails.link}
-                  >
-                    {link.title}
-                  </LinkButton>
-                ))}
+                    /**
+                     * Stop Propagation
+                     */
+                    if (isForTooltip) {
+                      e.stopPropagation();
+                    }
+                  }}
+                  aria-label={TEST_IDS.eventDetails.link}
+                >
+                  {link.title}
+                </LinkButton>
+              ))}
           </Card.Actions>
         )}
       </Card>

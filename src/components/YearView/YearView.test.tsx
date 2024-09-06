@@ -75,6 +75,144 @@ describe('Year View', () => {
     expect(monthSelectors.nextDate(false, 10, 5)).toBeInTheDocument();
   });
 
+  it('Should render with events', () => {
+    /**
+     * Events
+     */
+    const events = [
+      {
+        start: new Date('2023-09-09T11:15:00'),
+        end: new Date('2023-09-09T12:15:00'),
+        title: 'Event 1',
+        resource: {
+          color: '#7EB26D',
+        },
+      },
+      {
+        start: new Date('2023-09-09T10:15:00'),
+        end: new Date('2023-09-09T11:15:00'),
+        title: 'Event 1',
+        resource: {
+          color: '#EAB839',
+        },
+      },
+    ];
+    render(getComponent({ events }));
+
+    expect(selectors.root()).toBeInTheDocument();
+
+    const month = selectors.month(false, 8);
+    expect(month).toBeInTheDocument();
+
+    const monthSelectors = getSelectors(within(month));
+    expect(monthSelectors.prevDate(false, 7, 28)).toBeInTheDocument();
+    expect(monthSelectors.nextDate(false, 9, 1)).toBeInTheDocument();
+
+    expect(monthSelectors.date(false, 9)).toBeInTheDocument();
+
+    /**
+     * Date with events
+     */
+    const dateWithEvents = monthSelectors.date(false, 9);
+
+    /**
+     * Dots
+     */
+    const spans = dateWithEvents.querySelectorAll('span');
+
+    /**
+     * Should be 2 span elements
+     */
+    expect(spans.length).toBeGreaterThan(0);
+    expect(spans.length).toBe(2);
+
+    /**
+     * Date without events
+     */
+    const dateWithoutEvents = monthSelectors.date(false, 10);
+
+    /**
+     * Dots
+     */
+    const spansNone = dateWithoutEvents.querySelectorAll('span');
+
+    /**
+     * Should be 0
+     */
+    expect(spansNone.length).toBeLessThan(1);
+  });
+
+  it('Should render plus sign', () => {
+    /**
+     * Events
+     */
+    const events = [
+      {
+        start: new Date('2023-09-09T11:15:00'),
+        end: new Date('2023-09-09T12:15:00'),
+        title: 'Event 1',
+        resource: {
+          color: '#7EB26D',
+        },
+      },
+      {
+        start: new Date('2023-09-09T10:15:00'),
+        end: new Date('2023-09-09T11:15:00'),
+        title: 'Event 1',
+        resource: {
+          color: '#EAB839',
+        },
+      },
+      {
+        start: new Date('2023-09-09T09:15:00'),
+        end: new Date('2023-09-09T10:15:00'),
+        title: 'Event 1',
+        resource: {
+          color: '#EAB839',
+        },
+      },
+      {
+        start: new Date('2023-09-09T08:15:00'),
+        end: new Date('2023-09-09T09:15:00'),
+        title: 'Event 1',
+        resource: {
+          color: '#EAB839',
+        },
+      },
+    ];
+    render(getComponent({ events }));
+
+    expect(selectors.root()).toBeInTheDocument();
+
+    const month = selectors.month(false, 8);
+    expect(month).toBeInTheDocument();
+
+    const monthSelectors = getSelectors(within(month));
+
+    expect(monthSelectors.date(false, 9)).toBeInTheDocument();
+
+    /**
+     * Date with events
+     */
+    const dateWithEvents = monthSelectors.date(false, 9);
+
+    /**
+     * Dots
+     */
+    const spans = dateWithEvents.querySelectorAll('span');
+
+    /**
+     * Should be 2 span elements
+     */
+    expect(spans.length).toBeGreaterThan(0);
+    expect(spans.length).toBe(3);
+
+    /**
+     * Should be + sign
+     */
+    expect(spans[2]).toHaveTextContent('+');
+  });
+
   it('Should show current day', () => {
     render(getComponent({}));
 

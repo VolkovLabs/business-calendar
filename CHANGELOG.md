@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.7.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Updated yearly view to display events (#240)
+
 ## 3.6.0 (2024-08-19)
 
 ### Features / Enhancements

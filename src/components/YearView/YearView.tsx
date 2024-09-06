@@ -1,6 +1,6 @@
 import { useStyles2 } from '@grafana/ui';
 import React, { useMemo } from 'react';
-import { CalendarProps, DateLocalizer, Navigate, NavigateAction } from 'react-big-calendar';
+import { CalendarProps, DateLocalizer, Event, Navigate, NavigateAction } from 'react-big-calendar';
 
 import { TEST_IDS } from '../../constants';
 import { getStyles } from './YearView.styles';
@@ -9,7 +9,7 @@ import { YearViewMonth } from './YearViewMonth';
 /**
  * Year View
  */
-const YearView = ({ date, localizer, ...restProps }: CalendarProps) => {
+const YearView = ({ date, localizer, events, ...restProps }: CalendarProps) => {
   /**
    * Styles
    */
@@ -30,16 +30,39 @@ const YearView = ({ date, localizer, ...restProps }: CalendarProps) => {
   }, [localizer]);
 
   /**
+   * Monthly events
+   */
+  const eventsByMonth = useMemo(() => {
+    const monthsEvents: Record<number, Event[]> = {};
+    for (let i = 0; i < 12; i++) {
+      monthsEvents[i] = [];
+    }
+
+    if (events) {
+      events.forEach((event) => {
+        if (event.start) {
+          const monthCurrent = event.start.getMonth();
+          monthsEvents[monthCurrent].push(event);
+        }
+      });
+    }
+
+    return monthsEvents;
+  }, [events]);
+
+  /**
    * Months
    */
   const months = [];
   const firstMonth = localizer.startOf(date as Date, 'year');
 
   for (let i = 0; i < 12; i++) {
+    const month = localizer.add(firstMonth, i, 'month').getMonth();
     months.push(
       <YearViewMonth
         key={i + 1}
         date={localizer.add(firstMonth, i, 'month')}
+        monthEvents={eventsByMonth[month]}
         localizer={localizer}
         {...restProps}
         weekNames={weekNames}

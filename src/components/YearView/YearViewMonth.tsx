@@ -1,6 +1,6 @@
 import { useStyles2 } from '@grafana/ui';
 import React, { useEffect, useState } from 'react';
-import { CalendarProps } from 'react-big-calendar';
+import { CalendarProps, Event } from 'react-big-calendar';
 
 import { TEST_IDS } from '../../constants';
 import { View } from '../../types';
@@ -14,12 +14,13 @@ import { YearViewDate } from './YearViewDate';
 interface Props extends Omit<CalendarProps, 'date'> {
   date: Date;
   weekNames: string[];
+  monthEvents: Event[];
 }
 
 /**
  * Month
  */
-export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, getNow, weekNames }) => {
+export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, getNow, weekNames, monthEvents }) => {
   /**
    * Styles
    */
@@ -47,20 +48,24 @@ export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, g
       ))}
       {month.weeks.map(({ week }, index: number) => (
         <div key={index}>
-          {week.map((date, index) => (
-            <YearViewDate
-              key={index}
-              dateToRender={date}
-              dateOfMonth={month.currentDate}
-              onClick={(date: Date) => {
-                if (onDrillDown) {
-                  onDrillDown(date, View.YEAR as never);
-                }
-              }}
-              localizer={localizer}
-              getNow={getNow!}
-            />
-          ))}
+          {week.map((date, index) => {
+            const dayEvents = monthEvents.filter((event) => event.start?.getDate() === date.getDate());
+            return (
+              <YearViewDate
+                key={index}
+                dateToRender={date}
+                dateOfMonth={month.currentDate}
+                dayEvents={dayEvents}
+                onClick={(date: Date) => {
+                  if (onDrillDown) {
+                    onDrillDown(date, View.YEAR as never);
+                  }
+                }}
+                localizer={localizer}
+                getNow={getNow!}
+              />
+            );
+          })}
         </div>
       ))}
     </div>

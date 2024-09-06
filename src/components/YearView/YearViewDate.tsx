@@ -1,7 +1,7 @@
-import { cx } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
-import React from 'react';
-import { CalendarProps } from 'react-big-calendar';
+import React, { useMemo } from 'react';
+import { CalendarProps, Event } from 'react-big-calendar';
 
 import { TEST_IDS } from '../../constants';
 import { getStyles } from './YearView.styles';
@@ -24,12 +24,14 @@ interface Props extends Required<Pick<CalendarProps, 'getNow' | 'localizer'>> {
    * On Click
    */
   onClick: (date: Date) => void;
+
+  dayEvents: Event[];
 }
 
 /**
  * Year View Date
  */
-export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, localizer, getNow, onClick }) => {
+export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, dayEvents, localizer, getNow, onClick }) => {
   /**
    * Styles
    */
@@ -39,6 +41,41 @@ export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, local
    * Is Today
    */
   const isToday = localizer.isSameDate(dateToRender, getNow() as Date);
+
+  const dots = useMemo(() => {
+    if (dayEvents.length <= 3) {
+      return dayEvents.map((event) => (
+        <span
+          key={event.start?.toISOString()}
+          className={cx(
+            styles.dot,
+            css`
+              background-color: ${event.resource.color};
+            `
+          )}
+        ></span>
+      ));
+    }
+
+    const firstEvents = dayEvents.slice(0, 2);
+
+    return (
+      <>
+        {firstEvents.map((event) => (
+          <span
+            key={event.start?.toISOString()}
+            className={cx(
+              styles.dot,
+              css`
+                background-color: ${event.resource.color};
+              `
+            )}
+          ></span>
+        ))}
+        <span className={styles.plus}>+</span>
+      </>
+    );
+  }, [dayEvents, styles]);
 
   /**
    * Formatted Date
@@ -83,7 +120,10 @@ export const YearViewDate: React.FC<Props> = ({ dateToRender, dateOfMonth, local
       onClick={() => onClick(dateToRender)}
       data-testid={isToday ? TEST_IDS.yearView.currentDate : TEST_IDS.yearView.date(dateToRender.getDate())}
     >
-      {text}
+      <div className={styles.dateContent}>
+        {text}
+        <div className={styles.dots}>{dots}</div>
+      </div>
     </button>
   );
 };

@@ -30,13 +30,41 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     line-height: 30px;
   `,
 
+  dots: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+
+  dot: css`
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    margin-right: 1px;
+    display: inline-block;
+  `,
+
+  plus: css`
+    font-weight: 700;
+    line-height: 5px;
+    margin-left: 1px;
+    height: 6px;
+    width: 6px;
+    font-size: 10px;
+  `,
+
   date: css`
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background: ${theme.colors.background.primary};
     border-radius: 50px;
     border: none;
     outline: none;
+  `,
+
+  dateContent: css`
+    display: flex;
+    flex-direction: column;
   `,
 
   inMonth: css`

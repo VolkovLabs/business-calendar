@@ -29,11 +29,15 @@ const YearView = ({ date, localizer, events, ...restProps }: CalendarProps) => {
     return weekRange.map((date) => localizer.format(date, 'yearWeekFormat'));
   }, [localizer]);
 
+  /**
+   * Monthly events
+   */
   const eventsByMonth = useMemo(() => {
     const monthsEvents: Record<number, Event[]> = {};
     for (let i = 0; i < 12; i++) {
       monthsEvents[i] = [];
     }
+
     if (events) {
       events.forEach((event) => {
         if (event.start) {

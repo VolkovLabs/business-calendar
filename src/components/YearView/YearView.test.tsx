@@ -30,7 +30,7 @@ describe('Year View', () => {
    * Mock Format
    */
   localizer.format = jest.fn((date, format) => {
-    return dayjs(date).format((localizer.formats as any)[format]);
+    return dayjs(date as Date).format((localizer.formats as any)[format]);
   });
 
   /**

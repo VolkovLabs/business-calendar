@@ -5,6 +5,7 @@
 ### Features / Enhancements
 
 - Updated yearly view to display events (#240)
+- Updated to Grafana 11.2 and dependencies (#241)
 
 ## 3.6.0 (2024-08-19)
 

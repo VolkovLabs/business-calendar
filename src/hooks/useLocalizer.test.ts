@@ -47,7 +47,7 @@ describe('Use Localizer', () => {
 
       expect(result.current.messages.noEventsInRange).toEqual(t('localizerMessages.noEventsInRange'));
       if (result.current.messages.showMore) {
-        expect(result.current.messages.showMore(10)).toEqual(t('localizerMessages.showMore', { total: 10 }));
+        expect(result.current.messages.showMore(10, [], [])).toEqual(t('localizerMessages.showMore', { total: 10 }));
       }
     });
   });

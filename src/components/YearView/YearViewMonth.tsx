@@ -49,7 +49,12 @@ export const YearViewMonth: React.FC<Props> = ({ date, localizer, onDrillDown, g
       {month.weeks.map(({ week }, index: number) => (
         <div key={index}>
           {week.map((date, index) => {
-            const dayEvents = monthEvents.filter((event) => event.start?.getDate() === date.getDate());
+            const dayEvents = monthEvents.filter((event) => {
+              return (
+                (event.start?.getDate() === date.getDate() && event.start?.getMonth() === date.getMonth()) ||
+                (event.end?.getDate() === date.getDate() && event.end?.getMonth() === date.getMonth())
+              );
+            });
             return (
               <YearViewDate
                 key={index}

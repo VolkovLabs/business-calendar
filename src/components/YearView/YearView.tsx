@@ -41,8 +41,13 @@ const YearView = ({ date, localizer, events, ...restProps }: CalendarProps) => {
     if (events) {
       events.forEach((event) => {
         if (event.start) {
-          const monthCurrent = event.start.getMonth();
-          monthsEvents[monthCurrent].push(event);
+          const monthStart = event.start.getMonth();
+          monthsEvents[monthStart].push(event);
+          const monthEnd = event.end?.getMonth();
+
+          if (monthEnd && monthEnd !== monthStart) {
+            monthsEvents[monthEnd].push(event);
+          }
         }
       });
     }

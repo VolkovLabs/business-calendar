@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.0 (IN PROGRESS)
+
+### Features / Enhancements
+
+- Add Multi Day Events in Yearly View (#243)
+
 ## 3.7.0 (2024-09-15)
 
 ### Features / Enhancements

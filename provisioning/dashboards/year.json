@@ -1,0 +1,209 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "default": false,
+        "type": "marcusolsson-static-datasource",
+        "uid": "U0HP2Rv4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#b1b3b5",
+                "value": null
+              },
+              {
+                "color": "#9d70f9",
+                "value": 50
+              },
+              {
+                "color": "#eb4444",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 17,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "annotations": true,
+        "annotationsLimit": 100,
+        "annotationsType": "",
+        "colorField": "Color",
+        "colors": "event",
+        "dateFormat": "inherit",
+        "defaultView": "year",
+        "descriptionField": ["description"],
+        "displayFields": ["description", "labels", "links", "location", "text", "time"],
+        "endTimeField": "end",
+        "labelFields": ["labels"],
+        "locationLabel": "",
+        "preformattedDescription": false,
+        "quickLinks": false,
+        "scrollToTime": {
+          "hours": 0,
+          "minutes": 0
+        },
+        "showEventTooltip": false,
+        "showMonthTime": true,
+        "textField": "text",
+        "timeField": "start",
+        "timeRangeType": "default",
+        "views": ["day", "week", "month", "year", "work_week", "agenda"]
+      },
+      "pluginVersion": "3.7.0",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-static-datasource",
+            "uid": "U0HP2Rv4z"
+          },
+          "fields": [
+            {
+              "jsonPath": ""
+            }
+          ],
+          "frame": {
+            "fields": [
+              {
+                "config": {},
+                "name": "text",
+                "type": "string",
+                "values": [
+                  "Title",
+                  "Title 2",
+                  "Title 3",
+                  "Title 4",
+                  "Title 10-1",
+                  "Title 10-2",
+                  "Title 10-3",
+                  "Title 11-1",
+                  "Title 11-2",
+                  "Title 11-3",
+                  "Title 11-4",
+                  "Title 11-5"
+                ]
+              },
+              {
+                "config": {},
+                "name": "description",
+                "type": "string",
+                "values": [
+                  "Description 1",
+                  "Description 2",
+                  "Description 3",
+                  "Description 4",
+                  "desc 10-1",
+                  "desc 10-2",
+                  "desc 10-2",
+                  "desc 11-2",
+                  "desc 11-2",
+                  "desc 11-3",
+                  "desc 11-4",
+                  "desc 11-5"
+                ]
+              },
+              {
+                "config": {},
+                "name": "start",
+                "type": "time",
+                "values": [
+                  1726739602000, 1726739641128, 1726826064159, 1726480464000, 1725962429645, 1725962429645,
+                  1725962429645, 1726048829645, 1726048829645, 1726048829645, 1726048829645, 1727690429645
+                ]
+              },
+              {
+                "config": {},
+                "name": "end",
+                "type": "time",
+                "values": [
+                  1726754002130, 1726746841128, 1726836864159, 1726566864617, 1725962429645, 1725962429645,
+                  1725962429645, 1726048829645, 1726048829645, 1726048829645, 1726048829645, 1727776829645
+                ]
+              },
+              {
+                "config": {},
+                "name": "labels",
+                "type": "string",
+                "values": ["", "", "", "", "", "", "", "", "", "", "", ""]
+              },
+              {
+                "config": {},
+                "name": "Color",
+                "type": "number",
+                "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+              }
+            ],
+            "meta": {},
+            "name": "Data"
+          },
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Weekly",
+      "type": "marcusolsson-calendar-panel"
+    }
+  ],
+  "refresh": "",
+  "revision": 1,
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Year view",
+  "uid": "edycxlo8y02rkc",
+  "version": 9,
+  "weekStart": ""
+}

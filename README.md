@@ -61,7 +61,7 @@ The collection aims to solve the most frequent business tasks by providing an in
 
 [![Business Suite for Grafana](https://raw.githubusercontent.com/VolkovLabs/.github/main/business.png)](https://volkovlabs.io/plugins/)
 
-### Business Suite Enterprise
+### Enterprise Support
 
 With the [Business Suite Enterprise](https://volkovlabs.io/pricing/), you're not just getting a product, you're getting a complete support system. You'll have a designated support team ready to tackle any issues.
 

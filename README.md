@@ -10,15 +10,17 @@
 
 ## Introduction
 
-Business Calendar panel is a Grafana plugin that displays events from various data sources.
+The Business Calendar panel is a Grafana plugin that displays events in a stylish calendar format. The data can come from various data sources.
 
 [![Business Calendar 3.1.0 | Overview and detailed tutorial | Display dates and time in Grafana](https://raw.githubusercontent.com/volkovlabs/business-calendar/main/img/business.png)](https://youtu.be/CvLqyY2fQfo)
 
 ## Requirements
 
-- Business Calendar panel 3.X requires **Grafana 10** or **Grafana 11**.
+- The Business Calendar panel 3.X requires **Grafana 10** or **Grafana 11**.
 - Calendar panel 2.X requires **Grafana 9.2** or **Grafana 10**.
 - Calendar panel 1.X requires **Grafana 8.5** or **Grafana 9**.
+
+## Getting Started
 
 You can install the Business Calendar panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
 
@@ -30,21 +32,26 @@ grafana-cli plugins install marcusolsson-calendar-panel
 
 ## Highlights
 
-- Displays events in a monthly, weekly, or daily view.
-- Query calendar events from any data source.
-- Supports the filtration of events by a time range.
-- Supports the event coloring based on thresholds.
-- Enables the opening of a data link instead of a sidebar when clicking an event.
+- Intuitive multi-language toolbar that allows you to:
+  - Switch between the **Day**, **Week**, **Month**, **Work Week**, **Year**, and **Agenda** views.
+  - Switch back to today's events.
+  - Display events from the previous and subsequent time ranges.
+- Fetch and combine event data from any data sources.
+- Event filter by a time range.
+- Event coloring based on the Grafana Thresholds.
+- Enables the opening of a data link instead of a sidebar when clicking on an event.
 - Enables the display of annotations across all dashboards for the specified period.
-- Supports Internationalization: Spanish, French, German, and Chinese
+- Supports Internationalization: Spanish, French, German, Portuguese, and Chinese.
 
 ## Documentation
 
-| Section                                                                   | Description                                           |
-| ------------------------------------------------------------------------- | ----------------------------------------------------- |
-| [Events](https://volkovlabs.io/plugins/business-calendar/events/)         | Explains how to set up a calendar to display events.  |
-| [Features](https://volkovlabs.io/plugins/business-calendar/features/)     | Explains the plugin's features.                       |
-| [Release Notes](https://volkovlabs.io/plugins/business-calendar/release/) | Stay up to date with the latest features and updates. |
+| Section                                                                              | Description                                                    |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| [Basic configuration](https://volkovlabs.io/plugins/business-calendar/basic-config/) | Explains plugin basics                                         |
+| [Configuration](https://volkovlabs.io/plugins/business-calendar/sections/)           | Describes configuration options                                |
+| [Features](https://volkovlabs.io/plugins/business-calendar/features/)                | Describes plugin's features                                    |
+| [Tutorials](https://volkovlabs.io/plugins/business-calendar/tutorials/)              | Easy to follow tutorials                                       |
+| [Release Notes](https://volkovlabs.io/plugins/business-calendar/release/)            | Allows to stay up to date with the latest features and updates |
 
 ## Business Suite for Grafana
 
@@ -54,14 +61,17 @@ The collection aims to solve the most frequent business tasks by providing an in
 
 [![Business Suite for Grafana](https://raw.githubusercontent.com/VolkovLabs/.github/main/business.png)](https://volkovlabs.io/plugins/)
 
-## Feedback
+### Business Suite Enterprise
 
-We're looking forward to hearing from you. You can use different ways to get in touch with us.
+With the [Business Suite Enterprise](https://volkovlabs.io/pricing/), you're not just getting a product, you're getting a complete support system. You'll have a designated support team ready to tackle any issues.
+
+You can contact us via Zendesk, receive priority in feature requests and bug fixes, meet with us for in-person consultation, and get access to the Business Intelligence. It's a package that's designed to make your life easier.
+
+## Always happy to hear from you
 
 - Ask a question, request a new feature, or report an issue at [GitHub issues](https://github.com/volkovlabs/business-calendar/issues).
-- Subscribe to our [YouTube Channel](https://www.youtube.com/@volkovlabs) and leave your comments.
-- Sponsor our open-source plugins for Grafana at [GitHub Sponsor](https://github.com/sponsors/VolkovLabs).
-- Support our project by starring the repository.
+- Subscribe to our [YouTube Channel](https://youtube.com/@volkovlabs) and leave your comments.
+- Become a [Business Suite sponsor](https://github.com/sponsors/VolkovLabs).
 
 ## License
 

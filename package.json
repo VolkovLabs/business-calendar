@@ -5,6 +5,7 @@
     "@grafana/data": "^11.2.0",
     "@grafana/runtime": "^11.2.0",
     "@grafana/ui": "^11.2.0",
+    "@volkovlabs/components": "^3.4.1",
     "@types/react-virtualized-auto-sizer": "^1.0.4",
     "dayjs": "^1.11.13",
     "i18next": "^23.15.1",

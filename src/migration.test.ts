@@ -125,7 +125,7 @@ describe('Migration', () => {
     expect(migratedOptions.colors).toEqual(ColorMode.THRESHOLDS);
   });
 
-  it('Should update colors options correctly', () => {
+  it('Should update colors options correctly via thresholds', () => {
     const panel = {
       options: {
         colors: ColorMode.FRAME,
@@ -144,6 +144,60 @@ describe('Migration', () => {
     const migratedOptions = getMigratedOptions(panel);
 
     expect(migratedOptions.colors).toEqual(ColorMode.THRESHOLDS);
+  });
+
+  it('Should update colors options correctly via overrides', () => {
+    const panel = {
+      options: {
+        colors: ColorMode.FRAME,
+        colorField: 'color',
+      },
+      fieldConfig: {
+        defaults: {
+          thresholds: {
+            steps: [{}],
+          },
+        },
+        overrides: [
+          {
+            matcher: {
+              options: 'color',
+            },
+          },
+        ],
+      },
+    } as any;
+
+    const migratedOptions = getMigratedOptions(panel);
+
+    expect(migratedOptions.colors).toEqual(ColorMode.THRESHOLDS);
+  });
+
+  it('Should not update colors options correctly via overrides if colorField doesn`t use in overrides', () => {
+    const panel = {
+      options: {
+        colors: ColorMode.FRAME,
+        colorField: 'color',
+      },
+      fieldConfig: {
+        defaults: {
+          thresholds: {
+            steps: [{}],
+          },
+        },
+        overrides: [
+          {
+            matcher: {
+              options: 'someField',
+            },
+          },
+        ],
+      },
+    } as any;
+
+    const migratedOptions = getMigratedOptions(panel);
+
+    expect(migratedOptions.colors).toEqual(ColorMode.FRAME);
   });
 
   it('Should not update colors options if set only base threshold value', () => {

@@ -35,6 +35,8 @@ interface OutdatedPanelOptions extends CalendarOptions {
 export const getMigratedOptions = (panel: PanelModel<OutdatedPanelOptions>): CalendarOptions => {
   const { ...options } = panel.options;
   const { overrides, defaults } = panel.fieldConfig;
+  const isColorFieldExistInOverrides =
+    !!overrides.length && overrides.some((override) => override.matcher.options === options.colorField);
 
   /**
    * Remove Legacy option autoScroll
@@ -70,7 +72,7 @@ export const getMigratedOptions = (panel: PanelModel<OutdatedPanelOptions>): Cal
   if (
     options.colors === ColorMode.FRAME &&
     options.colorField &&
-    (!!overrides.length || (defaults.thresholds && defaults.thresholds.steps?.length > 1))
+    (isColorFieldExistInOverrides || (defaults.thresholds && defaults.thresholds.steps?.length > 1))
   ) {
     options.colors = ColorMode.THRESHOLDS;
   }

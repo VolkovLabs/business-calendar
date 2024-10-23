@@ -1,6 +1,6 @@
 import { PanelModel } from '@grafana/data';
 
-import { CalendarOptions } from './types';
+import { CalendarOptions, ColorMode } from './types';
 
 /**
  * Outdated Panel Options
@@ -34,6 +34,7 @@ interface OutdatedPanelOptions extends CalendarOptions {
  */
 export const getMigratedOptions = (panel: PanelModel<OutdatedPanelOptions>): CalendarOptions => {
   const { ...options } = panel.options;
+  const { overrides, defaults } = panel.fieldConfig;
 
   /**
    * Remove Legacy option autoScroll
@@ -63,5 +64,15 @@ export const getMigratedOptions = (panel: PanelModel<OutdatedPanelOptions>): Cal
     options.descriptionField = [options.descriptionField];
   }
 
+  /**
+   * Overrides color scheme
+   */
+  if (
+    options.colors === ColorMode.FRAME &&
+    options.colorField &&
+    (!!overrides.length || (defaults.thresholds && defaults.thresholds.steps?.length > 1))
+  ) {
+    options.colors = ColorMode.THRESHOLDS;
+  }
   return options as CalendarOptions;
 };

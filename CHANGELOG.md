@@ -1,12 +1,13 @@
 # Changelog
 
-## 3.8.0 (IN PROGRESS)
+## 3.8.0 (2024-10-25)
 
 ### Features / Enhancements
 
 - Added Multi Day Events in Yearly View (#243)
 - Updated Migration for thresholds color filter (#248)
 - Updated useRuntimeVariables hook for Scenes dashboards (#247)
+- Updated to Grafana 11.3 and dependencies (#248)
 
 ## 3.7.0 (2024-09-15)
 

@@ -4,8 +4,9 @@
 
 ### Features / Enhancements
 
-- Add Multi Day Events in Yearly View (#243)
-- Update Migration for thresholds color filter (#248)
+- Added Multi Day Events in Yearly View (#243)
+- Updated Migration for thresholds color filter (#248)
+- Updated useRuntimeVariables hook for Scenes dashboards (#247)
 
 ## 3.7.0 (2024-09-15)
 

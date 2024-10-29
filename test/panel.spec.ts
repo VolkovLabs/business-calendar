@@ -1,6 +1,7 @@
 import { test, expect } from '@grafana/plugin-e2e';
 import { TEST_IDS } from '../src/constants';
 import { View } from '../src/types';
+import { PanelHelper, UrlHelper } from './utils';
 
 test.describe('Volkovlabs Calendar Panel', () => {
   test('Check grafana version', async ({ grafanaVersion }) => {
@@ -8,66 +9,266 @@ test.describe('Volkovlabs Calendar Panel', () => {
     expect(grafanaVersion).toEqual(grafanaVersion);
   });
 
-  test('Should display a Calendar', async ({ gotoDashboardPage, page, gotoPanelEditPage }) => {
+  test('Should display a Calendar panel', async ({ readProvisionedDashboard, gotoDashboardPage }) => {
     /**
      * Go To Panels dashboard panels.json
      * return dashboardPage
      */
-    await gotoDashboardPage({ uid: 'hHK1qmpnk' });
-
-    await expect(page.getByRole('heading', { name: 'Calendar' }).first()).toBeVisible();
-
-    /**
-     * Go to panel Edit page
-     */
-    await gotoPanelEditPage({ dashboard: { uid: 'hHK1qmpnk' }, id: '16' });
+    const dashboard = await readProvisionedDashboard({ fileName: 'panels.json' });
+    const dashboardPage = await gotoDashboardPage({ uid: dashboard.uid });
 
     /**
-     * Wait canvas is visible and animation is finished
+     * Check Presence
      */
-    await page.waitForTimeout(3000);
+    const panel = new PanelHelper(dashboardPage, 'Calendar');
+    await panel.checkIfNoErrors();
+    await panel.checkPresence();
+
+    const toolbar = panel.getToolbar();
+
+    await toolbar.todayButtonCheckPresence();
+    await toolbar.nextButtonCheckPresence();
+    await toolbar.backButtonCheckPresence();
+    await toolbar.viewButtonCheckPresence(View.DAY);
+    await toolbar.viewButtonCheckPresence(View.AGENDA);
+    await toolbar.viewButtonCheckPresence(View.MONTH);
+    await toolbar.viewButtonCheckPresence(View.WEEK);
+    await toolbar.viewButtonCheckPresence(View.WORK_WEEK);
+    await toolbar.viewButtonCheckPresence(View.YEAR);
+
+    await panel.checkDayHeaderPresence('Sun');
+    await panel.checkDayHeaderPresence('Mon');
+    await panel.checkDayHeaderPresence('Tue');
+    await panel.checkDayHeaderPresence('Thu');
+    await panel.checkDayHeaderPresence('Fri');
+    await panel.checkDayHeaderPresence('Sat');
+  });
+
+  test('Should display a Calendar panel after refresh without errors', async ({
+    readProvisionedDashboard,
+    gotoDashboardPage,
+  }) => {
+    /**
+     * Go To Panels dashboard panels.json
+     * return dashboardPage
+     */
+    const dashboard = await readProvisionedDashboard({ fileName: 'panels.json' });
+    const dashboardPage = await gotoDashboardPage({ uid: dashboard.uid });
 
     /**
-     * Calendar should be visible
+     * Check Presence
      */
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root)).toBeVisible();
+    const panel = new PanelHelper(dashboardPage, 'Calendar');
+    await panel.checkIfNoErrors();
+    await panel.checkPresence();
+
+    await dashboardPage.refreshDashboard();
+
+    await panel.checkIfNoErrors();
+    await panel.checkPresence();
+  });
+
+  test('Should add empty default calendar', async ({ readProvisionedDashboard, gotoDashboardPage }) => {
+    /**
+     * Go To Panels dashboard weekly.json
+     * return dashboardPage
+     */
+    const dashboard = await readProvisionedDashboard({ fileName: 'weekly.json' });
+    const dashboardPage = await gotoDashboardPage({ uid: dashboard.uid });
 
     /**
-     * Days of the week should be
+     * Add new visualization
      */
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Sun' })).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Mon' })).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Tue' })).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Wed' })).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Thu' })).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Fri' })).toBeVisible();
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('columnheader', { name: 'Sat' })).toBeVisible();
+    const editPage = await dashboardPage.addPanel();
+    await editPage.setVisualization('Business Calendar');
+    await editPage.setPanelTitle('Business Calendar Test');
+    await editPage.backToDashboard();
 
     /**
-     * Check calendar navigation controls
+     * Should add empty visualization without errors
      */
-    await expect(page.getByTestId(TEST_IDS.bigCalendar.root).getByRole('button', { name: 'Today' })).toBeVisible();
+    const panel = new PanelHelper(dashboardPage, 'Business Calendar Test');
+    await panel.checkIfNoErrors();
+    await panel.checkPresence();
 
     /**
-     * Check if calendar supports all views
+     * Should display day headers
      */
-    await expect(
-      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.DAY))
-    ).toBeVisible();
-    await expect(
-      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.WEEK))
-    ).toBeVisible();
-    await expect(
-      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.WORK_WEEK))
-    ).toBeVisible();
-    await expect(
-      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.MONTH))
-    ).toBeVisible();
-    await expect(
-      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.YEAR))
-    ).toBeVisible();
-    await expect(
-      page.getByTestId(TEST_IDS.bigCalendar.root).getByTestId(TEST_IDS.bigCalendarToolbar.buttonView(View.AGENDA))
-    ).toBeVisible();
+    await panel.checkDayHeaderPresence('Sun');
+    await panel.checkDayHeaderPresence('Mon');
+    await panel.checkDayHeaderPresence('Tue');
+    await panel.checkDayHeaderPresence('Thu');
+    await panel.checkDayHeaderPresence('Fri');
+    await panel.checkDayHeaderPresence('Sat');
+  });
+
+  test.describe('Day view', () => {
+    test('Should change view on Day', async ({ readProvisionedDashboard, gotoDashboardPage }) => {
+      /**
+       * Go To Panels dashboard panels.json
+       * return dashboardPage
+       */
+      const dashboard = await readProvisionedDashboard({ fileName: 'panels.json' });
+      const dashboardPage = await gotoDashboardPage({ uid: dashboard.uid });
+
+      /**
+       * Check Presence
+       */
+      const panel = new PanelHelper(dashboardPage, 'Calendar');
+      await panel.checkIfNoErrors();
+      await panel.checkPresence();
+
+      const toolbar = panel.getToolbar();
+
+      await toolbar.viewButtonCheckPresence(View.DAY);
+      await toolbar.viewButtonCheckPresence(View.MONTH);
+      await panel.checkDayHeaderPresence('Sun');
+      await panel.checkDayHeaderPresence('Mon');
+
+      /**
+       * Change view
+       */
+      await toolbar.changeView(View.DAY);
+
+      /**
+       * Day headers should not be present on day view
+       */
+      await panel.checkDayHeaderNotPresence('Sun');
+      await panel.checkDayHeaderNotPresence('Mon');
+
+      await toolbar.isViewButtonDisabled(View.DAY);
+      await panel.checkIfNoErrors();
+
+      /**
+       * Change view
+       */
+      await toolbar.changeView(View.MONTH);
+    });
+  });
+
+  test.describe('Year view', () => {
+    test('Should change view on year', async ({ readProvisionedDashboard, gotoDashboardPage }) => {
+      /**
+       * Go To Panels dashboard panels.json
+       * return dashboardPage
+       */
+      const dashboard = await readProvisionedDashboard({ fileName: 'panels.json' });
+      const dashboardPage = await gotoDashboardPage({ uid: dashboard.uid });
+
+      /**
+       * Check Presence
+       */
+      const panel = new PanelHelper(dashboardPage, 'Calendar');
+      await panel.checkIfNoErrors();
+      await panel.checkPresence();
+
+      const toolbar = panel.getToolbar();
+
+      await toolbar.viewButtonCheckPresence(View.YEAR);
+      await toolbar.viewButtonCheckPresence(View.MONTH);
+      await panel.checkDayHeaderPresence('Sun');
+      await panel.checkDayHeaderPresence('Mon');
+
+      /**
+       * Change view
+       */
+      await toolbar.changeView(View.YEAR);
+
+      /**
+       * Day headers should not be present on day view
+       */
+      await panel.checkDayHeaderNotPresence('Sun');
+      await panel.checkDayHeaderNotPresence('Mon');
+
+      await toolbar.isViewButtonDisabled(View.YEAR);
+      await panel.checkIfNoErrors();
+
+      const yearView = panel.getYearView();
+      await yearView.checkPresence();
+
+      /**
+       * Check first and last month
+       */
+      await yearView.checkMonthPresence(0);
+      await yearView.checkMonthPresence(11);
+
+      /**
+       * Change view
+       */
+      await toolbar.changeView(View.MONTH);
+    });
+
+    test('Should navigate between years', async ({ readProvisionedDashboard, gotoDashboardPage, page }) => {
+      /**
+       * Go To Panels dashboard panels.json
+       * return dashboardPage
+       */
+      const dashboard = await readProvisionedDashboard({ fileName: 'panels.json' });
+      const dashboardPage = await gotoDashboardPage({ uid: dashboard.uid });
+
+      /**
+       * Check Presence
+       */
+      const panel = new PanelHelper(dashboardPage, 'Calendar');
+      await panel.checkPresence();
+
+      const toolbar = panel.getToolbar();
+
+      /**
+       * Change view
+       */
+      await toolbar.changeView(View.YEAR);
+      await toolbar.isViewButtonDisabled(View.YEAR);
+
+      const yearView = panel.getYearView();
+      await yearView.checkPresence();
+
+      const urlParams = new UrlHelper(await page.url());
+
+      await toolbar.goBack();
+
+      await urlParams.isParamDifferent('to', await page.url());
+      /**
+       * Change view
+       */
+      await toolbar.changeView(View.MONTH);
+    });
+  });
+
+  test.describe('Languages', () => {
+    test('Should display different languages for panels on dashboard', async ({
+      readProvisionedDashboard,
+      gotoDashboardPage,
+    }) => {
+      /**
+       * Go To Panels dashboard different.json
+       * return dashboardPage
+       */
+      const dashboard = await readProvisionedDashboard({ fileName: 'different.json' });
+      const dashboardPage = await gotoDashboardPage({ uid: dashboard.uid });
+
+      /**
+       * Check Presence
+       */
+      const panelSpanish = new PanelHelper(dashboardPage, 'Spanish');
+      const panelEnglish = new PanelHelper(dashboardPage, 'English');
+      const panelGerman = new PanelHelper(dashboardPage, 'German');
+      await panelSpanish.checkPresence();
+      await panelEnglish.checkPresence();
+      await panelGerman.checkPresence();
+
+      await panelSpanish.checkDayHeaderPresence('dom.');
+      await panelEnglish.checkDayHeaderPresence('Sun');
+      await panelGerman.checkDayHeaderPresence('So.');
+
+      await dashboardPage.refreshDashboard();
+
+      /**
+       * Check days after refresh
+       */
+      await panelSpanish.checkDayHeaderPresence('dom.');
+      await panelEnglish.checkDayHeaderPresence('Sun');
+      await panelGerman.checkDayHeaderPresence('So.');
+    });
   });
 });

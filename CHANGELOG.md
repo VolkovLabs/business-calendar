@@ -1,11 +1,12 @@
 # Changelog
 
-## 3.9.0 (IN PROGRESS)
+## 3.9.0 (2025-02-20)
 
 ### Features / Enhancements
 
 - Updated e2e tests (#250)
-- Updated to Grafana 11.5 and dependencies (#251)
+- Updated to Grafana 11.5 and dependencies (#252)
+- Updated release workflow to include attestation (#252)
 
 ## 3.8.0 (2024-10-25)
 

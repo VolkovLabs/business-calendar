@@ -1,3 +1,4 @@
+import { selectors } from '@grafana/e2e-selectors';
 import React, { ReactNode } from 'react';
 
 import { TEST_IDS } from '../../../constants';
@@ -28,7 +29,25 @@ Card.Tags = CardTags;
 Card.Description = CardDescription;
 Card.Actions = CardActions;
 
+/**
+ * Drawer Mock
+ * since grafana.ui version 11.5.1
+ * ReferenceError: IntersectionObserver is not defined
+ */
+export const Drawer = ({ title, children, onClose }: any) => {
+  return (
+    <div>
+      <button data-testid={selectors.components.Drawer.General.close} onClick={() => onClose()}>
+        Close Drawer
+      </button>
+      {title}
+      {children}
+    </div>
+  );
+};
+
 module.exports = {
   ...actual,
   Card,
+  Drawer,
 };

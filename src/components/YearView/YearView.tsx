@@ -58,22 +58,22 @@ const YearView = ({ date, localizer, events, ...restProps }: CalendarProps) => {
   /**
    * Months
    */
-  const months = [];
-  const firstMonth = localizer.startOf(date as Date, 'year');
-
-  for (let i = 0; i < 12; i++) {
-    const month = localizer.add(firstMonth, i, 'month').getMonth();
-    months.push(
-      <YearViewMonth
-        key={i + 1}
-        date={localizer.add(firstMonth, i, 'month')}
-        monthEvents={eventsByMonth[month]}
-        localizer={localizer}
-        {...restProps}
-        weekNames={weekNames}
-      />
-    );
-  }
+  const months = useMemo(() => {
+    const firstMonth = localizer.startOf(date as Date, 'year');
+    return Array.from(Array(12)).map((month, index) => {
+      const monthDate = localizer.add(firstMonth, index, 'month');
+      return (
+        <YearViewMonth
+          key={index}
+          date={monthDate}
+          monthEvents={eventsByMonth[monthDate.getMonth()]}
+          localizer={localizer}
+          {...restProps}
+          weekNames={weekNames}
+        />
+      );
+    });
+  }, [date, localizer, eventsByMonth, restProps, weekNames]);
 
   return (
     <div className={styles.year} data-testid={TEST_IDS.yearView.root}>

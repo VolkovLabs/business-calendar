@@ -8,7 +8,7 @@ import { getStyles } from './BigToolbar.styles';
 /**
  * Properties
  */
-interface Props extends ToolbarProps {}
+type Props = ToolbarProps;
 
 /**
  * Toolbar for Big Calendar

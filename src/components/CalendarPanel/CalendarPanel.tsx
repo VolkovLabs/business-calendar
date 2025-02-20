@@ -10,7 +10,7 @@ import { BigCalendar } from '../BigCalendar';
 /**
  * Properties
  */
-interface Props extends PanelProps<CalendarOptions> {}
+type Props = PanelProps<CalendarOptions>;
 
 /**
  * Calendar Panel

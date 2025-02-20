@@ -9,7 +9,7 @@ import { CalendarOptions, View } from '../../types';
 /**
  * Properties
  */
-interface Props extends StandardEditorProps<View, null, CalendarOptions> {}
+type Props = StandardEditorProps<View, null, CalendarOptions>;
 
 /**
  * Default View Editor

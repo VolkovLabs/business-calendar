@@ -2,7 +2,7 @@
 
 ![Calendar](https://github.com/VolkovLabs/business-calendar/raw/main/src/img/screenshot.png)
 
-![Grafana](https://img.shields.io/badge/Grafana-11.3-orange)
+![Grafana](https://img.shields.io/badge/Grafana-11.5-orange)
 ![CI](https://github.com/volkovlabs/business-calendar/workflows/CI/badge.svg)
 ![E2E](https://github.com/volkovlabs/business-calendar/workflows/E2E/badge.svg)
 [![codecov](https://codecov.io/gh/VolkovLabs/business-calendar/branch/main/graph/badge.svg)](https://codecov.io/gh/VolkovLabs/business-calendar)

@@ -9,7 +9,7 @@ import { getDateWithMinutesOffset, getMinutesOffsetFromTimeZone } from '../../ut
 /**
  * Properties
  */
-interface Props extends StandardEditorProps<TimeOptions, null, CalendarOptions> {}
+type Props = StandardEditorProps<TimeOptions, null, CalendarOptions>;
 
 /**
  * Time Editor

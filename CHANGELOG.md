@@ -4,7 +4,8 @@
 
 ### Features / Enhancements
 
-- Updatd e2e tests (#250)
+- Updated e2e tests (#250)
+- Updated to Grafana 11.5 and dependencies (#251)
 
 ## 3.8.0 (2024-10-25)
 

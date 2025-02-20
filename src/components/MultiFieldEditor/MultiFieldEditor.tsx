@@ -14,7 +14,7 @@ interface Settings {
 /**
  * Properties
  */
-interface Props extends StandardEditorProps<string | string[] | null, Settings> {}
+type Props = StandardEditorProps<string | string[] | null, Settings>;
 
 /**
  * Multi Field Editor

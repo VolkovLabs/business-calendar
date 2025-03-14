@@ -117,26 +117,6 @@ describe('Big Calendar', () => {
     expect(selectors.root()).toBeInTheDocument();
   });
 
-  it('Should call year view with correct height', () => {
-    render(
-      getComponent({
-        options: {
-          ...defaultOptions,
-          views: [View.YEAR],
-          defaultView: View.YEAR,
-        },
-      })
-    );
-
-    expect(Calendar).toHaveBeenCalledTimes(2);
-    expect(Calendar).toHaveBeenCalledWith(
-      expect.objectContaining({
-        style: expect.objectContaining({ height: '100%' }),
-      }),
-      expect.anything()
-    );
-  });
-
   it('Should show no views error', () => {
     render(getComponent({ options: { views: [] } as any }));
 

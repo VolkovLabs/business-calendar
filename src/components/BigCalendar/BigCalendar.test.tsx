@@ -128,7 +128,7 @@ describe('Big Calendar', () => {
       })
     );
 
-    expect(Calendar).toHaveBeenCalledTimes(1);
+    expect(Calendar).toHaveBeenCalledTimes(2);
     expect(Calendar).toHaveBeenCalledWith(
       expect.objectContaining({
         style: expect.objectContaining({ height: '100%' }),

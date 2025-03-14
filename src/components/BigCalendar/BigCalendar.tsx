@@ -245,7 +245,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
         startAccessor="start"
         showMultiDayTimes={true}
         endAccessor="end"
-        style={{ height }}
+        style={{ height: view === View.YEAR ? '100%' : height }}
         views={views}
         components={components}
         onNavigate={onNavigate as never}

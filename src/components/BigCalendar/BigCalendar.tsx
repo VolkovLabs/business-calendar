@@ -8,7 +8,7 @@ import { Calendar, Components, Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 
 import { TEST_IDS } from '../../constants';
-import { useBigCalendarEvents, useCalendarRange, useLocalizer } from '../../hooks';
+import { useBigCalendarEvents, useCalendarRange, useLocalizer, useMessagesUpdate } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
 import { getLanguage, returnCalendarEvent } from '../../utils';
 import { BigEventContent } from '../BigEventContent';
@@ -50,7 +50,12 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
   /**
    * Localizer
    */
-  const { localizer, messages } = useLocalizer(options);
+  const { localizer, messages: localizeMessages } = useLocalizer(options);
+
+  /**
+   * Update messages
+   */
+  const { messages } = useMessagesUpdate({ messages: localizeMessages });
 
   /**
    * Adopted Events for BigCalendar

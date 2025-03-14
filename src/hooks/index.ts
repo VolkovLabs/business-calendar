@@ -6,5 +6,6 @@ export * from './useColors';
 export * from './useEventFrames';
 export * from './useIntervalSelection';
 export * from './useLocalizer';
+export * from './useMessagesUpdate';
 export * from './useRuntimeVariables';
 export * from './useTimeRange';

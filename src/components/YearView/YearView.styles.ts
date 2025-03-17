@@ -10,6 +10,7 @@ export const getStyles = (theme: GrafanaTheme2) => ({
     flex-wrap: wrap;
     justify-content: space-around;
     overflow: auto;
+    flex: 1 0 0px;
   `,
 
   month: css`

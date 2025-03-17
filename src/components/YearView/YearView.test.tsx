@@ -97,7 +97,8 @@ describe('Year View', () => {
         },
       },
     ];
-    render(getComponent({ events }));
+
+    render(getComponent({ events, date: new Date('2023-09-09T11:15:00') }));
 
     expect(selectors.root()).toBeInTheDocument();
 
@@ -106,7 +107,6 @@ describe('Year View', () => {
 
     const monthSelectors = getSelectors(within(month));
     expect(monthSelectors.prevDate(false, 7, 28)).toBeInTheDocument();
-    expect(monthSelectors.nextDate(false, 9, 1)).toBeInTheDocument();
 
     expect(monthSelectors.date(false, 9)).toBeInTheDocument();
 
@@ -142,38 +142,65 @@ describe('Year View', () => {
     expect(spansNone.length).toBeLessThan(1);
   });
 
-  it('Should render with multi day events', () => {
+  it('Should render with multi day events day events in different months', () => {
     /**
      * Events
      */
     const events = [
       {
-        start: new Date('2023-09-09T11:15:00'),
-        end: new Date('2023-09-09T12:15:00'),
+        start: new Date('2023-11-09T11:15:00'),
+        end: new Date('2023-11-09T12:15:00'),
         title: 'Event 1',
         resource: {
           color: '#7EB26D',
         },
       },
       {
-        start: new Date('2023-09-10T10:15:00'),
-        end: new Date('2023-09-11T11:15:00'),
+        start: new Date('2023-11-10T10:15:00'),
+        end: new Date('2023-11-11T11:15:00'),
+        title: 'Event 2',
+        resource: {
+          color: '#EAB839',
+        },
+      },
+      {
+        start: new Date('2023-11-30T10:15:00'),
+        end: new Date('2023-12-01T11:15:00'),
         title: 'Event 2',
         resource: {
           color: '#EAB839',
         },
       },
     ];
-    render(getComponent({ events }));
+
+    render(getComponent({ events, date: new Date('2023-12-11T11:15:00') }));
 
     expect(selectors.root()).toBeInTheDocument();
 
-    const month = selectors.month(false, 8);
-    expect(month).toBeInTheDocument();
+    /**
+     * November
+     */
+    const month = selectors.month(false, 10);
 
+    /**
+     * December
+     */
+    const nextMonth = selectors.month(false, 11);
+
+    /**
+     * Check both month
+     */
+    expect(month).toBeInTheDocument();
+    expect(nextMonth).toBeInTheDocument();
+
+    /**
+     * Selectors
+     */
     const monthSelectors = getSelectors(within(month));
-    expect(monthSelectors.prevDate(false, 7, 28)).toBeInTheDocument();
-    expect(monthSelectors.nextDate(false, 9, 1)).toBeInTheDocument();
+    const nextMonthSelectors = getSelectors(within(nextMonth));
+
+    expect(monthSelectors.prevDate(false, 9, 29)).toBeInTheDocument();
+    expect(monthSelectors.nextDate(false, 11, 2)).toBeInTheDocument();
     expect(monthSelectors.date(false, 9)).toBeInTheDocument();
 
     /**
@@ -182,10 +209,21 @@ describe('Year View', () => {
     const dateWithEvents = monthSelectors.date(false, 9);
 
     /**
+     * Date with multi day events 2023-11-30 and 2023-12-01
+     */
+    const lastDayWithEvents = monthSelectors.date(false, 30);
+
+    /**
+     * Date with multi day events 2023-11-30 and 2023-12-01
+     */
+    const nextMonthWithEvents = nextMonthSelectors.date(false, 1);
+
+    /**
      * Dots
      */
     const spans = dateWithEvents.querySelectorAll('span');
 
+    expect(monthSelectors.nextDate(false, 11, 2)).toBeInTheDocument();
     /**
      * Should be 1 span elements
      */
@@ -218,78 +256,21 @@ describe('Year View', () => {
      * Should be 1 event as end at 11 day
      */
     expect(day11.querySelectorAll('span').length).toEqual(1);
-  });
-
-  it('Should render with multi day events in different months', () => {
-    /**
-     * Events
-     */
-    const events = [
-      {
-        start: new Date('2023-09-09T11:15:00'),
-        end: new Date('2023-09-09T12:15:00'),
-        title: 'Event 1',
-        resource: {
-          color: '#7EB26D',
-        },
-      },
-      {
-        start: new Date('2023-09-30T10:15:00'),
-        end: new Date('2023-10-01T11:15:00'),
-        title: 'Event 2',
-        resource: {
-          color: '#EAB839',
-        },
-      },
-    ];
-    render(getComponent({ events }));
-
-    expect(selectors.root()).toBeInTheDocument();
-
-    const september = selectors.month(false, 8);
-    expect(september).toBeInTheDocument();
-
-    const monthSelectors = getSelectors(within(september));
-    expect(monthSelectors.prevDate(false, 7, 28)).toBeInTheDocument();
-    expect(monthSelectors.nextDate(false, 9, 1)).toBeInTheDocument();
-    expect(monthSelectors.date(false, 9)).toBeInTheDocument();
 
     /**
-     * Date with events
+     * Dots for multi events in different month`s
      */
-    const dateWithEvents = monthSelectors.date(false, 9);
-
-    /**
-     * Dots
-     */
-    const spans = dateWithEvents.querySelectorAll('span');
+    const spansNovemberLastDay = lastDayWithEvents.querySelectorAll('span');
+    const spansDecemberFirstDay = nextMonthWithEvents.querySelectorAll('span');
 
     /**
      * Should be 1 span elements
      */
-    expect(spans.length).toBeGreaterThan(0);
-    expect(spans.length).toEqual(1);
+    expect(spansNovemberLastDay.length).toBeGreaterThan(0);
+    expect(spansNovemberLastDay.length).toBe(1);
 
-    const day30 = monthSelectors.date(false, 30);
-    /**
-     * Should be 1 event as start at 10 day
-     */
-    expect(day30.querySelectorAll('span').length).toEqual(1);
-
-    const october = selectors.month(false, 9);
-    expect(october).toBeInTheDocument();
-
-    const monthOctoberSelectors = getSelectors(within(october));
-    expect(monthOctoberSelectors.prevDate(false, 8, 28)).toBeInTheDocument();
-    expect(monthOctoberSelectors.nextDate(false, 10, 1)).toBeInTheDocument();
-
-    expect(monthOctoberSelectors.date(false, 1)).toBeInTheDocument();
-
-    /**
-     * Date with events
-     */
-    const octoberDay1 = monthOctoberSelectors.date(false, 1);
-    expect(octoberDay1.querySelectorAll('span').length).toEqual(1);
+    expect(spansDecemberFirstDay.length).toBeGreaterThan(0);
+    expect(spansDecemberFirstDay.length).toBe(1);
   });
 
   it('Should render plus sign', () => {
@@ -330,7 +311,7 @@ describe('Year View', () => {
         },
       },
     ];
-    render(getComponent({ events }));
+    render(getComponent({ events, date: new Date('2023-09-09T10:15:00') }));
 
     expect(selectors.root()).toBeInTheDocument();
 

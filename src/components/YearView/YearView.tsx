@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { CalendarProps, DateLocalizer, Event, Navigate, NavigateAction } from 'react-big-calendar';
 
 import { TEST_IDS } from '../../constants';
+import { filterEventsByYear } from '../../utils';
 import { getStyles } from './YearView.styles';
 import { YearViewMonth } from './YearViewMonth';
 
@@ -14,6 +15,13 @@ const YearView = ({ date, localizer, events, ...restProps }: CalendarProps) => {
    * Styles
    */
   const styles = useStyles2(getStyles);
+
+  /**
+   * Events for the current selected year
+   */
+  const yearEvents = useMemo(() => {
+    return filterEventsByYear(events, date);
+  }, [date, events]);
 
   /**
    * Week Names
@@ -38,8 +46,8 @@ const YearView = ({ date, localizer, events, ...restProps }: CalendarProps) => {
       monthsEvents[i] = [];
     }
 
-    if (events) {
-      events.forEach((event) => {
+    if (yearEvents && !!yearEvents.length) {
+      yearEvents.forEach((event) => {
         if (event.start) {
           const monthStart = event.start.getMonth();
           monthsEvents[monthStart].push(event);
@@ -53,7 +61,7 @@ const YearView = ({ date, localizer, events, ...restProps }: CalendarProps) => {
     }
 
     return monthsEvents;
-  }, [events]);
+  }, [yearEvents]);
 
   /**
    * Months

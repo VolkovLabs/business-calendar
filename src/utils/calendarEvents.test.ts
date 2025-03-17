@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import { EventField } from '../types';
-import { displayTime, isFieldVisible } from './calendarEvents';
+import { displayTime, filterEventsByYear, isFieldVisible } from './calendarEvents';
 
 /**
  * Calendar Events
@@ -69,6 +69,81 @@ describe('Calendar Events', () => {
       const result = displayTime(event);
 
       expect(result).toBe('LLL - LT');
+    });
+  });
+
+  /**
+   * filterEventsByYear
+   */
+  describe('filterEventsByYear', () => {
+    const sampleEvents = [
+      {
+        title: 'Event 1',
+        start: dayjs('2025-03-15').toDate(),
+        end: dayjs('2025-03-16').toDate(),
+      },
+      {
+        title: 'Event 2',
+        start: dayjs('2024-12-31').toDate(),
+        end: dayjs('2025-01-01').toDate(),
+      },
+      {
+        title: 'Event 3',
+        start: dayjs('2023-05-20').toDate(),
+        end: dayjs('2023-05-21').toDate(),
+      },
+      {
+        title: 'Event 4',
+        start: dayjs('2026-06-10').toDate(),
+        end: dayjs('2026-06-11').toDate(),
+      },
+      {
+        title: 'Event 5',
+        start: dayjs('2025-07-01').toDate(),
+        end: undefined,
+      },
+      {
+        title: 'Event 6',
+        start: undefined,
+        end: dayjs('2025-07-01').toDate(),
+      },
+    ] as any;
+
+    it('Should filters events by the specified year', () => {
+      const result = filterEventsByYear(sampleEvents, '2025-01-01');
+      expect(result).toHaveLength(4);
+      expect(result).toEqual([sampleEvents[0], sampleEvents[1], sampleEvents[4], sampleEvents[5]]);
+    });
+
+    it('Should returns an empty array if events is undefined', () => {
+      expect(filterEventsByYear(undefined, '2025-01-01')).toEqual([]);
+    });
+
+    it('Should returns an empty array if date is not provided', () => {
+      expect(filterEventsByYear(sampleEvents, undefined)).toEqual([]);
+    });
+
+    it('Should Filters events for the year 2024', () => {
+      const result = filterEventsByYear(sampleEvents, '2024-06-01');
+      expect(result).toHaveLength(1);
+      expect(result).toEqual([sampleEvents[1]]);
+    });
+
+    it('Should filters events for the year 2023', () => {
+      const result = filterEventsByYear(sampleEvents, '2023-01-01');
+      expect(result).toHaveLength(1);
+      expect(result).toEqual([sampleEvents[2]]);
+    });
+
+    it('Should filters events for the year 2026', () => {
+      const result = filterEventsByYear(sampleEvents, '2026-01-01');
+      expect(result).toHaveLength(1);
+      expect(result).toEqual([sampleEvents[3]]);
+    });
+
+    it(' Should returns an empty array if no events match the specified year', () => {
+      const result = filterEventsByYear(sampleEvents, '2027-01-01');
+      expect(result).toHaveLength(0);
     });
   });
 });

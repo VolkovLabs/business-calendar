@@ -72,7 +72,7 @@ const YearView = ({ date, localizer, events, ...restProps }: CalendarProps) => {
       const monthDate = localizer.add(firstMonth, index, 'month');
       return (
         <YearViewMonth
-          key={index}
+          key={index + monthDate.toISOString()}
           date={monthDate}
           monthEvents={eventsByMonth[monthDate.getMonth()]}
           localizer={localizer}

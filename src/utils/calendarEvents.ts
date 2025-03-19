@@ -1,7 +1,7 @@
 import { InternalTimeZones } from '@grafana/data';
 import { TimeZone } from '@grafana/schema';
 import dayjs from 'dayjs';
-import { Event } from 'react-big-calendar';
+import { Event, stringOrDate } from 'react-big-calendar';
 
 import { DEFAULT_LANGUAGE } from '../constants';
 import { CalendarEvent, EventField } from '../types';
@@ -88,3 +88,23 @@ export const returnCalendarEvent = (event: Event) => ({
   labels: [],
   ...(event.resource || {}),
 });
+
+/**
+ * Filter Events By Year
+ * @param events
+ * @param date
+ */
+export const filterEventsByYear = (events: Event[] | undefined, date?: stringOrDate): Event[] => {
+  if (!date || !events) {
+    return [];
+  }
+
+  const targetYear = dayjs(date).year();
+
+  return events.filter((event) => {
+    const startYear = event.start ? dayjs(event.start).year() : null;
+    const endYear = event.end ? dayjs(event.end).year() : null;
+
+    return startYear === targetYear || endYear === targetYear;
+  });
+};

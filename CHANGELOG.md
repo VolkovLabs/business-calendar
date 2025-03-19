@@ -1,346 +1,353 @@
 # Changelog
 
+## 3.9.1 (2025-03-18)
+
+### Enhancements
+
+- Updated "There are no events in this range" message in the alert info component (#258)
+- Adjusted Yearly view layout to prevent shifting with smaller panel sizes (#257)
+- Enabled Yearly view to display events from previous years (#260)
+
 ## 3.9.0 (2025-02-20)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated e2e tests (#250)
-- Updated to Grafana 11.5 and dependencies (#252)
-- Updated release workflow to include attestation (#252)
+- Updated end-to-end (e2e) tests (#250)
+- Upgraded to Grafana 11.5 and updated dependencies (#252)
+- Enhanced release workflow to include attestation (#252)
 
 ## 3.8.0 (2024-10-25)
 
-### Features / Enhancements
+### Enhancements
 
-- Added Multi Day Events in Yearly View (#243)
-- Updated Migration for thresholds color filter (#248)
-- Updated useRuntimeVariables hook for Scenes dashboards (#247)
-- Updated to Grafana 11.3 and dependencies (#248)
+- Added multi-day event support in Yearly view (#243)
+- Updated migration process for threshold color filters (#248)
+- Improved `useRuntimeVariables` hook for Scenes dashboards (#247)
+- Upgraded to Grafana 11.3 and updated dependencies (#248)
 
 ## 3.7.0 (2024-09-15)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated yearly view to display events (#240)
-- Updated to Grafana 11.2 and dependencies (#241)
+- Enhanced Yearly view to display events (#240)
+- Upgraded to Grafana 11.2 and updated dependencies (#241)
 
 ## 3.6.0 (2024-08-19)
 
-### Features / Enhancements
+### Enhancements
 
-- Update tooltip to prevent opening drawer when selecting text (#235)
-- Update Date time format for different languages (#236)
-- Update event details to hide actions when no actions available (#238)
+- Modified tooltip to prevent drawer opening when selecting text (#235)
+- Updated date-time format to support multiple languages (#236)
+- Hid event detail actions when no actions are available (#238)
 
 ## 3.5.0 (2024-07-25)
 
-### Features / Enhancements
+### Enhancements
 
-- Added event details in tooltip by hover (#217, #221)
-- Added option to Disable Event Time (#223)
-- Updated daily calendar view if timeRange changed (#229)
-- Updated description to follow fields order (#230)
-- Updated date using timeZone option (#227)
+- Added event details in tooltip on hover (#217, #221)
+- Introduced option to disable event time display (#223)
+- Updated daily calendar view to reflect time range changes (#229)
+- Reordered description fields for consistency (#230)
+- Adjusted date handling to use time zone option (#227)
 
 ## 3.4.0 (2024-07-16)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated E2E workflow using Docker (#211)
-- Added Font size configuration (#213)
-- Updated to Grafana 11.1 dependencies (#214)
+- Improved E2E workflow using Docker (#211)
+- Added font size configuration option (#213)
+- Upgraded to Grafana 11.1 and updated dependencies (#214)
 
 ## 3.3.0 (2024-06-19)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated variables with static datasource for time range source dashboard (#205)
-- Added multiple description fields (#206)
-- Added Threshold option for Colors (#208)
-- Added Portuguese language in Grafana 11 (#209)
+- Enhanced variables with static datasource for time range in source dashboard (#205)
+- Added support for multiple description fields (#206)
+- Introduced threshold-based color options (#208)
+- Added Portuguese language support in Grafana 11 (#209)
 
 ## 3.2.0 (2024-06-11)
 
-### Features / Enhancements
+### Enhancements
 
 - Updated tutorial video (#190)
-- Added Formatting for event description (#182)
-- Updated Details drawer layout (#192)
-- Added support for additional Time Range sources (#179)
-- Updated event format (#188)
-- Updated Time Range in Agenda view (#196)
-- Updated mouse cursor for Agenda view (#200)
+- Added formatting options for event descriptions (#182)
+- Improved details drawer layout (#192)
+- Added support for additional time range sources (#179)
+- Enhanced event format (#188)
+- Updated time range in Agenda view (#196)
+- Improved mouse cursor behavior in Agenda view (#200)
 - Updated dependencies (#200)
-- Added display dashboard annotations (#194)
-- Added Portuguese language (#201)
-- Updated toolbar and messages to the selected language (#203)
+- Added display of dashboard annotations (#194)
+- Introduced Portuguese language support (#201)
+- Localized toolbar and messages to the selected language (#203)
 
 ## 3.1.0 (2024-05-19)
 
-### Features / Enhancements
+### Enhancements
 
-- Added Agenda (List) View (#177)
-- Updated customization for Event Bubble (#178)
-- Updated multi-day window (#183)
-- Updated to Grafana 11 (#184)
+- Added Agenda (List) view (#177)
+- Enhanced customization for event bubbles (#178)
+- Improved multi-day window handling (#183)
+- Upgraded to Grafana 11 (#184)
 
 ## 3.0.0 (2024-05-02)
 
-### Breaking changes
+### Breaking Changes
 
-- Plugin rebranding, the new name is the Business Calendar Panel.
-- Legacy Calendar was replaced by Big Calendar.
-- Requires Grafana 10 and Grafana 11.
+- Renamed plugin to "Business Calendar Panel"
+- Replaced Legacy Calendar with Big Calendar
+- Now requires Grafana 10 or 11
 
-### Features / Enhancements
+### Enhancements
 
-- Added keeping refresh dashboard on time range change (#167)
-- Added plugin e2e tests and remove cypress (#168, #170)
-- Removed Legacy calendar replaced by Big Calendar (#172)
-- Prepared for Grafana 11 (#175, #176)
+- Preserved dashboard refresh on time range changes (#167)
+- Added plugin e2e tests and removed Cypress (#168, #170)
+- Replaced Legacy Calendar with Big Calendar (#172)
+- Prepared compatibility for Grafana 11 (#175, #176)
 
 ## 2.5.0 (2024-03-20)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated style for event details tags (#161)
-- Updated dependencies to Grafana 10.4 (#154)
+- Updated styling for event detail tags (#161)
+- Upgraded dependencies to Grafana 10.4 (#154)
 
-### Bugfixes
+### Bug Fixes
 
-- Fixed showing location on month and work week views (#160)
+- Fixed display of location in Month and Work Week views (#160)
 
 ## 2.4.0 (2024-03-07)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated Big Calendar to 1.10.3 (#150)
-- Added ability to select date format (#151)
-- Updated ESLint configuration and refactoring (#152)
-- Updated dependencies and Actions (#154)
-- Added hiding end time (#155)
+- Upgraded Big Calendar to version 1.10.3 (#150)
+- Added option to select date format (#151)
+- Updated ESLint configuration and refactored code (#152)
+- Updated dependencies and GitHub Actions (#154)
+- Added option to hide end time (#155)
 
-### Bugfixes
+### Bug Fixes
 
-- Fixed keeping calendar dates if no time range change (#156)
+- Fixed retention of calendar dates when time range is unchanged (#156)
 
 ## 2.3.1 (2023-11-06)
 
-### Bugfixes
+### Bug Fixes
 
-- Fixed import order for default big-calendar styles and their overrides (#143)
+- Corrected import order for default Big Calendar styles and overrides (#143)
 
 ## 2.3.0 (2023-11-01)
 
-### Features / Enhancements
+### Enhancements
 
-- Added yearly view (#134)
-- Added internationalization(Spanish, French, German, and Chinese) i18n (#135, #138)
-- Added default view option (#137)
-- Added scroll to Time option for BigCalendar (#140, #141)
+- Added Yearly view (#134)
+- Introduced internationalization (Spanish, French, German, Chinese) (#135, #138)
+- Added default view selection option (#137)
+- Enabled "scroll to time" feature in Big Calendar (#140, #141)
 
 ## 2.2.0 (2023-10-06)
 
-### Features / Enhancements
+### Enhancements
 
-- Added Event Location for Big Calendar (#127)
-- Added contrast text color for events (#129)
-- Updated to Grafana 10.1.4 (#132)
-- Updated to Plugin Tools 2.0.2 (#132)
-- Updated Grafana Access Policy to sign plugin (#132)
-- Added support of dashboard timezone in Start and End time (#128)
-- Added ability to select views: day, week, work week and month (#133)
+- Added event location support in Big Calendar (#127)
+- Improved contrast for event text colors (#129)
+- Upgraded to Grafana 10.1.4 and Plugin Tools 2.0.2 (#132)
+- Updated Grafana Access Policy for plugin signing (#132)
+- Added dashboard timezone support for start and end times (#128)
+- Added view selection options: Day, Week, Work Week, and Month (#133)
 
 ## 2.1.0 (2023-08-14)
 
-### Features / Enhancements
+### Enhancements
 
-- Added Annotations type and limit (#121)
-- Updated to Grafana 10.0.3 (#122)
-- Added Big Calendar Language Messages (#123)
+- Added annotation type and limit options (#121)
+- Upgraded to Grafana 10.0.3 (#122)
+- Added language messages for Big Calendar (#123)
 
 ## 2.0.1 (2023-08-03)
 
-### Bugfixes
+### Bug Fixes
 
-- Fixed display annotations options (#119)
+- Fixed display of annotation options (#119)
 
 ## 2.0.0 (2023-07-28)
 
-### Breaking changes
+### Breaking Changes
 
-- Requires Grafana 9.2 and Grafana 10
+- Now requires Grafana 9.2 or 10
 
-### Features / Enhancements
+### Enhancements
 
-- Increased tests coverage (#105)
-- Added Big Calendar component for rendering calendar (#106)
+- Increased test coverage (#105)
+- Introduced Big Calendar component for rendering (#106)
 - Updated ESLint configuration (#106)
-- Removed Grafana 8.5 support (#110)
-- Updated to Grafana 10.0 (#110)
-- Updated events overlap when the start date equals the end date in Big Calendar (#112)
-- Added quick links for Big Calendar (#113)
-- Updated back/next button for weekly and daily views in Big Calendar (#114)
-- Updated button styles for Big Calendar (#115)
-- Updated calendar resizing for Big Calendar (#116)
+- Removed support for Grafana 8.5 (#110)
+- Upgraded to Grafana 10.0 (#110)
+- Improved event overlap handling when start and end dates are equal in Big Calendar (#112)
+- Added quick links in Big Calendar (#113)
+- Updated back/next buttons for Weekly and Daily views in Big Calendar (#114)
+- Enhanced button styles in Big Calendar (#115)
+- Improved calendar resizing in Big Calendar (#116)
 
 ## 1.4.0 (2023-06-10)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated using Grafana 9.5.2 (#96, #101)
-- Added Text Formatting, Mappings and Overrides (#97)
-- Removed unused Standard Options (#97)
-- Increased Test Coverage and update testing library (#100, #103)
+- Upgraded to Grafana 9.5.2 (#96, #101)
+- Added text formatting, mappings, and overrides (#97)
+- Removed unused standard options (#97)
+- Increased test coverage and updated testing library (#100, #103)
 - Migrated to Plugin Tools 1.5.2 (#101)
-- Updated to Node 18 (#101)
+- Upgraded to Node 18 (#101)
 - Added E2E Cypress testing (#102)
 
-### Bug fixes
+### Bug Fixes
 
 - Increased event spacing to prevent overflow (#96)
 
 ## 1.3.0 (2023-03-08)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated using Grafana 9.4.3 (#87)
-- Added labels split to display in the drawer (#88)
+- Upgraded to Grafana 9.4.3 (#87)
+- Added label splitting for display in drawer (#88)
 - Added annotation tags as labels (#88)
-- Updated multi-day interval (#89)
-- Added display colors based on Event or Frame id if the Color field is not specified (#90)
-- Added support for Color schemes (#91)
+- Improved multi-day interval handling (#89)
+- Enabled color display based on event or frame ID if color field is unspecified (#90)
+- Added support for color schemes (#91)
 - Added video configuration tutorial (#92)
 
-### Bug fixes
+### Bug Fixes
 
-- Fixed scrollable content in the Day drawer (#93)
+- Fixed scrollable content in Day drawer (#93)
 
 ## 1.2.0 (2023-02-23)
 
-### Breaking changes
+### Breaking Changes
 
-Refactoring and Styles migration may introduce breaking changes. Please test before upgrading in Production.
+- Refactoring and styles migration may introduce breaking changes. Test before upgrading in production.
 
-### Features / Enhancements
+### Enhancements
 
-- Select color for calender entry queries (#67)
-- Filtering out undefined events (#69)
-- Updated CI and Release Workflows (#72)
-- Rebuild using Grafana 9.3.6 (#73)
-- Refactor Options Editors to use Field pickers (#74)
-- Refactor Day and Events Drawer (#75)
-- Set No Padding for the Panel (#75)
-- Refactor Day and update Styles (#76)
-- Migrated Styles to v2 (#79)
-- Match Grafana settings for Week Start (#80)
-- Skip undefined events in Drawer (#81)
-- Added Display Time (#82)
-- Updated Styles and Screenshot (#83)
+- Added color selection for calendar entry queries (#67)
+- Filtered out undefined events (#69)
+- Updated CI and release workflows (#72)
+- Rebuilt using Grafana 9.3.6 (#73)
+- Refactored options editors to use field pickers (#74)
+- Refactored Day and Events drawer (#75)
+- Removed panel padding (#75)
+- Updated Day view and styles (#76)
+- Migrated to Styles v2 (#79)
+- Aligned week start with Grafana settings (#80)
+- Skipped undefined events in drawer (#81)
+- Added display time option (#82)
+- Updated styles and screenshot (#83)
 
 ## 1.1.0 (2022-12-12)
 
-### Breaking changes
+### Breaking Changes
 
-Refactoring may introduce breaking changes. Please test before upgrading in Production.
+- Refactoring may introduce breaking changes. Test before upgrading in production.
 
-### Features / Enhancements
+### Enhancements
 
-- Updated Panel options in README (#53)
-- Added Youtube tutorial for Calendar with JSON API data source (#54)
-- Updated CI to Node 16 and Synchronize with Release workflow (#56)
-- Updated to Grafana 9.2.2 (#57)
-- Code Refactoring (#58)
-- Updated to Grafana 9.3.1 (#59)
+- Updated panel options in README (#53)
+- Added YouTube tutorial for Calendar with JSON API datasource (#54)
+- Updated CI to Node 16 and synced with release workflow (#56)
+- Upgraded to Grafana 9.2.2 (#57)
+- Refactored code (#58)
+- Upgraded to Grafana 9.3.1 (#59)
 - Updated CI to upload signed artifacts (#60)
-- Refactor panel options and increase test coverage (#61)
+- Refactored panel options and increased test coverage (#61)
 - Added annotation support (#8)
-- Refactoring and Removing legacy code (#62)
-- Refactor Panel Options and add Annotations options (#63)
+- Removed legacy code (#62)
+- Enhanced panel options with annotations (#63)
 
 ## 1.0.0 (2022-10-02)
 
-### Features / Enhancements
+### Enhancements
 
-- Maintained by Volkov Labs (#51)
+- Transferred maintenance to Volkov Labs (#51)
 - Updated based on Volkov Labs Panel Template (#51)
-- Updated to Grafana 9.1.6 (#52)
+- Upgraded to Grafana 9.1.6 (#52)
 
 ## 0.7.1 (2022-08-28)
 
-### Features / Enhancements
+### Enhancements
 
-- Updated to Grafana 9
+- Upgraded to Grafana 9
 
 ## 0.7.0 (2022-03-09)
 
-### Features / Enhancements
+### Enhancements
 
-- Quick links: Enable quick links to follow the data link when you click the event rather than opening a modal.
-- Updated to Grafana 8.4.3
+- Added quick links to follow data links on event click instead of opening a modal
+- Upgraded to Grafana 8.4.3
 
 ## 0.6.0 (2022-01-28)
 
-### Breaking changes
+### Breaking Changes
 
-This release bumps the minimum required Grafana to >=8.0. Grafana 8 introduces a new theming engine for panel plugins.
-
-- If you're running a Grafana version before 8.0, you should stay with v0.5.0.
-- If you're running Grafana 8.0 or above, you should update to v0.6.0.
+- Increased minimum Grafana requirement to 8.0 due to new theming engine
+  - Use v0.5.0 for Grafana versions below 8.0
+  - Upgrade to v0.6.0 for Grafana 8.0 or higher
 
 ## 0.5.0 (2021-09-06)
 
-### Features / Enhancements
+### Enhancements
 
-- Data links support (#25)
-- **New details view:** Instead of relying on tooltips, this version uses an inline drawer to display additional details. I like this better, but the built-in drawer component has some limitations. I'm not sure I like that it's a modal for example. I might end up creating a custom sidebar component. Let me know what you think about the new design!
+- Added data links support (#25)
+- Introduced inline drawer for event details, replacing tooltips (#25)
+  - Note: Feedback welcome on the new design; considering a custom sidebar alternative
 
 ## 0.4.3 (2021-06-12)
 
-### Features / Enhancements
+### Enhancements
 
-- Change "Apply time interval" to "Apply time range" to match Grafana
-- Increase contrast for single-day events
+- Renamed "Apply time interval" to "Apply time range" to align with Grafana
+- Increased contrast for single-day events
 
 ## 0.4.2 (2021-05-22)
 
-### Bug fixes
+### Bug Fixes
 
-- classicColors is (still) undefined (#16)
+- Fixed issue where `classicColors` was still undefined (#16)
 
 ## 0.4.1 (2021-05-21)
 
-### Bug fixes
+### Bug Fixes
 
-- classicColors is undefined (#16)
-- Improve legibility of event text (#15)
+- Fixed `classicColors` undefined error (#16)
+- Improved legibility of event text (#15)
 
 ## 0.4.0 (2021-05-20)
 
-### Features / Enhancements
+### Enhancements
 
-- Show event name if event starts in day out of filter (#13)
-- More calendars and colors (#14)
-- Line breaks in event description (#11)
+- Displayed event names for events starting outside the filtered day (#13)
+- Added support for more calendars and colors (#14)
+- Enabled line breaks in event descriptions (#11)
 
 ## 0.3.0 (2021-05-18)
 
-### Features / Enhancements
+### Enhancements
 
-- Show more details for individual events (#10)
+- Added detailed view for individual events (#10)
 
 ## 0.2.0 (2021-05-09)
 
-### Features / Enhancements
+### Enhancements
 
-- Multi-day events (#1)
-- Display truncated events (#6)
-- Allow string and number fields for time dimensions
+- Added multi-day event support (#1)
+- Enabled display of truncated events (#6)
+- Supported string and number fields for time dimensions
 
 ## 0.1.1 (2021-02-10)
 
-No changes.
+- No changes
 
 ## 0.1.0 (2021-02-10)
 
-Initial release. Not fit for production.
+- Initial release (not production-ready)

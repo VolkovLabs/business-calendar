@@ -10,7 +10,7 @@
       "name": "Volkov Labs",
       "url": "https://volkovlabs.io"
     },
-    "description": "Display events and set time range",
+    "description": "Displays events in a sleek calendar view, pulling from diverse data sources for seamless integration",
     "keywords": ["panel", "calendar"],
     "links": [
       {
@@ -20,6 +20,10 @@
       {
         "name": "GitHub",
         "url": "https://github.com/VolkovLabs/business-calendar"
+      },
+      {
+        "name": "Sponsor",
+        "url": "https://volkovlabs.io/pricing/"
       }
     ],
     "logos": {

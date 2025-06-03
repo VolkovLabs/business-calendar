@@ -1,78 +1,82 @@
 # Business Calendar for Grafana
 
-![Calendar](https://github.com/VolkovLabs/business-calendar/raw/main/src/img/screenshot.png)
+![Business Calendar Screenshot](https://github.com/VolkovLabs/business-calendar/raw/main/src/img/screenshot.png)
 
-![Grafana](https://img.shields.io/badge/Grafana-11.5-orange)
-![CI](https://github.com/volkovlabs/business-calendar/workflows/CI/badge.svg)
-![E2E](https://github.com/volkovlabs/business-calendar/workflows/E2E/badge.svg)
-[![codecov](https://codecov.io/gh/VolkovLabs/business-calendar/branch/main/graph/badge.svg)](https://codecov.io/gh/VolkovLabs/business-calendar)
+[![Grafana 11.5](https://img.shields.io/badge/Grafana-11.5-orange)](https://grafana.com)
+[![CI](https://github.com/volkovlabs/business-calendar/workflows/CI/badge.svg)](https://github.com/volkovlabs/business-calendar/actions/workflows/ci.yml)
+[![E2E](https://github.com/volkovlabs/business-calendar/workflows/E2E/badge.svg)](https://github.com/volkovlabs/business-calendar/actions/workflows/e2e.yml)
+[![Codecov](https://codecov.io/gh/VolkovLabs/business-calendar/branch/main/graph/badge.svg)](https://codecov.io/gh/VolkovLabs/business-calendar)
 [![CodeQL](https://github.com/VolkovLabs/business-calendar/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/VolkovLabs/business-calendar/actions/workflows/codeql-analysis.yml)
 
-## Introduction
+**Business Calendar** is a powerful Grafana plugin that transforms your data into an intuitive calendar view. Seamlessly visualize schedules, deadlines, and time-based metrics from any Grafana-supported data source.
 
-The Business Calendar panel is a Grafana plugin that displays events in a stylish calendar format. The data can come from various data sources.
+📺 Watch our **Overview and Tutorial Video**:  
+[![Business Calendar 3.1.0 | Overview and Detailed Tutorial](https://raw.githubusercontent.com/volkovlabs/business-calendar/main/img/business.png)](https://youtu.be/CvLqyY2fQfo)
 
-[![Business Calendar 3.1.0 | Overview and detailed tutorial | Display dates and time in Grafana](https://raw.githubusercontent.com/volkovlabs/business-calendar/main/img/business.png)](https://youtu.be/CvLqyY2fQfo)
+## 🚀 Features
 
-## Requirements
+- **Multi-Language Toolbar**: Switch between Day, Week, Month, Work Week, Year, and Agenda views with ease. Navigate to today’s events or browse time ranges.
+- **Data Flexibility**: Integrate and display events from any Grafana data source.
+- **Time Range Filtering**: Zoom in on specific periods for focused analysis.
+- **Threshold Coloring**: Highlight events with customizable colors using Grafana thresholds.
+- **Quick Links**: Click events to access data links directly (bypassing sidebars).
+- **Annotations**: Display dashboard annotations for selected time ranges.
+- **Localization**: Available in Spanish, French, German, Portuguese, and Chinese.
 
-- The Business Calendar panel 3.X requires **Grafana 10** or **Grafana 11**.
-- Calendar panel 2.X requires **Grafana 9.2** or **Grafana 10**.
-- Calendar panel 1.X requires **Grafana 8.5** or **Grafana 9**.
+## 📋 Requirements
 
-## Getting Started
+- **Version 3.x**: Grafana 10 or Grafana 11.
+- **Version 2.x**: Grafana 9.2 or Grafana 10.
+- **Version 1.x**: Grafana 8.5 or Grafana 9.
 
-You can install the Business Calendar panel plugin from the [Grafana Plugins catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or use the Grafana command line tool.
+## 🛠️ Installation
 
-For the latter, please use the following command:
+Get started with Business Calendar in just a few steps:
 
-```bash
-grafana-cli plugins install marcusolsson-calendar-panel
-```
+1. Install the plugin via the [Grafana Plugins Catalog](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/) or using the Grafana CLI:
+   ```bash
+   grafana-cli plugins install marcusolsson-calendar-panel
+   ```
+2. Restart Grafana to load the plugin.
+3. Add the **Business Calendar** panel to your dashboard and configure your data source.
 
-## Highlights
+📺 **Need help with installation?** Watch our guide:  
+[![Install Business Suite Plugins in Cloud, OSS, Enterprise](https://raw.githubusercontent.com/volkovlabs/.github/main/started.png)](https://youtu.be/1qYzHfPXJF8)
 
-- Intuitive multi-language toolbar that allows you to:
-  - Switch between the **Day**, **Week**, **Month**, **Work Week**, **Year**, and **Agenda** views.
-  - Switch back to today's events.
-  - Display events from the previous and subsequent time ranges.
-- Fetch and combine event data from any data sources.
-- Event filter by a time range.
-- Event coloring based on the Grafana Thresholds.
-- Enables the opening of a data link instead of a sidebar when clicking on an event.
-- Enables the display of annotations across all dashboards for the specified period.
-- Supports Internationalization: Spanish, French, German, Portuguese, and Chinese.
+## 📚 Documentation
 
-## Documentation
+Explore comprehensive guides and resources to master the plugin:
 
-| Section                                                                              | Description                                                    |
-| ------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| [Basic configuration](https://volkovlabs.io/plugins/business-calendar/basic-config/) | Explains plugin basics                                         |
-| [Configuration](https://volkovlabs.io/plugins/business-calendar/sections/)           | Describes configuration options                                |
-| [Features](https://volkovlabs.io/plugins/business-calendar/features/)                | Describes plugin's features                                    |
-| [Tutorials](https://volkovlabs.io/plugins/business-calendar/tutorials/)              | Easy to follow tutorials                                       |
-| [Release Notes](https://volkovlabs.io/plugins/business-calendar/release/)            | Allows to stay up to date with the latest features and updates |
+| Section                                                                              | Description                                      |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| [Basic Configuration](https://volkovlabs.io/plugins/business-calendar/basic-config/) | Learn the essentials to get started.             |
+| [Configuration Options](https://volkovlabs.io/plugins/business-calendar/sections/)   | Dive into all customization settings.            |
+| [Features](https://volkovlabs.io/plugins/business-calendar/features/)                | Discover key capabilities and use cases.         |
+| [Tutorials](https://volkovlabs.io/plugins/business-calendar/tutorials/)              | Follow step-by-step guides for practical setups. |
+| [Release Notes](https://volkovlabs.io/plugins/business-calendar/release/)            | Stay updated on new features and fixes.          |
 
-## Business Suite for Grafana
+## 🌟 Business Suite for Grafana
 
-The Business Suite is a collection of open source plugins created and actively maintained by Volkov Labs.
-
-The collection aims to solve the most frequent business tasks by providing an intuitive interface with detailed written documentation, examples, and video tutorials.
+Business Calendar is part of the **Business Suite**, a collection of open-source Grafana plugins by [Volkov Labs](https://volkovlabs.io/). These plugins are crafted to address common business challenges with user-friendly interfaces, detailed documentation, and supporting video tutorials.
 
 [![Business Suite for Grafana](https://raw.githubusercontent.com/VolkovLabs/.github/main/business.png)](https://volkovlabs.io/plugins/)
 
-### Enterprise Support
+### 💼 Enterprise Support
 
-With the [Business Suite Enterprise](https://volkovlabs.io/pricing/), you're not just getting a product, you're getting a complete support system. You'll have a designated support team ready to tackle any issues.
+Subscribe to [Business Suite Enterprise](https://volkovlabs.io/pricing/) for premium benefits:
 
-You can contact us via Zendesk, receive priority in feature requests and bug fixes, meet with us for in-person consultation, and get access to the Business Intelligence. It's a package that's designed to make your life easier.
+- Dedicated Zendesk support team.
+- Priority handling for feature requests and bug fixes.
+- In-person consultations.
+- Access to an advanced Business Intelligence platform.
 
-## Always happy to hear from you
+## 💬 Feedback & Contributions
 
-- Ask a question, request a new feature, or report an issue at [GitHub issues](https://github.com/volkovlabs/business-calendar/issues).
-- Subscribe to our [YouTube Channel](https://youtube.com/@volkovlabs) and leave your comments.
-- Become a [Business Suite sponsor](https://github.com/sponsors/VolkovLabs).
+We value your input and welcome contributions to improve Business Calendar:
 
-## License
+- **Issues**: Report bugs or suggest enhancements on [GitHub Issues](https://github.com/volkovlabs/business-calendar/issues).
+- **Community**: Subscribe to [Volkov Labs on YouTube](https://youtube.com/@volkovlabs) and share your thoughts in video comments.
 
-Apache License Version 2.0, see [LICENSE](https://github.com/volkovlabs/business-calendar/blob/main/LICENSE).
+## 📜 License
+
+This project is licensed under the [Apache License 2.0](https://github.com/volkovlabs/business-calendar/blob/main/LICENSE).

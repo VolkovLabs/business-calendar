@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
-import { EventField } from '../types';
-import { displayTime, isFieldVisible } from './calendarEvents';
+import { CalendarEvent, EventField } from '../types';
+import { displayTime, isFieldVisible, splitOvernightEvents } from './calendarEvents';
 
 /**
  * Calendar Events
@@ -69,6 +69,89 @@ describe('Calendar Events', () => {
       const result = displayTime(event);
 
       expect(result).toBe('LLL - LT');
+    });
+  });
+
+  /**
+   * splitOvernightEvents
+   */
+  describe('splitOvernightEvents', () => {
+    const baseEvent = {
+      text: 'Test Event',
+      description: [],
+      labels: [],
+      color: '#000000',
+      links: [],
+    };
+
+    it('Should return regular single-day event as is', () => {
+      const events: CalendarEvent[] = [
+        {
+          ...baseEvent,
+          start: dayjs('2025-06-10T10:00:00Z'),
+          end: dayjs('2025-06-10T11:00:00Z'),
+        },
+      ];
+
+      const result = splitOvernightEvents(events);
+      expect(result).toHaveLength(1);
+      expect(result[0].start.isSame(events[0].start)).toBeTruthy();
+      expect(result[0].end?.isSame(events[0].end)).toBeTruthy();
+    });
+
+    it('Should split short event crossing midnight', () => {
+      const events: CalendarEvent[] = [
+        {
+          ...baseEvent,
+          start: dayjs('2025-05-10T22:00:00Z'),
+          end: dayjs('2025-05-11T00:01:00Z'),
+        },
+      ];
+
+      const result = splitOvernightEvents(events);
+      expect(result).toHaveLength(2);
+
+      /**
+       * First part: 22:00 → 23:59:59.999
+       */
+      expect(result[0].start.format()).toEqual('2025-05-10T22:00:00+00:00');
+      expect(result[0].end?.format()).toEqual(dayjs('2025-05-10T23:59:59.999Z').format());
+
+      /**
+       *  Second part: 00:00 → 00:01
+       */
+      expect(result[1].start.format()).toEqual(dayjs('2025-05-11T00:00:00Z').format());
+      expect(result[1].end?.format()).toEqual('2025-05-11T00:01:00+00:00');
+    });
+
+    it('Should not split long multi-day event (> 24h)', () => {
+      const events: CalendarEvent[] = [
+        {
+          ...baseEvent,
+          start: dayjs('2025-06-10T08:00:00Z'),
+          end: dayjs('2025-06-12T09:00:00Z'),
+        },
+      ];
+
+      const result = splitOvernightEvents(events);
+      expect(result).toHaveLength(1);
+      expect(result[0].start.isSame(events[0].start)).toBeTruthy();
+      expect(result[0].end?.isSame(events[0].end)).toBeTruthy();
+    });
+
+    it('Should handle events with no end time', () => {
+      const events: CalendarEvent[] = [
+        {
+          ...baseEvent,
+          start: dayjs('2025-06-11T08:00:00Z'),
+          end: null,
+        },
+      ];
+
+      const result = splitOvernightEvents(events);
+      expect(result).toHaveLength(1);
+      expect(result[0].start.format()).toEqual('2025-06-11T08:00:00+00:00');
+      expect(result[0].end).toBeNull();
     });
   });
 });

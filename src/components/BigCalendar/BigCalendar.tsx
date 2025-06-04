@@ -74,7 +74,7 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
           : '',
       },
     }),
-    [theme.colors]
+    [theme.colors, theme.visualization]
   );
 
   /**

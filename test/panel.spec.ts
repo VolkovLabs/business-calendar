@@ -82,6 +82,9 @@ test.describe('Volkovlabs Calendar Panel', () => {
     const editPage = await dashboardPage.addPanel();
     await editPage.setVisualization('Business Calendar');
     await editPage.setPanelTitle('Business Calendar Test');
+
+    await editPage.datasource.set('Grafana');
+    await editPage.refreshPanel();
     await editPage.backToDashboard();
 
     /**

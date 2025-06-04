@@ -90,6 +90,53 @@ export const returnCalendarEvent = (event: Event) => ({
 });
 
 /**
+ * Divides events that cross midnight into two if they are shorter than one day and do not have to be all-day events
+ */
+export const splitOvernightEvents = (events: CalendarEvent[]): CalendarEvent[] => {
+  const result: CalendarEvent[] = [];
+
+  events.forEach((event) => {
+    const { start, end } = event;
+
+    if (!end || start.isSame(end, 'day')) {
+      result.push(event);
+      /**
+       * Regular event do not cross midnight
+       */
+      return;
+    }
+
+    const durationInHours = end.diff(start, 'hour', true);
+    const crossesMidnight = !start.isSame(end, 'day') && durationInHours < 24;
+
+    if (crossesMidnight) {
+      const endOfFirstDay = start.endOf('day');
+      const startOfSecondDay = end.startOf('day');
+
+      result.push({
+        ...event,
+        end: endOfFirstDay,
+        text: `${event.text}`,
+      });
+
+      result.push({
+        ...event,
+        start: startOfSecondDay,
+        end,
+        text: `${event.text}`,
+      });
+    } else {
+      /**
+       * Current multi day event
+       */
+      result.push(event);
+    }
+  });
+
+  return result;
+};
+
+/**
  * Filter Events By Year
  * @param events
  * @param date

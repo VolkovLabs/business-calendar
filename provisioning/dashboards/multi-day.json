@@ -1,0 +1,179 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "marcusolsson-static-datasource",
+        "uid": "U0HP2Rv4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 20,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 17,
+      "options": {
+        "annotations": false,
+        "annotationsLimit": 100,
+        "annotationsType": "",
+        "colors": "event",
+        "dateFormat": "inherit",
+        "defaultView": "month",
+        "descriptionField": ["description"],
+        "displayFields": ["description", "labels", "links", "location", "text", "time"],
+        "endTimeField": "end",
+        "locationLabel": "",
+        "preformattedDescription": false,
+        "quickLinks": false,
+        "scrollToTime": {
+          "hours": 0,
+          "minutes": 0
+        },
+        "showEventTooltip": false,
+        "showMonthTime": true,
+        "textField": "text",
+        "timeField": "start",
+        "timeRangeType": "default",
+        "views": ["day", "week", "month", "agenda", "work_week", "year"]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "marcusolsson-static-datasource",
+            "uid": "U0HP2Rv4z"
+          },
+          "frame": {
+            "fields": [
+              {
+                "config": {},
+                "name": "text",
+                "type": "string",
+                "values": [
+                  "3 day event",
+                  "2 day event",
+                  "1 day event",
+                  "half day",
+                  "Between 2 days not all day",
+                  "small event"
+                ]
+              },
+              {
+                "config": {},
+                "name": "description",
+                "type": "string",
+                "values": [
+                  "Description event 1",
+                  "Description event 1",
+                  "Description event 1",
+                  "Description event 1",
+                  "",
+                  ""
+                ]
+              },
+              {
+                "config": {},
+                "name": "start",
+                "type": "time",
+                "values": [1749178800500, 1749178800500, 1749416400500, 1749416400500, 1749582000500, 1749150000100]
+              },
+              {
+                "config": {},
+                "name": "end",
+                "type": "time",
+                "values": [1749351600500, 1749265200500, 1749502799000, 1749459600000, 1749589260000, 1749157080100]
+              },
+              {
+                "config": {},
+                "name": "color",
+                "type": "string",
+                "values": ["", "", "", "", "", ""]
+              }
+            ],
+            "meta": {}
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "New panel",
+      "type": "marcusolsson-calendar-panel"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 14,
+      "panels": [],
+      "title": "Details",
+      "type": "row"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2025-05-31T21:00:00.000Z",
+    "to": "2025-06-30T20:59:59.999Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Multi day events",
+  "uid": "42d86bf2-4751-402d-b52b-e2baf2783e3d",
+  "version": 13
+}

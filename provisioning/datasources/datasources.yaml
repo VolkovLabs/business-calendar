@@ -6,7 +6,7 @@ datasources:
     url: https://grafana.com/api/plugins
     access: proxy
     uid: X6tfeT2nz
-    isDefault: true
+    isDefault: false
     orgId: 1
     version: 1
     editable: true

@@ -2,7 +2,7 @@
 
 ![Business Calendar Screenshot](https://github.com/VolkovLabs/business-calendar/raw/main/src/img/screenshot.png)
 
-[![Grafana 11.5](https://img.shields.io/badge/Grafana-11.5-orange)](https://grafana.com)
+[![Grafana](https://img.shields.io/badge/Grafana-12.0-orange)](https://grafana.com)
 [![CI](https://github.com/volkovlabs/business-calendar/workflows/CI/badge.svg)](https://github.com/volkovlabs/business-calendar/actions/workflows/ci.yml)
 [![E2E](https://github.com/volkovlabs/business-calendar/workflows/E2E/badge.svg)](https://github.com/volkovlabs/business-calendar/actions/workflows/e2e.yml)
 [![Codecov](https://codecov.io/gh/VolkovLabs/business-calendar/branch/main/graph/badge.svg)](https://codecov.io/gh/VolkovLabs/business-calendar)
@@ -25,6 +25,7 @@
 
 ## 📋 Requirements
 
+- **Version 4.x**: Grafana 11 or Grafana 12.
 - **Version 3.x**: Grafana 10 or Grafana 11.
 - **Version 2.x**: Grafana 9.2 or Grafana 10.
 - **Version 1.x**: Grafana 8.5 or Grafana 9.

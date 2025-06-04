@@ -4,9 +4,16 @@ All notable changes to the **Business Calendar Panel** plugin for Grafana are do
 
 This changelog follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format and adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.0.0] - 2025-06-04
 
-- No unreleased changes at this time. Check back for updates.
+### Breaking Changes
+
+- Now requires Grafana 10 or 11
+
+### Changed
+
+- Updated Multi-Day Events ([#264](https://github.com/VolkovLabs/business-calendar/pull/264))
+- Upgraded to Grafana 12.0.1 and updated dependencies ([#265](https://github.com/VolkovLabs/business-calendar/pull/265))
 
 ## [3.9.1] - 2025-03-18
 

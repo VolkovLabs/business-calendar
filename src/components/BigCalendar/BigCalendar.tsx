@@ -69,10 +69,12 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
     (event: Event) => ({
       style: {
         backgroundColor: event.resource.color,
-        color: event.resource.color ? theme.colors.emphasize(event.resource.color, 1) : '',
+        color: event.resource.color
+          ? theme.colors.emphasize(theme.visualization.getColorByName(event.resource.color), 1)
+          : '',
       },
     }),
-    [theme.colors]
+    [theme.colors, theme.visualization]
   );
 
   /**

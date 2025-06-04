@@ -1,4 +1,4 @@
-import { dateTime, LinkTarget } from '@grafana/data';
+import { createTheme, dateTime, LinkTarget } from '@grafana/data';
 import { locationService } from '@grafana/runtime';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { getJestSelectors } from '@volkovlabs/jest-selectors';
@@ -84,6 +84,11 @@ describe('Big Calendar', () => {
    */
   const getSelectors = getJestSelectors(TEST_IDS.bigCalendar);
   const selectors = getSelectors(screen);
+
+  /**
+   * Selectors
+   */
+  const theme = createTheme();
 
   /**
    * Event Details Selectors
@@ -623,12 +628,16 @@ describe('Big Calendar', () => {
       return null;
     });
 
+    const startColor = '#99999';
     const event: CalendarEvent = {
       text: 'hello',
       start: dayjs(getSafeDate()),
       labels: [],
-      color: '#99999',
+      color: startColor,
     };
+
+    const colorText = theme.colors.emphasize(theme.visualization.getColorByName(startColor), 1);
+
     render(
       getComponent({
         events: [event],
@@ -640,10 +649,50 @@ describe('Big Calendar', () => {
     );
 
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+
     expect(selectedEvent).toBeDefined();
+
     expect(calendarProps.eventPropGetter(selectedEvent, getSafeDate(), getSafeDate(), false)).toEqual({
       style: expect.objectContaining({
         backgroundColor: event.color,
+        color: colorText,
+      }),
+    });
+  });
+
+  it('Should apply event color with empty color', () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const startColor = '';
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      labels: [],
+      color: startColor,
+    };
+
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          ...defaultOptions,
+          displayFields: [EventField.DESCRIPTION, EventField.LABELS, EventField.TEXT, EventField.TIME],
+        },
+      })
+    );
+
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+
+    expect(selectedEvent).toBeDefined();
+
+    expect(calendarProps.eventPropGetter(selectedEvent, getSafeDate(), getSafeDate(), false)).toEqual({
+      style: expect.objectContaining({
+        backgroundColor: event.color,
+        color: '',
       }),
     });
   });

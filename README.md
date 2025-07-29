@@ -71,13 +71,6 @@ Subscribe to [Business Suite Enterprise](https://volkovlabs.io/pricing/) for pre
 - In-person consultations.
 - Access to an advanced Business Intelligence platform.
 
-## 💬 Feedback & Contributions
-
-We value your input and welcome contributions to improve Business Calendar:
-
-- **Issues**: Report bugs or suggest enhancements on [GitHub Issues](https://github.com/volkovlabs/business-calendar/issues).
-- **Community**: Subscribe to [Volkov Labs on YouTube](https://youtube.com/@volkovlabs) and share your thoughts in video comments.
-
 ## 📜 License
 
 This project is licensed under the [Apache License 2.0](https://github.com/volkovlabs/business-calendar/blob/main/LICENSE).

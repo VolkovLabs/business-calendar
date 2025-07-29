@@ -8,7 +8,7 @@ This changelog follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ### Changed
 
-- Updated ESLint configuration
+- Updated ESLint configuration ([#269](https://github.com/VolkovLabs/business-calendar/pull/269)).
 
 ## [4.0.1] - 2025-06-23
 

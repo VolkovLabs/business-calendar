@@ -2,7 +2,7 @@
 
 ![Business Calendar Screenshot](https://github.com/VolkovLabs/business-calendar/raw/main/src/img/screenshot.png)
 
-[![Grafana](https://img.shields.io/badge/Grafana-12.0-orange)](https://grafana.com)
+[![Grafana](https://img.shields.io/badge/Grafana-12.1-orange)](https://grafana.com)
 [![CI](https://github.com/volkovlabs/business-calendar/workflows/CI/badge.svg)](https://github.com/volkovlabs/business-calendar/actions/workflows/ci.yml)
 [![E2E](https://github.com/volkovlabs/business-calendar/workflows/E2E/badge.svg)](https://github.com/volkovlabs/business-calendar/actions/workflows/e2e.yml)
 [![Codecov](https://codecov.io/gh/VolkovLabs/business-calendar/branch/main/graph/badge.svg)](https://codecov.io/gh/VolkovLabs/business-calendar)

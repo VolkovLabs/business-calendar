@@ -10,7 +10,8 @@
 
 **Business Calendar** is a powerful Grafana plugin that transforms your data into an intuitive calendar view. Seamlessly visualize schedules, deadlines, and time-based metrics from any Grafana-supported data source.
 
-📺 Watch our **Overview and Tutorial Video**:  
+## 📺 Watch Overview and Tutorial Video
+
 [![Business Calendar 3.1.0 | Overview and Detailed Tutorial](https://raw.githubusercontent.com/volkovlabs/business-calendar/main/img/business.png)](https://youtu.be/CvLqyY2fQfo)
 
 ## 🚀 Features
@@ -41,7 +42,8 @@ Get started with Business Calendar in just a few steps:
 2. Restart Grafana to load the plugin.
 3. Add the **Business Calendar** panel to your dashboard and configure your data source.
 
-📺 **Need help with installation?** Watch our guide:  
+### 📺 **Need help with installation?**
+
 [![Install Business Suite Plugins in Cloud, OSS, Enterprise](https://raw.githubusercontent.com/volkovlabs/.github/main/started.png)](https://youtu.be/1qYzHfPXJF8)
 
 ## 📚 Documentation

@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { TEST_IDS } from '../../constants';
 import { useBigCalendarEvents, useCalendarRange, useLocalizer, useMessagesUpdate } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
-import { getLanguage, returnCalendarEvent, checkIfNodeType } from '../../utils';
+import { checkIfNodeType, getLanguage, returnCalendarEvent } from '../../utils';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';

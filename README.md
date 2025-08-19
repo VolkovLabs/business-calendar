@@ -64,15 +64,6 @@ Business Calendar is part of the **Business Suite**, a collection of open-source
 
 [![Business Suite for Grafana](https://raw.githubusercontent.com/VolkovLabs/.github/main/business.png)](https://volkovlabs.io/plugins/)
 
-### 💼 Enterprise Support
-
-Subscribe to [Business Suite Enterprise](https://volkovlabs.io/pricing/) for premium benefits:
-
-- Dedicated Zendesk support team.
-- Priority handling for feature requests and bug fixes.
-- In-person consultations.
-- Access to an advanced Business Intelligence platform.
-
 ## 📜 License
 
 This project is licensed under the [Apache License 2.0](https://github.com/volkovlabs/business-calendar/blob/main/LICENSE).

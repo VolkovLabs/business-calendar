@@ -4,11 +4,12 @@ All notable changes to the **Business Calendar Panel** plugin for Grafana are do
 
 This changelog follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format and adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.1.0] - Unreleased
+## [4.1.0] - 2025-08-19
 
 ### Changed
 
 - Updated ESLint configuration ([#269](https://github.com/VolkovLabs/business-calendar/pull/269)).
+- Updated dashboard reload for data links ([#271](https://github.com/VolkovLabs/business-calendar/pull/271)).
 
 ## [4.0.1] - 2025-06-23
 

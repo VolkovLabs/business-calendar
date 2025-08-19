@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { TEST_IDS } from '../../constants';
 import { useBigCalendarEvents, useCalendarRange, useLocalizer, useMessagesUpdate } from '../../hooks';
 import { CalendarEvent, CalendarOptions, View } from '../../types';
-import { getLanguage, returnCalendarEvent } from '../../utils';
+import { getLanguage, returnCalendarEvent, checkIfNodeType } from '../../utils';
 import { BigEventContent } from '../BigEventContent';
 import { BigToolbar } from '../BigToolbar';
 import { EventDetails } from '../EventDetails';
@@ -168,7 +168,15 @@ export const BigCalendar: React.FC<Props> = ({ height, events, timeRange, onChan
    * Select event
    */
   const onSelectEvent = useCallback(
-    (event: Event) => {
+    (event: Event, e: React.SyntheticEvent<HTMLElement>) => {
+      /**
+       * Prevent quick actions if clicked on link
+       * stopPropagation can't be used because of reloading dashboard by data link click
+       */
+      if (checkIfNodeType(e.nativeEvent.target as Node, 'a')) {
+        return;
+      }
+
       if (options.quickLinks) {
         /**
          * Open first link

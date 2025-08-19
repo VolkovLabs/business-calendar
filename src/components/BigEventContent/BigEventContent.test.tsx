@@ -250,10 +250,11 @@ describe('Big Event Content', () => {
      */
     expect(onClick).toHaveBeenCalledTimes(1);
     expect(onClick.mock.calls[0][0]).toHaveProperty('currentTarget');
+
     /**
-     * Call stopPropagation for tooltip mode
+     * Check stopPropagation is not called for tooltip mode
      */
-    expect(eventStopPropagationSpy).toHaveBeenCalledTimes(1);
+    expect(eventStopPropagationSpy).not.toHaveBeenCalled();
   });
 
   it('Should render Month view with font size', () => {
@@ -360,7 +361,7 @@ describe('Big Event Content', () => {
   });
 
   describe('Click on Tooltip', () => {
-    it('Should call stopPropagation on tooltip body click', () => {
+    it('Should not call stopPropagation on tooltip body click', () => {
       const onClick = jest.fn();
 
       const eventStopPropagationSpy = jest.spyOn(Event.prototype, 'stopPropagation');
@@ -417,7 +418,7 @@ describe('Big Event Content', () => {
        */
       expect(onClick).toHaveBeenCalledTimes(0);
 
-      expect(eventStopPropagationSpy).toHaveBeenCalledTimes(2);
+      expect(eventStopPropagationSpy).not.toHaveBeenCalled();
 
       /**
        * Should not open Details Drawer

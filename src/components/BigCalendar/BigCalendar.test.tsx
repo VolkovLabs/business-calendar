@@ -3,7 +3,7 @@ import { locationService } from '@grafana/runtime';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { getJestSelectors } from '@volkovlabs/jest-selectors';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { Calendar, CalendarProps, Event } from 'react-big-calendar';
 
 import { DEFAULT_VIEWS, TEST_IDS } from '../../constants';
@@ -101,6 +101,16 @@ describe('Big Calendar', () => {
   const getSafeDate = () => new Date('2023-02-02');
 
   /**
+   * Create Click Event
+   */
+  const createClickEvent = (target?: ParentNode): SyntheticEvent<HTMLElement> =>
+    ({
+      nativeEvent: {
+        target: target as never,
+      },
+    }) as never;
+
+  /**
    * Get Tested Component
    * @param props
    */
@@ -115,6 +125,18 @@ describe('Big Calendar', () => {
     };
     return <BigCalendar events={[]} timeRange={timeRange} options={defaultOptions} {...(props as any)} />;
   };
+
+  beforeAll(() => {
+    jest.spyOn(window, 'open').mockImplementation(() => ({}) as any);
+  });
+
+  beforeEach(() => {
+    jest.mocked(window.open).mockReset();
+  });
+
+  afterAll(() => {
+    jest.mocked(window.open).mockRestore();
+  });
 
   it('Should find component', () => {
     render(getComponent({}));
@@ -165,7 +187,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Check if event details shown
@@ -189,8 +211,6 @@ describe('Big Calendar', () => {
       calendarProps = props;
       return null;
     });
-
-    jest.spyOn(window, 'open').mockImplementationOnce(() => ({}) as any);
 
     const link = {
       href: 'https://123.com',
@@ -230,12 +250,72 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Check if event link opened
      */
     expect(window.open).toHaveBeenCalledWith(link.href, link.target);
+  });
+
+  it('Should skip quick actions if clicked on link in tooltip', async () => {
+    let calendarProps: Required<CalendarProps> = {} as any;
+    jest.mocked(Calendar).mockImplementation((props: any): any => {
+      calendarProps = props;
+      return null;
+    });
+
+    const link = {
+      href: 'https://123.com',
+      target: '_blank' as LinkTarget,
+      title: '',
+      origin: {} as any,
+    };
+
+    const event: CalendarEvent = {
+      text: 'hello',
+      start: dayjs(getSafeDate()),
+      end: dayjs(getSafeDate()),
+      labels: [],
+      color: '',
+      links: [link],
+    };
+    render(
+      getComponent({
+        events: [event],
+        options: {
+          views: DEFAULT_VIEWS,
+          quickLinks: true,
+          dateFormat: DateFormat.INHERIT,
+          timeRangeType: 'default',
+          displayFields: [],
+          locationLabel: '',
+          showEventTooltip: false,
+          showMonthTime: true,
+        },
+      })
+    );
+
+    expect(eventDetailsSelectors.root(true)).not.toBeInTheDocument();
+
+    /**
+     * Event selecting
+     */
+    const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
+    expect(selectedEvent).toBeDefined();
+    await act(async () =>
+      calendarProps.onSelectEvent(
+        selectedEvent,
+        createClickEvent({
+          nodeName: 'a',
+        } as never)
+      )
+    );
+
+    /**
+     * Check if event link not opened
+     */
+    expect(window.open).not.toHaveBeenCalled();
   });
 
   it('Should open link with self by default', async () => {
@@ -244,8 +324,6 @@ describe('Big Calendar', () => {
       calendarProps = props;
       return null;
     });
-
-    jest.spyOn(window, 'open').mockImplementationOnce(() => ({}) as any);
 
     const link = {
       href: 'https://123.com',
@@ -285,7 +363,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Check if event link opened
@@ -299,8 +377,6 @@ describe('Big Calendar', () => {
       calendarProps = props;
       return null;
     });
-
-    jest.spyOn(window, 'open').mockImplementationOnce(() => ({}) as any);
 
     const event: CalendarEvent = {
       text: 'hello',
@@ -333,7 +409,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Check if event details shown
@@ -381,7 +457,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details
@@ -417,7 +493,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details
@@ -458,7 +534,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details
@@ -492,7 +568,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details
@@ -530,7 +606,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details
@@ -578,7 +654,7 @@ describe('Big Calendar', () => {
           ...selectedEvent,
           resource: null,
         },
-        {} as any
+        createClickEvent()
       )
     );
 
@@ -616,7 +692,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     expect(eventDetailsSelectors.root()).toBeInTheDocument();
   });
@@ -731,7 +807,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details
@@ -774,7 +850,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details
@@ -820,7 +896,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details
@@ -865,7 +941,7 @@ describe('Big Calendar', () => {
      */
     const selectedEvent = calendarProps.events.find(({ title }: any) => title === event.text) as Event;
     expect(selectedEvent).toBeDefined();
-    await act(async () => calendarProps.onSelectEvent(selectedEvent, {} as any));
+    await act(async () => calendarProps.onSelectEvent(selectedEvent, createClickEvent()));
 
     /**
      * Event Details

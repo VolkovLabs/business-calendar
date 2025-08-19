@@ -137,16 +137,7 @@ export const EventDetails: React.FC<Props> = ({
                   href={link.href}
                   target={link.target}
                   variant={'secondary'}
-                  onClick={(e) => {
-                    link.onClick && link.onClick(e);
-
-                    /**
-                     * Stop Propagation
-                     */
-                    if (isForTooltip) {
-                      e.stopPropagation();
-                    }
-                  }}
+                  onClick={link.onClick}
                   aria-label={TEST_IDS.eventDetails.link}
                 >
                   {link.title}
